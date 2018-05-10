@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    'allauth.socialaccount.providers.google',
 
 ]
 
@@ -107,7 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -155,12 +154,21 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 # May be changed. Subject
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "Portfolio APPS"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "Portfolio APPS: "
 
 ACCOUNT_LOGOUT_ON_GET = True
 
 ACCOUNT_LOGOUT_ON_PASSWORD_CHANGE = True
 
+ACCOUNT_ADAPTER = 'profiles.forms.DomainCheckAdapter'
+SOCIALACCOUNT_ADAPTER = 'profiles.forms.SocialDomainCheckAdapter'
 # Need to think
 # SOCIALACCOUNT_EMAIL_VERIFICATION
 # SOCIALACCOUNT_EMAIL_REQUIRED
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

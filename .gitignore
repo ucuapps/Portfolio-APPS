@@ -5,3 +5,4 @@ __pychache__/
 db.sqlite3
 static/static-only/
 static/media/
+.env
