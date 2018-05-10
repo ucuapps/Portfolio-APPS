@@ -5,3 +5,7 @@ from django.shortcuts import render
 def index(request):
     template = 'profiles/index.html'
     return render(request, template, {})
+
+def about(request):
+    template = 'profiles/about.html'
+    return render(request, template, {})
