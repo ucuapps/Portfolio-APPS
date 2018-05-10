@@ -17,6 +17,10 @@ mkdir -p static/media static/static static/static-only
 ./manage.py makemigrations
 ./manage.py migrate
 ./manage.py collectstatic
+
+# example of .env : .env-example
+source .env
+
 ./manage.py runserver
 ```
 
