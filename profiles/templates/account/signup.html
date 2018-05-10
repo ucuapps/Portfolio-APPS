@@ -1,22 +1,39 @@
 {% extends "account/base.html" %}
 
+{% load widget_tweaks %}
 {% load i18n %}
 {% load account socialaccount %}
+
+{% block extra_head %}
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+{% endblock%}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
+<div class="row justify-content-md-center"><div class="col-md-6">
 <h1>{% trans "Sign Up" %}</h1>
 
 <p>{% blocktrans %}Already have an account or have account in Google? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
+<!--<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">-->
+  <!--{% csrf_token %}-->
+  <!--{{ form.as_p }}-->
+  <!--{% if redirect_field_value %}-->
+  <!--<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />-->
+  <!--{% endif %}-->
+  <!--<button type="submit">{% trans "Sign Up" %} &raquo;</button>-->
+<!--</form>-->
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {% include 'includes/bs4_form.html' with form=form %}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+</div>
 {% endblock %}
