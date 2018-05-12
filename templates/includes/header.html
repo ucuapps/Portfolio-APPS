@@ -21,11 +21,13 @@
         </ul>
         {% if request.user.is_authenticated %}
         <a class="btn btn-outline-light" href="{{ logout }}">Logout</a>
-        {% endif %}
+        {% else %}
         {% if request.path == signup %}
         <a class="btn btn-outline-light" href="{{ signin }}">Sign in</a>
         {% else %}
         <a class="btn btn-outline-light" href="{{ signup }}">Sign up</a>
         {% endif %}
+        {% endif %}
+
     </div>
 </nav>
