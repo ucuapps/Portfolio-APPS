@@ -34,21 +34,20 @@
 
     <div class="row justify-content-md-center"> <div class="col-md-6">
         {% for message in messages %}
-        {% if message.success %}
+        {% if message.tags == "success" %}
         <div class="alert alert-success alert-dismissible">
-            {% endif %}
-            {% if message.error %}
+            {% elif message.tags == "error" %}
             <div class="alert alert-danger alert-dismissible">
                 {% else %}
                 <div class="alert alert-info alert-dismissible">
                     {% endif %}
+
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>{{message.tags|capfirst}}:</strong> {{message}}
 
-                    {% if message.success %}
+                    {% if message.tags == "success" %}
                 </div>
-                {% endif %}
-                {% if message.error %}
+                {% elif message.tags == "error" %}
             </div>
             {% else %}
         </div>

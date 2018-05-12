@@ -1,10 +1,13 @@
 from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import redirect
 from django.forms import forms
 from django import forms as f
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.helpers import ImmediateHttpResponse
 from django.http import Http404, HttpResponse
+from django.contrib.auth import get_user_model
+from django.contrib import messages
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):
@@ -19,7 +22,11 @@ class SocialDomainCheckAdapter(DefaultSocialAccountAdapter):
     def pre_social_login(self, request, sociallogin):
         u = sociallogin.user
         if not u.email.split('@')[1] == "ucu.edu.ua":
-            raise ImmediateHttpResponse(HttpResponse("It is not allowed"))
+            messages.error(request, "Only @ucu.edu.ua domains are allowed, but yours is %s (%s)" % (
+            u.email.split("@")[1], u.email))
+            raise ImmediateHttpResponse(redirect('account_signup'))
+        # if get_user_model().objects.filter(email=u.email).exists():
+        #     raise ImmediateHttpResponse(HttpResponse("User with such email exists"))
         return super().pre_social_login(request, sociallogin)
 
 

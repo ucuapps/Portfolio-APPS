@@ -1,8 +1,14 @@
+from allauth.socialaccount.helpers import ImmediateHttpResponse
+from django.shortcuts import redirect
 from django.db import models
-
+from django.dispatch import receiver
 # Create your models here.
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+from allauth.socialaccount.signals import pre_social_login
+from django.conf import settings
+from allauth.account.utils import perform_login
+
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -48,3 +54,12 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
+
+
+@receiver(pre_social_login)
+def link_to_local_user(sender, request, sociallogin, **kwargs):
+    email_address = sociallogin.account.extra_data['email']
+    users = User.objects.filter(email=email_address)
+    if users:
+        perform_login(request, users[0], email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
+        raise ImmediateHttpResponse(redirect('home'))
