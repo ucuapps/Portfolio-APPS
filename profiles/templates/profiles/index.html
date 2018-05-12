@@ -8,7 +8,7 @@
 
 <div class="row justify-content-md-center"><div class="col-md-6">
     {% if user.is_authenticated %}
-<p>Welcome {{ user.username }} !!!</p>
+<p>Welcome {{ user.first_name }} {{ user.last_name }} !!!</p>
 <p><a href="{% url 'account_logout' %}">Log out</a>
 {% else %}
 <p><a href="{% url 'account_signup' %}">Sign Up</a></p>
