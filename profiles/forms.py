@@ -23,7 +23,7 @@ class SocialDomainCheckAdapter(DefaultSocialAccountAdapter):
         u = sociallogin.user
         if not u.email.split('@')[1] == "ucu.edu.ua":
             messages.error(request, "Only @ucu.edu.ua domains are allowed, but yours is %s (%s)" % (
-            u.email.split("@")[1], u.email))
+                u.email.split("@")[1], u.email))
             raise ImmediateHttpResponse(redirect('account_signup'))
         # if get_user_model().objects.filter(email=u.email).exists():
         #     raise ImmediateHttpResponse(HttpResponse("User with such email exists"))

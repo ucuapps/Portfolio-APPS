@@ -2,12 +2,15 @@ from allauth.socialaccount.helpers import ImmediateHttpResponse
 from django.shortcuts import redirect
 from django.db import models
 from django.dispatch import receiver
-# Create your models here.
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from allauth.socialaccount.signals import pre_social_login
+from django.db.models.signals import post_save
 from django.conf import settings
 from allauth.account.utils import perform_login
+
+
+from student.models import Student
 
 
 class UserManager(BaseUserManager):
@@ -44,12 +47,18 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-
 class User(AbstractUser):
     """User model."""
 
     username = None
     email = models.EmailField(_('email address'), unique=True)
+
+    is_student = models.BooleanField(default=False)
+    is_teacher = models.BooleanField(default=False)
+
+    mobile_number = models.CharField(max_length=25, blank=True, null=True)
+    git_link = models.URLField(blank=True, null=True)
+    fb_link = models.URLField(blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -63,3 +72,9 @@ def link_to_local_user(sender, request, sociallogin, **kwargs):
     if users:
         perform_login(request, users[0], email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
         raise ImmediateHttpResponse(redirect('home'))
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created and not (instance.is_student or instance.is_teacher):
+        Student.objects.create(user=instance)
