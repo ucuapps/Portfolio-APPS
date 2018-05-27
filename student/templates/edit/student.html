@@ -1,0 +1,46 @@
+{% extends "edit/edit.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans "Edit student data:" %}{% endblock %}
+{% block block-header %}{% trans "Edit student data:" %}{% endblock %}
+
+{% block edit_content %}
+<form method="POST" action="{% url 'edit_student' %}">
+  {% csrf_token %}
+  {% include 'includes/bs4_form.html' with form=form %}
+  <div class="form-group">
+    <label>Languages:</label>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Language</th>
+        <th>Level</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for l in languages %}
+            <tr><td>{{l.name}}</td>
+            <td>{{l.level}}</td>
+            <td><a href="{% url 'edit_language' l.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'delete_language' l.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td></tr>
+        {% endfor %}
+    </tbody>
+  </table>
+    <div class="width:100%; height:150px;">
+        <a class="btn btn-primary float-right" href="{% url 'new_language' %}"><i class="fas fa-plus"></i> Language</a>
+    </div>
+      <div style="clear: both;"></div>
+  </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+{% endblock %}

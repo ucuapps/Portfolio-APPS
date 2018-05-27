@@ -59,6 +59,7 @@ class User(AbstractUser):
     mobile_number = models.CharField(max_length=25, blank=True, null=True)
     git_link = models.URLField(blank=True, null=True)
     fb_link = models.URLField(blank=True, null=True)
+    profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

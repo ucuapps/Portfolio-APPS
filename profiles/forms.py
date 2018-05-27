@@ -8,6 +8,26 @@ from allauth.socialaccount.helpers import ImmediateHttpResponse
 from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
+from django.conf import settings
+
+# class CustomClearableFileInputWidget(f.ClearableFileInput):
+#     template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
+
+
+f.ClearableFileInput.template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
+
+
+class UserForm(f.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('profile_image', 'first_name', 'last_name', 'mobile_number', 'git_link', 'fb_link',)
+        labels = {
+            'git_link': _('Github link:'),
+            'fb_link': _('Facebook link:'),
+        }
+        # widgets = {
+        #     'profile_image': CustomClearableFileInputWidget
+        # }
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):

@@ -4,6 +4,9 @@
     {% url 'account_logout' as logout %}
     {% url 'about' as about %}
     {% url 'home' as home %}
+    {% url 'edit_user' as edit_user %}
+    {% url 'edit_student' as edit_student %}
+    {% url 'edit_student' as edit_student %}
     <a class="navbar-brand" href="{{home}}">Portfolio APPS.UCU</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04"
             aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +21,12 @@
             <li class="nav-item {% if request.path == about %}active{% endif %}">
                 <a class="nav-link" href="{{about}}">About</a>
             </li>
+            {% if request.user.is_authenticated %}
+            <li class="nav-item {% if request.path|slice:':5' == '/edit' %}active{% endif %}">
+
+                <a class="nav-link" href="{{edit_user}}"><i class="fas fa-cog"></i></a>
+            </li>
+            {% endif %}
         </ul>
         {% if request.user.is_authenticated %}
         <a class="btn btn-outline-light" href="{{ logout }}">Sign out</a>

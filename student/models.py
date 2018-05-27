@@ -28,12 +28,16 @@ class Skill(models.Model):
     skill_type = models.CharField(max_length=255, choices=SKILL_TYPES)
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
     about = models.TextField()
-    technologies = models.ManyToManyField(Skill)
+    technologies = models.ManyToManyField(Skill, blank=True)
     # TODO: mentor
+    collaborators = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
 
 class VolunteerExperience(models.Model):
@@ -41,7 +45,7 @@ class VolunteerExperience(models.Model):
     description = models.TextField()
     link = models.URLField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    organization = models.CharField(max_length=225)
+    organization = models.CharField(max_length=225, blank=True, null=True)
 
 
 class WorkingExperience(models.Model):
@@ -75,16 +79,16 @@ class Student(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     # study programme
-    study_programme = models.ManyToManyField(StudyProgramme)
+    study_programme = models.ForeignKey(StudyProgramme, on_delete=models.CASCADE, blank=True, null=True)
     current_study_year = models.IntegerField(choices=STUDY_YEARS, blank=True, null=True)
 
     # Skills
-    professional_skills = models.ManyToManyField(Skill, related_name="professional_skills")
-    technical_skills = models.ManyToManyField(Skill, related_name="technical_skills")
-    soft_skills = models.ManyToManyField(Skill, related_name="soft_skills")
+    professional_skills = models.ManyToManyField(Skill, related_name="professional_skills", blank=True)
+    technical_skills = models.ManyToManyField(Skill, related_name="technical_skills", blank=True)
+    soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
 
     # Projects
-    projects = models.ManyToManyField(Project)
+    # projects = models.ManyToManyField(Project, blank=True)
 
     # Languages
     # languages

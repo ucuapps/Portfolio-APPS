@@ -1,0 +1,33 @@
+{% extends "edit/edit.html" %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+
+{% block edit_content %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for ve in vexps %}
+            <tr><td>{{ve.title}}</td>
+            <td>{{ve.company}}</td>
+            <td>{{ve.description|truncatechars:10}}</td>
+            <td><a href="{% url 'edit_vexp' ve.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'delete_vexp' ve.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+    <a class="btn btn-primary float-right" href="{% url 'new_vexp' %}"><i class="fas fa-plus"></i></a>
+
+{% endblock %}

@@ -6,7 +6,7 @@
 
 {% load socialaccount %}
 
-<div class="row justify-content-md-center"><div class="col-md-6">
+<div class="row justify-content-md-center"><div class="col-md-8">
     {% if user.is_authenticated %}
 <p>Welcome {{ user.first_name }} {{ user.last_name }} !!!</p>
 <p><a href="{% url 'account_logout' %}">Log out</a>

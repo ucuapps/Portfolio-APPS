@@ -1,0 +1,14 @@
+{% extends "edit/edit.html" %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+
+{% block edit_content %}
+<form method="POST" action="">
+  {% csrf_token %}
+  {% include 'includes/bs4_form.html' with form=form %}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block head_title %}{% endblock %}
+
+{% block block-header %}{% endblock %}
+{% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-md-4">
+    <div class="list-group">
+      {% url 'edit_user' as edit_user %}
+      {% url 'edit_student' as edit_student %}
+      {% url 'edit_projects' as edit_projects %}
+      {% url 'edit_work_exps' as edit_wexps %}
+      {% url 'edit_vexps' as edit_vexps %}
+
+      <a class="list-group-item {% if request.path == edit_user %}active{%endif%}" href="{{ edit_user }}">
+        Edit user data
+      </a>
+
+      <a class="list-group-item {% if request.path == edit_student %}active{%endif%}" href="{{ edit_student }}">
+        Edit student data
+      </a>
+      <a class="list-group-item" data-remote="true" href="#sub_categoria_4" id="categoria_4" data-toggle="collapse" data-parent="#sub_categoria_4">
+               <span>Experiences</span>
+              <span class="menu-ico-collapse"><i class="fa fa-chevron-down"></i></span>
+
+      </a>
+      <div class="collapse list-group-submenu" id="sub_categoria_4">
+        <a class="list-group-item sub-item {% if request.path == edit_projects %}active{%endif%}" data-parent="#sub_categoria_4" style="padding-left: 35px;" href="{{ edit_projects }}">
+        Projects
+      </a>
+      <a data-parent="#sub_categoria_4" style="padding-left: 35px;" class="list-group-item sub-item {% if request.path == edit_wexps %}active{%endif%}" href="{{ edit_wexps }}">
+        Working experiences
+      </a>
+      <a data-parent="#sub_categoria_4" style="padding-left: 38px;" class="list-group-item sub-item {% if request.path == edit_vexps %}active{%endif%}" href="{{ edit_vexps }}">
+        Volunteer experiences
+      </a>
+      </div>
+
+    </div>
+  </div>
+<div class="col-md-8">
+  {% block edit_content %}{% endblock %}
+</div>
+</div>
+
+
+{% endblock %}
