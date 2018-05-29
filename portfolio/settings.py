@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'profiles',
     'student',
+    'teacher',
 
     'allauth',
     'allauth.account',
