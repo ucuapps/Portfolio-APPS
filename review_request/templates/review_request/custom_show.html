@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+{% block content %}
+
+{% for req in requests %}
+<ul class="col-md-4 list-group">
+    <li class="list-group-item">
+        Student: {{req.student.email}}
+    </li>
+    <li class="list-group-item">
+            Title: {{req.title}}
+    </li>
+    {% if request.user.is_student %}
+    <li class="list-group-item">    <a class="btn btn-primary" href="{% url 'edit_request' req.id %}">Edit request</a>
+</li>
+    {% else %}
+<li class="list-group-item">        <a class="btn btn-primary" href="{% url 'show_single_request' req.id %}">More...</a>
+</li>
+    {% endif %}
+
+</ul>
+{% endfor %}
+{% if request.user.is_student %}
+   <a class="btn btn-primary" href="{% url 'create_request' %}">Create request</a>
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+{% endblock %}

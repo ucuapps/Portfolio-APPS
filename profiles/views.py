@@ -1,18 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from dal import autocomplete
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
+from student.models import Student
 from .forms import UserForm
 
-
+@login_required
 def index(request):
     template = 'profiles/index.html'
-    return render(request, template, {})
-
+    # return render(request, template, {})
+    # if request.user.is_authenticated:
+    return redirect('show-user', request.user.id)
+    # return render(request, template, {})
 
 def about(request):
     template = 'profiles/about.html'
@@ -43,3 +47,10 @@ class UsersAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(email__istartswith=self.q)
 
         return qs.all()
+
+
+@login_required
+def show_user(request, pk):
+    u = get_object_or_404(get_user_model(), id=pk)
+    context = dict(found_user=u, title="User")
+    return render(request, "user.html", context)

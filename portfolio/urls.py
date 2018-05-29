@@ -27,6 +27,7 @@ urlpatterns = [
     re_path(r'^', include('profiles.urls')),
     re_path(r'^', include('student.urls')),
     re_path(r'^', include('teacher.urls')),
+    re_path(r'^', include('review_request.urls')),
     re_path(r'^contact/$', contact_views.contact, name='contact'),
 ]
 

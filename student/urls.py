@@ -3,6 +3,8 @@ from django.urls import path, include, re_path
 from . import views
 
 urlpatterns = [
+    # re_path(r'^student/(?P<pk>\d+)$', views.show_student, name='show_student'),
+
     re_path(r'^edit/student/$', views.edit_student, name='edit_student'),
 
     re_path(r'^edit/projects/$', views.edit_projects, name='edit_projects'),

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+{% block content %}
+
+{% for req in requests %}
+<div class="col">
+    <div>
+        Student: {{req.student.email}}
+    </div>
+    <div>
+        Title: {{req.title}}
+    </div>
+    <a class="btn" href="{% url 'show_single_request' req.id %}">Show request</a>
+    <a class="btn" href="{% url 'accept_request' req.id %}">Accept request</a>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+{% endblock %}

@@ -14,6 +14,9 @@ def user_login_required(view_func):
     decorated_view_funct = login_required(student_login_required(view_func))
     return decorated_view_funct
 
+@login_required
+def show_student(request, pk):
+    pass
 
 @user_login_required
 def edit_student(request):

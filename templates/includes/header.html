@@ -8,6 +8,7 @@
     {% url 'edit_user' as edit_user %}
     {% url 'edit_student' as edit_student %}
     {% url 'edit_student' as edit_student %}
+    {% url 'show_my_requests' as show_my_requests %}
     <a class="navbar-brand" href="{{home}}">Portfolio APPS.UCU</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04"
             aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +25,20 @@
             <li class="nav-item {% if request.path == contact %}active{% endif %}">
                 <a class="nav-link" href="{{contact}}">Contact us</a>
             </li>
+
+            {% if request.user.is_teacher %}
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Requests</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="{% url 'show_my_requests' %}">Accepted by me</a>
+              <a class="dropdown-item" href="{% url 'show_all_requests' %}">All pending</a>
+            </div>
+          </li>
+            {%else%}
+            <li class="nav-item {% if request.path == show_my_requests %}active{% endif %}">
+                <a class="nav-link" href="{% url 'show_my_requests' %}">Requests</a>
+            </li>
+            {% endif %}
             <li class="nav-item {% if request.path|slice:':5' == '/edit' %}active{% endif %}">
 
                 <a class="nav-link" href="{{edit_user}}"><i class="fas fa-cog"></i></a>

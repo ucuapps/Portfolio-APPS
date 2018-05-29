@@ -8,6 +8,7 @@ from allauth.socialaccount.signals import pre_social_login
 from django.db.models.signals import post_save
 from django.conf import settings
 from allauth.account.utils import perform_login
+from django.contrib.auth import get_user_model
 
 
 from student.models import Student
@@ -75,7 +76,9 @@ def link_to_local_user(sender, request, sociallogin, **kwargs):
         raise ImmediateHttpResponse(redirect('home'))
 
 
-@receiver(post_save, sender=User)
+@receiver(post_save, sender=get_user_model())
 def create_user_profile(sender, instance, created, **kwargs):
     if created and not (instance.is_student or instance.is_teacher):
         Student.objects.create(user=instance)
+        instance.is_student = True
+        instance.save()

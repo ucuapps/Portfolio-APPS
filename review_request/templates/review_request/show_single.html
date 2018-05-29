@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+{% block content %}
+
+<ul class="col-md-8 list-group">
+    <li class="list-group-item">        Student: <a href="custom_show.html">{{req.student.email}}</a>
+</li>
+<li class="list-group-item">
+            Title: {{req.title}}
+
+</li>
+<li class="list-group-item">
+            About: {{req.about}}
+
+</li>
+<li class="list-group-item">
+            Deadline: {{req.deadline}}
+
+</li>
+    {% if req.skills.all %}
+<li class="list-group-item">
+            Skills: {% for skill in req.skills.all %}}{{skill}} {% endfor %}
+
+</li>
+    {% endif %}
+
+<li class="list-group-item">
+    {% if not req.accepted %}
+        <a class="btn" href="{% url 'accept_request' req.id %}">Accept request</a>
+{% else %}
+    Was accepted by {{req.teacher.email}}.
+    {% endif %}
+</li>
+
+
+</ul>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+{% endblock %}

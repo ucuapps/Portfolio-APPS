@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'student',
     'teacher',
     'contact',
+    'review_request',
 
     'allauth',
     'allauth.account',
