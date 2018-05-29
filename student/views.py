@@ -1,11 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill
 
+student_login_required = user_passes_test(lambda u: u.is_student, login_url='/')
 
+
+def user_login_required(view_func):
+    decorated_view_funct = login_required(student_login_required(view_func))
+    return decorated_view_funct
+
+
+@user_login_required
 def edit_student(request):
     template = "edit/student.html"
     context = {}
@@ -18,7 +28,7 @@ def edit_student(request):
     context["languages"] = Language.objects.filter(user=request.user)
     return render(request, template, context)
 
-
+@user_login_required
 def edit_project(request, pk=None):
     if pk:
         title = 'Edit project:'
@@ -40,12 +50,12 @@ def edit_project(request, pk=None):
 
     return render(request, template_name='edit/project.html', context={'form': form, 'title': title})
 
-
+@user_login_required
 def edit_projects(request):
     projects = Project.objects.filter(collaborators=request.user).distinct()
     return render(request, 'edit/projects.html', context={'projects': projects, 'title': "Projects"})
 
-
+@user_login_required
 def edit_work_exp(request, pk=None):
     if pk:
         title = 'Edit working experience:'
@@ -67,12 +77,12 @@ def edit_work_exp(request, pk=None):
 
     return render(request, template_name='edit/work_experience.html', context={'form': form, 'title': title})
 
-
+@user_login_required
 def edit_work_exps(request):
     work_exps = WorkingExperience.objects.filter(user=request.user)
     return render(request, 'edit/work_experiences.html', {'work_exps': work_exps, 'title': 'Working experiences'})
 
-
+@user_login_required
 def edit_volunteer_exp(request, pk=None):
     if pk:
         title = 'Edit volunteer experience:'
@@ -94,12 +104,12 @@ def edit_volunteer_exp(request, pk=None):
 
     return render(request, template_name='edit/volunteer_experience.html', context={'form': form, 'title': title})
 
-
+@user_login_required
 def edit_volunteer_exps(request):
     vexps = VolunteerExperience.objects.filter(user=request.user)
     return render(request, 'edit/volunteer_experiences.html', {'vexps': vexps, 'title': 'Volunteer experiences'})
 
-
+@user_login_required
 def edit_language(request, pk=None):
     if pk:
         title = 'Edit language skill:'
@@ -121,7 +131,7 @@ def edit_language(request, pk=None):
 
     return render(request, template_name='edit/language.html', context={'form': form, 'title': title})
 
-
+@user_login_required
 def delete_language(request, pk):
     l = get_object_or_404(Language, pk=pk)
     if request.user != l.user:
@@ -130,7 +140,7 @@ def delete_language(request, pk):
     messages.success(request, "Languages block was changed!")
     return redirect('edit_student')
 
-
+@user_login_required
 def delete_we(request, pk):
     we = get_object_or_404(WorkingExperience, pk=pk)
     if request.user != we.user:
@@ -139,7 +149,7 @@ def delete_we(request, pk):
     messages.success(request, "Working experience was deleted!")
     return redirect('edit_work_exps')
 
-
+@user_login_required
 def delete_ve(request, pk):
     ve = get_object_or_404(VolunteerExperience, pk=pk)
     if request.user != ve.user:
@@ -192,3 +202,19 @@ class TechnicalSkillsAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__istartswith=self.q)
 
         return qs.all()
+
+
+class SkillsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Skill.objects.none()
+
+        qs = Skill.objects
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+

@@ -19,11 +19,15 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from contact import views as contact_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^accounts/', include('allauth.urls')),
     re_path(r'^', include('profiles.urls')),
     re_path(r'^', include('student.urls')),
+    re_path(r'^', include('teacher.urls')),
+    re_path(r'^contact/$', contact_views.contact, name='contact'),
 ]
 
 if settings.DEBUG:

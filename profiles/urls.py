@@ -5,4 +5,5 @@ urlpatterns = [
     re_path(r'^$', views.index, name='home'),
     re_path(r'^about/$', views.about, name='about'),
     re_path(r'^edit/user/$', views.edit_user, name='edit_user'),
+    re_path(r'^users-autocomplete/$', views.UsersAutocomplete.as_view(), name='users-autocomplete'),
 ]

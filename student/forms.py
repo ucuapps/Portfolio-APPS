@@ -27,12 +27,16 @@ class StudentForm(forms.ModelForm):
         self.fields["technical_skills"].queryset = Skill.objects.filter(skill_type="technical")
 
 
-
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = ('__all__')
-    #
+        widgets = {
+            'technologies': autocomplete.ModelSelect2Multiple(url='tech-autocomplete'),
+            'collaborators': autocomplete.ModelSelect2Multiple(url='users-autocomplete'),
+        }
+
+        #
     # def __init__(self, *args, **kwargs):
     #     super(ProjectForm, self).__init__(*args, **kwargs)
     #     # self.fields["collaborators"].widget = forms.widgets.CheckboxSelectMultiple()

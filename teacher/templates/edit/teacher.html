@@ -1,0 +1,16 @@
+{% extends "edit/edit.html" %}
+{% load static %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans "Edit teacher data:" %}{% endblock %}
+{% block block-header %}{% trans "Edit teacher data:" %}{% endblock %}
+
+{% block edit_content %}
+<form method="POST" action="{% url 'edit_teacher' %}">
+  {% csrf_token %}
+  {% include 'includes/bs4_form.html' with form=form %}
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}
+

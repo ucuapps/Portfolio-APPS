@@ -25,9 +25,6 @@ class UserForm(f.ModelForm):
             'git_link': _('Github link:'),
             'fb_link': _('Facebook link:'),
         }
-        # widgets = {
-        #     'profile_image': CustomClearableFileInputWidget
-        # }
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):

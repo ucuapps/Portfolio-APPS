@@ -1,3 +1,7 @@
 .table tr:hover {
     /*cursor: pointer;*/
 }
+
+.bg-purple {
+    background: darkviolet;
+}

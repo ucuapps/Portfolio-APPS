@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth import get_user_model
+from dal import autocomplete
+
 
 from .forms import UserForm
 
@@ -26,3 +29,17 @@ def edit_user(request):
         messages.success(request, "Your data has been edited.")
     context["form"] = form
     return render(request, template, context)
+
+
+class UsersAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return get_user_model().objects.none()
+
+        qs = get_user_model().objects
+
+        if self.q:
+            qs = qs.filter(email__istartswith=self.q)
+
+        return qs.all()

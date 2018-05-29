@@ -11,14 +11,17 @@
     <div class="list-group">
       {% url 'edit_user' as edit_user %}
       {% url 'edit_student' as edit_student %}
+      {% url 'edit_teacher' as edit_teacher %}
       {% url 'edit_projects' as edit_projects %}
       {% url 'edit_work_exps' as edit_wexps %}
       {% url 'edit_vexps' as edit_vexps %}
+
 
       <a class="list-group-item {% if request.path == edit_user %}active{%endif%}" href="{{ edit_user }}">
         Edit user data
       </a>
 
+      {% if request.user.is_student %}
       <a class="list-group-item {% if request.path == edit_student %}active{%endif%}" href="{{ edit_student }}">
         Edit student data
       </a>
@@ -38,6 +41,11 @@
         Volunteer experiences
       </a>
       </div>
+      {%else%}
+      <a class="list-group-item {% if request.path == edit_teacher %}active{%endif%}" href="{{ edit_teacher }}">
+        Edit teacher data
+      </a>
+      {%endif%}
 
     </div>
   </div>
