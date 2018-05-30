@@ -69,12 +69,20 @@ def create_request(request, pk=None):
     else:
         title = 'Create request:'
         review_request = ReviewRequest()
+        review_request.student = request.user
 
     form = ReviewRequestForm(request.POST or None, instance=review_request)
+    print(form)
+
     if request.POST and form.is_valid():
-        review_request = form.save(commit=False)
-        review_request.student = request.user
-        review_request.save()
+        print("HELLO")
+        # r = form.save()
+        # r.student = request.user
+        # r.save()
+        # rev_request = form.save(commit=False)
+        # rev_request.student = request.user
+        a = form.save()
+        print(a.skills.all())
 
         notify_teachers(review_request)
         messages.success(request, "Process finished successfully")

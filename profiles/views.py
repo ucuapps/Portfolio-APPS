@@ -18,6 +18,7 @@ def index(request):
     return redirect('show-user', request.user.id)
     # return render(request, template, {})
 
+
 def about(request):
     template = 'profiles/about.html'
     return render(request, template, {})

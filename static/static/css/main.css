@@ -5,3 +5,11 @@
 .bg-purple {
     background: darkviolet;
 }
+
+div.kastil {
+    text-align: center !important;
+}
+
+body > div > div > div.col-md-6.align-left > div > div.kastil {
+    text-align: center !important;
+}

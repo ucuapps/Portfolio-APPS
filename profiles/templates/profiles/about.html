@@ -1,24 +1,66 @@
 {% extends 'base.html' %}
 {% block block-header %}About us{%endblock%}
 
+{% block extra_head %}
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
 {% block content %}
 
 
 {% load socialaccount %}
 
-<div class="row justify-content-md-center">
-    <div class="col-md-2">
-        <p>{%lorem%}</p>
-    </div>
-    <div class="col-md-8">
-        <div class="d-flex align-items-center bg-purple rounded box-shadow">
-            <h2>Projects</h2>
-        </div>
-        <p>{%lorem%}</p>
+<!--<div class="row justify-content-md-center">-->
+    <!--<div class="col-md-2">-->
+        <!--<p>{%lorem%}</p>-->
+    <!--</div>-->
+    <!--<div class="col-md-8">-->
+        <!--<div class="d-flex align-items-center bg-purple rounded box-shadow">-->
+            <!--<h2>Projects</h2>-->
+        <!--</div>-->
+        <!--<p>{%lorem%}</p>-->
 
-    </div>
-    <div class="col-md-2">
-        <p>{%lorem%}</p>
-    </div>
-</div>
+    <!--</div>-->
+    <!--<div class="col-md-2">-->
+        <!--<p>{%lorem%}</p>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="nav">
+			<div class="info">
+				<a class="menu"><strong>About</strong></a>
+			</div>
+			<div class="info">
+				<a class="menu"><strong>Contact</strong></a>
+			</div>
+		</div>
+		<div class="student_info">
+			<svg version="1.1"
+				xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+				x="0px" y="0px" width="12%" height="75%" viewBox="0 0 500 500" enable-background="new 0 0 490 490" xml:space="preserve">
+			<defs>
+			</defs>
+			<path id="photo" fill="#444444" d="M245,0C109.7,0,0,109.7,0,245s109.7,245,245,245s245-109.7,245-245S380.3,0,245,0z M171.5,220.5
+				c0-40.6,32.9-73.5,73.5-73.5c40.6,0,73.5,32.9,73.5,73.5c0,40.6-32.9,73.5-73.5,73.5C204.4,294,171.5,261.1,171.5,220.5z
+				M110.5,419.4c22.6-52.1,74.2-88.7,134.5-88.7c60.4,0,111.9,36.7,134.5,88.7c-37.3,28.8-83.8,46-134.5,46S147.7,448.2,110.5,419.4z"
+				/>
+			</svg>
+			<div class="about_student">
+				<strong><span class="name">Name Surname</span></strong>
+				<span class="name_info">BA,cool guy</span>
+			</div>
+		</div>
+		<div class="template">
+			<div class="skills">
+				<strong><span class="skl">Skills</span></strong>
+				<strong><span class="skl">Hard Skills</span></strong>
+			</div>
+			<div class="project">
+			</div>
+			<div class="hobbies">
+				<strong><span class="skl">My Hobbies</span></strong>
+			</div>
+		</div>
+
+
 {% endblock %}

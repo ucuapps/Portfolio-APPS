@@ -1,0 +1,147 @@
+{% load static %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+<!doctype HTML>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../../../favicon.ico">-->
+
+    <title>{% block head_title %}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+    {% block extra_head %}
+    {% endblock %}
+</head>
+
+<body style="height: 100%; min-height: 100%">
+
+
+{% block body %}
+{#<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">#}
+{#    <h2 class="display-4">{% block block-header %}{% endblock %}</h2>#}
+{#    <p class="lead">{% block block-header-comment %} {% endblock %}</p>#}
+{#</div>#}
+
+<div class="" style="height: 100%">
+    {% if messages %}
+
+    <div class="row justify-content-md-center" style=""> <div class="col-md-8">
+        {% for message in messages %}
+        {% if message.tags == "success" %}
+        <div class="alert alert-success alert-dismissible">
+            {% elif message.tags == "error" %}
+            <div class="alert alert-danger alert-dismissible">
+                {% else %}
+                <div class="alert alert-info alert-dismissible">
+                    {% endif %}
+
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>{{message.tags|capfirst}}:</strong> {{message}}
+
+                    {% if message.tags == "success" %}
+                </div>
+                {% elif message.tags == "error" %}
+            </div>
+            {% else %}
+        </div>
+        {% endif %}
+
+        {% endfor %}
+
+</div>
+    </div>
+    {% endif %}
+    {% block content %}
+        <div class="row justify-content-md-end" style="min-height: 100%">
+    <div class="col-md-6 align-left" style="background: #6b4b86;">
+        <div class="row justify-content-md-center">
+            <div class="col-md-12 kastil" style="text-align: center; margin-top: 300px"><h1 style="color:white;">Create effective profile</h1></div>
+            <div class="col-md-12 kastil" style="text-align: center"><h1 style="color:white;">Find your perfect employee</h1></div>
+            <div class="col-md-12 kastil" style="text-align: center"><h1 style="color:white;">Generate a CV</h1></div>
+            </div>
+    </div>
+    <div class="col-md-6" style="margin-top: 200px">
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
+of your existing third party accounts. Or, <a href="{{ signup_url }}" style="color: #6b4b86">sign up</a>
+for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>{% blocktrans %}If you have not created an account yet, then please
+<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+{% endif %}
+
+<form class="login" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {% include 'includes/bs4_form.html' with form=form %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <div class="form-group">
+    <a class="" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form></div>
+</div>
+
+    {% endblock %}
+
+
+    {% block extra_body %}
+    {% endblock %}
+
+
+</div>
+{% endblock %}
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+        <!--integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+        <!--crossorigin="anonymous"></script>-->
+<!--<script>window.jQuery || document.write("<script src=\"{% static 'js/vendor/jquery-slim.min.js'%}\"><\/script>")</script>-->
+<!--<script src="{% static 'js/vendor/popper.min.js' %}"></script>-->
+<!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+<!--<script src="{% static 'js/vendor/holder.min.js' %}"></script>-->
+<!--<script>-->
+    <!--Holder.addTheme('thumb', {-->
+        <!--bg: '#55595c',-->
+        <!--fg: '#eceeef',-->
+        <!--text: 'Thumbnail'-->
+    <!--});-->
+<!--</script>-->
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
