@@ -23,8 +23,12 @@ def edit_student(request):
     template = "edit/student.html"
     context = {}
 
-    form = StudentForm(request.POST or None, instance=request.user.student)
-    if request.POST and form.is_valid():
+    if request.method == "POST":
+        form = StudentForm(request.POST, instance=request.user.student)
+    else:
+        form = StudentForm(instance=request.user.student)
+
+    if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Your profile data has been changed")
     context["form"] = form
@@ -42,8 +46,12 @@ def edit_project(request, pk=None):
         title = 'Create project:'
         project = Project()
 
-    form = ProjectForm(request.POST or None, instance=project)
-    if request.POST and form.is_valid():
+    if request.method == "POST":
+        form = ProjectForm(request.POST, instance=project)
+    else:
+        form = ProjectForm(instance=project)
+
+    if request.method == "POST" and form.is_valid():
         project = form.save()
         project.collaborators.add(request.user)
         project.save()
@@ -69,8 +77,13 @@ def edit_work_exp(request, pk=None):
         title = 'Create working experience:'
         we = WorkingExperience()
 
-    form = WorkingExperienceForm(request.POST or None, instance=we)
-    if request.POST and form.is_valid():
+    # form = WorkingExperienceForm(request.POST or None, instance=we)
+    if request.method == "POST":
+        form = WorkingExperienceForm(request.POST, instance=we)
+    else:
+        form = WorkingExperienceForm(instance=we)
+
+    if request.method == "POST" and form.is_valid():
         we = form.save(commit=False)
         we.user = request.user
         we.save()
@@ -95,12 +108,18 @@ def edit_volunteer_exp(request, pk=None):
     else:
         title = 'Create volunteer experience:'
         ve = VolunteerExperience()
-
-    form = VolunteerExperienceForm(request.POST or None, instance=ve)
-    if request.POST and form.is_valid():
-        ve = form.save(commit=False)
         ve.user = request.user
-        ve.save()
+
+    # form = VolunteerExperienceForm(request.POST or None, instance=ve)
+    if request.method == "POST":
+        form = VolunteerExperienceForm(request.POST, instance=ve)
+    else:
+        form = VolunteerExperienceForm(instance=ve)
+
+    if request.method == "POST" and form.is_valid():
+        # ve = form.save(commit=False)
+        # ve.user = request.user
+        form.save()
 
         messages.success(request, "Process finished successfully")
         return redirect('edit_vexps')
@@ -122,11 +141,17 @@ def edit_language(request, pk=None):
     else:
         title = 'Add language skill:'
         l = Language()
-
-    form = LanguageForm(request.POST or None, instance=l)
-    if request.POST and form.is_valid():
-        l = form.save(commit=False)
         l.user = request.user
+
+    # form = LanguageForm(request.POST or None, instance=l)
+    if request.method == "POST":
+        form = LanguageForm(request.POST, instance=l)
+    else:
+        form = LanguageForm(instance=l)
+
+    if request.method == "POST" and form.is_valid():
+        # l = form.save(commit=False)
+        # l.user = request.user
         l.save()
 
         messages.success(request, "Language has been added successfully")

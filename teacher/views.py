@@ -19,8 +19,13 @@ def edit_teacher(request):
     template = "edit/teacher.html"
     context = {}
 
-    form = TeacherForm(request.POST or None, instance=request.user.teacher)
-    if request.POST and form.is_valid():
+    # form = TeacherForm(request.POST or None, instance=request.user.teacher)
+    if request.method == "POST":
+        form = TeacherForm(request.POST, instance=request.user.teacher)
+    else:
+        form = TeacherForm(instance=request.user.teacher)
+
+    if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Your profile data has been changed")
     context["form"] = form

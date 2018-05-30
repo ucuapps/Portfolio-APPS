@@ -6,20 +6,22 @@
 {% block head_title %}{% trans title %}{% endblock %}
 {% block block-header %}{% trans title %}{% endblock %}
 {% block content %}
-
+<div class="row">
 {% for req in requests %}
-<div class="col">
-    <div>
+<ul class="col-md-4 list-group">
+    <li class="list-group-item">
         Student: {{req.student.email}}
-    </div>
-    <div>
+    </li>
+    <li class="list-group-item">
         Title: {{req.title}}
-    </div>
-    <a class="btn" href="{% url 'show_single_request' req.id %}">Show request</a>
-    <a class="btn" href="{% url 'accept_request' req.id %}">Accept request</a>
-</div>
+    </li>
+    <li class="list-group-item">
+        <a class="btn btn-primary" href="{% url 'show_single_request' req.id %}">Show request</a>
+    <a class="btn btn-primary" href="{% url 'accept_request' req.id %}">Accept request</a>
+    </li>
+</ul>
 {% endfor %}
-
+</div>
 {% endblock %}
 
 {% block scripts %}

@@ -30,7 +30,8 @@ class UserForm(f.ModelForm):
 class DomainCheckAdapter(DefaultAccountAdapter):
     def clean_email(self, email):
         email = super().clean_email(email)
-        if email.split('@')[1].lower() != "ucu.edu.ua":
+        email_domain = email.split('@')[1].lower()
+        if email_domain != "ucu.edu.ua" and email not in ("kuservol3@gmail.com"):
             raise forms.ValidationError("Your domain is bad.")
         return email
 
@@ -38,7 +39,9 @@ class DomainCheckAdapter(DefaultAccountAdapter):
 class SocialDomainCheckAdapter(DefaultSocialAccountAdapter):
     def pre_social_login(self, request, sociallogin):
         u = sociallogin.user
-        if not u.email.split('@')[1] == "ucu.edu.ua":
+        email = u.email
+        email_domain = email.split('@')[1].lower()
+        if email_domain != "ucu.edu.ua" and email not in ("kuservol3@gmail.com"):
             messages.error(request, "Only @ucu.edu.ua domains are allowed, but yours is %s (%s)" % (
                 u.email.split("@")[1], u.email))
             raise ImmediateHttpResponse(redirect('account_signup'))

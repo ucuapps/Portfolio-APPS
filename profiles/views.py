@@ -28,11 +28,16 @@ def edit_user(request):
     template = "edit/user.html"
     context = {}
 
-    form = UserForm(request.POST or None, request.FILES, instance=request.user)
-    if request.POST and form.is_valid():
+    if request.method == "POST":
+        form = UserForm(request.POST or None, request.FILES, instance=request.user)
+    else:
+        form = UserForm(instance=request.user)
+    print(request.user.email, request.user.first_name)
+    if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Your data has been edited.")
     context["form"] = form
+    print(form)
     return render(request, template, context)
 
 

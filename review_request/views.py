@@ -71,18 +71,19 @@ def create_request(request, pk=None):
         review_request = ReviewRequest()
         review_request.student = request.user
 
-    form = ReviewRequestForm(request.POST or None, instance=review_request)
-    print(form)
+    if request.method == "POST":
+        form = ReviewRequestForm(request.POST, instance=review_request)
+    else:
+        form = ReviewRequestForm(instance=review_request)
 
-    if request.POST and form.is_valid():
-        print("HELLO")
+    if request.method == "POST" and form.is_valid():
         # r = form.save()
         # r.student = request.user
         # r.save()
         # rev_request = form.save(commit=False)
         # rev_request.student = request.user
         a = form.save()
-        print(a.skills.all())
+        # rev_request.m2m_save()
 
         notify_teachers(review_request)
         messages.success(request, "Process finished successfully")
