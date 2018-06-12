@@ -61,6 +61,7 @@ def show_my_requests(request):
 
 @student_login_required
 def create_request(request, pk=None):
+    new_form = False
     if pk:
         title = 'Edit request:'
         review_request = get_object_or_404(ReviewRequest, pk=pk)
@@ -70,6 +71,7 @@ def create_request(request, pk=None):
         title = 'Create request:'
         review_request = ReviewRequest()
         review_request.student = request.user
+        new_form = True
 
     if request.method == "POST":
         form = ReviewRequestForm(request.POST, instance=review_request)
@@ -85,7 +87,9 @@ def create_request(request, pk=None):
         a = form.save()
         # rev_request.m2m_save()
 
-        notify_teachers(review_request)
+        if new_form:
+            # notify_teachers(review_request)
+            pass
         messages.success(request, "Process finished successfully")
         return redirect('show_my_requests')
 

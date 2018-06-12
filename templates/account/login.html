@@ -16,8 +16,7 @@
 
 {% if socialaccount_providers %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+of your existing third party accounts.{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
 
@@ -25,28 +24,28 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
   </ul>
 
-  <div class="login-or">{% trans 'or' %}</div>
+  <!--<div class="login-or">{% trans 'or' %}</div>-->
 
 </div>
 
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+<!--<p>{% blocktrans %}If you have not created an account yet, then please-->
+<!--<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>-->
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {% include 'includes/bs4_form.html' with form=form %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <div class="form-group">
-    <a class="" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form></div>
+<!--<form class="login" method="POST" action="{% url 'account_login' %}">-->
+  <!--{% csrf_token %}-->
+  <!--{% include 'includes/bs4_form.html' with form=form %}-->
+  <!--{% if redirect_field_value %}-->
+  <!--<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />-->
+  <!--{% endif %}-->
+  <!--<div class="form-group">-->
+    <!--<a class="" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>-->
+  <!--</div>-->
+    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>--></div>
 </div>
 <!--</div>-->
 
