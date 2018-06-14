@@ -48,7 +48,7 @@ class DomainCheckAdapter(DefaultAccountAdapter):
 
 
 class SocialDomainCheckAdapter(DefaultSocialAccountAdapter):
-    def is_open_for_signup(self, request):
+    def is_open_for_signup(self, request, **kwargs):
         """
         Checks whether or not the site is open for signups.
 
@@ -56,6 +56,7 @@ class SocialDomainCheckAdapter(DefaultSocialAccountAdapter):
         regular flow by raising an ImmediateHttpResponse
 
         (Comment reproduced from the overridden method.)
+        :param **kwargs:
         """
         return True
 
