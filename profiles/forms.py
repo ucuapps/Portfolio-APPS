@@ -48,7 +48,7 @@ class DomainCheckAdapter(DefaultAccountAdapter):
 
 
 class SocialDomainCheckAdapter(DefaultSocialAccountAdapter):
-    def is_open_for_signup(self, request, **kwargs):
+    def is_open_for_signup(self, request, *args, **kwargs):
         """
         Checks whether or not the site is open for signups.
 
