@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 
@@ -86,6 +87,9 @@ class Student(models.Model):
     professional_skills = models.ManyToManyField(Skill, related_name="professional_skills", blank=True)
     technical_skills = models.ManyToManyField(Skill, related_name="technical_skills", blank=True)
     soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     # Projects
     # projects = models.ManyToManyField(Project, blank=True)

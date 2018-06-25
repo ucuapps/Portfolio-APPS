@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
@@ -16,7 +17,9 @@ def user_login_required(view_func):
 
 @login_required
 def show_student(request, pk):
-    pass
+    u = get_object_or_404(get_user_model(), id=pk)
+    context = dict(student=u, title="Student")
+    return render(request, "student/student_landing.html", context)
 
 @user_login_required
 def edit_student(request):

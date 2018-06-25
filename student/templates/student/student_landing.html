@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block block-header %}{{ found_user.profile_image}}{{ found_user.first_name}} {{ found_user.last_name}}{%endblock%}
+{% block block-header %}{{ student.profile_image}}{{ student.first_name}} {{ student.last_name}}{%endblock%}
 
 {% block content %}
 
@@ -7,10 +7,10 @@
 
 <div class="row justify-content-md-center">
     <div class="col-md-2">
-        <p>Email: {{ found_user.email }}</p>
-        <p>Mobile: {{ found_user.mobile_number }}</p>
-        <p>Git: {{ found_user.git_link }}</p>
-        <p>Fb: {{ found_user.fb_link }}</p>
+        <p>Email: {{ student.email }}</p>
+        <p>Mobile: {{ student.mobile_number }}</p>
+        <p>Git: {{ student.git_link }}</p>
+        <p>Fb: {{ student.fb_link }}</p>
     </div>
     <div class="col-md-8">
         <div class="d-flex align-items-center bg-purple rounded box-shadow">

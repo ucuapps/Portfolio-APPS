@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 
-admin.site.login = login_required(admin.site.login)
+#admin.site.login = login_required(admin.site.login)
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
