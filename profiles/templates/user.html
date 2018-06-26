@@ -1,26 +1,87 @@
 {% extends 'base.html' %}
-{% block block-header %}{{ found_user.profile_image}}{{ found_user.first_name}} {{ found_user.last_name}}{%endblock%}
 
 {% block content %}
 
-
+<div class="row justify-content-md-start">
+    <div class="col-md-6">
+    <h1>{{ found_user.profile_image}}{{ found_user.first_name}} {{ found_user.last_name}} </h1>
+    Email: {{ found_user.email }}<br>
+    Mobile: {{ found_user.mobile_number }}<br>
+    Git: {{ found_user.git_link }}<br>
+    Fb: {{ found_user.fb_link }}<br>
+        <br>
+    </div>
+</div>
 
 <div class="row justify-content-md-center">
     <div class="col-md-2">
         <p>Email: {{ found_user.email }}</p>
-        <p>Mobile: {{ found_user.mobile_number }}</p>
-        <p>Git: {{ found_user.git_link }}</p>
-        <p>Fb: {{ found_user.fb_link }}</p>
+
     </div>
     <div class="col-md-8">
         <div class="d-flex align-items-center bg-purple rounded box-shadow">
             <h2>Projects</h2>
         </div>
-        <p>{{ found_user.student.study_programme}}</p>
+        <div class="row">
+        {% for proj in found_user.project_set.all %}
+        <ul class="col-md-4 list-group">
+            <li class="list-group-item">
+                Title: {{proj.title}}
+            </li>
+            <li class="list-group-item">
+                About: {{proj.about}}
+            </li>
+
+        </ul>
+        {% endfor %}
+        </div>
+        <div class="d-flex align-items-center bg-purple rounded box-shadow">
+            <h2>Volunteering</h2>
+        </div>
+        <div class="row">
+        {% for volunteering in found_user.volunteerexperience_set.all %}
+        <ul class="col-md-4 list-group">
+            <li class="list-group-item">
+                Title: {{volunteering.title}}
+            </li>
+            <li class="list-group-item">
+                About: {{volunteering.description}}
+            </li>
+
+        </ul>
+        {% endfor %}
+        </div>
+        <div class="d-flex align-items-center bg-purple rounded box-shadow">
+            <h2>Work</h2>
+        </div>
+        <div class="row">
+        {% for work in found_user.workingexperience_set.all %}
+        <ul class="col-md-4 list-group">
+            <li class="list-group-item">
+                Title: {{work.title}}
+            </li>
+            <li class="list-group-item">
+                About: {{work.company}}
+            </li>
+            <li class="list-group-item">
+                {{work.period_start}}-{{work.period_end}}
+            </li>
+            <li class="list-group-item">
+                Link: {{work.link}}
+            </li>
+            <li class="list-group-item">
+                About: {{work.description}}
+            </li>
+
+        </ul>
+        {% endfor %}
+        </div>
 
     </div>
     <div class="col-md-2">
-        <p>{%lorem%}</p>
+        {% for lang in found_user.language_set.all %}
+            <p>{{ lang.name }}: {{ lang.level }}</p>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
