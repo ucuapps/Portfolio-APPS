@@ -9,6 +9,7 @@
     {% url 'edit_student' as edit_student %}
     {% url 'edit_student' as edit_student %}
     {% url 'show_my_requests' as show_my_requests %}
+
     <a class="navbar-brand" href="{{home}}">Portfolio APPS.UCU</a>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04"
             aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +23,7 @@
             </li>
 
             {% if request.user.is_authenticated %}
+                {% url 'generate_cv' user.id as generate_cv %}
             <li class="nav-item {% if request.path == contact %}active{% endif %}">
                 <a class="nav-link" href="{{contact}}">Contact us</a>
             </li>
@@ -37,6 +39,9 @@
             {%else%}
             <li class="nav-item {% if request.path == show_my_requests %}active{% endif %}">
                 <a class="nav-link" href="{% url 'show_my_requests' %}">Requests</a>
+            </li>
+            <li class="nav-item {% if request.path == generate_cv %}active{% endif %}">
+                <a class="nav-link" href="{% url 'generate_cv' user.id %}">CV</a>
             </li>
             {% endif %}
             <li class="nav-item {% if request.path|slice:':5' == '/edit' %}active{% endif %}">

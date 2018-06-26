@@ -15,11 +15,6 @@ def user_login_required(view_func):
     decorated_view_funct = login_required(student_login_required(view_func))
     return decorated_view_funct
 
-@login_required
-def show_student(request, pk):
-    u = get_object_or_404(get_user_model(), id=pk)
-    context = dict(student=u, title="Student")
-    return render(request, "student/student_landing.html", context)
 
 @user_login_required
 def edit_student(request):
@@ -249,3 +244,8 @@ class SkillsAutocomplete(autocomplete.Select2QuerySetView):
         return qs.all()
 
 
+@user_login_required
+def generate(request, pk=None):
+    u = get_object_or_404(get_user_model(), id=pk)
+    context = dict(found_user=u, title="User")
+    return render(request, "student/index.html", context)
