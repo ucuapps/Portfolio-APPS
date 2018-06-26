@@ -6,12 +6,13 @@ from django.conf import settings
 class Language(models.Model):
     LANGUAGES = (
         ("uk", "Ukrainian"),
+        ("en", "English"),
     )
     # ToDo: lang LVLs
     LEVEL = (
-        ("bad", "Bad LVL"),
-        ("good", "Good LVL"),
-        ("excellent", "Excellent LVL")
+        ("bad", "Beginner"),
+        ("good", "Intermediate"),
+        ("excellent", "Advanced")
     )
 
     name = models.CharField(max_length=255, choices=LANGUAGES)
