@@ -30,4 +30,6 @@ urlpatterns = [
     re_path(r'^technical-autocomplete/$', views.TechnicalSkillsAutocomplete.as_view(), name='tech-autocomplete'),
     re_path(r'^professional-autocomplete/$', views.ProfessionalSkillsAutocomplete.as_view(), name='prof-autocomplete'),
     re_path(r'^skills-autocomplete/$', views.SkillsAutocomplete.as_view(), name='skills-autocomplete'),
+
+    re_path(r'^generate-cv/(?P<pk>\d+)/$', views.generate, name='generate_cv'),
 ]
