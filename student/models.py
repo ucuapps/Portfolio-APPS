@@ -44,17 +44,27 @@ class Project(models.Model):
 
 class VolunteerExperience(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(max_length=700)
     link = models.URLField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     organization = models.CharField(max_length=225, blank=True, null=True)
+
+class Education(models.Model):
+    degree = models.CharField(max_length=255)
+    period_start = models.DateField(null=True, blank=True)
+    period_end = models.DateField(null=True, blank=True)
+    description = models.TextField(max_length=700)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    university = models.CharField(max_length=225, blank=True, null=True)
+    field_of_study = models.CharField(max_length=225, blank=True, null=True)
 
 
 class WorkingExperience(models.Model):
     title = models.CharField(max_length=255)
     company = models.CharField(max_length=255, null=True, blank=True)
-    period_start = models.DateTimeField(null=True, blank=True)
-    period_end = models.DateTimeField(null=True, blank=True)
+    period_start = models.DateField(null=True, blank=True)
+    period_end = models.DateField(null=True, blank=True)
     link = models.URLField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -89,8 +99,7 @@ class Student(models.Model):
     technical_skills = models.ManyToManyField(Skill, related_name="technical_skills", blank=True)
     soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    summary = models.TextField(blank=True, null=True)
 
     # Projects
     # projects = models.ManyToManyField(Project, blank=True)
