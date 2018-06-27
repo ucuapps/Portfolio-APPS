@@ -5,7 +5,8 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required, user_passes_test
-
+from student.views import student_login_required
+from teacher.views import teacher_login_required
 
 from student.models import Student
 from .forms import UserForm
@@ -58,5 +59,11 @@ class UsersAutocomplete(autocomplete.Select2QuerySetView):
 @login_required
 def show_user(request, pk):
     u = get_object_or_404(get_user_model(), id=pk)
+    #if u.is_teacher:
+     #   context = dict(found_user=u, title="Teacher")
+      #  return render(request, "teacher-inf.html", context)
+   # else:
     context = dict(found_user=u, title="User")
     return render(request, "user.html", context)
+
+
