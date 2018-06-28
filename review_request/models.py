@@ -14,3 +14,4 @@ class ReviewRequest(models.Model):
     student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="student_requestor")
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name="teacher_reviewer")
     accepted = models.BooleanField(default=False)
+

@@ -63,7 +63,7 @@ def show_user(request, pk):
      #   context = dict(found_user=u, title="Teacher")
       #  return render(request, "teacher-inf.html", context)
    # else:
-    context = dict(found_user=u, title="User")
+    context = dict(found_user=u, title="User", media="/media/")
     return render(request, "user.html", context)
 
 
