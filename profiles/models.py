@@ -14,6 +14,19 @@ from django.contrib.auth import get_user_model
 from student.models import Student
 
 
+
+class Interests(models.Model):
+    INTEREST_TYPES = (
+        ("professional", "Professional interest"),
+
+    )
+
+    interest_type = models.CharField(max_length=255, choices=INTEREST_TYPES)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
 
@@ -61,6 +74,8 @@ class User(AbstractUser):
     git_link = models.URLField(blank=True, null=True)
     fb_link = models.URLField(blank=True, null=True)
     profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
+
+    fields_of_interests = models.ManyToManyField(Interests, related_name="hard_skills", blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

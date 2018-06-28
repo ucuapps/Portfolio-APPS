@@ -25,10 +25,10 @@ urlpatterns = [
     re_path(r'^edit/new-language/$', views.edit_language, name='new_language'),
     re_path(r'^edit/delete-language/(?P<pk>\d+)/$', views.delete_language, name='delete_language'),
 
-    # НЕ КОТЯН
+
     re_path(r'^soft-autocomplete/$', views.SoftSkillsAutocomplete.as_view(), name='soft-autocomplete'),
-    re_path(r'^technical-autocomplete/$', views.TechnicalSkillsAutocomplete.as_view(), name='tech-autocomplete'),
-    re_path(r'^professional-autocomplete/$', views.ProfessionalSkillsAutocomplete.as_view(), name='prof-autocomplete'),
+    re_path(r'^hard-autocomplete/$', views.TechnicalSkillsAutocomplete.as_view(), name='hard-autocomplete'),
+    re_path(r'^planguage-autocomplete/$', views.ProfessionalSkillsAutocomplete.as_view(), name='plang-autocomplete'),
     re_path(r'^skills-autocomplete/$', views.SkillsAutocomplete.as_view(), name='skills-autocomplete'),
 
     re_path(r'^generate-cv/(?P<pk>\d+)/$', views.generate, name='generate_cv'),
