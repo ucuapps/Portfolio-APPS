@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from allauth.socialaccount.signals import pre_social_login
+from allauth.account.signals import user_signed_up
 from django.db.models.signals import post_save
 from django.conf import settings
 from allauth.account.utils import perform_login
@@ -86,8 +87,10 @@ class User(AbstractUser):
 def link_to_local_user(sender, request, sociallogin, **kwargs):
     email_address = sociallogin.account.extra_data['email']
     users = User.objects.filter(email=email_address)
+
     if users:
-        perform_login(request, users[0], email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
+        u = users[0]
+        perform_login(request, u, email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
         raise ImmediateHttpResponse(redirect('home'))
 
 
@@ -97,3 +100,27 @@ def create_user_profile(sender, instance, created, **kwargs):
         Student.objects.create(user=instance)
         instance.is_student = True
         instance.save()
+from allauth.account.signals import user_signed_up, user_logged_in
+
+
+@receiver(user_signed_up)
+def social_login_fname_lname_profilepic(sociallogin, user, **kwargs):
+
+    if sociallogin:
+
+        if sociallogin.account.provider == 'google':
+            f_name = sociallogin.account.extra_data['given_name']
+            l_name = sociallogin.account.extra_data['family_name']
+            if f_name:
+                user.first_name = f_name
+            if l_name:
+                user.last_name = l_name
+
+            picture_url = sociallogin.account.extra_data['picture']
+            if picture_url:
+                user.profile_picture =picture_url
+
+
+    user.save()
+   # profile = User(user=user)
+    #profile.save()
