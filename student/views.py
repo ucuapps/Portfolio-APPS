@@ -249,3 +249,7 @@ def generate(request, pk=None):
     u = get_object_or_404(get_user_model(), id=pk)
     context = dict(found_user=u, title="User", media="/media/")
     return render(request, "student/index.html", context)
+
+@user_login_required
+def search_form(request):
+    return render(request, 'student/search.html')

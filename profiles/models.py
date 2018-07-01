@@ -1,11 +1,14 @@
+from urllib.request import urlretrieve
+
 from allauth.socialaccount.helpers import ImmediateHttpResponse
+from django.core.files import File
 from django.shortcuts import redirect
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 from allauth.socialaccount.signals import pre_social_login
-from allauth.account.signals import user_signed_up
+# from allauth.account.signals import user_signed_up, user_logged_in
 from django.db.models.signals import post_save
 from django.conf import settings
 from allauth.account.utils import perform_login
@@ -13,6 +16,7 @@ from django.contrib.auth import get_user_model
 
 
 from student.models import Student
+
 
 
 
@@ -85,13 +89,14 @@ class User(AbstractUser):
 
 @receiver(pre_social_login)
 def link_to_local_user(sender, request, sociallogin, **kwargs):
-    email_address = sociallogin.account.extra_data['email']
-    users = User.objects.filter(email=email_address)
-
-    if users:
-        u = users[0]
-        perform_login(request, u, email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
-        raise ImmediateHttpResponse(redirect('home'))
+    # email_address = sociallogin.account.extra_data['email']
+    # users = User.objects.filter(email=email_address)
+    #
+    # if users:
+    #     u = users[0]
+    #     perform_login(request, u, email_verification=settings.ACCOUNT_EMAIL_VERIFICATION)
+    #     raise ImmediateHttpResponse(redirect('home'))
+    pass
 
 
 @receiver(post_save, sender=get_user_model())
@@ -117,10 +122,15 @@ def social_login_fname_lname_profilepic(sociallogin, user, **kwargs):
                 user.last_name = l_name
 
             picture_url = sociallogin.account.extra_data['picture']
+
             if picture_url:
-                user.profile_picture =picture_url
+
+                result = urlretrieve(picture_url)
+                user.profile_image.save(
+                    str(user.id)+".jpg",
+                    File(open(result[0], "rb"))
+                )
+
 
 
     user.save()
-   # profile = User(user=user)
-    #profile.save()
