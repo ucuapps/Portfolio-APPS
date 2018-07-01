@@ -16,15 +16,15 @@ class StudentForm(forms.ModelForm):
         exclude = ('user', )
         widgets = {
             'soft_skills': autocomplete.ModelSelect2Multiple(url='soft-autocomplete'),
-            'technical_skills': autocomplete.ModelSelect2Multiple(url='tech-autocomplete'),
-            'professional_skills': autocomplete.ModelSelect2Multiple(url='prof-autocomplete'),
+            'hard_skills': autocomplete.ModelSelect2Multiple(url='hard-autocomplete'),
+            'programming_language': autocomplete.ModelSelect2Multiple(url='plang-autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
-        self.fields["professional_skills"].queryset = Skill.objects.filter(skill_type="professional")
+        self.fields["programming_language"].queryset = Skill.objects.filter(skill_type="programming_language")
         self.fields["soft_skills"].queryset = Skill.objects.filter(skill_type="soft")
-        self.fields["technical_skills"].queryset = Skill.objects.filter(skill_type="technical")
+        self.fields["hard_skills"].queryset = Skill.objects.filter(skill_type="hard")
 
 
 class ProjectForm(forms.ModelForm):
