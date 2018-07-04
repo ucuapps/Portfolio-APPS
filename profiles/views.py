@@ -6,9 +6,10 @@ from django.contrib.auth import get_user_model
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-from profiles.models import User
+from profiles.models import User, Interests
 from student.views import student_login_required
 from teacher.views import teacher_login_required
+from student.views import SkillsAutocomplete
 
 from student.models import Student
 from .forms import UserForm
@@ -79,7 +80,7 @@ def search(request):
         if form.is_valid():
             users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'],
                                         last_name__icontains=form.cleaned_data['last_name'],
-                                        first_name__icontains=form.cleaned_data['first_name'])
+                                        first_name__icontains=form.cleaned_data['first_name'],  )#is_student__exact=form.cleaned_data['is_student'])
 
             return render(request, 'search.html', {'form': form, 'users': users})
 
@@ -88,3 +89,16 @@ def search(request):
         form = SearchForm()
 
     return render(request, 'search.html', {'form': form})
+
+class InterestsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Interests.objects.none()
+
+        qs = Interests.objects
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
