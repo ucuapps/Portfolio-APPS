@@ -87,10 +87,10 @@ class CustomSignupForm(f.Form):
 
 class SearchForm(f.Form):
 
-    first_name= f.CharField(max_length=30,widget=f.TextInput(attrs={'placeholder': 'Your first name'}))
-    last_name = f.CharField(max_length=30,
+    first_name= f.CharField(max_length=30, required=False,widget=f.TextInput(attrs={'placeholder': 'Your first name'}))
+    last_name = f.CharField(max_length=30, required=False,
                                  widget=f.TextInput(attrs={'placeholder': 'Your last name'}))
-    fields_of_interests = f.CharField()
-    current_study_year = f.CharField()
-    skills = f.CharField()
+    fields_of_interests = f.CharField(required=False)
+    current_study_year = f.CharField(required=False)
+    skills = f.CharField(required=False)
 
