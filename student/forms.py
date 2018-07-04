@@ -60,4 +60,6 @@ class LanguageForm(forms.ModelForm):
         model = Language
         exclude = ('user',)
 
+class StudentSearch(forms.ModelForm):
+  pass
 

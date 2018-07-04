@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block head_title %}search{% endblock %}
+
+{% block block-header %}{% endblock %}
+{% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-md-4">
+    <form method="post">
+        {% csrf_token %}
+        {% include 'includes/bs4_form.html' with form=form %}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    </div>
+
+</div>
+    <div class="row justify-content-md-center">
+        {% for user in users %}
+            <ul class="col-md-4 list-group">
+            <li class="list-group-item">
+                 {{user.first_name}}{{ user.last_name }}
+            </li>
+            <li class="list-group-item">
+                {{ user.student.summary }}
+            </li>
+
+        </ul>
+        {% endfor %}
+    </div>
+
+{% endblock %}

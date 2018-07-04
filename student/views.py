@@ -10,6 +10,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from student.models import Student
+from student.forms import StudentSearch
+
 
 
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm
@@ -280,4 +283,5 @@ def convertation(request, pk=None):
     url = request.build_absolute_uri(reverse('show_cv', args=pk))
     HTML(url).write_pdf(pdf)
     return FileResponse(open(pdf, 'rb'), content_type='')
+
 
