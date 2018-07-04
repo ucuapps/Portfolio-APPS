@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.conf import settings
+from django.core.exceptions import ValidationError
 
 # class CustomClearableFileInputWidget(f.ClearableFileInput):
 #     template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
@@ -83,3 +84,13 @@ class CustomSignupForm(f.Form):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.save()
+
+class SearchForm(f.Form):
+
+    first_name= f.CharField(max_length=30,widget=f.TextInput(attrs={'placeholder': 'Your first name'}))
+    last_name = f.CharField(max_length=30,
+                                 widget=f.TextInput(attrs={'placeholder': 'Your last name'}))
+    fields_of_interests = f.CharField()
+    current_study_year = f.CharField()
+    skills = f.CharField()
+

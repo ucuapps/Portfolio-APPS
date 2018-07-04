@@ -3,6 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from student.models import Student
+from student.forms import StudentSearch
+
 
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill
@@ -289,6 +292,7 @@ def convertation(request, pk=None):
     response['Content-Disposition'] = 'attachment; filename=' + pdf
     os.remove(pdf)
     return response
+
 
 
 

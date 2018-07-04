@@ -51,6 +51,7 @@
   padding-top: 10px;
   font-family: "Roboto";
   white-space: nowrap;
+    word-spacing: 17px;
 }
 
 
@@ -62,7 +63,7 @@
   text-align: center;
 }
 
-.sign-in {
+.sign-in a {
     background-color: rgb(101,57,152); 
     border: 1px solid #643894;
     border-radius: 20px;
@@ -79,7 +80,7 @@
 
 }
 
-.sign-in:hover, .sign-up:hover {
+.sign-in a:hover, .sign-up:hover {
   background-color: #d9d9d9;
   color: rgb(101,57,152);
 
@@ -101,14 +102,10 @@
     font-family: "Roboto";
 }
 
+ul {
+    list-style-type: none;
+}
 
-
-
-
-
-
-
-
-
-
-
+.text-left {
+    text-align: left;
+}

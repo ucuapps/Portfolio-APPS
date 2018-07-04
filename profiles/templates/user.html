@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
 
 <div class="row justify-content-md-start">
     <div class="col-md-6">
-    <h1><img src="{{ media }}{{ found_user.profile_image}}">{{ found_user.first_name}} {{ found_user.last_name}} </h1>
+    <h1><img src="{% get_media_prefix %}{{ found_user.profile_image}}">{{ found_user.first_name}} {{ found_user.last_name}} </h1>
     Email: {{ found_user.email }}<br>
     Mobile: {{ found_user.mobile_number }}<br>
     Git: {{ found_user.git_link }}<br>
