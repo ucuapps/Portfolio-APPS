@@ -8,7 +8,7 @@ from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExp
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill
 
 
-from weasyprint import HTML
+from weasyprint import HTML, CSS
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import FileResponse
@@ -275,7 +275,7 @@ def generate_cv(request, pk=None):
 def convertation(request, pk=None):
     pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', args=pk))
-    HTML(url).write_pdf(pdf)
+    HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
     '''   options = {
         'page-size': 'A4',
         'margin-top': '0.0in',
