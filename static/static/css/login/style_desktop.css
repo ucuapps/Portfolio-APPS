@@ -1,0 +1,114 @@
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: rgb(101,57,152);
+}
+
+
+.right {
+  right: 0;
+  background-color: rgb(240,240,240);
+}
+
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+}
+
+
+.APPS {
+
+  margin: 4px 4px;
+  left: calc(100% - 420px);
+  bottom: 0px;
+  position: absolute;
+  font-size: 1200%; 
+  opacity: 0.3;
+  font-family: "Roboto";
+  color: rgb(240,240,240);
+
+  
+}
+
+
+.info {
+  font-size: 25px;
+  color: rgb(240,240,240);
+  padding-top: 10px;
+  font-family: "Roboto";
+  white-space: nowrap;
+}
+
+
+
+.welcome {
+  font-size: 25px;
+  color: rgb(101,57,152);
+  font-family: "Roboto";
+  text-align: center;
+}
+
+.sign-in {
+    background-color: rgb(101,57,152); 
+    border: 1px solid #643894;
+    border-radius: 20px;
+    color: white;
+    padding: 5px 120px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.4s;
+    font-family: "Roboto";
+
+
+}
+
+.sign-in:hover, .sign-up:hover {
+  background-color: #d9d9d9;
+  color: rgb(101,57,152);
+
+}
+
+.sign-up {
+  background-color: rgb(101,57,152); 
+    border: 1px solid #643894;
+    border-radius: 20px;
+    color: white;
+    padding: 5px 120px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.4s;
+    font-family: "Roboto";
+}
+
+
+
+
+
+
+
+
+
+
+
+
