@@ -1,19 +1,21 @@
-from weasyprint import HTML
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.http import FileResponse
-from django.conf import settings
-import os
-
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill
+
+
+from weasyprint import HTML
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.http import FileResponse
+from django.conf import settings
+import os
+import pdfkit
+
 
 student_login_required = user_passes_test(lambda u: u.is_student, login_url='/')
 
@@ -263,15 +265,10 @@ def search_form(request):
     return render(request, 'student/search.html')
 
 
-
 def generate_cv(request, pk=None):
     u = get_object_or_404(get_user_model(), id=pk)
     context = dict(found_user=u, title="User", media="/media/")
     return render(request, "cv/index.html", context)
-
-
-
-
 
 
 @user_login_required
@@ -279,5 +276,19 @@ def convertation(request, pk=None):
     pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', args=pk))
     HTML(url).write_pdf(pdf)
-    return FileResponse(open(pdf, 'rb'), content_type='')
+    '''   options = {
+        'page-size': 'A4',
+        'margin-top': '0.0in',
+        'margin-right': '0.0in',
+        'margin-bottom': '0.0in',
+        'margin-left': '0.0in',
+    }
+
+    pdfkit.from_url(url, pdf, options=options)'''
+    response = FileResponse(open(pdf, 'rb'), content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=' + pdf
+    os.remove(pdf)
+    return response
+
+
 
