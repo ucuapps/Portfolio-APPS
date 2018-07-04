@@ -1,0 +1,128 @@
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+
+}
+
+
+.left {
+  left: 0;
+  background-color: rgb(101,57,152);
+}
+
+.right {
+  right: 0;
+  background-color: rgb(240,240,240);
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.APPS {
+  font-size: 800%;
+  color: rgb(240,240,240);
+  opacity: 0.3;
+  font-family: "Roboto";
+  margin: 4px 4px;
+  left: calc(100% - 283px);
+  bottom: 0px;
+  position: absolute;
+
+}
+
+.info {
+  font-size: 20px;
+  color: rgb(240,240,240);
+  padding-top: 10px;
+  font-family: "Roboto";
+  white-space: nowrap;
+}
+
+
+
+.welcome {
+  font-size: 20px;
+  color: rgb(101,57,152);
+  font-family: "Roboto";
+  text-align: center;
+}
+
+.sign-in {
+    background-color: rgb(101,57,152); 
+    border: 1px solid #643894;
+    border-radius: 15px;
+    color: white;
+    padding: 1% 30%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.4s;
+    font-family: "Roboto";
+
+  
+
+}
+
+.sign-in:hover, .sign-up:hover {
+  background-color: #d9d9d9;
+  color: rgb(101,57,152);
+}
+
+.sign-up {
+  background-color: rgb(101,57,152); 
+    border: 1px solid #643894;
+    border-radius: 20px;
+    color: white;
+    padding: 1% 30%;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    -webkit-transition-duration: 0.1s;
+    transition-duration: 0.4s;
+    font-family: "Roboto";
+}
+
+
+@media only screen and (max-width: 666px) and (min-width: 450px) {
+    .info {
+      font-size: 13px;
+      color: rgb(240,240,240);
+      padding-top: 10px;
+      font-family: "Roboto";
+      white-space: nowrap;
+    }
+
+    .APPS {
+      font-size: 500%;
+      left: calc(100% - 180px);
+      
+    }
+
+    .welcome {
+      font-size: 17px;
+    }
+}
+
+
+
+
+
+
+
+
+

@@ -35,8 +35,4 @@ urlpatterns = [
     re_path(r'^generate-cv/(?P<pk>\d+)/$', views.show_preview, name='generate_cv'),
     re_path(r'^show-cv/(?P<pk>\d+)/$', views.generate_cv, name='show_cv'),
     re_path(r'^generate-pdf/(?P<pk>\d+)/$', views.convertation, name='generate_pdf'),
-
-    # reverse django
-    #getabsurl
-
 ]

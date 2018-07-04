@@ -7,7 +7,7 @@
 
 
 <meta name="viewport" content="width=device-width"/>
-<meta name="description" content="The Curriculum Vitae."/>
+<meta name="description" content="CV"/>
 <meta charset="UTF-8">
 
 <link type="text/css" rel="stylesheet" href="{% static 'css/cv_style.css' %}">
@@ -15,18 +15,17 @@
 
 
 </head>
-<body id="top">
 <div id="cv" class="instaFade">
 	<div class="mainDetails">
 		<div id="headshot" class="quickFade">
 			<img src={{ media }}{{ found_user.profile_image }} alt="userphoto" />
 		</div>
-		
+
 		<div id="name">
 			<h1 class="quickFade delayTwo">{{ found_user.first_name }} {{ found_user.last_name }}</h1>
 			<h2 class="quickFade delayThree">programiruyu</h2>
 		</div>
-		
+
 		<div id="contactDetails" class="quickFade delayFour">
 			<ul>
 				<li>e: <a href="mailto:yuzkiv@ucu.edu.ua" target="_blank">{{ found_user.email }}</a></li>
@@ -35,26 +34,26 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	
+
 	<div id="mainArea" class="quickFade delayFive">
 		<section>
 			<article>
 				<div class="sectionTitle">
 					<h1>Personal Profile</h1>
 				</div>
-				
+
 				<div class="sectionContent">
 					<p>{{ found_user.student.summary }}</div>
 			</article>
 			<div class="clear"></div>
 		</section>
-		
-		
+
+
 		<section>
 			<div class="sectionTitle">
 				<h1>Work Experience</h1>
 			</div>
-			
+
 			<div class="sectionContent">
                 {% for work in found_user.workingexperience_set.all %}
 				<article>
@@ -66,13 +65,13 @@
 			</div>
 			<div class="clear"></div>
 		</section>
-		
-		
+
+
 		<section>
 			<div class="sectionTitle">
 				<h1>Key Skills</h1>
 			</div>
-			
+
 			<div class="sectionContent">
 				<ul class="keySkills">
 					<li>Python</li>
@@ -87,20 +86,20 @@
 			</div>
 			<div class="clear"></div>
 		</section>
-		
-		
+
+
 		<section>
 			<div class="sectionTitle">
 				<h1>Education</h1>
 			</div>
-			
+
 			<div class="sectionContent">
 				<article>
 					<h2>Ukrainian Catholic University</h2>
 					<p class="subDetails">Computer Science</p>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
 				</article>
-				
+
 				<article>
 					<h2>College/University</h2>
 					<p class="subDetails">Qualification</p>
@@ -110,12 +109,12 @@
 			<div class="clear"></div>
 		</section>
 
-		
+
 		<section>
 			<div class="sectionTitle">
 				<h1>Volunteering</h1>
 			</div>
-			
+
 			<div class="sectionContent">
                  {% for volunteering in found_user.volunteerexperience_set.all %}
 				<article>
@@ -127,9 +126,8 @@
 			</div>
 			<div class="clear"></div>
 		</section>
-		
+
 	</div>
 </div>
 
-</body>
 </html>

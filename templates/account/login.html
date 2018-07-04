@@ -1,61 +1,60 @@
-{% extends "base.html" %}
-
+{% load static %}
 {% load i18n %}
 {% load account socialaccount %}
 
+ <!DOCTYPE html>
+ <head>
+ 	<meta charset="UTF-8">
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+  <link href="{% static  'css/login/style_phone.css'%}" rel="stylesheet" media="screen and (max-width: 449px)">
+  <link href="{% static  'css/login/style_tablet.css'%}" rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)">
+  <link href="{% static  'css/login/style_desktop.css'%}" rel="stylesheet" media="screen and (min-width: 1251px)">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static  '/images/logo.ico'%}">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block block-header %}{% trans "Sign In" %}{% endblock %}
+ </head>
 
+ <title>Portfolio.APPS</title>
 
-{% block content %}
-<div class="row justify-content-md-center"><div class="col-md-8">
+<div class="split left">
+  <div class="centered">
+
+  	<div class="info">
+		<span class="glyphicon glyphicon-search" aria-hidden="true" > Search your perfect employee</span>
+  	</div>
+
+    <div class="info">
+    	<span class="glyphicon glyphicon-user" aria-hidden="true"> Create your perfect profile</span>
+
+    </div>
+
+    <div class="info">
+    	<span class="glyphicon glyphicon-list-alt" aria-hidden="true"> Generate CV</span>
+    </div>
+
+  </div>
+	 <span class="APPS">APPS</span>
+</div>
+
 
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts.{% endblocktrans %}</p>
-
-<div class="socialaccount_ballot">
-
-  <ul class="socialaccount_providers">
+<div class="split right">
+  <div class="centered">
+    <h2 class="welcome">{% blocktrans with site.name as site_name %}Please sign in with your existing @ucu.edu.ua account :){% endblocktrans %}</h2>
+      <br>
+ <!--   <button type="button" class="sign-in">Sign In</button> -->
+  <ul class="sign-in">
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
   </ul>
 
-  <!--<div class="login-or">{% trans 'or' %}</div>-->
-
+<!--    <button type="button" class="sign-up">Sign up</button> -->
+  </div>
 </div>
-
-{% include "socialaccount/snippets/login_extra.html" %}
-
-{% else %}
-<!--<p>{% blocktrans %}If you have not created an account yet, then please-->
-<!--<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>-->
 {% endif %}
 
-<!--<form class="login" method="POST" action="{% url 'account_login' %}">-->
-  <!--{% csrf_token %}-->
-  <!--{% include 'includes/bs4_form.html' with form=form %}-->
-  <!--{% if redirect_field_value %}-->
-  <!--<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />-->
-  <!--{% endif %}-->
-  <!--<div class="form-group">-->
-    <!--<a class="" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>-->
-  <!--</div>-->
-    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
-<!--</form>--></div>
-</div>
-<!--</div>-->
-
-
-{% endblock %}
-{% block extra_body %}
-<style>
-#id_remember {
-    display: inline-block;
-    width: auto;
-}
-</style>
-{% endblock %}
+</html>
