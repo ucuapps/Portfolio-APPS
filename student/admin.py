@@ -6,7 +6,7 @@ from .models import Student, Project, WorkingExperience, VolunteerExperience, Sk
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    fields = ('user', 'study_programme', 'current_study_year', 'professional_skills', 'technical_skills', 'soft_skills')
+    fields = ('user', 'study_programme', 'current_study_year', 'hard_skills', 'programming_language', 'soft_skills')
 
 
 admin.site.register(StudyProgramme)

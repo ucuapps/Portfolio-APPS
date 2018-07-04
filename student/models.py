@@ -186,7 +186,12 @@ class Student(models.Model):
     programming_language = models.ManyToManyField(Skill, related_name="programming_language", blank=True)
     soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
 
-    summary = models.TextField(blank=True, null=True)
+    summary = models.TextField(blank=True, null=True, help_text="Enter here 1-5 sentences about you. EX: Honors student"
+                                                                " with record of academic and extracurricular success. "
+                                                                "Extensive leadership experience, particularly within a"
+                                                                " higher education setting."
+                                                                "Adept at working across departments, with faculty,"
+                                                                " administrators")
 
     # Projects
     # projects = models.ManyToManyField(Project, blank=True)
