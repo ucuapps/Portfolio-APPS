@@ -277,7 +277,7 @@ def generate_cv(request, pk=None):
 @user_login_required
 def convertation(request, pk=None):
     pdf = "myCV.pdf"
-    url = request.build_absolute_uri(reverse('show_cv', args=pk))
+    url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
     '''   options = {
         'page-size': 'A4',
