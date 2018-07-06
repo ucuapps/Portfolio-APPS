@@ -1,6 +1,7 @@
+from dal import autocomplete
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import redirect
-from django.forms import forms
+from django.forms import forms, ChoiceField, CheckboxInput, BooleanField
 from django import forms as f
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
@@ -10,6 +11,10 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.conf import settings
 from django.core.exceptions import ValidationError
+
+from profiles.models import Interests
+from student.models import Skill, Language
+
 
 # class CustomClearableFileInputWidget(f.ClearableFileInput):
 #     template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
@@ -90,7 +95,18 @@ class SearchForm(f.Form):
     first_name= f.CharField(max_length=30, required=False,widget=f.TextInput(attrs={'placeholder': 'Your first name'}))
     last_name = f.CharField(max_length=30, required=False,
                                  widget=f.TextInput(attrs={'placeholder': 'Your last name'}))
-    fields_of_interests = f.CharField(required=False)
     current_study_year = f.CharField(required=False)
-    skills = f.CharField(required=False)
+
+
+    is_student = f.BooleanField(required=False, initial=True)
+
+    skills = f.ModelChoiceField(required=False,
+        queryset=Skill.objects.all(),
+        widget=autocomplete.ModelSelect2(url='skills-autocomplete')
+    )
+
+    fields_of_interests = f.ModelChoiceField(required=False,
+                                queryset=Interests.objects.all(),
+                                widget=autocomplete.ModelSelect2(url='interests-autocomplete')
+                                )
 

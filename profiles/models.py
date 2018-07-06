@@ -80,7 +80,7 @@ class User(AbstractUser):
     fb_link = models.URLField(blank=True, null=True)
     profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
 
-    fields_of_interests = models.ManyToManyField(Interests, related_name="hard_skills", blank=True)
+    fields_of_interests = models.ManyToManyField(Interests, related_name="interests", blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
