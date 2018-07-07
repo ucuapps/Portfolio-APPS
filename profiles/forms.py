@@ -26,11 +26,14 @@ f.ClearableFileInput.template_name = 'django_overrides/forms/widgets/clearable_f
 class UserForm(f.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('profile_image', 'first_name', 'last_name', 'mobile_number', 'git_link', 'fb_link',)
+        fields = ('profile_image', 'first_name', 'last_name', 'mobile_number', 'git_link', 'fb_link',
+                  'fields_of_interests')
         labels = {
             'git_link': _('Github link:'),
             'fb_link': _('Facebook link:'),
         }
+        widgets = {
+            'fields_of_interests': autocomplete.ModelSelect2Multiple(url='interests-autocomplete'),}
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):
@@ -90,13 +93,17 @@ class CustomSignupForm(f.Form):
         user.last_name = self.cleaned_data['last_name']
         user.save()
 
-class SearchForm(f.Form):
 
+class SearchForm(f.Form):
     first_name= f.CharField(max_length=30, required=False,widget=f.TextInput(attrs={'placeholder': 'Your first name'}))
     last_name = f.CharField(max_length=30, required=False,
                                  widget=f.TextInput(attrs={'placeholder': 'Your last name'}))
-    current_study_year = f.CharField(required=False)
+    current_study_year = f.IntegerField(required=False, initial=1)
 
+    language = f.ModelChoiceField(required=False,
+                                queryset=Language.objects.all(),
+                                widget=autocomplete.ModelSelect2(url='language-autocomplete')
+                                )
 
     is_student = f.BooleanField(required=False, initial=True)
 
@@ -109,4 +116,3 @@ class SearchForm(f.Form):
                                 queryset=Interests.objects.all(),
                                 widget=autocomplete.ModelSelect2(url='interests-autocomplete')
                                 )
-

@@ -74,10 +74,10 @@ def show_user(request, pk):
 
 def search(request):
     if request.method == 'POST':
-
         form = SearchForm(request.POST)
 
         if form.is_valid():
+            print(form.cleaned_data)
             users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'],
                                         last_name__icontains=form.cleaned_data['last_name'],
                                         first_name__icontains=form.cleaned_data['first_name'],  )#is_student__exact=form.cleaned_data['is_student'])
@@ -85,7 +85,6 @@ def search(request):
             return render(request, 'search.html', {'form': form, 'users': users})
 
     else:
-
         form = SearchForm()
 
     return render(request, 'search.html', {'form': form})

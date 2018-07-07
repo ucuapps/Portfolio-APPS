@@ -3,7 +3,7 @@ from django.forms import ClearableFileInput
 from django.shortcuts import render
 
 
-from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill
+from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
 
 
 from dal import autocomplete
@@ -63,3 +63,7 @@ class LanguageForm(forms.ModelForm):
 class StudentSearch(forms.ModelForm):
   pass
 
+class EducationForm(forms.ModelForm):
+    class Meta:
+        model = Education
+        exclude = ('user',)

@@ -21,6 +21,12 @@ urlpatterns = [
     re_path(r'^edit/new-volunteer-experience/$', views.edit_volunteer_exp, name='new_vexp'),
     re_path(r'^edit/delete-volunteer-experience/(?P<pk>\d+)/$', views.delete_ve, name='delete_vexp'),
 
+    re_path(r'^edit/educations/$', views.edit_edu_exps, name='edit_edus'),
+    re_path(r'^edit/education/(?P<pk>\d+)/$', views.edit_edu_exp, name='edit_edu'),
+    re_path(r'^edit/new-education/$', views.edit_edu_exp, name='new_edu'),
+    re_path(r'^edit/delete-education/(?P<pk>\d+)/$', views.delete_edu, name='delete_edu'),
+
+
     re_path(r'^edit/language/(?P<pk>\d+)/$', views.edit_language, name='edit_language'),
     re_path(r'^edit/new-language/$', views.edit_language, name='new_language'),
     re_path(r'^edit/delete-language/(?P<pk>\d+)/$', views.delete_language, name='delete_language'),
@@ -30,7 +36,7 @@ urlpatterns = [
     re_path(r'^hard-autocomplete/$', views.TechnicalSkillsAutocomplete.as_view(), name='hard-autocomplete'),
     re_path(r'^planguage-autocomplete/$', views.ProfessionalSkillsAutocomplete.as_view(), name='plang-autocomplete'),
     re_path(r'^skills-autocomplete/$', views.SkillsAutocomplete.as_view(), name='skills-autocomplete'),
-
+    re_path(r'^language-autocomplete/$', views.LanguageAutocomplete.as_view(), name='language-autocomplete'),
 
     re_path(r'^generate-cv/(?P<pk>\d+)/$', views.show_preview, name='generate_cv'),
     re_path(r'^show-cv/(?P<pk>\d+)/$', views.generate_cv, name='show_cv'),

@@ -7,8 +7,8 @@ from student.models import Student
 from student.forms import StudentSearch
 
 
-from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm
-from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill
+from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, EducationForm
+from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
 
 
 from weasyprint import HTML, CSS
@@ -170,6 +170,39 @@ def edit_language(request, pk=None):
     return render(request, template_name='edit/language.html', context={'form': form, 'title': title})
 
 @user_login_required
+def edit_edu_exp(request, pk=None):
+    if pk:
+        title = 'Edit education experience:'
+        edu = get_object_or_404(Education, pk=pk)
+        if request.user != edu.user:
+            return HttpResponseForbidden()
+    else:
+        title = 'Create education experience:'
+        edu = Education()
+        edu.user = request.user
+
+    if request.method == "POST":
+        form = EducationForm(request.POST, instance=edu)
+    else:
+        form = EducationForm(instance=edu)
+
+    if request.method == "POST" and form.is_valid():
+        # ve = form.save(commit=False)
+        # ve.user = request.user
+        form.save()
+
+        messages.success(request, "Process finished successfully")
+        return redirect('edit_edus')
+
+    return render(request, template_name='edit/education.html', context={'form': form, 'title': title})
+
+@user_login_required
+def edit_edu_exps(request):
+    edus = Education.objects.filter(user=request.user)
+    return render(request, 'edit/educations.html', {'edus': edus, 'title': 'Education'})
+
+
+@user_login_required
 def delete_language(request, pk):
     l = get_object_or_404(Language, pk=pk)
     if request.user != l.user:
@@ -196,6 +229,14 @@ def delete_ve(request, pk):
     messages.success(request, "Volunteer experience was deleted!")
     return redirect('edit_vexps')
 
+@user_login_required
+def delete_edu(request, pk):
+    edu = get_object_or_404(Education, pk=pk)
+    if request.user != edu.user:
+        return HttpResponseForbidden()
+    edu.delete()
+    messages.success(request, "Education item was deleted!")
+    return redirect('edit_edus')
 
 from dal import autocomplete
 
@@ -294,5 +335,16 @@ def convertation(request, pk=None):
     return response
 
 
+class LanguageAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Language.objects.none()
 
+        qs = Language.objects
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
 

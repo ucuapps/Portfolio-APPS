@@ -10,8 +10,10 @@
   <div class="col-md-4">
     <form method="post">
         {% csrf_token %}
-        {% include 'includes/bs4_form.html' with form=form %}
-        <button type="submit" class="btn btn-primary">Save</button>
+        {{ form.first_name }}
+        {{ form.last_name }}
+        {{ form.current_study_year }}
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
     </div>
 

@@ -43,6 +43,9 @@
             <li class="nav-item {% if request.path == generate_cv %}active{% endif %}">
                 <a class="nav-link" href="{% url 'generate_cv' user.id %}">CV</a>
             </li>
+            <li class="nav-item {% if request.path == search %}active{% endif %}">
+                <a class="nav-link" href="{% url 'search_user' %}">S</a>
+            </li>
             {% endif %}
             <li class="nav-item {% if request.path|slice:':5' == '/edit' %}active{% endif %}">
 

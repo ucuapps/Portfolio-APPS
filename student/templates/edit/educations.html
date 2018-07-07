@@ -1,0 +1,33 @@
+{% extends "edit/edit.html" %}
+{% load i18n %}
+
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+
+{% block edit_content %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Degree</th>
+        <th>University</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for edu in edus %}
+            <tr><td>{{edu.degree}}</td>
+            <td>{{edu.university}}</td>
+            <td>{{edu.description|truncatechars:10}}</td>
+            <td><a href="{% url 'edit_edu' ve.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'delete_edu' ve.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+    <a class="btn btn-primary float-right" href="{% url 'new_edu' %}"><i class="fas fa-plus"></i></a>
+
+{% endblock %}
