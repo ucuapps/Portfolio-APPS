@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
 
 
 {% block head_title %}search{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+    {% endblock %}
 
 {% block block-header %}{% endblock %}
 {% block content %}
@@ -10,9 +15,11 @@
   <div class="col-md-4">
     <form method="post">
         {% csrf_token %}
+        <table clas="table">
         {{ form.first_name }}
         {{ form.last_name }}
         {{ form.current_study_year }}
+        </table>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     </div>
