@@ -6,14 +6,16 @@ margin:0;
 padding:0;
 vertical-align:baseline;
 }
-
+/*
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 display:block;
-}
+}*/
 
-html, body {background: #f3f3f3; font-family: 'Lato', helvetica, arial, sans-serif; font-size: 16px; color: #222;}
+html, body {background: #f3f3f3; font-family: 'Lato', helvetica, arial, sans-serif; font-size: 16px; color: #222; height:297mm;
+    width:210mm;}
 /*
 html,body{
+		background: #f3f3f3;
         height:297mm;
         width:210mm;
 		font-family: 'Lato', helvetica, arial, sans-serif; font-size: 16px; color: #222;
@@ -34,7 +36,7 @@ p {
 	width: 100%;
 	max-width: 800px;
 	background: #f3f3f3;
-	margin: 30px auto;
+	/*margin: 30px auto;*/
 }
 
 .mainDetails {
