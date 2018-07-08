@@ -13,3 +13,24 @@ div.kastil {
 body > div > div > div.col-md-6.align-left > div > div.kastil {
     text-align: center !important;
 }
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: rgb(101,57,152);
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(160, 105, 224, 0.6);
+}
+
+.btn-primary {
+    background-color: rgb(101,57,152);
+    border-color: rgb(101,57,152);
+
+
+}
+
+.btn-primary:hover {
+    background-color: #d9d9d9;
+    border-color: rgb(101,57,152);
+    color: rgb(101,57,152);
+}
