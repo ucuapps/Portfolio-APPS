@@ -136,6 +136,7 @@ class VolunteerExperience(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     organization = models.CharField(max_length=225, blank=True, null=True)
 
+
 class Education(models.Model):
     degree = models.CharField(max_length=255)
     period_start = models.DateField(null=True, blank=True)

@@ -102,17 +102,26 @@ class SearchForm(f.Form):
 
     language = f.ModelChoiceField(required=False,
                                 queryset=Language.objects.all(),
-                                widget=autocomplete.ModelSelect2(url='language-autocomplete')
+                                widget=autocomplete.ModelSelect2Multiple(url='language-autocomplete')
                                 )
 
-    is_student = f.BooleanField(required=False, initial=True)
 
     skills = f.ModelChoiceField(required=False,
         queryset=Skill.objects.all(),
-        widget=autocomplete.ModelSelect2(url='skills-autocomplete')
+        widget=autocomplete.ModelSelect2Multiple(url='skills-autocomplete')
     )
 
     fields_of_interests = f.ModelChoiceField(required=False,
                                 queryset=Interests.objects.all(),
-                                widget=autocomplete.ModelSelect2(url='interests-autocomplete')
+                                widget=autocomplete.ModelSelect2Multiple(url='interests-autocomplete')
                                 )
+
+
+
+    def clean_current_study_year(self):
+        data = self.cleaned_data['current_study_year']
+
+        if 1>data or data>4:
+            raise ValidationError(_('Invalid current study year, try int between 1 and 4'))
+
+        return data

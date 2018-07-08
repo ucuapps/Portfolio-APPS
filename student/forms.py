@@ -2,6 +2,8 @@ from django import forms
 from django.forms import ClearableFileInput
 from django.shortcuts import render
 
+from review_request.forms import DateInput
+
 
 from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
 
@@ -47,6 +49,11 @@ class WorkingExperienceForm(forms.ModelForm):
     class Meta:
         model = WorkingExperience
         exclude = ('user',)
+        widgets = {
+            'period_start': DateInput(),
+            'period_end': DateInput(),
+
+        }
 
 
 class VolunteerExperienceForm(forms.ModelForm):
@@ -67,3 +74,8 @@ class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
         exclude = ('user',)
+        widgets = {
+            'period_start': DateInput(),
+            'period_end': DateInput(),
+
+        }

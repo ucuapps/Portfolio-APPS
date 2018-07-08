@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-
+{% load static %}
 
 {% block head_title %}search{% endblock %}
 
@@ -12,7 +12,10 @@
         {% csrf_token %}
         {{ form.first_name }}
         {{ form.last_name }}
-        {{ form.current_study_year }}
+        year {{ form.current_study_year }}
+        skills {{ form.skills }}
+        language {{ form.language }}
+        interests {{ form.fields_of_interests }}
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     </div>
@@ -32,4 +35,10 @@
         {% endfor %}
     </div>
 
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
 {% endblock %}
