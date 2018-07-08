@@ -1,41 +1,128 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+{% load widget_tweaks %}
 
 
-{% block head_title %}search{% endblock %}
+
+{% block head_title %}Search{% endblock %}
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
-    {% endblock %}
+{% endblock %}
 
-{% block block-header %}{% endblock %}
+{% block block-header %}Search{% endblock %}
 {% block content %}
-<div class="row justify-content-md-center">
-  <div class="col-md-4">
-    <form method="post">
-        {% csrf_token %}
-        <table clas="table">
-        {{ form.first_name }}
-        {{ form.last_name }}
-        {{ form.current_study_year }}
-        </table>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <form method="post">
+                {% csrf_token %}
+                {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field }}
+                {% endfor %}
 
-</div>
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="row">
+                    {% with field=form.first_name %}
+                        <div class="col-md-6 col-sm-12">
+
+                            {% if form.is_bound %}
+                                {% if field.errors %}
+
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endwith %}
+
+                    {% with field=form.last_name %}
+                        <div class="col-md-6 col-sm-12">
+
+                            {% if form.is_bound %}
+                                {% if field.errors %}
+
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endwith %}
+
+                    {% with field=form.current_study_year %}
+                        <div class="col-md-6 col-sm-12 margin12">
+
+                        {% if form.is_bound %}
+                                {% if field.errors %}
+
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endwith %}
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+
+    </div>
     <div class="row justify-content-md-center">
         {% for user in users %}
             <ul class="col-md-4 list-group">
-            <li class="list-group-item">
-                 {{user.first_name}}{{ user.last_name }}
-            </li>
-            <li class="list-group-item">
-                {{ user.student.summary }}
-            </li>
-
-        </ul>
+                <li class="list-group-item">
+                    {{ user.first_name }}{{ user.last_name }}
+                </li>
+                <li class="list-group-item">
+                    {{ user.student.summary }}
+                </li>
+            </ul>
         {% endfor %}
     </div>
 
