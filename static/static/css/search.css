@@ -1,0 +1,14 @@
+.margin12 {
+    margin-top: 3%;
+
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    font-size: 50px;
+}
+
+.btn-primary {
+    padding: 10px 30px;
+    margin: 3% auto;
+    display:block;
+}
