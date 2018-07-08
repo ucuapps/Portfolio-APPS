@@ -4,18 +4,27 @@
 
 {% block head_title %}search{% endblock %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+    {% endblock %}
+
 {% block block-header %}{% endblock %}
 {% block content %}
 <div class="row justify-content-md-center">
   <div class="col-md-4">
     <form method="post">
         {% csrf_token %}
+        <table class="table">
         {{ form.first_name }}
         {{ form.last_name }}
+
         year {{ form.current_study_year }}
         skills {{ form.skills }}
         language {{ form.language }}
         interests {{ form.fields_of_interests }}
+
+        </table>
+
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     </div>
