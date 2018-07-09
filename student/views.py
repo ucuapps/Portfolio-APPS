@@ -17,7 +17,7 @@ from django.http import HttpResponseRedirect
 from django.http import FileResponse
 from django.conf import settings
 import os
-import pdfkit
+#import pdfkit
 
 
 student_login_required = user_passes_test(lambda u: u.is_student, login_url='/')
