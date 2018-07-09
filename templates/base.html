@@ -12,9 +12,18 @@
     <title>{% block head_title %}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
+    <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
+    <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
+    <script src="{% static 'js/menu_mover.js'%}"></script>
+
 
     {% block extra_head %}
     {% endblock %}

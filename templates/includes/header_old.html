@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    {% url 'account_signup' as signup %}
+    {% url 'account_login' as signin %}
+    {% url 'account_logout' as logout %}
+    {% url 'about' as about %}
+    {% url 'contact' as contact %}
+    {% url 'home' as home %}
+    {% url 'edit_user' as edit_user %}
+    {% url 'edit_student' as edit_student %}
+    {% url 'edit_student' as edit_student %}
+    {% url 'show_my_requests' as show_my_requests %}
+
+    <a class="navbar-brand" href="{{home}}">Portfolio APPS.UCU</a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarsExample04" style="">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% if request.path == home %}active{% endif %}">
+                <a class="nav-link" href="{{home}}">Home</a>
+            </li>
+
+            {% if request.user.is_authenticated %}
+                {% url 'generate_cv' user.id as generate_cv %}
+            <li class="nav-item {% if request.path == contact %}active{% endif %}">
+                <a class="nav-link" href="{{contact}}">Contact us</a>
+            </li>
+
+            {% if request.user.is_teacher %}
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Requests</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="{% url 'show_my_requests' %}">Accepted by me</a>
+              <a class="dropdown-item" href="{% url 'show_all_requests' %}">All pending</a>
+            </div>
+          </li>
+            {%else%}
+            <li class="nav-item {% if request.path == show_my_requests %}active{% endif %}">
+                <a class="nav-link" href="{% url 'show_my_requests' %}">Requests</a>
+            </li>
+            <li class="nav-item {% if request.path == generate_cv %}active{% endif %}">
+                <a class="nav-link" href="{% url 'generate_cv' user.id %}">CV</a>
+            </li>
+            <li class="nav-item {% if request.path == search %}active{% endif %}">
+                <a class="nav-link" href="{% url 'search_user' %}">S</a>
+            </li>
+            {% endif %}
+            <li class="nav-item {% if request.path|slice:':5' == '/edit' %}active{% endif %}">
+
+                <a class="nav-link" href="{{edit_user}}"	><i class="fas fa-cog"></i></a>
+            </li>
+            {% endif %}
+        </ul>
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-outline-light" href="{{ logout }}">Sign out</a>
+        {% else %}
+        <!--{% if request.path == signin %}-->
+        <!--<a class="btn btn-outline-light" href="{{ signup }}">Sign up</a>-->
+        <!--{% else %}-->
+
+        <!--{% endif %}-->
+        <a class="btn btn-outline-light" href="{{ signin }}">Sign in</a>
+        {% endif %}
+
+    </div>
+</nav>
