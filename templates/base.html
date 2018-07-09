@@ -16,13 +16,13 @@
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-
+<!--
     <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
     <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
     <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
-    <script src="{% static 'js/menu_mover.js'%}"></script>
+    <script src="{% static 'js/menu_mover.js'%}"></script> -->
 
 
     {% block extra_head %}
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-{% include 'includes/header.html' %}
+{% include 'includes/header_old.html' %}
 
 {% block body %}
 <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">

@@ -25,8 +25,10 @@
 
 		<div id="name">
 			<h1 class="quickFade delayTwo">{{ found_user.first_name }} {{ found_user.last_name }}</h1>
-		<!--	<h2 class="quickFade delayThree">programiruyu</h2>-->
-		</div>
+            {% if found_user.student.study_programme.name %}
+			<h2 class="quickFade delayThree">Studying {{ found_user.student.study_programme }} at Ukrainian Catholic University</h2>
+		    {% endif %}
+        </div>
 
 		<div id="contactDetails" class="quickFade delayFour">
 			<ul>
@@ -59,8 +61,10 @@
 			<div class="sectionContent">
                 {% for work in found_user.workingexperience_set.all %}
 				<article>
-					<h2>{{ work.title }} {{ work.company }}</h2>
-					<p class="subDetails"> {{ work.period_start }}-{{ work.period_end }}</p>
+					<h2>{{ work.title }} at {{ work.company }}</h2>
+                    {% if work.period_start %}
+					<p class="subDetails"> {{ work.period_start }} {% if work.period_end %} - {{ work.period_end }} {% endif %}</p>
+                    {% endif %}
 					<p>{{ work.description }}</p>
 				</article>
                 {% endfor %}
@@ -71,19 +75,21 @@
 
 		<section>
 			<div class="sectionTitle">
-				<h1>Key Skills</h1>
+				<h1>Qualifications</h1>
 			</div>
 
 			<div class="sectionContent">
 				<ul class="keySkills">
-					<li>Python</li>
-					<li>Data Analisys</li>
-					<li>Django</li>
-					<li>HTML&CSS</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
-					<li>A Key Skill</li>
+                    {% for hardskill in found_user.student.hard_skills.all %}
+					    <li>{{ hardskill }}</li>
+					{% endfor %}
+                    {% for softskill in found_user.student.soft_skills.all %}
+					    <li>{{ softskill }}</li>
+					{% endfor %}
+                    {% for lang in found_user.language_set.all %}
+                        <li>{{ lang.name }}({{lang.level}})</li>
+                    {% endfor %}
+                <li>Python</li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -98,15 +104,10 @@
 			<div class="sectionContent">
 				<article>
 					<h2>Ukrainian Catholic University</h2>
-					<p class="subDetails">Computer Science</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
+					<p class="subDetails">{{ found_user.student.study_programme.name }}</p>
+					<p></p>
 				</article>
 
-				<article>
-					<h2>College/University</h2>
-					<p class="subDetails">Qualification</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
-				</article>
 			</div>
 			<div class="clear"></div>
 		</section>
@@ -125,6 +126,28 @@
 					<p>{{ volunteering.description }}</p>
 				</article>
 				 {% endfor %}
+			</div>
+			<div class="clear"></div>
+		</section>
+
+        <section>
+			<div class="sectionTitle">
+				<h1>Interests</h1>
+			</div>
+
+			<div class="sectionContent">
+				<ul class="keySkills">
+                <li>PIU PIU</li>
+                    {% for hardskill in found_user.student.hard_skills.all %}
+					    <li>{{ hardskill }}</li>
+					{% endfor %}
+                    {% for softskill in found_user.student.soft_skills.all %}
+					    <li>{{ softskill }}</li>
+					{% endfor %}
+                    {% for lang in found_user.language_set.all %}
+                        <li>{{ lang.name }}({{lang.level}})</li>
+                    {% endfor %}
+                </ul>
 			</div>
 			<div class="clear"></div>
 		</section>
