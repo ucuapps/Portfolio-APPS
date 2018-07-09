@@ -33,7 +33,7 @@
                     <polygon points="0,0 0,20 14,20 14,18 2,18 2,2 14,2 14,0 	"/>
                     </g>
                     </svg>
-            <a href="https://www.facebook.com/profile.php?id=100005298526313">Sign out</a>
+            <a href="{{ logout }}">Sign out</a>
         </div>
     </div>
 </div>
@@ -87,12 +87,14 @@
                 <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
                             <defs>
                             </defs>
+                    <!-- тут посилання: href="{% url 'search_user' %}" -->
                             <g id="nav">
                                 <path fill="#FFFFFF" d="M19.6,34.3c0,7.3,2.3,14,6.1,19.6L0.3,79.3c-0.5,0.5-0.5,1.2,0,1.7l6.9,6.9c0.5,0.5,1.2,0.5,1.7,0
                                     l25.4-25.4l0,0c5.6,3.9,12.3,6.1,19.6,6.1c18.9,0,34.3-15.4,34.3-34.3S72.9,0,53.9,0C35,0,19.6,15.4,19.6,34.3z M27.7,34.3
                                     c0-14.5,11.7-26.2,26.2-26.2s26.2,11.7,26.2,26.2S68.4,60.5,53.9,60.5S27.7,48.8,27.7,34.3z"/>
                             </g>
                 </svg>
+                <!-- тут посилання: href="{% url 'generate_cv' user.id %}" -->
                 <span id="nav">CV</span>
                 </svg>
                 <svg
@@ -100,7 +102,7 @@
                             xml:space="preserve">
                         <defs>
                         </defs>
-                        <g id="nav">
+                        <g id="nav">  <!-- тут посилання: href="{% url 'show_my_requests' %}" -->
                             <g>
                                 <path fill="#E8E8E8" d="M3.2,1.6l14.5,10.9c0.7,0.5,1.6,0.7,2.4,0.7c0.9,0,1.8-0.2,2.4-0.7L37.1,1.6C38.3,0.7,38,0,36.5,0H20.2
                                     H3.8C2.3,0,2,0.7,3.2,1.6z"/>
@@ -110,14 +112,14 @@
                         </g>
                         </svg>
                 <div onclick="popup_func()">
-                    <img src="" class="avatar">
+                    <img src={{ media }}{{ found_user.profile_image }} class="avatar">
                 </div>
             </div>
             <div id="popup" >
                 <a href="{{home}}">Profile</a>
                 <a href="{{edit_user}}">Settings</a>
                 <hr>
-                <div class="exit" href="{{ logout }}">
+                <div class="exit">
                     <svg version="1.1"
                             x="0px" y="0px" width="17px" height="30%" viewBox="0 0 24 20" enable-background="new 0 0 24 20" xml:space="preserve">
                             <defs>
