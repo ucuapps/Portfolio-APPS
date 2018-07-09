@@ -84,34 +84,34 @@
         </div>
         <div class="icon_container">
             <div class="icons">
-                <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
+                <a href="{% url 'search_user' %}">
+                    <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
+                                <defs>
+                                </defs>
+                                <g id="nav">
+                                    <path fill="#FFFFFF" d="M19.6,34.3c0,7.3,2.3,14,6.1,19.6L0.3,79.3c-0.5,0.5-0.5,1.2,0,1.7l6.9,6.9c0.5,0.5,1.2,0.5,1.7,0
+                                        l25.4-25.4l0,0c5.6,3.9,12.3,6.1,19.6,6.1c18.9,0,34.3-15.4,34.3-34.3S72.9,0,53.9,0C35,0,19.6,15.4,19.6,34.3z M27.7,34.3
+                                        c0-14.5,11.7-26.2,26.2-26.2s26.2,11.7,26.2,26.2S68.4,60.5,53.9,60.5S27.7,48.8,27.7,34.3z"/>
+                                </g>
+                    </svg>
+                </a>
+                <a href="{% url 'generate_cv' user.id %}"><span id="nav">CV</span></a>
+                </svg>
+                <a href="{% url 'show_my_requests' %}">
+                    <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 40.3 26.8" enable-background="new 0 0 40.3 26.8"
+                            xml:space="preserve">
                             <defs>
                             </defs>
-                    <!-- тут посилання: href="{% url 'search_user' %}" -->
                             <g id="nav">
-                                <path fill="#FFFFFF" d="M19.6,34.3c0,7.3,2.3,14,6.1,19.6L0.3,79.3c-0.5,0.5-0.5,1.2,0,1.7l6.9,6.9c0.5,0.5,1.2,0.5,1.7,0
-                                    l25.4-25.4l0,0c5.6,3.9,12.3,6.1,19.6,6.1c18.9,0,34.3-15.4,34.3-34.3S72.9,0,53.9,0C35,0,19.6,15.4,19.6,34.3z M27.7,34.3
-                                    c0-14.5,11.7-26.2,26.2-26.2s26.2,11.7,26.2,26.2S68.4,60.5,53.9,60.5S27.7,48.8,27.7,34.3z"/>
+                                <g>
+                                    <path fill="#E8E8E8" d="M3.2,1.6l14.5,10.9c0.7,0.5,1.6,0.7,2.4,0.7c0.9,0,1.8-0.2,2.4-0.7L37.1,1.6C38.3,0.7,38,0,36.5,0H20.2
+                                        H3.8C2.3,0,2,0.7,3.2,1.6z"/>
+                                    <path fill="#E8E8E8" d="M38.2,4.5L22.3,15.9c-0.6,0.4-1.4,0.6-2.1,0.6c-0.8,0-1.6-0.2-2.1-0.6L2.1,4.5C1,3.6,0,4.1,0,5.5v18.7
+                                        c0,1.4,1.2,2.5,2.7,2.5h17.5h17.5c1.5,0,2.7-1.1,2.7-2.5V5.5C40.3,4.1,39.3,3.6,38.2,4.5z"/>
+                                </g>
                             </g>
-                </svg>
-                <!-- тут посилання: href="{% url 'generate_cv' user.id %}" -->
-             <!--   <span id="nav">CV</span>  -->
-                <a class="nav-link" href="{% url 'generate_cv' user.id %}">CV</a>
-                </svg>
-                <svg
-                            x="0px" y="0px" width="20px" height="50%" viewBox="0 0 40.3 26.8" enable-background="new 0 0 40.3 26.8"
-                            xml:space="preserve">
-                        <defs>
-                        </defs>
-                        <g id="nav">  <!-- тут посилання: href="{% url 'show_my_requests' %}" -->
-                            <g>
-                                <path fill="#E8E8E8" d="M3.2,1.6l14.5,10.9c0.7,0.5,1.6,0.7,2.4,0.7c0.9,0,1.8-0.2,2.4-0.7L37.1,1.6C38.3,0.7,38,0,36.5,0H20.2
-                                    H3.8C2.3,0,2,0.7,3.2,1.6z"/>
-                                <path fill="#E8E8E8" d="M38.2,4.5L22.3,15.9c-0.6,0.4-1.4,0.6-2.1,0.6c-0.8,0-1.6-0.2-2.1-0.6L2.1,4.5C1,3.6,0,4.1,0,5.5v18.7
-                                    c0,1.4,1.2,2.5,2.7,2.5h17.5h17.5c1.5,0,2.7-1.1,2.7-2.5V5.5C40.3,4.1,39.3,3.6,38.2,4.5z"/>
-                            </g>
-                        </g>
-                        </svg>
+                    </svg>
+                </a>
                 <div onclick="popup_func()">
                     <img src={{ media }}{{ found_user.profile_image }} class="avatar">
                 </div>
