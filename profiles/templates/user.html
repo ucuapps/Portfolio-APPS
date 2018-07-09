@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head_title %}Profile{% endblock %}
+
 {% block content %}
 
 
@@ -92,7 +94,7 @@
         {% for lang in found_user.language_set.all %}
             <p>{{ lang.name }}: {{ lang.level }}</p>
         {% endfor %}
-        <p>{{ found_user.profile_image}}</p>
+
     </div>
 </div>
     {% endif %}
