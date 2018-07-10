@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block head_title %}search{% endblock %}
+
+{% block block-header %}{% endblock %}
+{% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-md-4">
+      <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

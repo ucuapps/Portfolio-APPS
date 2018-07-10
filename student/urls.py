@@ -33,8 +33,8 @@ urlpatterns = [
 
 
     re_path(r'^soft-autocomplete/$', views.SoftSkillsAutocomplete.as_view(), name='soft-autocomplete'),
-    re_path(r'^hard-autocomplete/$', views.TechnicalSkillsAutocomplete.as_view(), name='hard-autocomplete'),
-    re_path(r'^planguage-autocomplete/$', views.ProfessionalSkillsAutocomplete.as_view(), name='plang-autocomplete'),
+    re_path(r'^hard-autocomplete/$', views.HardSkillsAutocomplete.as_view(), name='hard-autocomplete'),
+    re_path(r'^planguage-autocomplete/$', views.ProgrammingLanguagesAutocomplete.as_view(), name='plang-autocomplete'),
     re_path(r'^skills-autocomplete/$', views.SkillsAutocomplete.as_view(), name='skills-autocomplete'),
     re_path(r'^language-autocomplete/$', views.LanguageAutocomplete.as_view(), name='language-autocomplete'),
 

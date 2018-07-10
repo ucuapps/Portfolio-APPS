@@ -184,7 +184,7 @@ class Student(models.Model):
 
     # Skills
     hard_skills = models.ManyToManyField(Skill, related_name="hard_skills", blank=True)
-    programming_language = models.ManyToManyField(Skill, related_name="programming_language", blank=True)
+    programming_languages = models.ManyToManyField(Skill, related_name="programming_languages", blank=True)
     soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
 
     summary = models.TextField(blank=True, null=True, help_text="Enter here 1-5 sentences about you. EX: Honors student"

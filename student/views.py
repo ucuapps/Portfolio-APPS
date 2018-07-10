@@ -255,13 +255,13 @@ class SoftSkillsAutocomplete(autocomplete.Select2QuerySetView):
         return qs.all()
 
 
-class ProfessionalSkillsAutocomplete(autocomplete.Select2QuerySetView):
+class HardSkillsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated:
             return Skill.objects.none()
 
-        qs = Skill.objects.filter(skill_type="professional")
+        qs = Skill.objects.filter(skill_type="hard")
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
@@ -269,13 +269,13 @@ class ProfessionalSkillsAutocomplete(autocomplete.Select2QuerySetView):
         return qs.all()
 
 
-class TechnicalSkillsAutocomplete(autocomplete.Select2QuerySetView):
+class ProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated:
             return Skill.objects.none()
 
-        qs = Skill.objects.filter(skill_type="technical")
+        qs = Skill.objects.filter(skill_type="programming_languages")
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
