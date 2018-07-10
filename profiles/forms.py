@@ -100,21 +100,21 @@ class SearchForm(f.Form):
                                  widget=f.TextInput(attrs={'placeholder': 'Your last name'}))
     current_study_year = f.IntegerField(required=False, initial=1)
 
-    language = f.ModelChoiceField(required=False,
-                                queryset=Language.objects.all(),
-                                widget=autocomplete.ModelSelect2Multiple(url='language-autocomplete')
-                                )
+    #language = f.ModelChoiceField(required=False,
+                                #queryset=Language.objects.all(),
+                                #widget=autocomplete.ModelSelect2Multiple(url='language-autocomplete')
+                                #)
 
 
-    skills = f.ModelChoiceField(required=False,
-        queryset=Skill.objects.all(),
-        widget=autocomplete.ModelSelect2Multiple(url='skills-autocomplete')
-    )
+    #skills = f.ModelChoiceField(required=False,
+    #    queryset=Skill.objects.all(),
+    #    widget=autocomplete.ModelSelect2Multiple(url='skills-autocomplete')
+    #)
 
-    fields_of_interests = f.ModelChoiceField(required=False,
-                                queryset=Interests.objects.all(),
-                                widget=autocomplete.ModelSelect2Multiple(url='interests-autocomplete')
-                                )
+   # fields_of_interests = f.ModelChoiceField(required=False,
+    #                            queryset=Interests.objects.all(),
+     #                           widget=autocomplete.ModelSelect2Multiple(url='interests-autocomplete')
+      #                          )
 
 
 
