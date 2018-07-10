@@ -20,7 +20,7 @@ class StudentForm(forms.ModelForm):
         widgets = {
             'soft_skills': autocomplete.ModelSelect2Multiple(url='soft-autocomplete'),
             'hard_skills': autocomplete.ModelSelect2Multiple(url='hard-autocomplete'),
-            'programming_languages': autocomplete.ModelSelect2Multiple(url='plang-autocomplete'),
+            'programming_languages': autocomplete.ModelSelect2Multiple(url='planguage-autocomplete'),
         }
 
     def __init__(self, *args, **kwargs):

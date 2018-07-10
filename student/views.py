@@ -28,7 +28,7 @@ def user_login_required(view_func):
     return decorated_view_funct
 
 
-@user_login_required
+@student_login_required
 def edit_student(request):
     template = "edit/student.html"
     context = {}
