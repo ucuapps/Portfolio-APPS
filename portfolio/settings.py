@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'portfolio',
-        'USER': 'portfoliouser',
-        'PASSWORD': 'password',
+        'NAME': 'portfoliouser',
+        'USER': os.getenv("DATABASE_USERNAME"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
         'HOST': 'localhost',
         'PORT': '',
     }

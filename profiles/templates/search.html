@@ -152,8 +152,7 @@
         {% for user in users %}
             <ul class="col-md-12 list-group">
                 <a href="{% url 'show-user' user.id %}" class="list-group-item list-group-item-action">
-                    <img src="{% get_media_prefix %}{{ user.profile_image}}" width=50px height=50px alt={{ user.first_name }}
-                            class="photo"> <span class="spaces_for_name">{{ user.first_name }} {{ user.last_name }}</span></a>
+                    <img src="{% get_media_prefix %}{{ user.profile_image}}" width=50px height=50px class="search_photo"> <span class="spaces_for_name">{{ user.first_name }} {{ user.last_name }}</span></a>
 
             </ul>
         {% endfor %}
