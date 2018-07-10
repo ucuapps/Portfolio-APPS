@@ -314,14 +314,14 @@ def generate_cv(request, pk=None):
     context = dict(found_user=u, title="User", media="/media/")
     return render(request, "cv/index.html", context)
 
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.conf import settings
 
 
 @user_login_required
 def convertation(request, pk=None):
   #  pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
-    pdf = static('media/student_cv/myCV.pdf')
+    pdf = settings.MEDIA_ROOT + '/student_cv/myCV.pdf'
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
     '''   options = {
         'page-size': 'A4',
@@ -333,7 +333,7 @@ def convertation(request, pk=None):
 
     pdfkit.from_url(url, pdf, options=options)'''
     response = FileResponse(open(pdf, 'rb'), content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=' + pdf
+    response['Content-Disposition'] = 'attachment; filename=' + 'myCV.pdf'
     os.remove(pdf)
     return response
 
