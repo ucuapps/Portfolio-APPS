@@ -35,7 +35,9 @@
 		<div id="contactDetails" class="quickFade delayFour">
 			<ul>
 				<li>e: {{ found_user.email }}</li>
+                {% if found_user.mobile_number %}
 				<li>m: {{ found_user.mobile_number }}</li>
+                {% endif %}
 			</ul>
 		</div>
 		<div class="clear"></div>
@@ -143,16 +145,15 @@
 
 			<div class="sectionContent">
 				<ul class="keySkills">
-                <li>PIU PIU</li>
-                    {% for hardskill in found_user.student.hard_skills.all %}
-					    <li>{{ hardskill }}</li>
-					{% endfor %}
-                    {% for softskill in found_user.student.soft_skills.all %}
-					    <li>{{ softskill }}</li>
-					{% endfor %}
-                    {% for lang in found_user.language_set.all %}
-                        <li>{{ lang.name }}({{lang.level}})</li>
-                    {% endfor %}
+                {% for hardskill in found_user.student.hard_skills.all %}
+                    <li>{{ hardskill }}</li>
+                {% endfor %}
+                {% for softskill in found_user.student.soft_skills.all %}
+                    <li>{{ softskill }}</li>
+                {% endfor %}
+                {% for lang in found_user.language_set.all %}
+                    <li>{{ lang.name }}({{lang.level}})</li>
+                {% endfor %}
                 </ul>
 			</div>
 			<div class="clear"></div>

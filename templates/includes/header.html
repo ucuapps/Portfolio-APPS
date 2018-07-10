@@ -14,12 +14,15 @@
 {% if request.user.is_authenticated %}
         {% url 'generate_cv' user.id as generate_cv %}
 {% endif %}
+
+
 <div id="overlay"></div>
+{% if request.user.is_authenticated %}
 <div id="pop_menu">
     <div class="menu_head">
         <img src="{% static 'images/cross_mark.png'%}" class="close" onclick="closeNav()">
     </div>
-    <div class="info">
+    <div class="info">]
         <a href="{{home}}">Profile</a>
         <a href="{{edit_user}}">Settings</a>
         <hr>
@@ -37,6 +40,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 <div id="main">
     <div class="navigation">
         <img id="menu" src="{% static 'images/menu.png'%}" onclick="openNav()">
@@ -98,7 +102,7 @@
                 </a>
 
                 <a href="{% url 'generate_cv' request.user.id %}"><span id="nav">CV</span></a>
-                {% endif %}
+
                 </svg>
                 <a href="{% url 'show_my_requests' %}">
                     <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 40.3 26.8" enable-background="new 0 0 40.3 26.8"
@@ -137,6 +141,9 @@
                     <a href="{{ logout }}">Sign out</a>
                 </div>
             </div>
+        {% else %}
+        <a href="{{ signin }}"><span id="nav">Sign in</span></a>
+        {% endif %}
         </div>
     </div>
 </div>
