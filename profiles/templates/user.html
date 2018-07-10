@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head_title %}Profile{% endblock %}
+
 {% block content %}
 
 
@@ -18,9 +20,10 @@
     </div>
 </div>
 {% if found_user.is_student %}
+
+
 <div class="row justify-content-md-center">
     <div class="col-md-2">
-
 
 
     </div>
@@ -91,7 +94,7 @@
         {% for lang in found_user.language_set.all %}
             <p>{{ lang.name }}: {{ lang.level }}</p>
         {% endfor %}
-        <p>{{ found_user.profile_image}}</p>
+
     </div>
 </div>
     {% endif %}
@@ -105,23 +108,6 @@
     </div>
 
     <div class="col-md-8">
-        <div class="d-flex align-items-center bg-purple rounded box-shadow">
-            <h2>Projects</h2>
-        </div>
-        <div class="row">
-        {% for proj in found_user.project_set.all %}
-        <ul class="col-md-4 list-group">
-            <li class="list-group-item">
-                Title: {{proj.title}}
-            </li>
-            <li class="list-group-item">
-                About: {{proj.about}}
-            </li>
-
-        </ul>
-        {% endfor %}
-        </div>
-
         <div class="d-flex align-items-center bg-purple rounded box-shadow">
             <h2>Work</h2>
         </div>

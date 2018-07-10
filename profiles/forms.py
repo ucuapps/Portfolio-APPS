@@ -95,9 +95,9 @@ class CustomSignupForm(f.Form):
 
 
 class SearchForm(f.Form):
-    first_name= f.CharField(max_length=30, required=False,widget=f.TextInput(attrs={'placeholder': 'Your first name'}))
+    first_name= f.CharField(max_length=30, required=False,widget=f.TextInput(attrs={'placeholder': 'First name'}))
     last_name = f.CharField(max_length=30, required=False,
-                                 widget=f.TextInput(attrs={'placeholder': 'Your last name'}))
+                                 widget=f.TextInput(attrs={'placeholder': 'Last name'}))
     current_study_year = f.IntegerField(required=False, initial=1)
 
     #language = f.ModelChoiceField(required=False,
