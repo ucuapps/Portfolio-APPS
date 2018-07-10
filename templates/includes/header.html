@@ -84,6 +84,7 @@
         </div>
         <div class="icon_container">
             <div class="icons">
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'search_user' %}">
                     <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
                                 <defs>
@@ -95,7 +96,9 @@
                                 </g>
                     </svg>
                 </a>
-                <a href="{% url 'generate_cv' user.id %}"><span id="nav">CV</span></a>
+
+                <a href="{% url 'generate_cv' request.user.id %}"><span id="nav">CV</span></a>
+                {% endif %}
                 </svg>
                 <a href="{% url 'show_my_requests' %}">
                     <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 40.3 26.8" enable-background="new 0 0 40.3 26.8"

@@ -314,11 +314,14 @@ def generate_cv(request, pk=None):
     context = dict(found_user=u, title="User", media="/media/")
     return render(request, "cv/index.html", context)
 
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
 
 @user_login_required
 def convertation(request, pk=None):
-    pdf = "myCV.pdf"
+  #  pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
+    pdf = static('media/student_cv/myCV.pdf')
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
     '''   options = {
         'page-size': 'A4',
