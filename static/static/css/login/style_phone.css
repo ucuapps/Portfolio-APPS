@@ -59,12 +59,12 @@
 
 
 
-.sign-in {
-    background-color: rgb(101,57,152); 
+.sign-in a {
+    background-color: rgb(101,57,152);
     border: 1px solid #643894;
     border-radius: 15px;
     color: white;
-    padding: 2% 30%;
+    padding: 3px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -72,35 +72,30 @@
     transition-duration: 0.4s;
     font-family: "Roboto";
     -webkit-transition-duration: 0.1s;
+    transform: translate(-50%, -50%);
 
 }
 
-.sign-in:hover, .sign-up:hover {
+.sign-in a:hover, .sign-up:hover {
   background-color: #d9d9d9;
   color: rgb(101,57,152);
 }
 
-.sign-up {
-  background-color: rgb(101,57,152); 
-    border: 1px solid #643894;
-    border-radius: 15px;
-    color: white;
-    padding: 2% 30%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 40%;
-    transition-duration: 0.4s;
-    font-family: "Roboto";
-    margin-top: 10px;
-  }
+
+ul {
+    list-style-type: none;
+}
+
+.text-left {
+    text-align: left;
+}
 
 
+ul.sign-in {
+    padding: 1px;
+}
 
 
-
-
-
-
-
-
+ul.sign-in a {
+    transform: none;
+}

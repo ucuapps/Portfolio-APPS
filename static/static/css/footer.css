@@ -1,0 +1,11 @@
+footer {
+    background-color: #f8f9fa;
+}
+
+@media (min-width: 768px){
+    .my-md-5 {
+        margin-bottom: 0px !important;
+    }
+
+}
+

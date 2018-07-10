@@ -13,10 +13,9 @@ input[type=number]::-webkit-inner-spin-button {
     display:block;
 }
 
-.photo {
+.search_photo {
     border-radius: 50%;
-
-
+    size: 100px;
 }
 
 .list-group-item {

@@ -1,0 +1,18 @@
+.list-group-item.active {
+    background-color: rgb(101,57,152);
+    border-color: rgb(101,57,152);
+}
+
+.list-group-item:focus {
+    outline-color: #6f42c1;
+}
+
+
+a {
+    color: rgb(101,57,152);
+}
+
+a:hover {
+    color: rgb(101,57,152)  ;
+    background-color: #f8f9fa;
+}
