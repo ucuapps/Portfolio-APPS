@@ -1,11 +1,19 @@
 footer {
     background-color: #f8f9fa;
+    position: marker;
 }
 
+
 @media (min-width: 768px){
+
     .my-md-5 {
         margin-bottom: 0px !important;
     }
 
+}
+
+div.row {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
