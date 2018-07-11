@@ -2,147 +2,458 @@
 {% load static %}
 
 {% block head_title %}Profile{% endblock %}
+{% block extra_head %}
+<meta name="description" content="This helps you to create your portfolio">
+		<link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
+        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css'%}">
+        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css'%}">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+		<link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
+        <script src="{% static 'js/student_switcher.js'%}"></script>
+		<script src="{% static 'js/project_resizer.js'%}"></script>
+        <script src="{% static 'js/menu_mover.js'%}'"></script>
+{% endblock %}
 
 {% block content %}
+    <div class="student_page">
+        <div class="student_credentials">
+                    <div class="profile_photo">
+                        <div class="photo">
+                            <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
+                        </div>
+                    </div>
+                    <div class="student_name">
+                        <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
+                        <span class="occupation">{{ found_user.student.study_programme }}, po</span>
+                        <hr>
+                        <div class="social_info">
+                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png'%}" width="25px" height="25px"></a>
+                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png'%}" width="25px" height="25px"></a>
 
-
-<div class="row justify-content-md-start">
-    <div class="col-md-6">
-    <h1><img src="{% get_media_prefix %}{{ found_user.profile_image}}">{{ found_user.first_name}} {{ found_user.last_name}} </h1>
-    Email: {{ found_user.email }}<br>
-    Mobile: {{ found_user.mobile_number }}<br>
-    Git: {{ found_user.git_link }}<br>
-    Fb: {{ found_user.fb_link }}<br>
-        <br>
-    </div>
-    <div class="col-md-6">
-         {{ found_user.student.summary }}
-    </div>
-</div>
-{% if found_user.is_student %}
-
-
-<div class="row justify-content-md-center">
-    <div class="col-md-2">
-
-
-    </div>
-
-    <div class="col-md-8">
-
-        <div class="d-flex align-items-center bg-purple rounded box-shadow">
-            <h2>Projects</h2>
+                        </div>
+                    </div>
         </div>
-        <div class="row">
-        {% for proj in found_user.project_set.all %}
-        <ul class="col-md-4 list-group">
-            <li class="list-group-item">
-                Title: {{proj.title}}
-            </li>
-            <li class="list-group-item">
-                About: {{proj.about}}
-            </li>
-
-        </ul>
-        {% endfor %}
+        <div class="switchers">
+                    <div class="switch"><span onclick="hard()" class="proj_sw">About</span></div>
+                    <div class="switch"><span onclick="proj()" class="proj_sw">Projects</span></div>
+                    <div class="switch"><span onclick="hobbies()" class="proj_sw">Hobbies</span></div>
         </div>
+    <div class="student_info">
+                    <div class="skills" id="hard">
+                        <svg id="triang"
+						 x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
+                        <defs>
+                        </defs>
+                        <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
+                        </svg>
+                        <div class="hard_skills">
+                            <span>ABOUT ME</span>
+                            <div class="description">
+                                <p>{{ found_user.student.summary }}
+                                </p>
+                            </div>
+                            <hr class="divide">
+                            <!--<span>PREFERENCES</span>-->
+                            <!--<div class="pref">-->
+                            <!--<span>Python</span>-->
+                            <!--<div class="slider">-->
+                            <!--<div class="slider_value"></div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="pref">-->
+                            <!--<span>C++</span>-->
+                            <!--<div class="slider">-->
+                            <!--<div class="slider_value"></div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="pref">-->
+                            <!--<span>Java</span>-->
+                            <!--<div class="slider">-->
+                            <!--<div class="slider_value"></div>-->
+                            <!--</div>-->
+                            <!--</div>-->
 
-        <div class="d-flex align-items-center bg-purple rounded box-shadow">
-            <h2>Volunteering</h2>
-        </div>
-        <div class="row">
-        {% for volunteering in found_user.volunteerexperience_set.all %}
-        <ul class="col-md-4 list-group">
-            <li class="list-group-item">
-                Title: {{volunteering.title}}
-            </li>
-            <li class="list-group-item">
-                About: {{volunteering.description}}
-            </li>
+                            <span class="last">LANGUAGES</span>
+                            <ul class="rate">
+                                {% for lang in found_user.language_set.all %}
+                                    <li><span>{{ lang.name }}</span><span>{{ lang.level }}</span></li>
+                               {% endfor %}
 
-        </ul>
-        {% endfor %}
-        </div>
-        <div class="d-flex align-items-center bg-purple rounded box-shadow">
-            <h2>Work</h2>
-        </div>
-        <div class="row">
-        {% for work in found_user.workingexperience_set.all %}
-        <ul class="col-md-4 list-group">
-            <li class="list-group-item">
-                Title: {{work.title}}
-            </li>
-            <li class="list-group-item">
-                Company: {{work.company}}
-            </li>
-            <li class="list-group-item">
-                {{work.period_start}}-{{work.period_end}}
-            </li>
-            <li class="list-group-item">
-                Link: {{work.link}}
-            </li>
-            <li class="list-group-item">
-                About: {{work.description}}
-            </li>
-
-        </ul>
-        {% endfor %}
-        </div>
-
+                            </ul>
+                            <hr class="divide">
+                            <span class="last">HARD SKILLS</span>
+                            <ul class="rate">
+                                {% for hard in found_user.student.hard_skills.all %}
+                                    <li><span>{{ hard.name }}</span></li>
+                               {% endfor %}
+                            </ul>
+                             <hr class="divide">
+                            <span class="last">SOFT SKILLS</span>
+                            <ul class="rate">
+                                {% for soft in found_user.student.soft_skills.all %}
+                                    <li><span>{{ soft.name }}</span></li>
+                               {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="projects_container">
+                        <div class="switchers">
+                            <div class="switch"><span onclick="project()" class="proj_sw">Projects</span></div>
+                            <div class="switch"><span onclick="internship()" class="proj_sw">Internships</span></div>
+                            <div class="switch"><span onclick="volunteer()" class="proj_sw">Volunteering</span></div>
+                        </div>
+                        <div class="projects" id="proj">
+                            <div class="proj_container">
+                                <div class="project">
+                                    <div class="proj_tech" style="background-color: rgb(101,57,152)">
+                                        <span>Web</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Web project</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>Tools:</h2>
+                                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project">
+                                    <div class="proj_tech" style="background-color: #ffde14">
+                                        <span>ML</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>ML project</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>Tools:</h2>
+                                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project">
+                                    <div class="proj_tech" style="background-color: rgb(45,37,163)">
+                                        <span>IOT</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>IOT project</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>Tools:</h2>
+                                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project">
+                                    <div class="proj_tech" style="background-color: rgb(82,163,61)">
+                                        <span>Math</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Math project</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>Tools:</h2>
+                                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project">
+                                    <div class="proj_tech" style="background-color: rgb(190,2,0)">
+                                        <span>Gr.Design</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Gr.Design project</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>Tools:</h2>
+                                            <div class="tools"><span>Lol</span><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="projects" id="intern">
+                            <div class="proj_container">
+                                <div class="intern_project">
+                                    <div class="proj_tech">
+                                        <span>SoftServe</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Graphic Designer</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>October 21 - October 21.5</h2>
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was there and did that</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intern_project">
+                                    <div class="proj_tech">
+                                        <span>SoftServe</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Graphic Designer</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>October 21 - October 21.5</h2>
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was there and did that</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intern_project">
+                                    <div class="proj_tech">
+                                        <span>SoftServe</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Graphic Designer</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>October 21 - October 21.5</h2>
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was there and did that</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intern_project">
+                                    <div class="proj_tech">
+                                        <span>SoftServe</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Graphic Designer</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>October 21 - October 21.5</h2>
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was there and did that</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intern_project">
+                                    <div class="proj_tech">
+                                        <span>SoftServe</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <h1>Graphic Designer</h1>
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>October 21 - October 21.5</h2>
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was there and did that</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="projects" id="volunteer">
+                            <div class="proj_container">
+                                <div class="volunteer_project">
+                                    <div class="proj_tech">
+                                        <span>TEDxUCU</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was here and did that and met him</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="volunteer_project">
+                                    <div class="proj_tech">
+                                        <span>TEDxUCU</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was here and did that and met him</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="volunteer_project">
+                                    <div class="proj_tech">
+                                        <span>TEDxUCU</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was here and did that and met him</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="volunteer_project">
+                                    <div class="proj_tech">
+                                        <span>TEDxUCU</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was here and did that and met him</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="volunteer_project">
+                                    <div class="proj_tech">
+                                        <span>TEDxUCU</span>
+                                    </div>
+                                    <div class="proj_info">
+                                        <hr>
+                                        <div class="proj_desc">
+                                            <h2>About:</h2>
+                                            <div class="tools"><span>I was here and did that and met him</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skills" id="hobbies">
+                        <h1>HOBBIES</h1>
+                    </div>
+                </div>
     </div>
-    <div class="col-md-2">
-        {% for lang in found_user.language_set.all %}
-            <p>{{ lang.name }}: {{ lang.level }}</p>
-        {% endfor %}
-
-    </div>
-</div>
-    {% endif %}
-
-
-{% if found_user.is_teacher %}
-<div class="row justify-content-md-center">
-    <div class="col-md-2">
-        <p>{{ found_user.teacher.degree}} in {{ found_user.teacher.field_of_study }}</p>
-
-    </div>
-
-    <div class="col-md-8">
-        <div class="d-flex align-items-center bg-purple rounded box-shadow">
-            <h2>Work</h2>
-        </div>
-        <div class="row">
-        {% for work in found_user.workingexperience_set.all %}
-        <ul class="col-md-4 list-group">
-            <li class="list-group-item">
-                Title: {{work.title}}
-            </li>
-            <li class="list-group-item">
-                About: {{work.company}}
-            </li>
-            <li class="list-group-item">
-                {{work.period_start}}-{{work.period_end}}
-            </li>
-            <li class="list-group-item">
-                Link: {{work.link}}
-            </li>
-            <li class="list-group-item">
-                About: {{work.description}}
-            </li>
-
-        </ul>
-        {% endfor %}
-        </div>
-
-    </div>
-    <div class="col-md-2">
-        {% for lang in found_user.language_set.all %}
-            <p>{{ lang.name }}: {{ lang.level }}</p>
-        {% endfor %}
-    </div>
-</div>
-    {% endif %}
 {% endblock %}
+{#<div class="row justify-content-md-start">#}
+{#    <div class="col-md-6">#}
+{#    <h1><img src="{% get_media_prefix %}{{ found_user.profile_image}}">{{ found_user.first_name}} {{ found_user.last_name}} </h1>#}
+{#    Email: {{ found_user.email }}<br>#}
+{#    Mobile: {{ found_user.mobile_number }}<br>#}
+{#    Git: {{ found_user.git_link }}<br>#}
+{#    Fb: {{ found_user.fb_link }}<br>#}
+{#        <br>#}
+{#    </div>#}
+{#    <div class="col-md-6">#}
+{#         {{ found_user.student.summary }}#}
+{#    </div>#}
+{#</div>#}
+{#{% if found_user.is_student %}#}
+{##}
+{##}
+{#<div class="row justify-content-md-center">#}
+{#    <div class="col-md-2">#}
+{##}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="col-md-8">#}
+{##}
+{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
+{#            <h2>Projects</h2>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#        {% for proj in found_user.project_set.all %}#}
+{#        <ul class="col-md-4 list-group">#}
+{#            <li class="list-group-item">#}
+{#                Title: {{proj.title}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                About: {{proj.about}}#}
+{#            </li>#}
+{##}
+{#        </ul>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{##}
+{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
+{#            <h2>Volunteering</h2>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#        {% for volunteering in found_user.volunteerexperience_set.all %}#}
+{#        <ul class="col-md-4 list-group">#}
+{#            <li class="list-group-item">#}
+{#                Title: {{volunteering.title}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                About: {{volunteering.description}}#}
+{#            </li>#}
+{##}
+{#        </ul>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
+{#            <h2>Work</h2>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#        {% for work in found_user.workingexperience_set.all %}#}
+{#        <ul class="col-md-4 list-group">#}
+{#            <li class="list-group-item">#}
+{#                Title: {{work.title}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                Company: {{work.company}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                {{work.period_start}}-{{work.period_end}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                Link: {{work.link}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                About: {{work.description}}#}
+{#            </li>#}
+{##}
+{#        </ul>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#    <div class="col-md-2">#}
+{#        {% for lang in found_user.language_set.all %}#}
+{#            <p>{{ lang.name }}: {{ lang.level }}</p>#}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+{#</div>#}
+{#    {% endif %}#}
+{##}
+{##}
+{#{% if found_user.is_teacher %}#}
+{#<div class="row justify-content-md-center">#}
+{#    <div class="col-md-2">#}
+{#        <p>{{ found_user.teacher.degree}} in {{ found_user.teacher.field_of_study }}</p>#}
+{##}
+{#    </div>#}
+{##}
+{#    <div class="col-md-8">#}
+{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
+{#            <h2>Work</h2>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#        {% for work in found_user.workingexperience_set.all %}#}
+{#        <ul class="col-md-4 list-group">#}
+{#            <li class="list-group-item">#}
+{#                Title: {{work.title}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                About: {{work.company}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                {{work.period_start}}-{{work.period_end}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                Link: {{work.link}}#}
+{#            </li>#}
+{#            <li class="list-group-item">#}
+{#                About: {{work.description}}#}
+{#            </li>#}
+{##}
+{#        </ul>#}
+{#        {% endfor %}#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#    <div class="col-md-2">#}
+{#        {% for lang in found_user.language_set.all %}#}
+{#            <p>{{ lang.name }}: {{ lang.level }}</p>#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#</div>#}
+{#    {% endif %}#}
+{#{% endblock %}#}
+{##}
 
 
 
