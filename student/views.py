@@ -317,7 +317,7 @@ def generate_cv(request, pk=None):
 from django.conf import settings
 
 
-@user_login_required
+
 def convertation(request, pk=None):
   #  pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
