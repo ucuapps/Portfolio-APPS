@@ -1,20 +1,30 @@
-{% extends 'base.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html>
+    {% load static %}
+	<head>
+		<title>Profile</title>
+		<meta charset="utf-8">
 
-{% block head_title %}Profile{% endblock %}
-{% block extra_head %}
-<meta name="description" content="This helps you to create your portfolio">
+        <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
+        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
+        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
+        <script src="{% static 'js/menu_mover.js'%}"></script>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+		<meta name="description" content="This helps you to create your portfolio">
 		<link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
-        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css'%}">
-        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css'%}">
+        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css' %}">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-		<link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
-        <script src="{% static 'js/student_switcher.js'%}"></script>
-		<script src="{% static 'js/project_resizer.js'%}"></script>
-        <script src="{% static 'js/menu_mover.js'%}'"></script>
-{% endblock %}
-
-{% block content %}
+		<link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/ico">
+        <script src="{% static 'js/student_switcher.js' %}"></script>
+		<script src="{% static 'js/project_resizer.js' %}"></script>
+        <script src="{% static 'js/menu_mover.js' %}'"></script>
+	</head>
+	<body>
+    {% include 'includes/header.html' %}
     {% if found_user.is_student %}
     <div class="student_page">
         <div class="student_credentials">
@@ -28,8 +38,8 @@
                         <span class="occupation">{{ found_user.student.study_programme }}, po</span>
                         <hr>
                         <div class="social_info">
-                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png'%}" width="25px" height="25px"></a>
-                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png'%}" width="25px" height="25px"></a>
+                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
 
                         </div>
                     </div>
@@ -189,8 +199,8 @@
                         <span class="occupation">{{ found_user.teacher.degree }} in {{ found_user.teacher.field_of_study }}</span>
                         <hr>
                         <div class="social_info">
-                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png'%}" width="25px" height="25px"></a>
-                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png'%}" width="25px" height="25px"></a>
+                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
 
                         </div>
                     </div>
@@ -252,7 +262,9 @@
         </div>
 
     {% endif %}
-{% endblock %}
+    {% include 'includes/footer.html' %}
+    </body>
+</html>
 
 
 
