@@ -215,8 +215,10 @@
                     <div class="projects" id="proj">
                         <div class="proj_desc">
                             <h2>Courses:</h2>
-                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span>
+                            {% for course in found_user.teacher.subjects.all %}
+                            <div class="tools"><span>course.name</span>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
 

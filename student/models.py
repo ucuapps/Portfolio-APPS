@@ -111,7 +111,7 @@ class Skill(models.Model):
     SKILL_TYPES = (
         ("hard", "Hard skill"),
         ("soft", "Soft skill"),
-        ("programming_languages", "Programming languages")
+        ("programming", "Programming languages")
     )
 
     skill_type = models.CharField(max_length=255, choices=SKILL_TYPES)

@@ -25,7 +25,7 @@ class StudentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
-        self.fields["programming_languages"].queryset = Skill.objects.filter(skill_type="programming_languages")
+        self.fields["programming_languages"].queryset = Skill.objects.filter(skill_type="programming")
         self.fields["soft_skills"].queryset = Skill.objects.filter(skill_type="soft")
         self.fields["hard_skills"].queryset = Skill.objects.filter(skill_type="hard")
 

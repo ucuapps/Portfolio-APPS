@@ -3,8 +3,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 
 
-from .models import Teacher
+from .models import Teacher, Subject
 from .forms import TeacherForm
+from dal import autocomplete
 
 teacher_login_required = user_passes_test(lambda u: u.is_teacher, login_url='/')
 
@@ -30,3 +31,17 @@ def edit_teacher(request):
         messages.success(request, "Your profile data has been changed")
     context["form"] = form
     return render(request, template, context)
+
+
+class SubjectsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Subject.objects.none()
+
+        qs = Subject.objects
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
