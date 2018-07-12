@@ -88,13 +88,22 @@
                                {% endfor %}
                             </ul>
                              <hr class="divide">
+                            <span class="last">PROGRAMMING LANGUAGES</span>
+                            <ul class="rate">
+                                {% for plang in found_user.student.programming_languages.all %}
+                                    <li><span>{{ plang.name }}</span></li>
+                               {% endfor %}
+                            </ul>
+                            <hr class="divide">
                             <span class="last">SOFT SKILLS</span>
                             <ul class="rate">
                                 {% for soft in found_user.student.soft_skills.all %}
                                     <li><span>{{ soft.name }}</span></li>
                                {% endfor %}
                             </ul>
+                            <hr class="divide">
                         </div>
+
                     </div>
                     <div class="projects_container">
                         <div class="switchers">
@@ -173,140 +182,44 @@
                         </div>
                         <div class="projects" id="intern">
                             <div class="proj_container">
+                                {% for work in found_user.workingexperience_set.all %}
                                 <div class="intern_project">
                                     <div class="proj_tech">
-                                        <span>SoftServe</span>
+                                        <span>{{work.company}}</span>
                                     </div>
                                     <div class="proj_info">
-                                        <h1>Graphic Designer</h1>
+                                        <h1>{{ work.title }}</h1>
+                                        <hr>
+                                        <h1>{{ work.link }}</h1>
                                         <hr>
                                         <div class="proj_desc">
-                                            <h2>October 21 - October 21.5</h2>
+                                            <h2>{{ work.period_start }} - {{ work.period_end }}</h2>
                                             <h2>About:</h2>
-                                            <div class="tools"><span>I was there and did that</span></div>
+                                            <div class="tools"><span>{{ work.description }}</span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="intern_project">
-                                    <div class="proj_tech">
-                                        <span>SoftServe</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <h1>Graphic Designer</h1>
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>October 21 - October 21.5</h2>
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was there and did that</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="intern_project">
-                                    <div class="proj_tech">
-                                        <span>SoftServe</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <h1>Graphic Designer</h1>
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>October 21 - October 21.5</h2>
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was there and did that</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="intern_project">
-                                    <div class="proj_tech">
-                                        <span>SoftServe</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <h1>Graphic Designer</h1>
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>October 21 - October 21.5</h2>
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was there and did that</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="intern_project">
-                                    <div class="proj_tech">
-                                        <span>SoftServe</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <h1>Graphic Designer</h1>
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>October 21 - October 21.5</h2>
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was there and did that</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                         <div class="projects" id="volunteer">
                             <div class="proj_container">
+                                {% for volunteering in found_user.volunteerexperience_set.all %}
                                 <div class="volunteer_project">
                                     <div class="proj_tech">
-                                        <span>TEDxUCU</span>
+                                        <span>{{ volunteering.title }}</span>
                                     </div>
                                     <div class="proj_info">
                                         <hr>
                                         <div class="proj_desc">
                                             <h2>About:</h2>
-                                            <div class="tools"><span>I was here and did that and met him</span></div>
+                                            <div class="tools"><span>{{ volunteering.description }}</span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="volunteer_project">
-                                    <div class="proj_tech">
-                                        <span>TEDxUCU</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was here and did that and met him</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="volunteer_project">
-                                    <div class="proj_tech">
-                                        <span>TEDxUCU</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was here and did that and met him</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="volunteer_project">
-                                    <div class="proj_tech">
-                                        <span>TEDxUCU</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was here and did that and met him</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="volunteer_project">
-                                    <div class="proj_tech">
-                                        <span>TEDxUCU</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>I was here and did that and met him</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>
@@ -373,41 +286,12 @@
 {#        </ul>#}
 {#        {% endfor %}#}
 {#        </div>#}
-{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
-{#            <h2>Work</h2>#}
-{#        </div>#}
-{#        <div class="row">#}
-{#        {% for work in found_user.workingexperience_set.all %}#}
-{#        <ul class="col-md-4 list-group">#}
-{#            <li class="list-group-item">#}
-{#                Title: {{work.title}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                Company: {{work.company}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                {{work.period_start}}-{{work.period_end}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                Link: {{work.link}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                About: {{work.description}}#}
-{#            </li>#}
-{##}
+
 {#        </ul>#}
 {#        {% endfor %}#}
 {#        </div>#}
 {##}
-{#    </div>#}
-{#    <div class="col-md-2">#}
-{#        {% for lang in found_user.language_set.all %}#}
-{#            <p>{{ lang.name }}: {{ lang.level }}</p>#}
-{#        {% endfor %}#}
-{##}
-{#    </div>#}
-{#</div>#}
-{#    {% endif %}#}
+{#
 {##}
 {##}
 {#{% if found_user.is_teacher %}#}
