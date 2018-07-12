@@ -11,7 +11,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 display:block;
 }*/
 
-html, body {background: #f3f3f3; font-family: 'Lato', helvetica, arial, sans-serif; font-size: 16px; color: #222; height:297mm;
+html, body {font-family: 'Lato', helvetica, arial, sans-serif; font-size: 16px; color: #222; height:297mm;
     width:210mm;}
 /*
 html,body{
@@ -35,13 +35,13 @@ p {
 #cv {
 	width: 100%;
 	max-width: 800px;
-	background: #f3f3f3;
+	/*background: #f3f3f3;*/
 	/*margin: 30px auto;*/
 }
 
 .mainDetails {
 	padding: 25px 35px;
-	border-bottom: 2px solid #cf8a05;
+	border-bottom: 2px solid #222;
 }
 
 #name h1 {
@@ -104,7 +104,7 @@ p {
 }
 
 #contactDetails ul li a:hover {
-	color: #cf8a05;
+	color: #222;
 }
 
 
@@ -135,7 +135,7 @@ section:last-child {
 	font-family: 'Rokkitt', Helvetica, Arial, sans-serif;
 	font-style: italic;
 	font-size: 1.5em;
-	color: #cf8a05;
+	color: #222;
 }
 
 .sectionContent h2 {
