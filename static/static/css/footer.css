@@ -1,6 +1,7 @@
 footer {
     background-color: #f8f9fa;
     position: marker;
+    letter-spacing: 1px;
 }
 
 
@@ -15,5 +16,29 @@ footer {
 div.row {
     margin-left: 0px;
     margin-right: 0px;
+}
+
+
+.footer_year {
+    padding-bottom: 10px;
+    margin-top: 16px;
+}
+
+.block_1 {
+    text-align: center;
+    margin-left: 50px;
+}
+
+a {
+    color: rgb(101,57,152);
+}
+
+.contact_links:hover {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.fa-facebook-square, .fa-youtube-play, .email_footer{
+    color: #6c757d;
 }
 
