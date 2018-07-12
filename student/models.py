@@ -106,6 +106,9 @@ class Language(models.Model):
     level = models.CharField(max_length=255, choices=LEVEL)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Skill(models.Model):
     SKILL_TYPES = (
@@ -160,6 +163,9 @@ class WorkingExperience(models.Model):
 
 class StudyProgramme(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Certification(models.Model):
