@@ -21,7 +21,7 @@
 	<div class="mainDetails">
         {% if found_user.profile_image %}
 		<div id="headshot" class="quickFade">
-			<img src="{% get_media_prefix %}{{ found_user.profile_image}}" alt="userphoto" />
+			<img src="{% get_media_prefix %}{{found_user.profile_image}}" alt="userphoto" />
 		</div>
         {% endif %}
 
@@ -32,10 +32,10 @@
 
 		<div id="contactDetails" class="quickFade delayFour">
 			<ul>
-				<li>e: {{ found_user.email }}</li>
-                {% if found_user.mobile_number %}
-				<li>m: {{ found_user.mobile_number }}</li>
-                {% endif %}
+            <!--email_off-->		<li>e: {{ found_user.email }}</li> <!--/email_off-->
+            {% if found_user.mobile_number %}
+            <li>m: {{ found_user.mobile_number }}</li>
+            {% endif %}
 			</ul>
 		</div>
 		<div class="clear"></div>

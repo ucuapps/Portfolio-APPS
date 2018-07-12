@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+
 from student.models import Student
 from student.forms import StudentSearch
 
@@ -318,16 +319,17 @@ def convertation(request, pk=None):
   #  pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
     pdf = settings.MEDIA_ROOT + '/student_cv/myCV.pdf'
+   
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
-    '''   options = {
+    '''  options = {
         'page-size': 'A4',
         'margin-top': '0.0in',
         'margin-right': '0.0in',
         'margin-bottom': '0.0in',
         'margin-left': '0.0in',
-    }
+    }'''
 
-    pdfkit.from_url(url, pdf, options=options)'''
+  #  pdfkit.from_url(url, pdf, options=options)
     response = FileResponse(open(pdf, 'rb'), content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=' + 'myCV.pdf'
     os.remove(pdf)
