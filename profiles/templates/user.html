@@ -184,30 +184,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="skills" id="hobbies">
+                    <div class="skills" id="hard">
                         <span class="last">PROFESSIONAL</span>
                         <span class="last">INTERESTS</span>
                         <ul class="rate">
-                            <li><span>rersdv</span></li>
                              {% if found_user.fields_of_interests.all %}
                                   {% for intrs in found_user.fields_of_interests.all %}
                                     <li><span>{{ intrs.name }}</span></li>
                                {% endfor %}
                         {% endif %}
                         </ul>
-                       <hr class="divide">
-
+                        <hr class="divide">
 
                     <span class="last">HOBBIES</span>
                         <ul class="rate">
-                        <li><span>rersdv</span></li>
                              {% if found_user.fields_of_interests.all %}
                                   {% for intrs in found_user.fields_of_interests.all %}
                                     <li><span>{{ intrs.name }}</span></li>
                                {% endfor %}
                         {% endif %}
                         </ul>
-                       <hr class="divide">
 
                         </div>
                     </div>
