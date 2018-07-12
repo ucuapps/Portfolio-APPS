@@ -13,3 +13,4 @@ class TeacherForm(forms.ModelForm):
             'subjects': autocomplete.ModelSelect2Multiple(url='subjects-autocomplete'),}
 
 
+

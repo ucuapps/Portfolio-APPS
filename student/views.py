@@ -275,7 +275,7 @@ class ProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Skill.objects.none()
 
-        qs = Skill.objects.filter(skill_type="programming_languages")
+        qs = Skill.objects.filter(skill_type="programming")
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
@@ -342,7 +342,7 @@ class LanguageAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Language.objects.none()
 
-        qs = Language.objects
+        qs = Language.objects.all()
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
