@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block content %}
+    {% if found_user.is_student %}
     <div class="student_page">
         <div class="student_credentials">
                     <div class="profile_photo">
@@ -161,119 +162,72 @@
                     </div>
                     <div class="skills" id="hobbies">
                         <h1>HOBBIES</h1>
+                        <span class="last">Interests</span>
+                        <div class="tools">
+                            {% for intrs in found_user.interests.all %}
+                            <span>intrs.name</span>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
     </div>
-{% endblock %}
-{#<div class="row justify-content-md-start">#}
-{#    <div class="col-md-6">#}
-{#    <h1><img src="{% get_media_prefix %}{{ found_user.profile_image}}">{{ found_user.first_name}} {{ found_user.last_name}} </h1>#}
-{#    Email: {{ found_user.email }}<br>#}
-{#    Mobile: {{ found_user.mobile_number }}<br>#}
-{#    Git: {{ found_user.git_link }}<br>#}
-{#    Fb: {{ found_user.fb_link }}<br>#}
-{#        <br>#}
-{#    </div>#}
-{#    <div class="col-md-6">#}
-{#         {{ found_user.student.summary }}#}
-{#    </div>#}
-{#</div>#}
-{#{% if found_user.is_student %}#}
-{##}
-{##}
-{#<div class="row justify-content-md-center">#}
-{#    <div class="col-md-2">#}
-{##}
-{##}
-{#    </div>#}
-{##}
-{#    <div class="col-md-8">#}
-{##}
-{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
-{#            <h2>Projects</h2>#}
-{#        </div>#}
-{#        <div class="row">#}
-{#        {% for proj in found_user.project_set.all %}#}
-{#        <ul class="col-md-4 list-group">#}
-{#            <li class="list-group-item">#}
-{#                Title: {{proj.title}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                About: {{proj.about}}#}
-{#            </li>#}
-{##}
-{#        </ul>#}
-{#        {% endfor %}#}
-{#        </div>#}
-{##}
-{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
-{#            <h2>Volunteering</h2>#}
-{#        </div>#}
-{#        <div class="row">#}
-{#        {% for volunteering in found_user.volunteerexperience_set.all %}#}
-{#        <ul class="col-md-4 list-group">#}
-{#            <li class="list-group-item">#}
-{#                Title: {{volunteering.title}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                About: {{volunteering.description}}#}
-{#            </li>#}
-{##}
-{#        </ul>#}
-{#        {% endfor %}#}
-{#        </div>#}
+    {% endif %}
+    {% if found_user.is_teacher %}
+        <div class="student_page">
+        <div class="student_credentials">
+                    <div class="profile_photo">
+                        <div class="photo">
+                            <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
+                        </div>
+                    </div>
+                    <div class="student_name">
+                        <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
+                        <span class="occupation">{{ found_user.teacher.degree }} in {{ found_user.teacher.field_of_study }}</span>
+                        <hr>
+                        <div class="social_info">
+                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png'%}" width="25px" height="25px"></a>
+                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png'%}" width="25px" height="25px"></a>
 
-{#        </ul>#}
-{#        {% endfor %}#}
-{#        </div>#}
-{##}
-{#
-{##}
-{##}
-{#{% if found_user.is_teacher %}#}
-{#<div class="row justify-content-md-center">#}
-{#    <div class="col-md-2">#}
-{#        <p>{{ found_user.teacher.degree}} in {{ found_user.teacher.field_of_study }}</p>#}
-{##}
-{#    </div>#}
-{##}
-{#    <div class="col-md-8">#}
-{#        <div class="d-flex align-items-center bg-purple rounded box-shadow">#}
-{#            <h2>Work</h2>#}
-{#        </div>#}
-{#        <div class="row">#}
-{#        {% for work in found_user.workingexperience_set.all %}#}
-{#        <ul class="col-md-4 list-group">#}
-{#            <li class="list-group-item">#}
-{#                Title: {{work.title}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                About: {{work.company}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                {{work.period_start}}-{{work.period_end}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                Link: {{work.link}}#}
-{#            </li>#}
-{#            <li class="list-group-item">#}
-{#                About: {{work.description}}#}
-{#            </li>#}
-{##}
-{#        </ul>#}
-{#        {% endfor %}#}
-{#        </div>#}
-{##}
-{#    </div>#}
-{#    <div class="col-md-2">#}
-{#        {% for lang in found_user.language_set.all %}#}
-{#            <p>{{ lang.name }}: {{ lang.level }}</p>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#</div>#}
-{#    {% endif %}#}
-{#{% endblock %}#}
-{##}
+                        </div>
+                    </div>
+        </div>
+
+        <div class="student_info">
+                    <div class="skills" id="hard">
+                        <svg id="triang"
+						 x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
+                        <defs>
+                        </defs>
+                        <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
+                        </svg>
+                        <div class="hard_skills">
+                            <span>ABOUT ME</span>
+                            <div class="description">
+                                <p>{{ found_user.teacher.about_me }}
+                                </p>
+                            </div>
+                            <hr class="divide">
+                            <span class="last">Interests</span>
+                            <hr class="divide">
+                        </div>
+                    </div>
+                        <div class="projects_container">
+                    <div class="projects" id="proj">
+                        <div class="proj_desc">
+                            <h2>Courses:</h2>
+                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+
+        </div>
+
+    {% endif %}
+{% endblock %}
 
 
 
