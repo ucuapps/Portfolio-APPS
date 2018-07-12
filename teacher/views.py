@@ -39,7 +39,7 @@ class SubjectsAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Subject.objects.none()
 
-        qs = Subject.objects
+        qs = Subject.objects.all()
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)

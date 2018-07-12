@@ -340,7 +340,7 @@ class LanguageAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Language.objects.none()
 
-        qs = Language.objects
+        qs = Language.objects.all()
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
