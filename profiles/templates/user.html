@@ -164,9 +164,13 @@
                         <h1>HOBBIES</h1>
                         <span class="last">Interests</span>
                         <div class="tools">
+                        {% if found_user.fields_of_interests.all %}
                             {% for intrs in found_user.interests.all %}
                             <span>intrs.name</span>
                             {% endfor %}
+                            {% else %}
+                            <span>Thereis no info.</span>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -203,22 +207,41 @@
                         <div class="hard_skills">
                             <span>ABOUT ME</span>
                             <div class="description">
+                                {% if found_user.teacher.about_me %}
+
                                 <p>{{ found_user.teacher.about_me }}
                                 </p>
+                                    {% else %}
+                                    <p> There is no info.
+                                </p>
+                                    {% endif %}
                             </div>
                             <hr class="divide">
                             <span class="last">Interests</span>
+                            {% if found_user.fields_of_interests.all %}
+                                {% for intrst  in found_user.fields_of_interests.all %}
+                                    <li><span>{{ intrst.name }}</span></li>
+                                {% endfor %}
+                                    {% else %}
+                                    <p> There is no info.
+                                </p>
+                                    {% endif %}
+                            </div>
                             <hr class="divide">
                         </div>
-                    </div>
+
                         <div class="projects_container">
                     <div class="projects" id="proj">
                         <div class="proj_desc">
                             <h2>Courses:</h2>
-                            {% for sbj in found_user.teacher.subjects.all %}
-                            <div class="tools"><span>{{ sbj.name }}</span>
-                            </div>
-                            {% endfor %}
+                            {% if found_user.teacher.subjects.all  %}
+                                {% for sbj in found_user.teacher.subjects.all %}
+                                <div class="tools"><span>{{ sbj.name }}</span>
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <span> There is no courses. Please fill your data in settings.</span>
+                                {% endif %}
                         </div>
                     </div>
 

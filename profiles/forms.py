@@ -37,7 +37,7 @@ class UserForm(f.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        self.fields["fields_of_interests"].queryset = Interests.objects.filter(skill_type="professional")
+        self.fields["fields_of_interests"].queryset = Interests.objects.filter(interest_type="professional")
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):
