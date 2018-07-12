@@ -35,6 +35,10 @@ class UserForm(f.ModelForm):
         widgets = {
             'fields_of_interests': autocomplete.ModelSelect2Multiple(url='interests-autocomplete'),}
 
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields["fields_of_interests"].queryset = Interests.objects.filter(skill_type="professional")
+
 
 class DomainCheckAdapter(DefaultAccountAdapter):
     def is_open_for_signup(self, request):
