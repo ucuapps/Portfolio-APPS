@@ -128,26 +128,31 @@ class Skill(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=255)
+    project_field = models.CharField(max_length=20, default="", help_text="Word/words/abbreviation which describes your project."
+                                                      " Example: ML, WEB, IOT, NLP, CV, AI, Design, Networks, BA,"
+                                                      " Visualization, Robotics, Data Mining, Software, Security, "
+                                                      "Analysis, Economics", blank=False)
+    title = models.CharField(max_length=60, help_text="Project title. Example: Health Care project", blank=False)
     about = models.TextField()
     technologies = models.ManyToManyField(Skill, blank=True)
+
     # TODO: mentor
     collaborators = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
 
 class VolunteerExperience(models.Model):
-    title = models.CharField(max_length=255)
-    description = models.TextField(max_length=700)
+    title = models.CharField(max_length=60, help_text="Event title. Example: ML Conference", blank=False)
+    description = models.TextField(max_length=150)
     link = models.URLField(null=True, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     organization = models.CharField(max_length=225, blank=True, null=True)
 
 
 class Education(models.Model):
-    degree = models.CharField(max_length=255)
+    degree = models.CharField(max_length=30)
     period_start = models.DateField(null=True, blank=True)
     period_end = models.DateField(null=True, blank=True)
-    description = models.TextField(max_length=700)
+    description = models.TextField(max_length=130)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     university = models.CharField(max_length=225, blank=True, null=True)
@@ -155,12 +160,13 @@ class Education(models.Model):
 
 
 class WorkingExperience(models.Model):
-    title = models.CharField(max_length=255)
+    occupation = models.CharField(max_length=255,default="", help_text="Example: Back-end dev")
     company = models.CharField(max_length=255, null=True, blank=True)
     period_start = models.DateField(null=True, blank=True)
     period_end = models.DateField(null=True, blank=True)
     link = models.URLField(null=True, blank=True)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, help_text="Fill the field with description"
+                                                                    " of your responsibilities, gained experience")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
@@ -172,7 +178,8 @@ class StudyProgramme(models.Model):
 
 
 class Certification(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=60, help_text="Please fill the field with the certificate name "
+                                                      "Example: Data Science Summer School")
     image = models.FileField(upload_to="%Y/%m/%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

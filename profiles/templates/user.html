@@ -83,7 +83,8 @@
                                {% endfor %}
                             </ul>
                              <hr class="divide">
-                            <span class="last">PROGRAMMING LANGUAGES</span>
+                            <span class="last">PROGRAMMING</span>
+                            <span class="last">LANGUAGES</span>
                             <ul class="rate">
                                 {% for plang in found_user.student.programming_languages.all %}
                                     <li><span>{{ plang.name }}</span></li>
@@ -141,7 +142,7 @@
                                         <span>{{work.company}}</span>
                                     </div>
                                     <div class="proj_info">
-                                        <h1>{{ work.title }}</h1>
+                                        <h1>{{ work.occupation }}</h1>
                                         <hr>
                                         <h1>{{ work.link }}</h1>
                                         <hr>
@@ -185,7 +186,7 @@
                             <span>intrs.name</span>
                             {% endfor %}
                             {% else %}
-                            <span>Thereis no info.</span>
+
                             {% endif %}
                         </div>
                     </div>
@@ -257,7 +258,7 @@
                                 {% endfor %}
                                 {% else %}
                                 <span> There is no courses. Please fill your data in settings.</span>
-                                {% endif %}
+{% endif %}
                         </div>
                     </div>
 
@@ -268,9 +269,10 @@
         </div>
 
     {% endif %}
-    {% include 'includes/footer.html' %}
+
     </body>
 </html>
+
 
 
 
