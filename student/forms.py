@@ -35,7 +35,7 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ('__all__')
         widgets = {
-            'technologies': autocomplete.ModelSelect2Multiple(url='tech-autocomplete'),
+            'tools': autocomplete.ModelSelect2Multiple(url='language-autocomplete'),
             'collaborators': autocomplete.ModelSelect2Multiple(url='users-autocomplete'),
         }
 
