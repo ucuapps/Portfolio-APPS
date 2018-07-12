@@ -298,13 +298,6 @@ class SkillsAutocomplete(autocomplete.Select2QuerySetView):
 
 
 @user_login_required
-def show_preview(request, pk=None):
-    u = get_object_or_404(get_user_model(), id=pk)
-    context = dict(found_user=u, title="User", media="/media/")
-
-    return render(request, "cv/cv_preview.html", context)
-
-@user_login_required
 def search_form(request):
     return render(request, 'student/search.html')
 
@@ -316,8 +309,14 @@ def generate_cv(request, pk=None):
 
 from django.conf import settings
 
+def show_preview(request, pk=None):
+    u = get_object_or_404(get_user_model(), id=pk)
+    context = dict(found_user=u, title="User", media="/media/")
+    return render(request, "cv/cv_preview.html", context)
 
-@user_login_required
+
+#@user_login_required
+@login_required
 def convertation(request, pk=None):
   #  pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
