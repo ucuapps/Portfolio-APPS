@@ -35,7 +35,9 @@
                     </div>
                     <div class="student_name">
                         <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
-                        <span class="occupation">{{ found_user.student.study_programme }}, po</span>
+                        {% if found_user.student.study_programme %}
+                        <span class="occupation">{{ found_user.student.study_programme }}, {{ found_user.student.current_study_year }}</span>
+                        {% endif %}
                         <hr>
                         <div class="social_info">
                             <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
@@ -109,14 +111,18 @@
                                  {% for proj in found_user.project_set.all %}
                                 <div class="project">
                                     <div class="proj_tech" style="background-color: rgb(101,57,152)">
-                                        <span>Web</span>
+                                        <span>{{ proj.project_field }}</span>
                                     </div>
                                     <div class="proj_info">
                                         <h1>{{ proj.title }}</h1>
                                         <hr>
                                         <div class="proj_desc">
                                             <h2>Tools:</h2>
-                                            <div class="tools"><span>Python</span><span>JavaScript</span><span>C++</span><span>HTML</span><span>CSS</span></div>
+                                            <div class="tools">
+                                                {% for tool in proj.technologies.all %}
+                                                    <span>{{ tool }}</span>
+                                                {% endfor %}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
