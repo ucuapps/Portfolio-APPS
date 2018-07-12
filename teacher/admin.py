@@ -4,7 +4,7 @@ from .models import Teacher, Subject
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    fields = ('user', 'degree', 'ield_of_study', 'subjects', 'about_me')
+    fields = ('user', 'degree', 'field_of_study', 'subjects', 'about_me')
 
 
 

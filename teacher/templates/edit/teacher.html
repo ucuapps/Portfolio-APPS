@@ -1,5 +1,6 @@
 {% extends "edit/edit.html" %}
 {% load static %}
+{% load staticfiles %}
 {% load i18n %}
 
 
@@ -14,3 +15,7 @@
 </form>
 {% endblock %}
 
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+{% endblock %}
