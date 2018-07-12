@@ -247,10 +247,17 @@ hr{
     justify-content: center;
     align-items: center;
 }
+
 .hard_skills span{
     font-size: 17px;
     font-weight: 500;
 }
+
+.skills span{
+    font-size: 17px;
+    font-weight: 500;
+}
+
 .description{
     display: flex;
     flex-direction: column;

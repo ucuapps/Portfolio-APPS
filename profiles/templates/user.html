@@ -62,8 +62,7 @@
                         <div class="hard_skills">
                             <span>ABOUT ME</span>
                             <div class="description">
-                                <p>{{ found_user.student.summary }}
-                                </p>
+                                <p>{{ found_user.student.summary }}</p>
                             </div>
                             <hr class="divide">
 
@@ -121,7 +120,15 @@
                                             <h2>Tools:</h2>
                                             <div class="tools">
                                                 {% for tool in proj.technologies.all %}
-                                                    <span>{{ tool }}</span>
+                                                    <span>{{ tool.name }}</span>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="proj_desc">
+                                            <h2>Collaborators:</h2>
+                                            <div class="tools">
+                                                {% for collaborator in proj.collaborators.all %}
+                                                    <span>{{ collaborator.first_name }} {{ collaborator.last_name }}</span>
                                                 {% endfor %}
                                             </div>
                                         </div>
@@ -178,16 +185,30 @@
                         </div>
                     </div>
                     <div class="skills" id="hobbies">
-                        <h1>HOBBIES</h1>
-                        <span class="last">Interests</span>
-                        <div class="tools">
-                        {% if found_user.fields_of_interests.all %}
-                            {% for intrs in found_user.interests.all %}
-                            <span>intrs.name</span>
-                            {% endfor %}
-                            {% else %}
+                        <span class="last">PROFESSIONAL</span>
+                        <span class="last">INTERESTS</span>
+                        <ul class="rate">
+                            <li><span>rersdv</span></li>
+                             {% if found_user.fields_of_interests.all %}
+                                  {% for intrs in found_user.fields_of_interests.all %}
+                                    <li><span>{{ intrs.name }}</span></li>
+                               {% endfor %}
+                        {% endif %}
+                        </ul>
+                       <hr class="divide">
 
-                            {% endif %}
+
+                    <span class="last">HOBBIES</span>
+                        <ul class="rate">
+                        <li><span>rersdv</span></li>
+                             {% if found_user.fields_of_interests.all %}
+                                  {% for intrs in found_user.fields_of_interests.all %}
+                                    <li><span>{{ intrs.name }}</span></li>
+                               {% endfor %}
+                        {% endif %}
+                        </ul>
+                       <hr class="divide">
+
                         </div>
                     </div>
                 </div>
