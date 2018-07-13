@@ -1,293 +1,395 @@
 <!DOCTYPE html>
 <html>
-    {% load static %}
-	<head>
-		<title>Profile</title>
-		<meta charset="utf-8">
+{% load static %}
+<head>
+    <title>Profile</title>
+    <meta charset="utf-8">
 
-        <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
-        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
-        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-        <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
-        <script src="{% static 'js/menu_mover.js'%}"></script>
+    <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
+    <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
+    <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-		<meta name="description" content="This helps you to create your portfolio">
-		<link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
-        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css' %}">
-        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css' %}">
-		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-		<link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/ico">
-        <script src="{% static 'js/student_switcher.js' %}"></script>
-		<script src="{% static 'js/project_resizer.js' %}"></script>
-        <script src="{% static 'js/menu_mover.js' %}'"></script>
-	</head>
-	<body>
-    {% include 'includes/header.html' %}
-    {% if found_user.is_student %}
-    <div class="student_page">
-        <div class="student_credentials">
-                    <div class="profile_photo">
-                        <div class="photo">
-                            <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
-                        </div>
-                    </div>
-                    <div class="student_name">
-                        <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
-                        {% if found_user.student.study_programme %}
-                        <span class="occupation">{{ found_user.student.study_programme }}, {{ found_user.student.current_study_year }}</span>
-                        {% endif %}
-                        <hr>
-                        <div class="social_info">
-                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
-                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta name="description" content="This helps you to create your portfolio">
+    <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
+    <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css' %}">
+    <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/ico">
+    <script src="{% static 'js/student_switcher.js' %}"></script>
+    <script src="{% static 'js/project_resizer.js' %}"></script>
+    <script src="{% static 'js/menu_mover.js'%}"></script>
+    <script>
+        function teacher_info() {
+            var proj = document.getElementById('projcont');
+            var hard = document.getElementById('hard');
 
-                        </div>
-                    </div>
+            proj.style.display = "none";
+            hard.style.display = "flex";
+            document.getElementsByClassName('proj_sw')[0].style.color = "rgb(101,57,152)";
+            document.getElementsByClassName('switch')[0].style.borderBottom = "2px solid rgb(101,57,152)";
+            document.getElementsByClassName('proj_sw')[1].style.color = "rgb(68,68,68)";
+            document.getElementsByClassName('switch')[1].style.borderBottom = "none";
+
+        }
+
+        function courses() {
+            document.getElementsByClassName('student_info')[0].style.justifyContent = "center";
+            var proj = document.getElementById('projcont');
+            var hard = document.getElementById('hard');
+            document.getElementsByClassName('switchers')[1].style.display = "none";
+
+            hard.style.display = "none";
+            proj.style.display = "flex";
+            document.getElementsByClassName('proj_sw')[1].style.color = "rgb(101,57,152)";
+            document.getElementsByClassName('switch')[1].style.borderBottom = "2px solid rgb(101,57,152)";
+            document.getElementsByClassName('proj_sw')[0].style.color = "rgb(68,68,68)";
+            document.getElementsByClassName('switch')[0].style.borderBottom = "none";
+        }
+    </script>
+</head>
+<body>
+{% include 'includes/header.html' %}
+{% if found_user.is_student %}
+<div class="student_page">
+    <div class="student_credentials">
+        <div class="profile_photo">
+            <div class="photo">
+                <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
+            </div>
         </div>
-        <div class="switchers">
-                    <div class="switch"><span onclick="hard()" class="proj_sw">About</span></div>
-                    <div class="switch"><span onclick="proj()" class="proj_sw">Experience</span></div>
-                    <div class="switch"><span onclick="hobbies()" class="proj_sw">Hobbies</span></div>
+        <div class="student_name">
+            <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
+            {% if found_user.student.study_programme %}
+            <span class="occupation">{{ found_user.student.study_programme }}, {{ found_user.student.current_study_year }}</span>
+            {% endif %}
+            <hr>
+            <div class="social_info">
+                <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
+
+            </div>
         </div>
+    </div>
+    <div class="switchers">
+        <div class="switch"><span onclick="hard()" class="proj_sw">About</span></div>
+        <div class="switch"><span onclick="proj()" class="proj_sw">Experience</span></div>
+        <div class="switch"><span onclick="hobbies()" class="proj_sw">Hobbies</span></div>
+    </div>
     <div class="student_info">
-                    <div class="skills" id="hard">
-                        <svg id="triang"
+        <div class="skills" id="hard">
+            <svg id="triang"
 						 x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
                         <defs>
                         </defs>
                         <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
                         </svg>
-                        <div class="hard_skills">
-                            <span>ABOUT ME</span>
-                            <div class="description">
-                                <p>{{ found_user.student.summary }}</p>
-                            </div>
-                            <hr class="divide">
+            <div class="hard_skills">
+                <span>ABOUT ME</span>
+                <div class="description">
+                    <p>{{ found_user.student.summary }}</p>
+                </div>
+                <hr class="divide">
 
 
-                            <span class="last">LANGUAGES</span>
-                            <ul class="rate">
-                                {% for lang in found_user.language_set.all %}
-                                    <li><span>{{ lang.name }}</span><span>{{ lang.level }}</span></li>
-                               {% endfor %}
+                <span class="last">LANGUAGES</span>
+                <ul class="rate">
+                    {% for lang in found_user.language_set.all %}
+                    <li><span>{{ lang.name }}</span><span>{{ lang.level }}</span></li>
+                    {% endfor %}
 
-                            </ul>
-                            <hr class="divide">
-                            <span class="last">HARD SKILLS</span>
-                            <ul class="rate">
-                                {% for hard in found_user.student.hard_skills.all %}
-                                    <li><span>{{ hard.name }}</span></li>
-                               {% endfor %}
-                            </ul>
-                             <hr class="divide">
-                            <span class="last">PROGRAMMING</span>
-                            <span class="last">LANGUAGES</span>
-                            <ul class="rate">
-                                {% for plang in found_user.student.programming_languages.all %}
-                                    <li><span>{{ plang.name }}</span></li>
-                               {% endfor %}
-                            </ul>
-                            <hr class="divide">
-                            <span class="last">SOFT SKILLS</span>
-                            <ul class="rate">
-                                {% for soft in found_user.student.soft_skills.all %}
-                                    <li><span>{{ soft.name }}</span></li>
-                               {% endfor %}
-                            </ul>
-                            <hr class="divide">
+                </ul>
+                <hr class="divide">
+                <span class="last">HARD SKILLS</span>
+                <ul class="rate">
+                    {% for hard in found_user.student.hard_skills.all %}
+                    <li><span>{{ hard.name }}</span></li>
+                    {% endfor %}
+                </ul>
+                <hr class="divide">
+                <span class="last">PROGRAMMING LANGUAGES</span>
+                <ul class="rate">
+                    {% for plang in found_user.student.programming_languages.all %}
+                    <li><span>{{ plang.name }}</span></li>
+                    {% endfor %}
+                </ul>
+                <hr class="divide">
+                <span class="last">SOFT SKILLS</span>
+                <ul class="rate">
+                    {% for soft in found_user.student.soft_skills.all %}
+                    <li><span>{{ soft.name }}</span></li>
+                    {% endfor %}
+                </ul>
+                <hr class="divide">
+            </div>
+
+        </div>
+        <div class="projects_container" id="projcont">
+            <div class="switchers">
+                <div class="switch"><span onclick="project()" class="proj_sw">Projects</span></div>
+                <div class="switch"><span onclick="internship()" class="proj_sw">Internships</span></div>
+                <div class="switch"><span onclick="volunteer()" class="proj_sw">Volunteering</span></div>
+            </div>
+            <div class="projects" id="proj">
+                <div class="proj_container">
+                    {% for proj in found_user.project_set.all %}
+                    <div class="project">
+                        <div class="proj_tech" style="background-color: rgb(101,57,152)">
+                            <span>{{ proj.project_field }}</span>
                         </div>
-
-                    </div>
-                    <div class="projects_container">
-                        <div class="switchers">
-                            <div class="switch"><span onclick="project()" class="proj_sw">Projects</span></div>
-                            <div class="switch"><span onclick="internship()" class="proj_sw">Internships</span></div>
-                            <div class="switch"><span onclick="volunteer()" class="proj_sw">Volunteering</span></div>
-                        </div>
-                        <div class="projects" id="proj">
-                            <div class="proj_container">
-                                 {% for proj in found_user.project_set.all %}
-                                <div class="project">
-                                    <div class="proj_tech" style="background-color: rgb(101,57,152)">
-                                        <span>{{ proj.project_field }}</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <h1>{{ proj.title }}</h1>
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>Tools:</h2>
-                                            <div class="tools">
-                                                {% for tool in proj.technologies.all %}
-                                                    <span>{{ tool.name }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        <div class="proj_desc">
-                                            <h2>Collaborators:</h2>
-                                            <div class="tools">
-                                                {% for collaborator in proj.collaborators.all %}
-                                                    <span>{{ collaborator.first_name }} {{ collaborator.last_name }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="proj_info">
+                            <h1>{{ proj.title }}</h1>
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>Tools:</h2>
+                                <div class="tools">
+                                    {% for tool in proj.technologies.all %}
+                                    <span>{{ tool.name }}</span>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
-
-
-
-
                             </div>
-                        </div>
-                        <div class="projects" id="intern">
-                            <div class="proj_container">
-                                {% for work in found_user.workingexperience_set.all %}
-                                <div class="intern_project">
-                                    <div class="proj_tech">
-                                        <span>{{work.company}}</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <h1>{{ work.occupation }}</h1>
-                                        <hr>
-                                        <h1>{{ work.link }}</h1>
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>{{ work.period_start }} - {{ work.period_end }}</h2>
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>{{ work.description }}</span></div>
-                                        </div>
-                                    </div>
+                            <div class="proj_desc">
+                                <h2>Collaborators:</h2>
+                                <div class="tools">
+                                    {% for collaborator in proj.collaborators.all %}
+                                    <span>{{ collaborator.first_name }} {{ collaborator.last_name }}</span>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
-
-                            </div>
-                        </div>
-                        <div class="projects" id="volunteer">
-                            <div class="proj_container">
-                                {% for volunteering in found_user.volunteerexperience_set.all %}
-                                <div class="volunteer_project">
-                                    <div class="proj_tech">
-                                        <span>{{ volunteering.title }}</span>
-                                    </div>
-                                    <div class="proj_info">
-                                        <hr>
-                                        <div class="proj_desc">
-                                            <h2>About:</h2>
-                                            <div class="tools"><span>{{ volunteering.description }}</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-
                             </div>
                         </div>
                     </div>
-                    <div class="skills" id="hobbies">
-                        <span class="last">PROFESSIONAL</span>
-                        <span class="last">INTERESTS</span>
-                        <ul class="rate">
-                             {% if found_user.fields_of_interests.all %}
-                                  {% for intrs in found_user.fields_of_interests.all %}
-                                    <li><span>{{ intrs.name }}</span></li>
-                               {% endfor %}
-                        {% endif %}
-                        </ul>
-                        <hr class="divide">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="projects" id="intern">
+                <div class="proj_container">
+                    {% for work in found_user.workingexperience_set.all %}
+                    <div class="intern_project">
+                        <div class="proj_tech">
+                            <span>{{work.company}}</span>
+                        </div>
+                        <div class="proj_info">
+                            <h1>{{ work.occupation }}</h1>
+                            <hr>
+                            <h1>{{ work.link }}</h1>
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>{{ work.period_start }} - {{ work.period_end }}</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>{{ work.description }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
 
-                    <span class="last">HOBBIES</span>
-                        <ul class="rate">
-                             {% if found_user.fields_of_interests.all %}
-                                  {% for intrs in found_user.fields_of_interests.all %}
-                                    <li><span>{{ intrs.name }}</span></li>
-                               {% endfor %}
-                        {% endif %}
-                        </ul>
+                </div>
+            </div>
+            <div class="projects" id="volunteer">
+                <div class="proj_container">
+                    {% for volunteering in found_user.volunteerexperience_set.all %}
+                    <div class="volunteer_project">
+                        <div class="proj_tech">
+                            <span>{{ volunteering.title }}</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>About:</h2>
+                                <div class="tools"><span>{{ volunteering.description }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
 
+                </div>
+            </div>
+        </div>
+        <div class="skills" id="hobbies">
+            <span class="last">PROFESSIONAL INTERESTS</span>
+            <ul class="rate">
+                {% if found_user.fields_of_interests.all %}
+                {% for intrs in found_user.fields_of_interests.all %}
+                <li><span>{{ intrs.name }}</span></li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+            <hr class="divide">
+
+            <span class="last">HOBBIES</span>
+            <ul class="rate">
+                {% if found_user.fields_of_interests.all %}
+                {% for intrs in found_user.fields_of_interests.all %}
+                <li><span>{{ intrs.name }}</span></li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</div>
+</div>
+{% endif %}
+{% if found_user.is_teacher %}
+<div class="student_page">
+    <div class="student_credentials">
+        <div class="profile_photo" style="width: 250px">
+            <div class="photo">
+                <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
+            </div>
+        </div>
+        <div class="student_name">
+            <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
+            <span class="occupation">{{ found_user.teacher.degree }} in {{ found_user.teacher.field_of_study }}</span>
+            <hr>
+            <div class="social_info">
+                <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
+
+            </div>
+        </div>
+    </div>
+    <div class="switchers">
+        <div class="switch"><span onclick="teacher_info()" class="proj_sw">About</span></div>
+        <div class="switch"><span onclick="courses()" class="proj_sw">Courses</span></div>
+    </div>
+    <div class="student_info">
+        <div class="skills" id="hard">
+            <svg id="triang"
+						 x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
+                        <defs>
+                        </defs>
+                        <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
+                        </svg>
+            <div class="hard_skills">
+                <span>ABOUT ME</span>
+                <div class="description">
+                    {% if found_user.teacher.about_me %}
+
+                    <p>{{ found_user.teacher.about_me }}
+                    </p>
+                    {% else %}
+                    {% endif %}
+                </div>
+                <hr class="divide">
+
+                <span class="last">INTERESTS</span>
+                <ul class="rate">
+                    {% if found_user.fields_of_interests.all %}
+                    {% for intrst  in found_user.fields_of_interests.all %}
+                    <li><span>{{ intrst.name }}</span></li>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+                </ul>
+                <hr class="divide">
+            </div>
+        </div>
+        <div class="projects_container" style="width: 100%" id="projcont">
+            <div class="switchers">
+                <div class="switch"><span class="proj_sw" style="font-size: 20px">COURSES</span></div>
+            </div>
+            <div class="projects" id="intern" style="display: flex">
+                <div class="proj_container">
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>Math</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>Calculus</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>SE</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>SE</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>SE</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>SE</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intern_project" style="border-top: 15px solid rgb(140,140,140); border-bottom: 6px solid rgb(140,140,140)">
+                        <div class="proj_tech" style="width: 150px">
+                            <span>SE</span>
+                        </div>
+                        <div class="proj_info">
+                            <hr>
+                            <div class="proj_desc">
+                                <h2>October 21 - October 21.5</h2>
+                                <h2>About:</h2>
+                                <div class="tools"><span>I am a cool guy</span></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
-    {% endif %}
-    {% if found_user.is_teacher %}
-        <div class="student_page">
-        <div class="student_credentials">
-                    <div class="profile_photo">
-                        <div class="photo">
-                            <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
-                        </div>
-                    </div>
-                    <div class="student_name">
-                        <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
-                        <span class="occupation">{{ found_user.teacher.degree }} in {{ found_user.teacher.field_of_study }}</span>
-                        <hr>
-                        <div class="social_info">
-                            <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
-                            <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
-
-                        </div>
-                    </div>
-        </div>
-
-        <div class="student_info">
-                    <div class="skills" id="hard">
-                        <svg id="triang"
-						 x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
-                        <defs>
-                        </defs>
-                        <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
-                        </svg>
-                        <div class="hard_skills">
-                            <span>ABOUT ME</span>
-                            <div class="description">
-                                {% if found_user.teacher.about_me %}
-
-                                <p>{{ found_user.teacher.about_me }}
-                                </p>
-                                    {% else %}
-                                    <p> There is no info.
-                                </p>
-                                    {% endif %}
-                            </div>
-                            <hr class="divide">
-                            <span class="last">Interests</span>
-                            {% if found_user.fields_of_interests.all %}
-                                {% for intrst  in found_user.fields_of_interests.all %}
-                                    <li><span>{{ intrst.name }}</span></li>
-                                {% endfor %}
-                                    {% else %}
-                                    <p> There is no info.
-                                </p>
-                                    {% endif %}
-                            </div>
-                            <hr class="divide">
-                        </div>
-
-                        <div class="projects_container">
-                    <div class="projects" id="proj">
-                        <div class="proj_desc">
-                            <h2>Courses:</h2>
-                            {% if found_user.teacher.subjects.all  %}
-                                {% for sbj in found_user.teacher.subjects.all %}
-                                <div class="tools"><span>{{ sbj.name }}</span>
-                                </div>
-                                {% endfor %}
-                                {% else %}
-                                <span> There is no courses. Please fill your data in settings.</span>
+</div>
 {% endif %}
-                        </div>
-                    </div>
-
-                        </div>
-                    </div>
-
-
-        </div>
-
-    {% endif %}
-
-    </body>
+</body>
 </html>
 
 

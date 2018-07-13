@@ -1,15 +1,12 @@
 // Fix this gauno code as soon as possible
 
 function hard() {
-    var proj = document.getElementsByClassName('projects_container')[0];
+    var proj = document.getElementById('projcont');
     var hobbies = document.getElementById('hobbies');
     var hard = document.getElementById('hard');
 
     proj.style.display = "none";
     hobbies.style.display = "none";
-    hard.style.zIndex = 2;
-    proj.style.zIndex = 1;
-    hobbies.style.zIndex = 0;
     hard.style.display = "flex";
     document.getElementsByClassName('proj_sw')[0].style.color = "rgb(101,57,152)";
     document.getElementsByClassName('switch')[0].style.borderBottom = "2px solid rgb(101,57,152)";
@@ -21,15 +18,12 @@ function hard() {
 }
 
 function proj() {
-    var proj = document.getElementsByClassName('projects_container')[0];
+    var proj = document.getElementById('projcont');
     var hobbies = document.getElementById('hobbies');
     var hard = document.getElementById('hard');
 
     hard.style.display = "none";
     hobbies.style.display = "none";
-    proj.style.zIndex = 2;
-    hard.style.zIndex = 1;
-    hobbies.style.zIndex = 0;
     proj.style.display = "flex";
     document.getElementsByClassName('proj_sw')[1].style.color = "rgb(101,57,152)";
     document.getElementsByClassName('switch')[1].style.borderBottom = "2px solid rgb(101,57,152)";
@@ -40,15 +34,12 @@ function proj() {
 }
 
 function hobbies() {
-    var proj = document.getElementsByClassName('projects_container')[0];
+    var proj = document.getElementById('projcont');
     var hobbies = document.getElementById('hobbies');
     var hard = document.getElementById('hard');
 
     proj.style.display = "none";
     hard.style.display = "none";
-    hobbies.style.zIndex = 2;
-    proj.style.zIndex = 1;
-    hard.style.zIndex = 0;
     hobbies.style.display = "flex";
     document.getElementsByClassName('proj_sw')[2].style.color = "rgb(101,57,152)";
     document.getElementsByClassName('switch')[2].style.borderBottom = "2px solid rgb(101,57,152)";

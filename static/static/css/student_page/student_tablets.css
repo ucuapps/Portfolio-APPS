@@ -27,6 +27,14 @@ svg{
 .logo{
     margin-left: 30px;
 }
+.proj_container{
+    max-width: 720px;
+    margin: 20px 0px 20px 0px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 #nav{
     padding: 0;
     margin: 0;
@@ -77,6 +85,8 @@ svg{
     width: 100%;
     flex-direction: column;
     height: auto;
+    position: relative;
+    z-index: 10;
     background-color: whitesmoke;
     box-shadow: 0px 0px 8px rgb(171, 171, 171);
 }
@@ -126,7 +136,7 @@ svg{
     width: 100%;
     display: none;
     background-color: whitesmoke;
-/*    justify-content: center;*/
+    justify-content: center;
     flex-direction: column;
 }
 #intern,#volunteer{
@@ -195,10 +205,8 @@ svg{
     align-items: center;
     flex-direction: column;
     width: 100%;
-    position: absolute;
-    z-index: 0;
     height: auto;
-    background-color: rgb(230,230,230);;
+    background-color: rgb(230,230,230);
 }
 .skills:first-child,#hard{
     display: flex;
@@ -493,15 +501,6 @@ hr{
 .skills h1{
     font-size: 17px;
     font-weight: 700;
-}
-.proj_container{
-    max-width: 720px;
-    min-width: 430px;
-    margin: 20px 0px 20px 0px;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
 }
 .places{
     height: auto;

@@ -237,8 +237,6 @@ svg{
     align-items: center;
     flex-direction: column;
     width: 100%;
-    position: absolute;
-    z-index: 0;
     height: auto;
     background-color: rgb(230,230,230);;
 }
