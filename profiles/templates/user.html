@@ -219,9 +219,9 @@
 
             <span class="last">HOBBIES</span>
             <ul class="rate">
-                {% if found_user.fields_of_interests.all %}
-                {% for intrs in found_user.fields_of_interests.all %}
-                <li><span>{{ intrs.name }}</span></li>
+                {% if found_user.student.hobbies.all %}
+                {% for hobby in found_user.student.hobbies.all %}
+                <li><span>{{ hobby.name }}</span></li>
                 {% endfor %}
                 {% endif %}
             </ul>
