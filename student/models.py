@@ -176,6 +176,12 @@ class StudyProgramme(models.Model):
     def __str__(self):
         return self.name
 
+class Hobby(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
 
 class Certification(models.Model):
     title = models.CharField(max_length=60, help_text="Please fill the field with the certificate name "
@@ -209,6 +215,7 @@ class Student(models.Model):
                                                                 " higher education setting."
                                                                 "Adept at working across departments, with faculty,"
                                                                 " administrators")
+    hobbies = models.ManyToManyField(Skill, blank=True)
 
     # Projects
     # projects = models.ManyToManyField(Project, blank=True)

@@ -133,7 +133,11 @@ a{
 }
 .student_page{
 	height: auto;
+<<<<<<< HEAD
 	margin: 40px;
+=======
+	margin: 30px;
+>>>>>>> 04b358c333a88b298d24e41665e949c565ff22a2
     box-shadow: 0px 0px 13px rgb(120,120,120);
 }
 .student_credentials{
