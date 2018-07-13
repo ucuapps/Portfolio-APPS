@@ -107,11 +107,28 @@
 			</div>
 
 			<div class="sectionContent">
+            {% if found_user.student.study_programme.name %}
 				<article>
-					<h2>Ukrainian Catholic University</h2>
-					<p class="subDetails">{{ found_user.student.study_programme.name }}</p>
+					<h2>Bachelor of {{ found_user.student.study_programme.name }}</h2>
+					<p class="subDetails">Ukrainian Catholic University</p>
 					<p></p>
 				</article>
+            {% endif %}
+                {% for edu in found_user.education.all %}
+				<article>
+                {% if edu.degree %}
+					<h2>{{ edu.degree }} of {{ edu.field_of_study }}</h2>
+                {% else %}
+                    <h2>{{ edu.field_of_study }}</h2>
+                {% endif %}
+                    {% if edu.period_start %}
+					<p class="subDetails"> {{ edu.period_start }} {% if edu.period_end %} - {{ edu.period_end }} {% endif %}</p>
+                    {% endif %}
+                    {% if edu.description %}
+					<p>{{ edu.description }}</p>
+                    {% endif %}
+				</article>
+                {% endfor %}
 
 			</div>
 			<div class="clear"></div>
@@ -139,24 +156,21 @@
 			<div class="sectionTitle">
 				<h1>Interests</h1>
 			</div>
-<!--
 			<div class="sectionContent">
 				<ul class="keySkills">
-                {% for hardskill in found_user.student.hard_skills.all %}
-                    <li>{{ hardskill }}</li>
-                {% endfor %}
-                {% for softskill in found_user.student.soft_skills.all %}
-                    <li>{{ softskill }}</li>
-                {% endfor %}
-                {% for lang in found_user.language_set.all %}
-                    <li>{{ lang.name }}({{lang.level}})</li>
+                {% for interest in found_user.fields_of_interests.all %}
+                    <li>{{ interest }}</li>
                 {% endfor %}
                 </ul>
-			</div> -->
+     <!--           <ul class="keySkills">
+                {% for hobby in found_user.fields_of_interests.all %}
+                    <li>{{ interest }}</li>
+                {% endfor %}
+                </ul>-->
+			</div>
 			<div class="clear"></div>
 		</section>
 
 	</div>
 </div>
-
 </html>
