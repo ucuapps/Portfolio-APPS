@@ -185,7 +185,7 @@ svg{
     width: 100%;
     display: none;
     background-color: whitesmoke;
-   /* justify-content: center;*/
+    justify-content: center;
     flex-direction: column;
 }
 #intern,#volunteer{
@@ -198,7 +198,6 @@ svg{
 .projects_container .switchers{
     height: 33px;
     width: 100%;
-    z-index: 5;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
