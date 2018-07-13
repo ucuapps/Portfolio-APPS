@@ -126,7 +126,7 @@ svg{
     width: 100%;
     display: none;
     background-color: whitesmoke;
-    justify-content: center;
+/*    justify-content: center;*/
     flex-direction: column;
 }
 #intern,#volunteer{
