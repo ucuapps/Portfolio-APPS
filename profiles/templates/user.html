@@ -67,8 +67,12 @@
             {% endif %}
             <hr>
             <div class="social_info">
+                {% found_user.fb_link %}
                 <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                {% endif %}
+                {% if found_user.git_link %}
                 <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
+                {% endif %}
 
             </div>
         </div>
@@ -246,8 +250,12 @@
             <span class="occupation">{{ found_user.teacher.degree }} in {{ found_user.teacher.field_of_study }}</span>
             <hr>
             <div class="social_info">
+                {% if found_user.fb_link %}
                 <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                {% endif %}
+                {% if found_user.git_link %}
                 <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
+                {% endif %}
 
             </div>
         </div>
