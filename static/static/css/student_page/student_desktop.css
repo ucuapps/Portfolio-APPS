@@ -373,6 +373,10 @@ svg{
     margin: 5px 0px 10px 0px;
     list-style-position: inside;
 }
+.rate li{
+    margin-top: 10px;
+    list-style-type: none;
+}
 .rate li span{
     line-height: 18px;
     display:inline-block;
