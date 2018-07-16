@@ -24,7 +24,6 @@ class Interests(models.Model):
     INTEREST_TYPES = (
         ("professional", "Professional interest"),
         ("hobby", "Hobby")
-
     )
 
     interest_type = models.CharField(max_length=255, choices=INTEREST_TYPES)

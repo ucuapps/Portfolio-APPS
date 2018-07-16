@@ -95,7 +95,7 @@ class InterestsAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Interests.objects.none()
 
-        qs = Interests.objects.filter(skill_type="professional")
+        qs = Interests.objects.filter(interest_type="professional")
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
@@ -109,7 +109,7 @@ class HobbyAutocomplete(autocomplete.Select2QuerySetView):
         if not self.request.user.is_authenticated:
             return Interests.objects.none()
 
-        qs = Interests.objects.filter(skill_type="hobby")
+        qs = Interests.objects.filter(interest_type="hobby")
 
         if self.q:
             qs = qs.filter(name__istartswith=self.q)
