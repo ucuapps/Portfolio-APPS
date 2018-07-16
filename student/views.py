@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-from student.models import Student, Hobby
+from student.models import Student
 from student.forms import StudentSearch
 
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, EducationForm

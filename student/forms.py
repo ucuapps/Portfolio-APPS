@@ -5,7 +5,8 @@ from django.shortcuts import render
 from review_request.forms import DateInput
 
 
-from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill, Education, Hobby
+from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
+
 
 from dal import autocomplete
 
