@@ -67,7 +67,7 @@
             {% endif %}
             <hr>
             <div class="social_info">
-                {% found_user.fb_link %}
+                {%if found_user.fb_link %}
                 <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
                 {% endif %}
                 {% if found_user.git_link %}
