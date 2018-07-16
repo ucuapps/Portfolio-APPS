@@ -26,19 +26,66 @@ div.row {
 
 .block_1 {
     text-align: center;
-    margin-left: 50px;
+    margin-left: 36px;
 }
 
 a {
     color: rgb(101,57,152);
 }
 
-.contact_links:hover {
+.contact_links:hover, a:hover {
     color: #6c757d;
     text-decoration: none;
 }
 
-.fa-facebook-square, .fa-youtube-play, .email_footer{
+.fa{
     color: #6c757d;
 }
 
+h5 {
+    color: rgb(68,68,68);
+}
+
+.footer_location {
+    float: left;
+    margin-right: 11px;
+    text-align: center;
+}
+
+
+p {
+    line-height: 25px;
+    color: #6c757d;
+}
+
+.about_us_block {
+    margin-left: 27px;
+}
+
+
+@media only screen and (max-width: 975px) {
+
+
+    .about_us_info, .contact_info, .creators_info, p  {
+    margin-left: 10px;
+    font-size: 10px;
+    line-height: 18px;
+
+
+}
+
+    .about_us_block, .contact_info, .creators_info {
+        text-align: center;
+    }
+
+    .footer_location {
+        float: none;
+    }
+
+}
+
+.col-sm-12 {
+    margin-left:auto;
+   margin-right:auto;
+   display:block;
+}
