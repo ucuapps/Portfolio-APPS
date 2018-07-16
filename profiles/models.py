@@ -23,6 +23,7 @@ from student.models import Student
 class Interests(models.Model):
     INTEREST_TYPES = (
         ("professional", "Professional interest"),
+        ("hobby", "Hobby")
 
     )
 
@@ -81,6 +82,7 @@ class User(AbstractUser):
     profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
 
     fields_of_interests = models.ManyToManyField(Interests, related_name="interests", blank=True)
+    hobbies = models.ManyToManyField(Interests, related_name="hobbies", blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

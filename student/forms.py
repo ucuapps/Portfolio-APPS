@@ -20,7 +20,7 @@ class StudentForm(forms.ModelForm):
             'soft_skills': autocomplete.ModelSelect2Multiple(url='soft-autocomplete'),
             'hard_skills': autocomplete.ModelSelect2Multiple(url='hard-autocomplete'),
             'programming_languages': autocomplete.ModelSelect2Multiple(url='planguage-autocomplete'),
-            'hobbies': autocomplete.ModelSelect2Multiple(url='hobbies-autocomplete'),
+
         }
 
     def __init__(self, *args, **kwargs):
@@ -28,7 +28,7 @@ class StudentForm(forms.ModelForm):
         self.fields["programming_languages"].queryset = Skill.objects.filter(skill_type="programming")
         self.fields["soft_skills"].queryset = Skill.objects.filter(skill_type="soft")
         self.fields["hard_skills"].queryset = Skill.objects.filter(skill_type="hard")
-        self.fields["hobbies"].queryset = Hobby.objects.filter()
+
 
 
 class ProjectForm(forms.ModelForm):
