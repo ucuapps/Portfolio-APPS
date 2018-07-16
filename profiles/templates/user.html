@@ -294,7 +294,18 @@
                     {% endif %}
                 </ul>
                 <hr class="divide">
-            </div>
+
+                <span class="last">HOBBIES</span>
+                    <ul class="rate">
+                        {% if found_user.hobbies.all %}
+                        {% for hobby  in found_user.hobbies.all %}
+                        <li><span>{{ hobby.name }}</span></li>
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </ul>
+                    <hr class="divide">
+                </div>
         </div>
         <div class="projects_container" style="width: 100%" id="projcont">
             <div class="switchers">
