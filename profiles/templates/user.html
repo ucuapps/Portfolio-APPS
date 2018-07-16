@@ -217,14 +217,16 @@
             </ul>
             <hr class="divide">
 
+            {% if found_user.student.hobbies.all %}
             <span class="last">HOBBIES</span>
             <ul class="rate">
-                {% if found_user.student.hobbies.all %}
+
                 {% for hobby in found_user.student.hobbies.all %}
                 <li><span>{{ hobby.name }}</span></li>
                 {% endfor %}
-                {% endif %}
+
             </ul>
+            {% endif %}
 
         </div>
     </div>

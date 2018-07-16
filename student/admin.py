@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Student, Project, WorkingExperience, VolunteerExperience, Skill, Language, StudyProgramme, \
-    Certification
+    Certification, Hobby
 
 
 @admin.register(Student)
@@ -16,3 +16,4 @@ admin.site.register(VolunteerExperience)
 admin.site.register(Skill)
 admin.site.register(Language)
 admin.site.register(Certification)
+admin.site.register(Hobby)
