@@ -5,8 +5,7 @@ from django.shortcuts import render
 from review_request.forms import DateInput
 
 
-from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
-
+from .models import Student, Project, WorkingExperience, VolunteerExperience, Language, Skill, Education, Hobby
 
 from dal import autocomplete
 
@@ -29,6 +28,7 @@ class StudentForm(forms.ModelForm):
         self.fields["programming_languages"].queryset = Skill.objects.filter(skill_type="programming")
         self.fields["soft_skills"].queryset = Skill.objects.filter(skill_type="soft")
         self.fields["hard_skills"].queryset = Skill.objects.filter(skill_type="hard")
+        self.fields["hobbies"].queryset = Hobby.objects.filter()
 
 
 class ProjectForm(forms.ModelForm):
