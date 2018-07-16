@@ -40,6 +40,7 @@ class UserForm(f.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields["fields_of_interests"].queryset = Interests.objects.filter(interest_type="professional")
+        self.fields["hobby"].queryset = Interests.objects.filter(interest_type="hobby")
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):
