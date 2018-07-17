@@ -321,6 +321,7 @@ hr{
 }
 svg{
     display: block;
+    pointer-events: none;
 }
 .pref{
     margin-bottom: 5px;
