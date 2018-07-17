@@ -97,7 +97,7 @@ svg{
     width: auto;
     height: 65px;
 }
-#popup{
+.popup{
     display: none;
 }
 #pop_menu{

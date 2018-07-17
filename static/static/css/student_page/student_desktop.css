@@ -66,7 +66,7 @@ body, html{
 a{
     text-decoration: none;
 }
-#popup{
+.popup{
     display: none;
     width: 100%;
     flex-direction: column;
@@ -77,24 +77,24 @@ a{
     box-shadow: 0px 0px 8px rgb(171, 171, 171);
 }
 
-#popup a{
+.popup a{
     font-weight: 500;
     letter-spacing: .5px;
     color: #3a3a3a;
     text-decoration: none;
     font-size: 15px;
 }
-#popup a:nth-child(n+2){
+.popup a:nth-child(n+2){
     margin: 10px 0px 0px 10px;
 }
-#popup a:nth-child(1){
+.popup a:nth-child(1){
     margin: 10px 0px 0px 10px;
 }
-#popup hr{
+.popup hr{
     width: 100%;
     background-color: #3a3a3a;
 }
-#popup .exit a{
+.popup .exit a{
     margin: 0px 0px 0px 5px;
 }
 #nav:hover, #menu:hover{

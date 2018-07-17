@@ -122,36 +122,32 @@
                     </svg>
                 </a>
                 {% elif request.user.is_teacher %}
-                    <!-- <a class="dropdown-item" href="{% url 'show_my_requests' %}">Accepted by me</a>
-              <a class="dropdown-item" href="{% url 'show_all_requests' %}">All pending</a>  -->
-
-                <a href="{% url 'show_my_requests' %}">
+                <div style="display: block" onclick="popup_request_func()">
                     <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 40.3 26.8" enable-background="new 0 0 40.3 26.8"
-                            xml:space="preserve">
-                            <defs>
-                            </defs>
-                            <g id="nav">
-                                <g>
-                                    <path fill="#E8E8E8" d="M3.2,1.6l14.5,10.9c0.7,0.5,1.6,0.7,2.4,0.7c0.9,0,1.8-0.2,2.4-0.7L37.1,1.6C38.3,0.7,38,0,36.5,0H20.2
-                                        H3.8C2.3,0,2,0.7,3.2,1.6z"/>
-                                    <path fill="#E8E8E8" d="M38.2,4.5L22.3,15.9c-0.6,0.4-1.4,0.6-2.1,0.6c-0.8,0-1.6-0.2-2.1-0.6L2.1,4.5C1,3.6,0,4.1,0,5.5v18.7
-                                        c0,1.4,1.2,2.5,2.7,2.5h17.5h17.5c1.5,0,2.7-1.1,2.7-2.5V5.5C40.3,4.1,39.3,3.6,38.2,4.5z"/>
-                                </g>
+                        xml:space="preserve">
+                        <defs>
+                        </defs>
+                        <g id="nav">
+                            <g>
+                                <path fill="#E8E8E8" d="M3.2,1.6l14.5,10.9c0.7,0.5,1.6,0.7,2.4,0.7c0.9,0,1.8-0.2,2.4-0.7L37.1,1.6C38.3,0.7,38,0,36.5,0H20.2
+                                    H3.8C2.3,0,2,0.7,3.2,1.6z"/>
+                                <path fill="#E8E8E8" d="M38.2,4.5L22.3,15.9c-0.6,0.4-1.4,0.6-2.1,0.6c-0.8,0-1.6-0.2-2.1-0.6L2.1,4.5C1,3.6,0,4.1,0,5.5v18.7
+                                    c0,1.4,1.2,2.5,2.7,2.5h17.5h17.5c1.5,0,2.7-1.1,2.7-2.5V5.5C40.3,4.1,39.3,3.6,38.2,4.5z"/>
                             </g>
+                        </g>
                     </svg>
-                </a>
-
+                </div>
                 {% endif %}
                 <div onclick="popup_func()">
                     <img src="{% get_media_prefix %}{{ request.user.profile_image }}" class="avatar">
                 </div>
             </div>
-            <div id="popup" >
-                <a href="{{home}}">Profile</a>
-                <a href="{{edit_user}}">Edit</a>
-                <hr>
-                <div class="exit">
-                    <svg version="1.1"
+            <div class="popup" >
+                    <a href="{{home}}">Profile</a>
+                    <a href="{{edit_user}}">Edit</a>
+                    <hr>
+                    <div class="exit">
+                        <svg version="1.1"
                             x="0px" y="0px" width="17px" height="30%" viewBox="0 0 24 20" enable-background="new 0 0 24 20" xml:space="preserve">
                             <defs>
                             </defs>
@@ -160,9 +156,12 @@
                             <polygon points="0,0 0,20 14,20 14,18 2,18 2,2 14,2 14,0 	"/>
                             </g>
                             </svg>
-
-                    <a href="{{ logout }}">Sign out</a>
-                </div>
+                        <a href="{{ logout }}">Sign out</a>
+                    </div>
+            </div>
+            <div class="popup" >
+                <a href="{% url 'show_my_requests' %}">Accepted by me</a>
+                <a href="{% url 'show_all_requests' %}" style="margin-bottom: 10px;">All pending</a>
             </div>
         {% else %}
         <a href="{{ signin }}"><span id="nav">Sign in</span></a>
