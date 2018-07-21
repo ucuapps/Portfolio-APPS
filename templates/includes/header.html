@@ -15,7 +15,137 @@
         {% url 'generate_cv' user.id as generate_cv %}
 {% endif %}
 
-
+<script>
+    function popup_func() {
+        var popup = document.getElementsByClassName("popup")[0];
+        var popup_request = document.getElementsByClassName("popup")[1];
+        popup.style.display = "flex";
+        popup_request.style.display = "none";
+    }
+    function popup_request_func() {
+        var popup = document.getElementsByClassName("popup")[0];
+        var popup_request = document.getElementsByClassName("popup")[1];
+        popup.style.display = "none";
+        popup_request.style.display = "flex";
+    }
+    document.onclick = function(e){
+        var popup = document.getElementsByClassName("popup");
+        if(e.target.className !== "request" && e.target.className !== "avatar" && e.target.className !== "popup"){
+            console.log(popup.length);
+            for(var i = 0; i < popup.length; i++){
+                popup[i].style.display = 'none';
+            }
+        }
+    };
+</script>
+<style>
+    @media screen and (min-width: 450px) and (max-width: 1250px){
+        #nav:hover{
+            cursor: pointer;
+            opacity: 1;
+        }
+        .icon_container{
+            margin-right: 30px;
+            width: auto;
+            height: 65px;
+        }
+        .icon_container .avatar{
+            opacity: .8;
+            width: 35px;
+            height: 35px;
+        }
+        .icons{
+            height: 98%;
+            width: 145px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .popup{
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            height: auto;
+            position: relative;
+            z-index: 10;
+            background-color: whitesmoke;
+            box-shadow: 0px 0px 8px rgb(171, 171, 171);
+        }
+        .popup a{
+            font-weight: 500;
+            letter-spacing: .5px;
+            color: #3a3a3a;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .popup a:nth-child(n+2){
+            margin: 10px 0px 0px 10px;
+        }
+        .popup a:nth-child(1){
+            margin: 10px 0px 0px 10px;
+        }
+        .popup hr{
+            width: 100%;
+            background-color: #3a3a3a;
+        }
+        .popup .exit a{
+            margin: 0px 0px 0px 5px;
+        }
+    }
+    @media screen and (min-width: 1251px){
+        .icon_container{
+            margin-right: 30px;
+            width: auto;
+            height: 65px;
+        }
+        .icon_container .avatar{
+            opacity: .8;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+        }
+        .icon_container .avatar:hover{
+            opacity: 1;
+        }
+        .icons{
+            height: 100%;
+            width: 145px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .popup{
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            height: auto;
+            position: relative;
+            z-index: 10;
+            background-color: whitesmoke;
+            box-shadow: 0px 0px 8px rgb(171, 171, 171);
+        }
+        .popup a{
+            font-weight: 500;
+            letter-spacing: .5px;
+            color: #3a3a3a;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .popup a:nth-child(n+2){
+            margin: 10px 0px 0px 10px;
+        }
+        .popup a:nth-child(1){
+            margin: 10px 0px 0px 10px;
+        }
+        .popup hr{
+            width: 100%;
+            background-color: #3a3a3a;
+        }
+        .popup .exit a{
+            margin: 0px 0px 0px 5px;
+        }
+    }
+</style>
 <div id="overlay"></div>
 {% if request.user.is_authenticated %}
 <div id="pop_menu">
@@ -104,9 +234,7 @@
                 </a>
                 {% if request.user.is_student %}
                 <a href="{% url 'generate_cv' request.user.id %}"><span id="nav">CV</span></a>
-
-                </svg>
-                <a href="{% url 'show_my_requests' %}">
+                <a href="{% url 'show_my_requests' %}" >
                     <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav">
                 </a>
                 {% elif request.user.is_teacher %}
@@ -116,7 +244,7 @@
                     <img src="{% get_media_prefix %}{{ request.user.profile_image }}" class="avatar">
                 </div>
             </div>
-            <div class="popup" style="display: none">
+            <div class="popup">
                     <a href="{{home}}">Profile</a>
                     <a href="{{edit_user}}">Edit</a>
                     <hr>
@@ -143,26 +271,3 @@
         </div>
     </div>
 </div>
-<script>
-    function popup_func() {
-        var popup = document.getElementsByClassName("popup")[0];
-        var popup_request = document.getElementsByClassName("popup")[1];
-        popup.style.display = "flex";
-        popup_request.style.display = "none";
-    }
-    function popup_request_func() {
-        var popup = document.getElementsByClassName("popup")[0];
-        var popup_request = document.getElementsByClassName("popup")[1];
-        popup.style.display = "none";
-        popup_request.style.display = "flex";
-    }
-    document.onclick = function(e){
-        var popup = document.getElementsByClassName("popup");
-        if(e.target.className !== "request" && e.target.className !== "avatar" && e.target.className !== "popup"){
-            console.log(popup.length);
-            for(var i = 0; i < popup.length; i++){
-                popup[i].style.display = 'none';
-            }
-        }
-    };
-</script>
