@@ -91,11 +91,13 @@
                         <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
                         </svg>
             <div class="hard_skills">
+                {% if found_user.student.summary %}
                 <span>ABOUT ME</span>
                 <div class="description">
                     <p>{{ found_user.student.summary }}</p>
                 </div>
                 <hr class="divide">
+                {% endif %}
 
 
                 <span class="last">LANGUAGES</span>
