@@ -1,0 +1,158 @@
+{% load google_date %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static '/js/calendarLib.js' %}"></script>
+    <style>/*! CSS Used from: https://calendar.google.com/calendar/_/scs/calendar-static/_/ss/k=calendar.mat.-sxlrgmuh2tum.L.W.O/am=ACCDyQAQ/d=0/rs=ANwU0p6LhgwMQVJvmyI01fJ5eOje3ZpaIA */
+    body, html {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+}
+
+    .circle-text{clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px;}
+        [role="gridcell"]{outline:none;}
+        .Z7IIl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+        .yHbHub{display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;flex-direction:column;}
+        .row-cell{margin-top:8px;padding-bottom:8px;border-bottom:#e0e0e0 1px solid;}
+        .row-el{display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-ms-flexbox;display:flex;}
+        .right-block{display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;align-items:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+        .grid-cell{-webkit-box-flex:none;-webkit-flex:none;flex:none;vertical-align:top;text-align:left;width:120px;padding-left:16px;}
+        .circle{-webkit-box-flex:none;-webkit-flex:none;flex:none;width:44px;-webkit-box-ordinal-group:0;-webkit-order:0;order:0;}
+        .block-time{-webkit-box-flex:none;-webkit-flex:none;flex:none;width:160px;-webkit-box-ordinal-group:1;-webkit-order:1;order:1;}
+        .blob-block{width:100%;-webkit-box-ordinal-group:2;-webkit-order:2;order:2;}
+        .blob-block>.blob-text{outline:none;font-weight:600;-webkit-box-flex:none;-webkit-flex:none;flex:none;}
+        .blob-block>.blob-text>html-blob> span {color:#8a8a8a; font-weight: 400;}
+        .JDkLTe{margin-left:8px;}
+        .presentation{outline:none;margin:0;display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:32px;cursor:pointer;-webkit-box-flex:1 1 auto;-webkit-flex:1 1 auto;flex:1 1 auto;overflow:hidden;margin-left:136px;}
+        .presentation.first{margin-left:0;}
+        .day{font-weight:normal;margin:0;}
+        .day.today{font-weight:500;color:#4285f4;}
+        .day-name{font-size:12px;}
+        .day-num{font-size:14px;cursor:pointer;outline:none;}
+        .day-num:hover{text-decoration:underline;}
+        .GPGavc{border-top:#db4437 solid 2px;position:relative;margin-left:136px;}
+        .circle-box{-webkit-box-flex:none;-webkit-flex:none;flex:none;width:12px;margin:auto 16px;}
+        .circle-inner{-webkit-border-radius:12px;border-radius:12px;border:6px solid;width:0;height:0;}
+        .blob-block>.blob-text{font-weight:500;}
+.button {
+	position: relative;
+	height: 50px;
+	width: 200px;
+{#	top: calc(11vh - 25px);#}
+	left: calc(50vw - 100px);
+	background-image: none;
+	border: none;
+	outline: none;
+	background-color: #E4C441;
+	color: white;
+	text-transform: uppercase;
+	font-size: 20px;
+	letter-spacing: 2px;
+	cursor: pointer;
+	transition: all 0.2s ease-out;
+    margin-bottom: 30px;
+    margin-top: 20px;
+{#    margin-bottom: calc(11vh - 25px);#}
+}
+.button::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 160px;
+	height: 40px;
+	background-color: black;
+	z-index: -1;
+	left: calc(50% - 80px);
+	top: 10px;
+	opacity: 0.3;
+	filter: blur(5px);
+	transition: all 0.2s ease-out;
+{#    margin-bottom: 20px;#}
+}
+.button:hover::after {
+	opacity: 0.5;
+	filter: blur(20px);
+	transform: translatey(10px) scalex(1.2);
+}
+.button:active {
+	background-color: #dd4b4b;
+}
+.button:active::after {
+	opacity: 0.3;
+}
+.loading {
+	border-radius: 50px;
+	width: 50px;
+	left: calc(50vw - 25px);
+}
+.button.loading::after {
+	width: 40px;
+	left: 5px;
+	top: 12px;
+	border-radius: 100%;
+
+}
+.spinner {
+	display: block;
+	width: 34px;
+	height: 34px;
+	position: absolute;
+	top: 8px;
+	left: calc(50% - 17px);
+	background: transparent;
+	box-sizing: border-box;
+	border-top: 4px solid white;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+	border-radius: 100%;
+	animation: spin 0.6s ease-out infinite;
+}
+@keyframes spin {
+	100% {transform: rotate(360deg)}
+}
+
+</style>
+</head>
+<body>
+ <button onclick="loadBefore()" class="button before">Завантажити</button>
+    <div role="grid" id="grid" aria-readonly="true" class="gridCalendar" jscontroller="CGdsUd" jsaction="focusin:sn54Q; focusout:Rsz2be; mouseout:Rsz2be; mouseover:sn54Q;oEncVd:hwJTce;lMJhnd:c9RZ0d; click:Tp2SZe(KpB2Ud);">
+        {% for event in events  %}
+                <div class="row-cell">
+                    <div class="row-el">
+                        <div class="grid-cell">
+                            <h2 class="day today" data-day="{{ event.start.dateTime }}">
+                                <div class="day-name">{{ event.start.dateTime|to_day}}</div>
+                                <div class="day-num">{{ event.start.dateTime|to_month_day }} {{ event.start.dateTime|to_month}}.</div>
+                            </h2>
+                        </div>
+                        <div class="presentation item first">
+                            <div class="right-block block-time">{{ event.start.dateTime|to_hour }}:{{ event.start.dateTime|to_minute }} – {{ event.end.dateTime|to_hour }}:{{ event.end.dateTime|to_minute }}</div>
+                            <div class="right-block blob-block resource ">
+                                <div class="blob-text blob-resource ">
+                                    <html-blob>{{ event.summary }} ({{ event.organizer.email }}) <span> {{ event.location }}</span> </html-blob>
+                                </div>
+                            </div>
+                            <div role="gridcell" class="right-block circle">
+                                <div class="circle-inner " style="border-color: #E4C441;">
+                                    <span class="circle-text">{{ event.summary }}({{ event.organizer.displayName }})</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        {% endfor %}
+    </div>
+    <button onclick="loadMore()" class="button after">Завантажити</button>
+
+</body>
+</html>

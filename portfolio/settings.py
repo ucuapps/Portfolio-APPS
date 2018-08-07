@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'teacher',
     'contact',
     'review_request',
+    'ccalendar',
 
     'allauth',
     'allauth.account',
