@@ -10,13 +10,13 @@ register = template.Library()
 def to_day(value):
     date = parse(value)
     weekDays = [None]*7
-    weekDays[0] = "Нд"
-    weekDays[1] = "Пн"
-    weekDays[2] = "Вт"
-    weekDays[3] = "Ср"
-    weekDays[4] = "Чт"
-    weekDays[5] = "Пт"
-    weekDays[6] = "Сб"
+    weekDays[0] = "Пн"
+    weekDays[1] = "Вт"
+    weekDays[2] = "Ср"
+    weekDays[3] = "Чт"
+    weekDays[4] = "Пт"
+    weekDays[5] = "Сб"
+    weekDays[6] = "Нд"
     return weekDays[date.weekday()]
 
 
