@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from google.oauth2 import service_account
 from dateutil.parser import parse
+from ccalendar import config
 import googleapiclient.discovery
 from googleapiclient.errors import HttpError
 import datetime
@@ -12,13 +13,14 @@ import json
 import time
 # from ccalendar.helpers.lists import calendar_list
 import ccalendar.helpers.lists as lists
+
 from urllib.error import URLError, HTTPError
 
 
 
 def index(request):
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = '/Users/StasMaster/Downloads/adm.json'
+    SERVICE_ACCOUNT_FILE = config.googe_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -101,7 +103,7 @@ def loadnext(request):
 
 def list(request):
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = '/Users/StasMaster/Downloads/adm.json'
+    SERVICE_ACCOUNT_FILE = config.googe_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -116,7 +118,7 @@ def list(request):
 
 def resources(request):
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = '/Users/StasMaster/Downloads/adm.json'
+    SERVICE_ACCOUNT_FILE = config.googe_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -130,7 +132,7 @@ def resources(request):
 
 def buildings(request):
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
-    SERVICE_ACCOUNT_FILE = '/Users/StasMaster/Downloads/adm.json'
+    SERVICE_ACCOUNT_FILE = config.googe_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)

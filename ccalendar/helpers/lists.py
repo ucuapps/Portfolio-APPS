@@ -5,11 +5,12 @@ import googleapiclient.discovery
 import datetime
 import time
 import sys
+from ccalendar import config
 
 
 def calendar_list(buildingId):
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
-    SERVICE_ACCOUNT_FILE = '/Users/StasMaster/Downloads/adm.json'
+    SERVICE_ACCOUNT_FILE = config.google_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -36,7 +37,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
     calendars = calendar_list(building_id)
 
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = '/Users/StasMaster/Downloads/adm.json'
+    SERVICE_ACCOUNT_FILE = config.google_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
