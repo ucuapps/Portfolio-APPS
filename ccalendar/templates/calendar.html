@@ -17,7 +17,9 @@
     body, html {
     font-family: Roboto,Helvetica,Arial,sans-serif;
 }
-
+    .btn-block:hover {
+        opacity: 0.5;
+    }
     .circle-text{clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px;}
         [role="gridcell"]{outline:none;}
         .Z7IIl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
@@ -47,6 +49,7 @@
 	position: relative;
 	height: 50px;
 	width: 200px;
+    display:none;
 {#	top: calc(11vh - 25px);#}
 	left: calc(50vw - 100px);
 	background-image: none;
@@ -106,7 +109,7 @@
 	width: 34px;
 	height: 34px;
 	position: absolute;
-	top: 8px;
+	top: 5px;
 	left: calc(50% - 17px);
 	background: transparent;
 	box-sizing: border-box;
@@ -120,6 +123,21 @@
 @keyframes spin {
 	100% {transform: rotate(360deg)}
 }
+
+
+.round {
+    display:none;
+    position: relative;
+    z-index:9999;
+    width: 44px;
+    height:44px;
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+    border-radius:100%;
+    background-color: #333;
+    margin:0 auto;
+}
+
 
         /*! CSS Used from: https://calendar.google.com/calendar/_/scs/calendar-static/_/ss/k=calendar.mat.-kzbsjp4y98zu.L.W.O/am=AIAwFBAC/d=0/rs=ANwU0p5txO_mv0ajdThJPrPeELrozULbgQ */
 .DPvwYc{font-family:'Material Icons Extended';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-rendering:optimizeLegibility;text-transform:none;display:inline-block;word-wrap:normal;direction:ltr;font-feature-settings:'liga' 1;-webkit-font-smoothing:antialiased;}
@@ -867,15 +885,36 @@ img.gb_Wa{border:0;vertical-align:middle;}
 </div>
 </div>
 </header>
+
+
+<div class="btn-block chev-before" style="
+    height: 45px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+" onclick="loadBefore()"  >
+<i class="fas fa-chevron-up" style="
+    padding: 10px;
+    font-size: 31px;
+"></i>
+   <button class="round">
+
+       <span class="spinner"></span>
+
+   </button>
+</div>
+
+
  <button onclick="loadBefore()" class="button before">Завантажити</button>
-    <div role="grid" id="grid" aria-readonly="true" class="gridCalendar" jscontroller="CGdsUd" jsaction="focusin:sn54Q; focusout:Rsz2be; mouseout:Rsz2be; mouseover:sn54Q;oEncVd:hwJTce;lMJhnd:c9RZ0d; click:Tp2SZe(KpB2Ud);">
+    <div role="grid"  id="grid" aria-readonly="true" class="gridCalendar" data-building="{{ building_id }}" data-room="{{ room_id }}" >
         {% for event in events  %}
                 <div class="row-cell">
                     <div class="row-el">
                         <div class="grid-cell">
-                            <h2 class="day today" data-day="{{ event.start.dateTime }}">
+                            <h2 class="day today" data-day="{{ event.start.dateTime }}" style="display:none;">
                                 <div class="day-name">{{ event.start.dateTime|to_day}}</div>
-                                <div class="day-num">{{ event.start.dateTime|to_month_day }} {{ event.start.dateTime|to_month}}.</div>
+                                <div class="day-num" data-month="{{ event.start.dateTime|to_month_num }}" >{{ event.start.dateTime|to_month_day }} {{ event.start.dateTime|to_month}}.</div>
                             </h2>
                         </div>
                         <div class="presentation item first">
@@ -898,6 +937,24 @@ img.gb_Wa{border:0;vertical-align:middle;}
         {% endfor %}
     </div>
     <button onclick="loadMore()" class="button after">Завантажити</button>
+<div class="btn-block chev-after" style="
+    height: 45px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+" onclick="loadMore()"  >
+    <i class="fas fa-chevron-down" style="
+    padding: 10px;
+    font-size: 31px;
+    "></i>
+    <button class="round">
+
+       <span class="spinner"></span>
+
+    </button>
+</div>
+
 
 </body>
 </html>

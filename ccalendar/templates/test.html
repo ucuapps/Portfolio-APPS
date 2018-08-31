@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-    {% for event in events  %}
-       <pre>{{ event.start.dateTime }}    {{ event.summary }}</pre>
+    {% for resource in resources %}
+        <p>{{ resource.resourceName }} : {{ resource.resourceId }}</p> <br>
     {% endfor %}
 </body>
 </html>

@@ -44,6 +44,12 @@ def to_month(value):
     month[11] = "гру"
     return month[date.month-1]
 
+@register.filter(name='to_month_num')
+def to_month_num(value):
+    date = parse(value)
+    return  date.month-1
+
+
 
 @register.filter(name='to_hour')
 def to_hour(value):
