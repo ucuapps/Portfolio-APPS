@@ -79,7 +79,7 @@ function loadMore() {
     console.log($("#grid").attr("data-building"));
     $.ajax(
         {
-            url: "http://127.0.0.1:8000/calendar/json/",
+            url: "http://"+window.location.host+"/calendar/json/",
             data: {
                 date: $(".row-cell:last-child .day").attr("data-day"),
                 loadBefore: false,
@@ -126,7 +126,7 @@ function loadBefore() {
 
     $.ajax(
         {
-            url: "http://127.0.0.1:8000/calendar/json/",
+            url: "http://"+window.location.host+"/calendar/json/",
             data: {
                 date: $(".row-cell:first-child .day").attr("data-day"),
                 loadBefore: true,
