@@ -20,7 +20,7 @@ from urllib.error import URLError, HTTPError
 
 def index(request):
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = config.googe_path
+    SERVICE_ACCOUNT_FILE = config.google_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -103,7 +103,7 @@ def loadnext(request):
 
 def list(request):
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = config.googe_path
+    SERVICE_ACCOUNT_FILE = config.google_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -118,7 +118,7 @@ def list(request):
 
 def resources(request):
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = config.googe_path
+    SERVICE_ACCOUNT_FILE = config.google_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -132,7 +132,7 @@ def resources(request):
 
 def buildings(request):
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
-    SERVICE_ACCOUNT_FILE = config.googe_path
+    SERVICE_ACCOUNT_FILE = config.google_path
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
