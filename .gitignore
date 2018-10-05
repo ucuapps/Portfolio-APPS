@@ -1,4 +1,5 @@
 .idea/
+bin/
 venv/
 *.pyc
 __pychache__/
