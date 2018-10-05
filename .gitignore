@@ -8,3 +8,4 @@ static/media/
 .env
 */migrations/*.py
 portfolio/production.wsgi
+lib/
