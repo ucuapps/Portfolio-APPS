@@ -1,3 +1,8 @@
+import os
 
+google_path = ""
 
-google_path = '../../adm.json'
+if os.environ['ADM_JSON'] is None:
+        google_path = os.environ['ADM_JSON']
+else:
+    google_path = '/Users/StasMaster/Downloads/adm.json'
