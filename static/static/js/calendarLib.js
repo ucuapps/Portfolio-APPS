@@ -218,13 +218,28 @@ function apppendEvent(event, prepend) {
 
         grid_cell.append(day.append(day_name).append(day_num))
 
+        var color = "#f44336";
+        switch (event.status) {
+            case 'confirmed':
+                color = '#4CAF50';
+                break;
+            case 'tentative':
+                color = '#FFEB3B';
+                break;
+            case 'cancelled':
+                color = '#f44336';
+                break;
+            default:
+                color = '#f44336'
+        }
+
         var presentation =  $('<div class="presentation item first"></div>'),
             block_time = $('<div class="right-block block-time" ></div> ').text(minutes(date.getHours()) +':'+minutes(date.getMinutes())+' – '+minutes(date_end.getHours()) +':'+ minutes(date_end.getMinutes()) ),
             blob_block = $('<div class="right-block blob-block resource " ></div> '),
-            blob_text = $('<div class="blob-text blob-resource " ></div> ').append(" <html-blob>"+event.summary+' ('+ event.organizer.email+') <span> '+ event.location+ "</span> </html-blob>"),
+            blob_text = $('<div class="blob-text blob-resource " ></div> ').append(" <html-blob>"+event.summary+'  <span> '+ event.location+ "</span> </html-blob>"),
             circle = $('<div role="gridcell" class="right-block circle">'),
             circle_box = $('<div class="circle-box"></div>'),
-            circle_inner = $('<div class="circle-inner " style="border-color: #E4C441;"></div>'),
+            circle_inner = $('<div class="circle-inner " style="border-color: '+ color +';"></div>'),
             circle_text = $('<span class="circle-text"></span>').text(event.summary);
         //appending
           presentation.append(block_time)
