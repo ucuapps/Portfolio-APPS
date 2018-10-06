@@ -80,6 +80,5 @@ def color_filter(value):
         'confirmed': '#4CAF50',
         'tentative': '#FFEB3B',
         'cancelled': '#f44336',
-        None: '#f44336'
     }
     return variants.get(value)
