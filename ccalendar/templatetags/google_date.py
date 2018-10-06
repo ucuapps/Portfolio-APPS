@@ -69,3 +69,17 @@ def to_minute(value):
     return date.minute
 
 
+@register.filter(name='location')
+def location(value):
+    value= value.split(" ")[0]
+    return value
+
+@register.filter(name='color_filter')
+def color_filter(value):
+    variants = {
+        'confirmed': '#4CAF50',
+        'tentative': '#FFEB3B',
+        'cancelled': '#f44336',
+        None: '#f44336'
+    }
+    return variants.get(value)
