@@ -57,14 +57,14 @@ def load_more(building_id, load_date, room_id=False, before=False):
                 if count == 0:
                     events = calendar_api.events().list(calendarId=calendar["resourceEmail"], timeMin=load_date,
                                                        singleEvents=True, timeMax= max_day,
-                                                       orderBy='startTime').execute()["items"]
+                                                       orderBy='startTime', showDeleted=True).execute()["items"]
                     count += 1
 
                     continue
 
                 events += calendar_api.events().list(calendarId=calendar["resourceEmail"], timeMin=load_date,
-                                                    singleEvents=True,timeMax= max_day,
-                                                    orderBy='startTime').execute()["items"]
+                                                    singleEvents=True, timeMax= max_day,
+                                                    orderBy='startTime', showDeleted=True).execute()["items"]
             except(Exception):
                 continue
 
@@ -80,7 +80,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
                     events = calendar_api.events().list(calendarId=calendar["resourceEmail"],
                                                                 timeMin=min_day,timeMax=load_date,
                                                                 singleEvents=True,
-                                                                orderBy='startTime').execute()["items"]
+                                                                orderBy='startTime', showDeleted=True).execute()["items"]
                     count = 1
                     # return events
                     continue
@@ -88,7 +88,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
                 events += calendar_api.events().list(calendarId=calendar["resourceEmail"],
                                                     timeMin=min_day, timeMax=load_date,
                                                     singleEvents=True,
-                                                    orderBy='startTime').execute()["items"]
+                                                    orderBy='startTime', showDeleted=True).execute()["items"]
             except(Exception):
                 continue
 

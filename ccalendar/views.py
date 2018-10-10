@@ -47,12 +47,12 @@ def index(request):
             if count == 0:
                 events = calendarAPI.events().list(calendarId=calendar["resourceEmail"], timeMin=now,
                                                singleEvents=True, timeMax=next,
-                                              orderBy='startTime').execute()["items"]
+                                              orderBy='startTime', showDeleted=True).execute()["items"]
                 count+=1
                 continue
             events+= calendarAPI.events().list(calendarId=calendar["resourceEmail"], timeMin=now,
                                                singleEvents=True, timeMax =next,
-                                              orderBy='startTime').execute().get('items',[])
+                                              orderBy='startTime', showDeleted=True).execute().get('items',[])
         except(HttpError):
             pass
 
@@ -101,46 +101,4 @@ def loadnext(request):
     return HttpResponse(403)
 
 
-def list(request):
-    SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = config.google_path
 
-    credentials = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    # registering api
-    calendarAPI = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
-
-    now = datetime.datetime.utcnow().isoformat() + 'Z'
-    events_result = calendarAPI.calendarList().list().execute()
-    return HttpResponse( lists.load_more("Ш","2018-08-22T09:00:00+03:00", before=True ))
-    return  JsonResponse(json.dumps({ 'events':lists.load_more("Ш","2018-08-23T13:00:00+03:00", before=False) }, ensure_ascii=True), safe=False)
-
-
-def resources(request):
-    SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-    SERVICE_ACCOUNT_FILE = config.google_path
-
-    credentials = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    # registering api
-    calendarAPI = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
-
-    events_result = calendarAPI.calendarList().list().execute().get("items",[])
-    return HttpResponse(events_result)
-
-
-
-def buildings(request):
-    SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
-    SERVICE_ACCOUNT_FILE = config.google_path
-
-    credentials = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    # registering api
-    # credentials.create_delegated("zavaliy@ucu.edu.ua")
-    credentials = credentials.with_subject('zavaliy@ucu.edu.ua')
-    resourceApi = googleapiclient.discovery.build('admin', 'directory_v1', credentials=credentials)
-
-    result = resourceApi.resources().buildings().list(customer="C01ak6gy3").execute()
-    # return HttpResponse(result.get("buildings",[]))
-    # return JsonResponse(json.dumps(result.get("items",[]), ensure_ascii=False), safe=False)
