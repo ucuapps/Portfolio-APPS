@@ -26,7 +26,7 @@ function minutes(mins) {
 }
 
 function beautifySchedule() {
-        $(".row-cell:not(.updated)").each(function() {
+        $(".row-cell").each(function() {
                 if($(this).find(".day-name").text() === $(this).next().find(".day-name").text() ) {
 
                     $(this).css({'border':'none', 'padding-bottom':'0px'});
@@ -39,7 +39,7 @@ function beautifySchedule() {
                     $(this).attr("day", day_id+'_day_'+month_id);
         });
 
-        $(".row-cell:not(.updated)").each(function() {
+        $(".row-cell").each(function() {
            var atr = $(this).attr("day");
            // $("."+atr+" h2").hide();
            $("."+atr+" h2").first().show();
