@@ -26,12 +26,11 @@ function minutes(mins) {
 }
 
 function beautifySchedule() {
-        $(".row-cell").each(function() {
+        $(".row-cell:not(.updated)").each(function() {
                 if($(this).find(".day-name").text() === $(this).next().find(".day-name").text() ) {
-                    // $(this).find(".day-name").hide();
+
                     $(this).css({'border':'none', 'padding-bottom':'0px'});
 
-                    // $('#grid .'+ day_id+'_day:first-child h2').css({'display':'block'});
                 }
                     var day_id = $(this).find(".day-num").text().split(" ")[0],
                         month_id = $(this).find(".day-num").attr("data-month");
@@ -40,10 +39,11 @@ function beautifySchedule() {
                     $(this).attr("day", day_id+'_day_'+month_id);
         });
 
-        $(".row-cell").each(function() {
+        $(".row-cell:not(.updated)").each(function() {
            var atr = $(this).attr("day");
            // $("."+atr+" h2").hide();
            $("."+atr+" h2").first().show();
+           $(this).addClass("updated");
         });
 }
 
