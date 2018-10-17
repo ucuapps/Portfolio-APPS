@@ -27,17 +27,20 @@ class UserForm(f.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('profile_image', 'first_name', 'last_name', 'mobile_number', 'git_link', 'fb_link',
-                  'fields_of_interests')
+                  'fields_of_interests', 'hobbies')
         labels = {
             'git_link': _('Github link:'),
             'fb_link': _('Facebook link:'),
         }
         widgets = {
-            'fields_of_interests': autocomplete.ModelSelect2Multiple(url='interests-autocomplete'),}
+            'fields_of_interests': autocomplete.ModelSelect2Multiple(url='interests-autocomplete'),
+            'hobbies': autocomplete.ModelSelect2Multiple(url='hobby-autocomplete')
+        }
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields["fields_of_interests"].queryset = Interests.objects.filter(interest_type="professional")
+        self.fields["hobbies"].queryset = Interests.objects.filter(interest_type="hobby")
 
 
 class DomainCheckAdapter(DefaultAccountAdapter):

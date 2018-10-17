@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from contact import views as contact_views
 
 urlpatterns = [
+    path('calendar/', include('ccalendar.urls')),
     path('admin/', admin.site.urls),
     re_path(r'^accounts/', include('allauth.urls')),
     re_path(r'^', include('profiles.urls')),

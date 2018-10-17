@@ -1,0 +1,90 @@
+{% load google_date %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Календар подій УКУ</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static '/css/calendar.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static '/js/calendarLib.js' %}"></script>
+
+</head>
+<body>
+
+
+<div class="btn-block chev-before" style="
+    height: 45px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+" onclick="loadBefore()"  >
+<i class="fas fa-chevron-up" style="
+    padding: 10px;
+    font-size: 31px;
+"></i>
+   <button class="round">
+
+       <span class="spinner"></span>
+
+   </button>
+</div>
+
+
+ <button onclick="loadBefore()" class="button before">Завантажити</button>
+    <div role="grid"  id="grid" aria-readonly="true" class="gridCalendar" data-building="{{ building_id }}" data-room="{{ room_id }}" >
+        {% for event in events  %}
+                <div class="row-cell">
+                    <div class="row-el">
+                        <div class="grid-cell">
+                            <h2 class="day today" data-day="{{ event.start.dateTime }}" style="display:none;">
+                                <div class="day-name">{{ event.start.dateTime|to_day}}</div>
+                                <div class="day-num" data-month="{{ event.start.dateTime|to_month_num }}" >{{ event.start.dateTime|to_month_day }} {{ event.start.dateTime|to_month}}.</div>
+                            </h2>
+                        </div>
+                        <div class="presentation item first">
+                            <div class="right-block block-time">{{ event.start.dateTime|to_hour }}:{{ event.start.dateTime|to_minute }} – {{ event.end.dateTime|to_hour }}:{{ event.end.dateTime|to_minute }}</div>
+                            <div class="right-block blob-block resource ">
+                                <div class="blob-text blob-resource ">
+                                    <html-blob>{{ event.location|location }} {{ event.summary }}  <span> {{ event.location }}</span> </html-blob>
+                                </div>
+                            </div>
+                            <div role="gridcell" class="right-block circle">
+                                <div class="circle-inner " style="border-color: {{ event.status|color_filter }};">
+                                    <span class="circle-text">{{ event.summary }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+        {% endfor %}
+    </div>
+    <button onclick="loadMore()" class="button after">Завантажити</button>
+<div class="btn-block chev-after" style="
+    height: 45px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+" onclick="loadMore()"  >
+    <i class="fas fa-chevron-down" style="
+    padding: 10px;
+    font-size: 31px;
+    "></i>
+    <button class="round">
+
+       <span class="spinner"></span>
+
+    </button>
+</div>
+
+
+</body>
+</html>

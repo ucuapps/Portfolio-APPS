@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-from student.models import Student, Hobby
+from student.models import Student
 from student.forms import StudentSearch
 
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, EducationForm
@@ -349,15 +349,3 @@ class LanguageAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs.all()
 
-class HobbyAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated:
-            return Hobby.objects.none()
-
-        qs = Hobby.objects.all()
-
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-
-        return qs.all()

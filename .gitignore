@@ -1,4 +1,5 @@
 .idea/
+bin/
 venv/
 *.pyc
 __pychache__/
@@ -8,3 +9,4 @@ static/media/
 .env
 */migrations/*.py
 portfolio/production.wsgi
+lib/

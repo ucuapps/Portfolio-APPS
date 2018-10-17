@@ -176,11 +176,6 @@ class StudyProgramme(models.Model):
     def __str__(self):
         return self.name
 
-class Hobby(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
 
 
 class Certification(models.Model):
