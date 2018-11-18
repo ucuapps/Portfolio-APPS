@@ -123,7 +123,7 @@
     margin:0 auto;
 }
 
-.row-cell .event_canceled {
+.row-cell.event_canceled {
 	opacity: 0.5;
 }
 
