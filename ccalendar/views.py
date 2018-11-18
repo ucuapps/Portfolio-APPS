@@ -56,7 +56,7 @@ def index(request):
         except(HttpError):
             pass
 
-    events = filter(lambda x: x.get("start").get("dateTime") is not None and parse(x.get("start").get("dateTime")) > datetime.datetime.utcnow(), events)
+    events = filter(lambda x: x.get("start").get("dateTime") is not None and parse(x.get("start").get("dateTime")).replace(tzinfo=None) > datetime.datetime.utcnow(), events)
 
     newlist = sorted(events, key= lambda x: time.mktime(parse(x.get("start").get("dateTime")).timetuple()))
 
