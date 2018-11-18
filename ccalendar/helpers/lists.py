@@ -19,7 +19,8 @@ def calendar_list(buildingId):
     credentials = credentials.with_subject('zavaliy@ucu.edu.ua')
     resourceApi = googleapiclient.discovery.build('admin', 'directory_v1', credentials=credentials)
 
-    result = resourceApi.resources().calendars().list(customer="C01ak6gy3", query=str("buildingId="+buildingId)).execute()
+    result = resourceApi.resources().calendars().list(customer="C01ak6gy3",
+                                                      query=str("buildingId=" + buildingId)).execute()
     # result = filter(lambda x: x.get("buildingId") == buildingId, result.get("items"))
     return result.get("items")
 
@@ -33,7 +34,6 @@ def room_calendar(buildingId, roomId):
 
 
 def load_more(building_id, load_date, room_id=False, before=False):
-
     calendars = calendar_list(building_id)
 
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
@@ -45,7 +45,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
     calendar_api = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
 
     if room_id is not False:
-        calendars = filter(lambda x: int(x["resourceId"]) ==int(room_id), calendars)
+        calendars = filter(lambda x: int(x["resourceId"]) == int(room_id), calendars)
 
     events = {}
     if before is False:
@@ -57,46 +57,46 @@ def load_more(building_id, load_date, room_id=False, before=False):
             try:
                 if count == 0:
                     events = calendar_api.events().list(calendarId=calendar["resourceEmail"], timeMin=load_date,
-                                                       singleEvents=True, timeMax= max_day,
-                                                       orderBy='startTime', showDeleted=True).execute()["items"]
+                                                        singleEvents=True, timeMax=max_day,
+                                                        orderBy='startTime', showDeleted=True).execute()["items"]
                     count += 1
 
                     continue
 
                 events += calendar_api.events().list(calendarId=calendar["resourceEmail"], timeMin=load_date,
-                                                    singleEvents=True, timeMax= max_day,
-                                                    orderBy='startTime', showDeleted=True).execute()["items"]
+                                                     singleEvents=True, timeMax=max_day,
+                                                     orderBy='startTime', showDeleted=True).execute()["items"]
             except(Exception):
                 continue
         events = filter(lambda x: x.get("start").get("dateTime") is not None and
-        parse(x.get("start").get("dateTime")).replace(tzinfo=None) > load_dt, events)
+                                  parse(x.get("start").get("dateTime")).replace(tzinfo=None) > load_dt, events)
 
     elif before is True:
         min_day = parse(load_date) - datetime.timedelta(days=7)
+        min_day_dt = min_day.replace(tzinfo=None)
         min_day = min_day.isoformat()
         count = 0
         load_dt = parse(load_date).replace(tzinfo=None)
         for calendar in calendars:
             try:
                 if count == 0:
-
                     events = calendar_api.events().list(calendarId=calendar["resourceEmail"],
-                                                                timeMin=min_day,timeMax=load_date,
-                                                                singleEvents=True,
-                                                                orderBy='startTime', showDeleted=True).execute()["items"]
+                                                        timeMin=min_day, timeMax=load_date,
+                                                        singleEvents=True,
+                                                        orderBy='startTime', showDeleted=True).execute()["items"]
                     count = 1
                     # return events
                     continue
 
                 events += calendar_api.events().list(calendarId=calendar["resourceEmail"],
-                                                    timeMin=min_day, timeMax=load_date,
-                                                    singleEvents=True,
-                                                    orderBy='startTime', showDeleted=True).execute()["items"]
+                                                     timeMin=min_day, timeMax=load_date,
+                                                     singleEvents=True,
+                                                     orderBy='startTime', showDeleted=True).execute()["items"]
             except(Exception):
                 continue
         events = filter(lambda x: x.get("start").get("dateTime") is not None and
-        parse(x.get("start").get("dateTime")).replace(tzinfo=None) < load_dt , events)
-
+                                  load_dt > parse(x.get("start").get("dateTime")).replace(tzinfo=None) > min_day_dt,
+                        events)
 
     events = sorted(events, key=lambda x: time.mktime(parse(x.get("start").get("dateTime")).timetuple()))
 
