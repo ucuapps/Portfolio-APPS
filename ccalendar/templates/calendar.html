@@ -39,7 +39,7 @@
  <button onclick="loadBefore()" class="button before">Завантажити</button>
     <div role="grid"  id="grid" aria-readonly="true" class="gridCalendar" data-building="{{ building_id }}" data-room="{{ room_id }}" >
         {% for event in events  %}
-                <div class="row-cell">
+                <div class="row-cell {{ event.status|status_filter }}  ">
                     <div class="row-el">
                         <div class="grid-cell">
                             <h2 class="day today" data-day="{{ event.start.dateTime }}" style="display:none;">

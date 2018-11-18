@@ -74,11 +74,22 @@ def location(value):
     value= value.split(" ")[0]
     return value
 
+
 @register.filter(name='color_filter')
 def color_filter(value):
     variants = {
         'confirmed': '#4CAF50',
         'tentative': '#FFEB3B',
         'cancelled': '#f44336',
+    }
+    return variants.get(value)
+
+
+@register.filter(name='status_filter')
+def color_filter(value):
+    variants = {
+        'confirmed': 'event_confirmed',
+        'tentative': 'event_waiting',
+        'cancelled': 'event_canceled',
     }
     return variants.get(value)
