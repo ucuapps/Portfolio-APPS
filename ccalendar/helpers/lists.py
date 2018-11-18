@@ -51,28 +51,31 @@ def load_more(building_id, load_date, room_id=False, before=False):
     if before is False:
         max_day = parse(load_date) + datetime.timedelta(days=7)
         max_day = max_day.isoformat()
+        load_dt = parse(load_date).replace(tzinfo=None)
         count = 0
         for calendar in calendars:
             try:
                 if count == 0:
                     events = calendar_api.events().list(calendarId=calendar["resourceEmail"], timeMin=load_date,
                                                        singleEvents=True, timeMax= max_day,
-                                                       orderBy='startTime', showDeleted=False).execute()["items"]
+                                                       orderBy='startTime', showDeleted=True).execute()["items"]
                     count += 1
 
                     continue
 
                 events += calendar_api.events().list(calendarId=calendar["resourceEmail"], timeMin=load_date,
                                                     singleEvents=True, timeMax= max_day,
-                                                    orderBy='startTime', showDeleted=False).execute()["items"]
+                                                    orderBy='startTime', showDeleted=True).execute()["items"]
             except(Exception):
                 continue
+        events = filter(lambda x: x.get("start").get("dateTime") is not None and
+        parse(x.get("start").get("dateTime")).replace(tzinfo=None) > load_dt, events)
 
     elif before is True:
         min_day = parse(load_date) - datetime.timedelta(days=7)
         min_day = min_day.isoformat()
         count = 0
-
+        load_dt = parse(load_date).replace(tzinfo=None)
         for calendar in calendars:
             try:
                 if count == 0:
@@ -80,7 +83,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
                     events = calendar_api.events().list(calendarId=calendar["resourceEmail"],
                                                                 timeMin=min_day,timeMax=load_date,
                                                                 singleEvents=True,
-                                                                orderBy='startTime', showDeleted=False).execute()["items"]
+                                                                orderBy='startTime', showDeleted=True).execute()["items"]
                     count = 1
                     # return events
                     continue
@@ -88,14 +91,12 @@ def load_more(building_id, load_date, room_id=False, before=False):
                 events += calendar_api.events().list(calendarId=calendar["resourceEmail"],
                                                     timeMin=min_day, timeMax=load_date,
                                                     singleEvents=True,
-                                                    orderBy='startTime', showDeleted=False).execute()["items"]
+                                                    orderBy='startTime', showDeleted=True).execute()["items"]
             except(Exception):
                 continue
+        events = filter(lambda x: x.get("start").get("dateTime") is not None and
+        parse(x.get("start").get("dateTime")).replace(tzinfo=None) < load_dt , events)
 
-    events = filter(lambda x: x.get("start").get("dateTime") is not None, events)
-    # for event in events:
-    #     if event.get("start").get("dateTime") is None:
-    #         return HttpResponse(event.get("summary"))
 
     events = sorted(events, key=lambda x: time.mktime(parse(x.get("start").get("dateTime")).timetuple()))
 
