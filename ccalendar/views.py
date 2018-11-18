@@ -47,18 +47,16 @@ def index(request):
             if count == 0:
                 events = calendarAPI.events().list(calendarId=calendar["resourceEmail"], timeMin=now,
                                                singleEvents=True, timeMax=next,
-                                              orderBy='startTime', showDeleted=False).execute()["items"]
+                                              orderBy='startTime', showDeleted=True).execute()["items"]
                 count+=1
                 continue
             events+= calendarAPI.events().list(calendarId=calendar["resourceEmail"], timeMin=now,
                                                singleEvents=True, timeMax =next,
-                                              orderBy='startTime', showDeleted=False).execute().get('items',[])
+                                              orderBy='startTime', showDeleted=True).execute().get('items',[])
         except(HttpError):
             pass
 
     events = filter(lambda x: x.get("start").get("dateTime") is not None, events)
-
-
 
     newlist = sorted(events, key= lambda x: time.mktime(parse(x.get("start").get("dateTime")).timetuple()))
 
