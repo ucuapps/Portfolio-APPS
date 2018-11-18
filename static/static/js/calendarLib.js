@@ -99,7 +99,6 @@ function loadMore() {
                     var cur_date = new Date($(".row-cell:last-child .day").attr("data-day"));
                     $(".row-cell:last-child .day").attr("data-day", dateString(cur_date.addDays(7)));
                     alert("date changed");
-
                 }
                 $("body").css({'overflow':'auto'});
                 $("#grid").css({'overflow':'auto'});
@@ -228,6 +227,7 @@ function apppendEvent(event, prepend) {
                 break;
             case 'cancelled':
                 color = '#f44336';
+                calend_event.addClass("event_canceled");
                 break;
             default:
                 color = '#f44336'
