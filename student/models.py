@@ -210,7 +210,6 @@ class Student(models.Model):
                                                                 " higher education setting."
                                                                 "Adept at working across departments, with faculty,"
                                                                 " administrators")
-    # hobbies = models.ManyToManyField(Skill, blank=True)
 
     # Projects
     # projects = models.ManyToManyField(Project, blank=True)
