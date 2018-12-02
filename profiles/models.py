@@ -75,7 +75,7 @@ class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
 
-    mobile_number = models.CharField(max_length=25, blank=True, null=True, help_text="Enter your mobile number in this format: +380**********")
+    mobile_number = models.CharField(max_length=25, blank=True, null=True, help_text="Enter your mobile number in this format: +380*********")
     git_link = models.URLField(blank=True, null=True)
     fb_link = models.URLField(blank=True, null=True)
     profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
