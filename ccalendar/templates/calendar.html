@@ -43,7 +43,7 @@
                     <div class="row-el">
                         <div class="grid-cell">
                             <h2 class="day today" data-day="{{ event.start.dateTime }}" style="display:none;">
-                                <div class="day-name">{{ event.start.dateTime|to_day}}</div>
+                                <div class="day-name">{{ event.start|to_day}}</div>
                                 <div class="day-num" data-month="{{ event.start.dateTime|to_month_num }}" >{{ event.start.dateTime|to_month_day }} {{ event.start.dateTime|to_month}}.</div>
                             </h2>
                         </div>
