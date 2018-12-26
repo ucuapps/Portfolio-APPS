@@ -1,6 +1,6 @@
 from django import template
 from dateutil.parser import parse
-from  datetime import datetime
+import datetime
 
 
 register = template.Library()
@@ -8,6 +8,7 @@ register = template.Library()
 
 @register.filter(name='to_day')
 def to_day(value):
+    date = parse(value)
     weekDays = [None]*7
     weekDays[0] = "Пн"
     weekDays[1] = "Вт"
@@ -16,31 +17,18 @@ def to_day(value):
     weekDays[4] = "Пт"
     weekDays[5] = "Сб"
     weekDays[6] = "Нд"
-    if value.get("dateTime") is not None:
-        date = parse(value)
-        return weekDays[date.weekday()]
-    elif value.get("date") is not None:
-        combined = datetime.combine(parse(value.get("date")), datetime.min.time())
-        return weekDays[combined.weekday()]
-    else:
-        return ""
+    return weekDays[date.weekday()]
 
 
 @register.filter(name='to_month_day')
 def to_month_day(value):
-    if value.get("dateTime") is not None:
-        date = parse(value)
-        return str(date.day)
-    elif value.get("date") is not None:
-        date = datetime.combine(parse(value.get("date")), datetime.min.time())
-        return str(date.day)
-    else:
-        return ""
+    date = parse(value)
+    return str(date.day)
 
 
 @register.filter(name='to_month')
 def to_month(value):
-
+    date = parse(value)
     month = [None] * 12
     month[0] = "січ"
     month[1] = "лют"
@@ -54,62 +42,31 @@ def to_month(value):
     month[9] = "жов"
     month[10] = "лис"
     month[11] = "гру"
-    if value.get("dateTime") is not None:
-        date = parse(value)
-        return month[date.month-1]
-    elif value.get("date") is not None:
-        date = datetime.combine(parse(value.get("date")), datetime.min.time())
-        return month[date.month-1]
-    else:
-        return ""
-
+    return month[date.month-1]
 
 @register.filter(name='to_month_num')
 def to_month_num(value):
-    if value.get("dateTime") is not None:
-        date = parse(value)
-        return date.month-1
-    elif value.get("date") is not None:
-        date = datetime.combine(parse(value.get("date")), datetime.min.time())
-        return date.month-1
-    else:
-        return ""
+    date = parse(value)
+    return  date.month-1
+
 
 
 @register.filter(name='to_hour')
 def to_hour(value):
-    if value.get("dateTime") is not None:
-        date = parse(value)
-        if date.hour<10:
-            return "0"+str(date.hour)
-        return date.hour
-    elif value.get("date") is not None:
-        date = datetime.combine(parse(value.get("date")), datetime.min.time())
-        if date.hour<10:
-            return "0"+str(date.hour)
-        return date.hour
-    else:
-        return ""
+    date = parse(value)
+    if date.hour< 10:
+        return "0"+str(date.hour)
+    return date.hour
 
 
 @register.filter(name='to_minute')
 def to_minute(value):
-    if value.get("dateTime") is not None:
-        date = parse(value)
-        if date.minute == 0:
-            return "00"
-        elif date.minute <10:
-            return "0"+str(date.minute)
-        return date.minute
-    elif value.get("date") is not None:
-        date = datetime.combine(parse(value.get("date")), datetime.min.time())
-        if date.minute == 0:
-            return "00"
-        elif date.minute <10:
-            return "0"+str(date.minute)
-        return date.minute
-    else:
-        return ""
+    date = parse(value)
+    if date.minute == 0:
+        return "00"
+    elif date.minute <10:
+        return "0"+str(date.minute)
+    return date.minute
 
 
 @register.filter(name='location')
