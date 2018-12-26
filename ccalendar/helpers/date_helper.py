@@ -10,7 +10,7 @@ def combine_date(x):
                                                                                                 tzinfo=None) > datetime.utcnow():
         to_time = parse(x.get("start").get("dateTime")).timetuple()
 
-    elif x.get("start").get("dateTime") is None:
+    elif x.get("start").get("date") is not None:
         combined = parse(x.get("start").get("date"))
         combined = datetime.combine(combined, datetime.min.time()).timetuple()
 
