@@ -15,5 +15,6 @@ def combine_date(x):
         combined = datetime.combine(combined, datetime.min.time()).timetuple()
 
         to_time = combined
-
+    else:
+        return 0
     return time.mktime(to_time)
