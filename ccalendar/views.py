@@ -13,6 +13,7 @@ import json
 import time
 # from ccalendar.helpers.lists import calendar_list
 import ccalendar.helpers.lists as lists
+from ccalendar.helpers.date_helper import combine_date
 
 from urllib.error import URLError, HTTPError
 
@@ -56,9 +57,10 @@ def index(request):
         except(HttpError):
             pass
 
-    events = filter(lambda x: x.get("start").get("dateTime") is not None and parse(x.get("start").get("dateTime")).replace(tzinfo=None) > datetime.datetime.utcnow(), events)
+    # events = filter(lambda x: x.get("start").get("dateTime") is not None and parse(x.get("start").get("dateTime")).replace(tzinfo=None) > datetime.datetime.utcnow(), events)
 
-    newlist = sorted(events, key= lambda x: time.mktime(parse(x.get("start").get("dateTime")).timetuple()))
+    newlist = sorted(events, key= lambda x: combine_date(x) )
+    # newlist = sorted(events, key= lambda x: time.mktime(parse(x.get("start").get("dateTime")).timetuple()))
 
     context = {
         "events": newlist,
