@@ -63,13 +63,6 @@ function groupByDays() {
 }
 
 function loadMore() {
-// var button = $('.after'),
-//     spinner = '<span class="spinner"></span>';
-//
-// 	if (!button.hasClass('loading')) {
-// 		button.toggleClass('loading').html(spinner);
-// 	}
-
      var button = $('.chev-after');
 	button.find('i').hide();
 	button.find('button').show();
@@ -111,12 +104,7 @@ function loadMore() {
 }
 
 function loadBefore() {
-    // var button = $('.before'),
-    // spinner = '<span class="spinner"></span>';
-    //
-	// if (!button.hasClass('loading')) {
-	// 	button.toggleClass('loading').html(spinner);
-	// }
+
     var button = $('.chev-before');
 	button.find('i').hide();
 	button.find('button').show();

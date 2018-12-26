@@ -49,7 +49,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
 
     events = {}
     if before is False:
-        max_day = parse(load_date) + datetime.timedelta(days=7)
+        max_day = parse(load_date) + datetime.timedelta(days=1)
         max_day = max_day.isoformat()
         load_dt = parse(load_date).replace(tzinfo=None)
         count = 0
@@ -72,7 +72,7 @@ def load_more(building_id, load_date, room_id=False, before=False):
                                   parse(x.get("start").get("dateTime")).replace(tzinfo=None) > load_dt, events)
 
     elif before is True:
-        min_day = parse(load_date) - datetime.timedelta(days=7)
+        min_day = parse(load_date) - datetime.timedelta(days=1)
         min_day_dt = min_day.replace(tzinfo=None)
         min_day = min_day.isoformat()
         count = 0

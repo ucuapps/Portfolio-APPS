@@ -37,7 +37,7 @@ def index(request):
         calendars = lists.calendar_list("С")
     now = datetime.datetime.utcnow().isoformat() + 'Z'
 
-    next = datetime.datetime.utcnow() + datetime.timedelta(days=7)
+    next = datetime.datetime.utcnow() + datetime.timedelta(days=1)
     next = next.isoformat() + 'Z'
     events = {}
     count = 0
