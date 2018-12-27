@@ -6,12 +6,13 @@ from django.views.decorators.csrf import csrf_exempt
 from google.oauth2 import service_account
 from dateutil.parser import parse
 from ccalendar import config
-import googleapiclient.discovery
 from googleapiclient.errors import HttpError
+
+import googleapiclient.discovery
 import datetime
 import json
 import time
-# from ccalendar.helpers.lists import calendar_list
+import threading
 import ccalendar.helpers.lists as lists
 
 from urllib.error import URLError, HTTPError
@@ -24,7 +25,7 @@ def index(request):
 
     credentials = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    # registering api
+
     calendarAPI = googleapiclient.discovery.build('calendar', 'v3', credentials=credentials)
 
     building = request.GET.get("building","")
@@ -41,6 +42,22 @@ def index(request):
     next = next.isoformat() + 'Z'
     events = {}
     count = 0
+
+
+    def update_events():
+
+        events.update(calendarAPI.events().list(calendarId=calendar["resourceEmail"], timeMin=now,
+                                               singleEvents=True, timeMax=next,
+                                              orderBy='startTime', showDeleted=True).execute()["items"])
+
+    threads = []
+
+    thread1 = threading.Thread(target=update_events())
+    thread2 = threading.Thread(target=update_events())
+
+
+
+
     for calendar in calendars:
 
         try:
@@ -66,7 +83,8 @@ def index(request):
         "room_id": room
     }
 
-    return render(request,"calendar.html",context)
+    return render(request, "calendar.html", context)
+
 
 @csrf_exempt
 def loadnext(request):
@@ -88,13 +106,13 @@ def loadnext(request):
         # return HttpResponse(before)
         day = request.POST.get("date")
 
-        events = lists.load_more(building_id, day, room_id= room_id, before=before)
+        events = lists.load_more(building_id, day, room_id=room_id, before=before)
 
         if len(events) <1:
 
             return HttpResponse(events)
 
-        return JsonResponse(json.dumps({ 'events':events }, ensure_ascii=True), safe=False)
+        return JsonResponse(json.dumps({'events': events}, ensure_ascii=True), safe=False)
 
     return HttpResponse(403)
 

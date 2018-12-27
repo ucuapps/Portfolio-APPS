@@ -1,14 +1,27 @@
+
 from google.oauth2 import service_account
 from dateutil.parser import parse
 from googleapiclient.errors import HttpError
+from ccalendar import config
+
 import googleapiclient.discovery
 import datetime
 import time
 import sys
-from ccalendar import config
+import json
 
 
 def calendar_list(buildingId):
+
+    try:
+        with open('/home/buildings.json') as f:
+            calendars = json.load(f)
+        if datetime.datetime.today().day - datetime.datetime.fromisoformat(calendars.get("date")).day == 0:
+            return filter(lambda x: x.get("buildingId") == buildingId,calendars.get("items"))
+    except:
+        pass
+
+
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
     SERVICE_ACCOUNT_FILE = config.google_path
 
@@ -20,9 +33,13 @@ def calendar_list(buildingId):
     resourceApi = googleapiclient.discovery.build('admin', 'directory_v1', credentials=credentials)
 
     result = resourceApi.resources().calendars().list(customer="C01ak6gy3",
-                                                      query=str("buildingId=" + buildingId)).execute()
-    # result = filter(lambda x: x.get("buildingId") == buildingId, result.get("items"))
-    return result.get("items")
+                                                      ).execute()
+
+    with open('/home/buildings.json') as fp:
+
+        json.dump({'items':result.get("items"), 'date': datetime.datetime.today().isoformat()}, fp)
+
+        return filter(lambda x: x.get("buildingId") == buildingId,result.get("items"))
 
 
 def room_calendar(buildingId, roomId):
