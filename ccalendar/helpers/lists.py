@@ -3,9 +3,9 @@ from google.oauth2 import service_account
 from dateutil.parser import parse
 from googleapiclient.errors import HttpError
 from ccalendar import config
+from datetime import datetime
 
 import googleapiclient.discovery
-import datetime
 import time
 import sys
 import json
