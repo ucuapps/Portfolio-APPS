@@ -13,14 +13,10 @@ import json
 
 def calendar_list(buildingId):
 
-    try:
-        with open('/home/main/home/buildings.json') as f:
-            calendars = json.load(f)
-        if datetime.datetime.today().day - datetime.datetime.fromisoformat(calendars.get("date")).day == 0:
-            return filter(lambda x: x.get("buildingId") == buildingId,calendars.get("items"))
-    except:
-        pass
-
+    with open('/home/main/home/buildings.json') as f:
+        calendars = json.load(f)
+    if datetime.datetime.today().day - datetime.datetime.fromisoformat(calendars.get("date")).day == 0:
+        return filter(lambda x: x.get("buildingId") == buildingId,calendars.get("items"))
 
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
     SERVICE_ACCOUNT_FILE = config.google_path
@@ -35,7 +31,7 @@ def calendar_list(buildingId):
     result = resourceApi.resources().calendars().list(customer="C01ak6gy3",
                                                       ).execute()
 
-    with open('/home/main/home/buildings.json','w') as fp:
+    with open('/home/main/home/buildings.json', 'w') as fp:
 
         json.dump({'items':result.get("items"), 'date': datetime.datetime.today().isoformat()}, fp)
 
