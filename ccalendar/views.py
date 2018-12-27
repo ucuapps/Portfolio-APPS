@@ -44,20 +44,6 @@ def index(request):
     count = 0
 
 
-    def update_events():
-
-        events.update(calendarAPI.events().list(calendarId=calendar["resourceEmail"], timeMin=now,
-                                               singleEvents=True, timeMax=next,
-                                              orderBy='startTime', showDeleted=True).execute()["items"])
-
-    threads = []
-
-    thread1 = threading.Thread(target=update_events())
-    thread2 = threading.Thread(target=update_events())
-
-
-
-
     for calendar in calendars:
 
         try:
