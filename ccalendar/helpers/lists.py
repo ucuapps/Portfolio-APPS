@@ -35,7 +35,7 @@ def calendar_list(buildingId):
     result = resourceApi.resources().calendars().list(customer="C01ak6gy3",
                                                       ).execute()
 
-    with open('/home/main/home/buildings.json') as fp:
+    with open('/home/main/home/buildings.json','w') as fp:
 
         json.dump({'items':result.get("items"), 'date': datetime.datetime.today().isoformat()}, fp)
 
