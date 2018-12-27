@@ -1,13 +1,11 @@
 
 from google.oauth2 import service_account
 from dateutil.parser import parse
-from googleapiclient.errors import HttpError
 from ccalendar import config
-from datetime import datetime
 
 import googleapiclient.discovery
 import time
-import sys
+import datetime
 import json
 
 
@@ -15,7 +13,7 @@ def calendar_list(buildingId):
 
     with open('/home/main/home/buildings.json') as f:
         calendars = json.load(f)
-    if datetime.datetime.today().day - datetime.datetime.fromisoformat(calendars.get("date")).day == 0:
+    if datetime.datetime.today().day - datetime.datetime.fromtimestamp(calendars.get("date")).day == 0:
         return filter(lambda x: x.get("buildingId") == buildingId,calendars.get("items"))
 
     SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
@@ -33,7 +31,7 @@ def calendar_list(buildingId):
 
     with open('/home/main/home/buildings.json', 'w') as fp:
 
-        json.dump({'items':result.get("items"), 'date': datetime.datetime.today().isoformat()}, fp)
+        json.dump({'items':result.get("items"), 'date': datetime.datetime.today().timestamp()}, fp)
 
         return filter(lambda x: x.get("buildingId") == buildingId,result.get("items"))
 
