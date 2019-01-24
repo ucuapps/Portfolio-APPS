@@ -51,7 +51,8 @@
                             <div class="right-block block-time">{{ event.start.dateTime|to_hour }}:{{ event.start.dateTime|to_minute }} – {{ event.end.dateTime|to_hour }}:{{ event.end.dateTime|to_minute }}</div>
                             <div class="right-block blob-block resource ">
                                 <div class="blob-text blob-resource ">
-                                    <html-blob>{{ event.location|location }}    {{ event.summary }}  <span> {{ event.location }}</span> </html-blob>
+                                    <p class="room">{{ event.location|location }}</p>
+                                    <html-blob>{{ event.summary }}  <span> {{ event.location }}</span> </html-blob>
                                 </div>
                             </div>
                             <div role="gridcell" class="right-block circle">

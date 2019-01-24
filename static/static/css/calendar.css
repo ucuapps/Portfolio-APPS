@@ -17,9 +17,10 @@
         .block-time{-webkit-box-flex:none;-webkit-flex:none;flex:none;width:160px;-webkit-box-ordinal-group:1;-webkit-order:1;order:1;}
         .blob-block{width:100%;-webkit-box-ordinal-group:2;-webkit-order:2;order:2;}
         .blob-block>.blob-text{outline:none;font-weight:600;-webkit-box-flex:none;-webkit-flex:none;flex:none;}
-        .blob-block>.blob-text>p>span {color:#8a8a8a; font-weight: 400;}
-		.blob-block>.blob-text>p>.room {margin-right: 10px;
-			font-weight: 600;}
+        .blob-block>.blob-text>html-blob> span {color:#8a8a8a; font-weight: 400;}
+        .blob-block>.blob-text>.room {
+			display:inline-flex;
+			margin-right: 15px;}
         .JDkLTe{margin-left:8px;}
         .presentation{outline:none;margin:0;display:-webkit-box;display:-moz-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:32px;cursor:pointer;-webkit-box-flex:1 1 auto;-webkit-flex:1 1 auto;flex:1 1 auto;overflow:hidden;margin-left:136px;}
         .presentation.first{margin-left:0;}
