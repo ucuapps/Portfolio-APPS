@@ -126,7 +126,7 @@
     margin:0 auto;
 }
 
-.row-cell.event_canceled >.presentation {
+.row-cell.event_canceled >.row-el>.presentation {
 	opacity: 0.5;
 }
 
