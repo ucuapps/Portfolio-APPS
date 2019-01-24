@@ -27,6 +27,7 @@ function minutes(mins) {
 
 function beautifySchedule() {
         $(".row-cell").each(function() {
+            $(this).find('h2.day').hide();
                 if($(this).find(".day-name").text() === $(this).next().find(".day-name").text() ) {
 
                     $(this).css({'border':'none', 'padding-bottom':'0px'});
