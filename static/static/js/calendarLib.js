@@ -231,17 +231,19 @@ function apppendEvent(event, prepend) {
         }
 
         var presentation =  $('<div class="presentation item first"></div>'),
-            block_time = $('<div class="right-block block-time" ></div> ').text(minutes(date.getHours()) +':'+minutes(date.getMinutes())+' – '+minutes(date_end.getHours()) +':'+ minutes(date_end.getMinutes()) ),
+            block_time = $('<div class="right-block block-time" ></div>').text(minutes(date.getHours()) +':'+minutes(date.getMinutes())+' – '+minutes(date_end.getHours()) +':'+ minutes(date_end.getMinutes()) ),
             blob_block = $('<div class="right-block blob-block resource " ></div> '),
             blob_room = $('<p class="room"></p>').text(room_code),
-            blob_text = $('<div class="blob-text blob-resource " ></div> ').append(" <html-blob>" + room_code + event.summary+'  <span> '+ event.location+ "</span> </html-blob>"),
+            blob_text = $('<div class="blob-text blob-resource " ></div>')
+                .append(blob_room)
+                .append("<html-blob>" + room_code + event.summary+' <span> '+ event.location+ "</span> </html-blob>"),
             circle = $('<div role="gridcell" class="right-block circle">'),
             circle_box = $('<div class="circle-box"></div>'),
             circle_inner = $('<div class="circle-inner " style="border-color: '+ color +';"></div>'),
             circle_text = $('<span class="circle-text"></span>').text(event.summary);
         //appending
           presentation.append(block_time)
-                      .append(blob_block.append(blob_room).append(blob_text))
+                      .append(blob_block.append(blob_text))
                       .append(circle.append(circle_inner.append(circle_text)));
           if(prepend) {
               grid.prepend(calend_event.append(row_el.append(grid_cell).append(presentation)));
