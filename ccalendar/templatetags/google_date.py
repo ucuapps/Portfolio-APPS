@@ -72,7 +72,7 @@ def to_minute(value):
 @register.filter(name='location')
 def location(value):
     value= value.split(" ")[0]
-    return value + "&nbsp&nbsp&nbsp"
+    return "<p class='room'>"+value+"</p>"
 
 
 @register.filter(name='color_filter')
