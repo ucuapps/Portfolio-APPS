@@ -78,6 +78,7 @@ def location(value):
 @register.filter(name='color_filter')
 def color_filter(value):
     variants = {
+        'needsAction': '#FFEB3B',
         'confirmed': '#4CAF50',
         'tentative': '#FFEB3B',
         'cancelled': '#f44336',
@@ -90,6 +91,7 @@ def color_filter(value):
     variants = {
         'confirmed': 'event_confirmed',
         'tentative': 'event_waiting',
+        'needsAction': 'event_waiting',
         'cancelled': 'event_canceled',
     }
     return variants.get(value)
