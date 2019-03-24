@@ -11,7 +11,7 @@ from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExp
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
 
 
-from weasyprint import HTML, CSS
+# from weasyprint import HTML, CSS
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import FileResponse
