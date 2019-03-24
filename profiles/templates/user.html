@@ -68,10 +68,10 @@
             <hr>
             <div class="social_info">
                 {%if found_user.fb_link %}
-                <a href="{{ found_user.fb_link }}"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
+                <a href="{{ found_user.fb_link }}" target="_blank"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
                 {% endif %}
                 {% if found_user.git_link %}
-                <a href="{{ found_user.git_link }}"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
+                <a href="{{ found_user.git_link }}" target="_blank"><img src="{% static 'images/github.png' %}" width="25px" height="25px"></a>
                 {% endif %}
 
             </div>
