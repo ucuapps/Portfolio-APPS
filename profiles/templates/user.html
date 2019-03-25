@@ -66,7 +66,7 @@
             <span class="occupation">{{ found_user.student.study_programme }}, {{ found_user.student.current_study_year }}</span>
             {% endif %}
             <hr>
-            <div class="social_info">
+            <div>
                 {%if found_user.fb_link %}
                 <a href="{{ found_user.fb_link }}" target="_blank"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
                 {% endif %}
@@ -75,7 +75,7 @@
                 {% endif %}
                 {% if found_user.email %}
                 <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to={{ found_user.email }}&tf=1" target="_blank">
-                    <img src="{% static 'images/envelope.png' %}" width="25px" height="25px">
+                    <img src="{% static 'images/email.png' %}" width="25px" height="25px">
                 </a>
                 {% endif %}
 
