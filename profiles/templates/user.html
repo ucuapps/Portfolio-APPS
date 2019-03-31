@@ -153,14 +153,16 @@
                         <div class="proj_info">
                             <h1>{{ proj.title }}</h1>
                             <hr>
-                            <div class="proj_desc">
-                                <h2>Tools:</h2>
-                                <div class="tools">
-                                    {% for tool in proj.technologies.all %}
-                                    <span>{{ tool.name }}</span>
-                                    {% endfor %}
+                            {% if proj.technologies.all %}
+                                <div class="proj_desc">
+                                    <h2>Tools:</h2>
+                                    <div class="tools">
+                                        {% for tool in proj.technologies.all %}
+                                        <span>{{ tool.name }}</span>
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                            </div>
+                            {% endif %}
                             <div class="proj_desc">
                                 <h2>Collaborators:</h2>
                                 <div class="tools">
