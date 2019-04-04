@@ -151,7 +151,34 @@
                     </div>
                     <div class="projects" id="proj">
                         <div class="proj_container">
-                            {% for proj in found_user.project_set.all %}
+                            <div id="projectsCarousel" class="carousel slide">
+                                <div class="carousel-inner">
+                                        {% for proj in found_user.project_set.all %}
+                                            {% if forloop.first %}
+                                                <div class="active carousel-item" data-interval="False">
+                                                    <h2>
+                                                        Project 1
+                                                    </h2>
+                                                </div>
+                                            {% else %}
+                                                <div class="carousel-item" data-interval="False">
+                                                    <h2>Project 2</h2>
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+                                </div>
+                                <a href="#projectsCarousel" class="carousel-control-prev" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a href="#projectsCarousel" class="carousel-control-next" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+
+                            <!-- {% for proj in found_user.project_set.all %}
                             <div class="project">
                                 <div class="proj_tech" style="background-color: rgb(101,57,152)">
                                     <span>{{ proj.project_field }}</span>
@@ -179,7 +206,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {% endfor %}
+                            {% endfor %} -->
                         </div>
                     </div>
                     <div class="projects" id="intern">
