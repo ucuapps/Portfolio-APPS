@@ -150,18 +150,18 @@
                         <div class="switch"><span onclick="volunteer()" class="proj_sw">Volunteering</span></div>
                     </div>
                     <div class="projects" id="proj">
-                        <div class="proj_container">
-                            <div id="projectsCarousel" class="carousel slide">
+                        <div class="proj_carousel">
+                            <div id="projectsCarousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="false">
                                 <div class="carousel-inner">
                                         {% for proj in found_user.project_set.all %}
                                             {% if forloop.first %}
-                                                <div class="active carousel-item" data-interval="False">
+                                                <div class="active carousel-item" >
                                                     <h2>
                                                         Project 1
                                                     </h2>
                                                 </div>
                                             {% else %}
-                                                <div class="carousel-item" data-interval="False">
+                                                <div class="carousel-item" >
                                                     <h2>Project 2</h2>
                                                 </div>
                                             {% endif %}
