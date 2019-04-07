@@ -550,3 +550,22 @@ svg{
     flex-direction: row;
     flex-wrap: wrap;
 }
+#projectsCarousel{
+    width: inherit;
+    height: inherit;
+}
+
+#projectsCarousel .carousel-control-prev,
+#projectsCarousel .carousel-control-next{
+    width: 7%;
+}
+
+#projectsCarousel .carousel-control-prev:hover,
+#projectsCarousel .carousel-control-next:hover{
+    background-color: #c3c3c3 !important;
+}
+
+#projectsCarousel .carousel-control-prev:active,
+#projectsCarousel .carousel-control-next:active{
+    background-color: #767676 !important;
+}
