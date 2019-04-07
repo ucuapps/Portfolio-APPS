@@ -154,17 +154,41 @@
                             <div id="projectsCarousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="false">
                                 <div class="carousel-inner">
                                         {% for proj in found_user.project_set.all %}
-                                            {% if forloop.first %}
-                                                <div class="active carousel-item" >
-                                                    <h2>
-                                                        Project 1
-                                                    </h2>
+                                            
+                                            <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
+                                                <h4 class="proj_title">
+                                                    {{ proj.title }}
+                                                </h4 >
+
+                                                {% if proj.technologies.all %}
+                                                    <div class="proj_desc">
+                                                        <h2>Tools:</h2>
+                                                        <div class="tools">
+                                                            {% for tool in proj.technologies.all %}
+                                                            <span>{{ tool.name }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+                                                <br>
+                                                <div class="proj_info_carousel">
+                                                    <div class="row">
+                                                            <h5>About: {{ proj.project_field }}</h5>
+                                                        </div>
+        
+                                                        <div class="collaborators_info row col-md-4">
+                                                            <h5>Collaborators:</h5>
+                                                            <br>
+                                                            <div>
+                                                                {% for collaborator in proj.collaborators.all %}
+                                                                <a class="collaborator" href='#'>{{ collaborator.first_name }} {{ collaborator.last_name }}</a>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
                                                 </div>
-                                            {% else %}
-                                                <div class="carousel-item" >
-                                                    <h2>Project 2</h2>
-                                                </div>
-                                            {% endif %}
+
+                                            </div>                                            
 
                                         {% endfor %}
                                 </div>
@@ -180,30 +204,13 @@
 
                             <!-- {% for proj in found_user.project_set.all %}
                             <div class="project">
-                                <div class="proj_tech" style="background-color: rgb(101,57,152)">
-                                    <span>{{ proj.project_field }}</span>
-                                </div>
                                 <div class="proj_info">
-                                    <h1>{{ proj.title }}</h1>
-                                    <hr>
-                                    {% if proj.technologies.all %}
-                                        <div class="proj_desc">
-                                            <h2>Tools:</h2>
-                                            <div class="tools">
-                                                {% for tool in proj.technologies.all %}
-                                                <span>{{ tool.name }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    {% endif %}
+                                    
+                                    
                                     <div class="proj_desc">
-                                        <h2>Collaborators:</h2>
-                                        <div class="tools">
-                                            {% for collaborator in proj.collaborators.all %}
-                                            <span>{{ collaborator.first_name }} {{ collaborator.last_name }}</span>
-                                            {% endfor %}
-                                        </div>
+                                        
                                     </div>
+
                                 </div>
                             </div>
                             {% endfor %} -->

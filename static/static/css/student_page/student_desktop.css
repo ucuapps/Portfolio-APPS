@@ -569,3 +569,26 @@ svg{
 #projectsCarousel .carousel-control-next:active{
     background-color: #767676 !important;
 }
+.proj_title{
+    margin: 10px auto 0 auto;
+    width: 65%;
+    text-align: center;
+}
+#projectsCarousel .proj_info_carousel{
+    padding-left: 85px;
+}
+.collaborators_info{
+    padding-left: 0 !important;
+}
+.collaborator{
+    max-width: 200px;
+    margin: 5px auto;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 2px 1px 2px 3px;
+    background-color: rgb(185,185,185);
+    color: whitesmoke;
+}
+.collaborator a:hover{
+    background-color: rgb(185,185,185) !important;
+}
