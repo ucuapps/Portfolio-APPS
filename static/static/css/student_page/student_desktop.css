@@ -572,6 +572,7 @@ svg{
 .proj_title{
     margin: 10px auto 0 auto;
     width: 65%;
+    height: 60px;
     text-align: center;
 }
 #projectsCarousel .proj_info_carousel{
