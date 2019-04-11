@@ -217,7 +217,40 @@
                         </div>
                     </div>
                     <div class="projects" id="intern">
-                        <div class="proj_container">
+                        <div class="proj_carousel">
+                            <div id="workCarousel" class="carousel slide" data-ride="carousel" data-type="multi" data-interval="false">
+                                <div class="carousel-inner">
+                                        {% for work in found_user.workingexperience_set.all %}
+
+                                        <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
+                                                <span>{{work.company}}</span>
+
+                                                <h4>{{ work.occupation }}</h4>
+                                                    <hr>
+                                                    <h5>{{ work.link }}</h5>
+                                                    <hr>
+                                                    <div class="proj_desc">
+                                                        <h2>{{ work.period_start }} - {{ work.period_end }}</h2>
+                                                        <h2>About:</h2>
+                                                        <div class="tools"><span>{{ work.description }}</span></div>
+                                                    </div>
+                                        </div>
+
+                                        {% endfor %}
+                                </div>
+
+                                <a href="#workCarousel" class="carousel-control-prev" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon"></span>
+                                        <span class="sr-only">Previous</span>
+                                </a>
+                                <a href="#workCarousel" class="carousel-control-next" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <!-- <div class="proj_container">
                             {% for work in found_user.workingexperience_set.all %}
                             <div class="intern_project">
                                 <div class="proj_tech">
@@ -237,7 +270,7 @@
                             </div>
                             {% endfor %}
 
-                        </div>
+                        </div> -->
                     </div>
                     <div class="projects" id="volunteer">
                         <div class="proj_container">

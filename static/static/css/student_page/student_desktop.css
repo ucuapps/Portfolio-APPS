@@ -550,23 +550,23 @@ svg{
     flex-direction: row;
     flex-wrap: wrap;
 }
-#projectsCarousel{
-    width: inherit;
-    height: inherit;
+.proj_carousel .carousel{
+    width: inherit !important;
+    height: inherit !important;
 }
 
-#projectsCarousel .carousel-control-prev,
-#projectsCarousel .carousel-control-next{
+.proj_carousel .carousel-control-prev,
+.proj_carousel .carousel-control-next{
     width: 7%;
 }
 
-#projectsCarousel .carousel-control-prev:hover,
-#projectsCarousel .carousel-control-next:hover{
+.proj_carousel .carousel-control-prev:hover,
+.proj_carousel .carousel-control-next:hover{
     background-color: #c3c3c3 !important;
 }
 
-#projectsCarousel .carousel-control-prev:active,
-#projectsCarousel .carousel-control-next:active{
+.proj_carousel .carousel-control-prev:active,
+.proj_carousel .carousel-control-next:active{
     background-color: #767676 !important;
 }
 .proj_title{
@@ -575,7 +575,7 @@ svg{
     height: 60px;
     text-align: center;
 }
-#projectsCarousel .proj_info_carousel{
+.proj_carousel .proj_info_carousel{
     padding-left: 85px;
 }
 .collaborators_info{
@@ -592,4 +592,10 @@ svg{
 }
 .collaborator a:hover{
     background-color: rgb(185,185,185) !important;
+}
+#workCarousel {
+    text-align: center;
+}
+#workCarousel .proj_desc {
+    margin-left: 60px;
 }
