@@ -223,17 +223,17 @@
                                         {% for work in found_user.workingexperience_set.all %}
 
                                         <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
-                                                <span>{{work.company}}</span>
+                                                
+                                                <h4 class="text-center"> <a href="{{ work.link }}">{{work.company}}</a> </h4>
 
-                                                <h4>{{ work.occupation }}</h4>
-                                                    <hr>
-                                                    <h5>{{ work.link }}</h5>
-                                                    <hr>
-                                                    <div class="proj_desc">
-                                                        <h2>{{ work.period_start }} - {{ work.period_end }}</h2>
-                                                        <h2>About:</h2>
-                                                        <div class="tools"><span>{{ work.description }}</span></div>
-                                                    </div>
+                                                <h5>Position: {{ work.occupation }}</h5>
+                                                <h5>Period: {{ work.period_start }} - {{ work.period_end }}</h5>
+                                                    
+                                                <hr>
+                                                <div class="proj_desc">
+                                                    <h2>About:</h2>
+                                                    <div class="tools"><span>{{ work.description }}</span></div>
+                                                </div>
                                         </div>
 
                                         {% endfor %}
@@ -280,10 +280,10 @@
                                         {% for volunteering in found_user.volunteerexperience_set.all %}
 
                                             <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
-                                                <div style="text-align:center">
+                                                <div>
                                                         <h4>{{ volunteering.title }}</h4>
                                                     </div>
-                                                    <div class="proj_info" style="margin-left:60px">
+                                                    <div class="proj_info">
                                                         <hr>
                                                         <div class="proj_desc">
                                                             <h2>About:</h2>

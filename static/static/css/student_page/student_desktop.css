@@ -593,8 +593,9 @@ svg{
 .collaborator a:hover{
     background-color: rgb(185,185,185) !important;
 }
-#workCarousel {
-    text-align: center;
+#workCarousel .carousel-inner {
+    margin-top: 10px;
+    padding: 0px 65px;
 }
 #workCarousel .proj_desc {
     margin-left: 60px;
