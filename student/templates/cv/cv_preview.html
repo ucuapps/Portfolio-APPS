@@ -1,21 +1,33 @@
-{% extends 'base.html' %}
+{% extends "edit/edit.html" %}
+{% load static %}
+{% load i18n %}
+
 
 {% block head_title %}Generate CV{% endblock %}
+{% block block-header %}{% trans "Select data for CV:" %}{% endblock %}
 
 {% block content %}
+{#<form method="POST" action="{% url 'generate_cv' request.user.id %}">#}
+  <form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% include 'includes/bs4_form.html' with form=form %}
 
-<div class="row justify-content-md-center">
-
-    <div class="col-md-2">
-
-      <!--  <div style="margin-top: 20px;">
-           <a class="btn btn-primary" href="{% url 'show_cv' user.id %}">Show preview</a>
-        </div> -->
-
-        <div style="margin-top: 20px;">
-           <a class="btn btn-primary" href="{% url 'generate_pdf' user.id %}">Generate CV in PDF</a>
+    <div class="row justify-content-md-center">
+        <div class="col-md-2">
+          <!--  <div style="margin-top: 20px;">
+{#               <a class="btn btn-primary" href="{% url 'show_cv' user.id %}">Show preview</a>#}
+            </div> -->
+            <button type="submit" href="{% url 'edit_cv' user.id %}" class="btn btn-primary">Save</button>
+{#            <button type="submit" href="{% url 'generate_pdf' user.id %}" class="btn btn-primary">Save</button>#}
+            <div style="margin-top: 20px;">
+               <a class="btn btn-primary" href="{% url 'generate_pdf' user.id %}">Generate CV in PDF</a>
+            </div>
         </div>
     </div>
-</div>
+</form>
+{% endblock %}
 
+{% block scripts %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
 {% endblock %}

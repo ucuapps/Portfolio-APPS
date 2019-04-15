@@ -1,17 +1,18 @@
-from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import get_user_model
+
 
 from student.models import Student
 from student.forms import StudentSearch
 
-from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, EducationForm
-from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education
+from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, EducationForm, cvForm
+from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education, ProgrammingLanguage
 
 
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import FileResponse
@@ -71,10 +72,12 @@ def edit_project(request, pk=None):
 
     return render(request, template_name='edit/project.html', context={'form': form, 'title': title})
 
+
 @user_login_required
 def edit_projects(request):
     projects = Project.objects.filter(collaborators=request.user).distinct()
     return render(request, 'edit/projects.html', context={'projects': projects, 'title': "Projects"})
+
 
 @user_login_required
 def edit_work_exp(request, pk=None):
@@ -255,6 +258,20 @@ class SoftSkillsAutocomplete(autocomplete.Select2QuerySetView):
         return qs.all()
 
 
+class CvSoftSkillsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Skill.objects.none()
+
+        qs = self.request.user.student.soft_skills
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+
 class HardSkillsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
@@ -268,13 +285,28 @@ class HardSkillsAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs.all()
 
-
-class ProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
+class CvHardSkillsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
         if not self.request.user.is_authenticated:
             return Skill.objects.none()
 
+        qs = self.request.user.student.hard_skills
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+
+class ProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            # return ProgrammingLanguage.objects.none()
+            return Skill.objects.none()
+
+        # qs = ProgrammingLanguage.objects.filter(skill_type="programming")
         qs = Skill.objects.filter(skill_type="programming")
 
         if self.q:
@@ -282,6 +314,20 @@ class ProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs.all()
 
+
+class CvProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            # return ProgrammingLanguage.objects.none()
+            return Skill.objects.none()
+
+        qs = self.request.user.student.programming_languages
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
 
 class SkillsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -302,7 +348,111 @@ def search_form(request):
     return render(request, 'student/search.html')
 
 
+class LanguageAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Language.objects.none()
+
+        qs = Language.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+
+class CvProjectsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Project.objects.none()
+
+        qs = Project.objects.filter(collaborators=self.request.user).distinct()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+class CvVolunteerExpsAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return VolunteerExperience.objects.none()
+
+        qs = VolunteerExperience.objects.filter(user=self.request.user).distinct()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+
+class CvWorkingExpAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return WorkingExperience.objects.none()
+
+        qs = WorkingExperience.objects.filter(user=self.request.user).distinct()
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs.all()
+
+
+def edit_cv(request, pk=None):
+    if pk:
+        template = "cv/cv_preview.html"
+        context = {}
+
+        if request.method == "POST":
+            form = cvForm(request.POST, instance=request.user.student)
+        else:
+            instance = request.user.student
+            if not instance.cv_hard_skills:
+                instance.cv_hard_skills = instance.hard_skills
+            if not instance.cv_soft_skills:
+                instance.cv_soft_skills = instance.soft_skills
+            if not instance.cv_programming_languages:
+                instance.cv_programming_languages = instance.programming_languages
+            if not instance.cv_summary:
+                instance.cv_summary = instance.summary
+            form = cvForm(instance=instance)
+
+        if request.method == "POST" and form.is_valid():
+            form.save()
+            context["summary"] = form.cleaned_data['cv_summary']
+        context["form"] = form
+
+        return render(request, template, context)
+
+
 def generate_cv(request, pk=None):
+    if pk:
+        # template = "cv/cv_preview.html"
+        context = {}
+
+        if request.method == "POST":
+            form = cvForm(request.POST, instance=request.user.student)
+        else:
+            instance = request.user.student
+            if not instance.cv_hard_skills:
+                instance.cv_hard_skills = instance.hard_skills
+            if not instance.cv_soft_skills:
+                instance.cv_soft_skills = instance.soft_skills
+            if not instance.cv_programming_languages:
+                instance.cv_programming_languages = instance.programming_languages
+            if not instance.cv_summary:
+                instance.cv_summary = instance.summary
+            form = cvForm(instance=instance)
+
+        if request.method == "POST" and form.is_valid():
+            form.save()
+            context["summary"] = form.cleaned_data['cv_summary']
+        context["form"] = form
+
     u = get_object_or_404(get_user_model(), id=pk)
     context = dict(found_user=u, title="User", media="/media/")
     return render(request, "cv/index.html", context)
@@ -319,7 +469,7 @@ def convertation(request, pk=None):
   #  pdf = "myCV.pdf"
     url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
     pdf = settings.MEDIA_ROOT + '/student_cv/myCV.pdf'
-   
+
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
     '''  options = {
         'page-size': 'A4',
@@ -334,18 +484,4 @@ def convertation(request, pk=None):
     response['Content-Disposition'] = 'attachment; filename=' + 'myCV.pdf'
     os.remove(pdf)
     return response
-
-
-class LanguageAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        # Don't forget to filter out results depending on the visitor !
-        if not self.request.user.is_authenticated:
-            return Language.objects.none()
-
-        qs = Language.objects.all()
-
-        if self.q:
-            qs = qs.filter(name__istartswith=self.q)
-
-        return qs.all()
 
