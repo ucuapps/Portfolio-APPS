@@ -173,19 +173,17 @@
 
                                                 <br>
                                                 <div class="proj_info_carousel">
-                                                    <div class="row">
-                                                            <h5>About: {{ proj.project_field }}</h5>
-                                                        </div>
+                                                    <h5>About: {{ proj.project_field }}</h5>
+                                                    
         
-                                                        <div class="collaborators_info row col-md-4">
-                                                            <h5>Collaborators:</h5>
-                                                            <br>
-                                                            <div>
-                                                                {% for collaborator in proj.collaborators.all %}
-                                                                <a class="collaborator" href='#'>{{ collaborator.first_name }} {{ collaborator.last_name }}</a>
-                                                                {% endfor %}
-                                                            </div>
+                                                    <div class="collaborators_info col-md-4">
+                                                        <h5>Collaborators:</h5>
+                                                        <div>
+                                                            {% for collaborator in proj.collaborators.all %}
+                                                            <a class="collaborator" href='#'>{{ collaborator.first_name }} {{ collaborator.last_name }}</a>
+                                                            {% endfor %}
                                                         </div>
+                                                    </div>
                                                 </div>
 
                                             </div>                                            
@@ -224,12 +222,12 @@
 
                                         <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
                                                 
-                                                <h4 class="text-center"> <a href="{{ work.link }}">{{work.company}}</a> </h4>
+                                                <h4 class="mt-2 text-center"> <a href="{{ work.link }}">{{work.company}}</a> </h4>
 
                                                 <h5>Position: {{ work.occupation }}</h5>
                                                 <h5>Period: {{ work.period_start }} - {{ work.period_end }}</h5>
                                                     
-                                                <hr>
+                                                <hr class="mt-0 mb-1">
                                                 <div>
                                                     <h5>About:</h5>
                                                     <div>{{ work.description }}</div>
@@ -281,7 +279,7 @@
 
                                             <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
                                                 <div>
-                                                        <h4>{{ volunteering.title }}</h4>
+                                                        <h4 class="proj_title">{{ volunteering.title }}</h4>
                                                     </div>
                                                     <div class="proj_info">
                                                         <hr>

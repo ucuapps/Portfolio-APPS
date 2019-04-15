@@ -575,9 +575,6 @@ svg{
     height: 60px;
     text-align: center;
 }
-.proj_carousel .proj_info_carousel{
-    padding-left: 85px;
-}
 .collaborators_info{
     padding-left: 0 !important;
 }
@@ -593,8 +590,7 @@ svg{
 .collaborator a:hover{
     background-color: rgb(185,185,185) !important;
 }
-#workCarousel .carousel-inner {
-    margin-top: 10px;
+.projects_container .carousel-inner {
     padding: 0px 65px;
 }
 #workCarousel .proj_desc {
