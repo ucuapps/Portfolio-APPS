@@ -279,15 +279,22 @@
 
                                             <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
                                                 <div>
-                                                        <h4 class="proj_title">{{ volunteering.title }}</h4>
+                                                    <h4 class="mt-2 text-center">{{ volunteering.title }}</h4>
+                                                </div>
+                                                <div class="volunteer_organization">
+                                                    {% if volunteering.organization %}
+                                                    <h5>
+                                                        Orhanization: <a href="{{ volunteering.link }}">{{ volunteering.organization }}</a>
+                                                    </h5>
+                                                    {% endif %}                                                            
+                                                </div>
+                                                <div class="proj_info">
+                                                    <hr class="mt-0 mb-1">
+                                                    <div>
+                                                        <h5>About:</h5>
+                                                        <div>{{ volunteering.description }}</div>
                                                     </div>
-                                                    <div class="proj_info">
-                                                        <hr>
-                                                        <div class="proj_desc">
-                                                            <h2>About:</h2>
-                                                            <div class="tools"><span>{{ volunteering.description }}</span></div>
-                                                        </div>
-                                                    </div>
+                                                </div>
                                             </div>
 
 
