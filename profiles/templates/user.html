@@ -117,7 +117,7 @@
                 <hr class="divide">
                 <span class="last">PROGRAMMING LANGUAGES</span>
                 <ul class="rate">
-                    {% for plang in found_user.student.programming_languages.all %}
+                    {% for plang in found_user.student.programming_language.all %}
                     <li><span>{{ plang.name }}</span></li>
                     {% endfor %}
                 </ul>
@@ -146,7 +146,7 @@
                             <span>{{ proj.project_field }}</span>
                         </div>
                         <div class="proj_info">
-                            <h1>{{ proj.title }}</h1>
+                            <h1>{{ proj.name }}</h1>
                             <hr>
                             <div class="proj_desc">
                                 <h2>Tools:</h2>

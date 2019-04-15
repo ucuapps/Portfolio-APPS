@@ -15,6 +15,19 @@ from django.core.exceptions import ValidationError
 from profiles.models import Interests
 from student.models import Skill, Language
 
+from django.db import models
+
+
+# class IntegerRangeField(models.IntegerField):
+#     def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
+#         self.min_value, self.max_value = min_value, max_value
+#         models.IntegerField.__init__(self, verbose_name, name, **kwargs)
+#
+#     def formfield(self, **kwargs):
+#         defaults = {'min_value': self.min_value, 'max_value': self.max_value}
+#         defaults.update(kwargs)
+#         return super(IntegerRangeField, self).formfield(**defaults)
+
 
 # class CustomClearableFileInputWidget(f.ClearableFileInput):
 #     template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
@@ -101,34 +114,34 @@ class CustomSignupForm(f.Form):
         user.save()
 
 
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+
 class SearchForm(f.Form):
-    first_name= f.CharField(max_length=30, required=False,widget=f.TextInput(attrs={'placeholder': 'First name'}))
+    first_name = f.CharField(max_length=30, required=False, widget=f.TextInput(attrs={'placeholder': 'First name'}))
     last_name = f.CharField(max_length=30, required=False,
-                                 widget=f.TextInput(attrs={'placeholder': 'Last name'}))
-    current_study_year = f.IntegerField(required=False, initial=1)
+                            widget=f.TextInput(attrs={'placeholder': 'Last name'}))
+    current_study_year = f.IntegerField(required=False, initial=1,
+                                        validators=[
+                                        MaxValueValidator(4),
+                                               MinValueValidator(1)
+                                           ])
 
-    #language = f.ModelChoiceField(required=False,
-                                #queryset=Language.objects.all(),
-                                #widget=autocomplete.ModelSelect2Multiple(url='language-autocomplete')
-                                #)
+    language = f.ModelChoiceField(required=False,
+                                queryset=Language.objects.all(),
+                                widget=autocomplete.ModelSelect2Multiple(url='language-autocomplete'))
 
+    skills = f.ModelChoiceField(required=False,
+                                queryset=Skill.objects.all(),
+                                widget=autocomplete.ModelSelect2Multiple(url='skills-autocomplete'))
 
-    #skills = f.ModelChoiceField(required=False,
-    #    queryset=Skill.objects.all(),
-    #    widget=autocomplete.ModelSelect2Multiple(url='skills-autocomplete')
-    #)
-
-   # fields_of_interests = f.ModelChoiceField(required=False,
-    #                            queryset=Interests.objects.all(),
-     #                           widget=autocomplete.ModelSelect2Multiple(url='interests-autocomplete')
-      #                          )
-
-
+    fields_of_interests = f.ModelChoiceField(required=False,
+                               queryset=Interests.objects.all(),
+                               widget=autocomplete.ModelSelect2Multiple(url='interests-autocomplete'))
 
     def clean_current_study_year(self):
-        data = self.cleaned_data['current_study_year']
-
-        if 1>data or data>4:
-            raise ValidationError(_('Invalid current study year, try int between 1 and 4'))
-
-        return data
+        if self.cleaned_data['current_study_year']:
+            data = self.cleaned_data['current_study_year']
+            if 1 > data or data > 4:
+                raise ValidationError(_('Invalid current study year, try int between 1 and 4'))
+            return data
