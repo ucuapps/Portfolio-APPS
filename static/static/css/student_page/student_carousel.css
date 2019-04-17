@@ -1,0 +1,62 @@
+.proj_carousel{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.proj_carousel .carousel{
+    width: inherit !important;
+    height: inherit !important;
+}
+
+.proj_carousel .carousel-control-prev,
+.proj_carousel .carousel-control-next{
+    width: 7%;
+}
+
+.proj_carousel .carousel-control-prev:hover,
+.proj_carousel .carousel-control-next:hover{
+    background-color: #c3c3c3 !important;
+}
+
+.proj_carousel .carousel-control-prev:active,
+.proj_carousel .carousel-control-next:active{
+    background-color: #767676 !important;
+}
+.proj_title{
+    margin: 10px auto 0 auto;
+    width: 65%;
+    height: 60px;
+    text-align: center;
+}
+.collaborators_info{
+    padding-left: 0 !important;
+}
+.collaborator{
+    max-width: 200px;
+    margin: 5px auto;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 2px 1px 2px 3px;
+    background-color: rgb(185,185,185);
+    color: whitesmoke;
+}
+.collaborator a:hover{
+    background-color: rgb(185,185,185) !important;
+}
+.projects_container .carousel-inner {
+    padding: 0px 85px;
+}
+#workCarousel .proj_desc {
+    margin-left: 60px;
+}
+.volunteer_organization {
+    height: 35px;
+}
+
+@media screen and (max-width: 1024px) {
+    .proj_carousel{
+        height: 200px;
+    }
+}
