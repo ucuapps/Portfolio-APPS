@@ -93,3 +93,8 @@
         height: 340px;
     }
 }
+@media screen and (max-width: 320px) {
+    .proj_carousel{
+        height: 365px;
+    }
+}
