@@ -12,7 +12,7 @@
 {% url 'edit_student' as edit_student %}
 {% url 'show_my_requests' as show_my_requests %}
 {% if request.user.is_authenticated %}
-        {% url 'generate_cv' user.id as generate_cv %}
+        {% url 'edit_cv' user.id as generate_cv %}
 {% endif %}
 
 <script>
@@ -233,7 +233,7 @@
                     </svg>
                 </a>
                 {% if request.user.is_student %}
-                <a href="{% url 'generate_cv' request.user.id %}"><span id="nav">CV</span></a>
+                <a href="{% url 'edit_cv' request.user.id %}"><span id="nav">CV</span></a>
                 <a href="{% url 'show_my_requests' %}" >
                     <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav">
                 </a>
