@@ -10,3 +10,4 @@ static/media/
 */migrations/*.py
 portfolio/production.wsgi
 lib/
+.vscode/
