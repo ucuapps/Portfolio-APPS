@@ -77,10 +77,13 @@ def search(request):
         form = SearchForm(request.POST)
 
         if form.is_valid():
-
-            users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'],
-                                        last_name__icontains=form.cleaned_data['last_name'],
-                                        first_name__icontains=form.cleaned_data['first_name'],)
+            users = User.objects.all()
+            if form.cleaned_data['current_study_year']:
+                users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'])
+            if form.cleaned_data['last_name']:
+                users = User.objects.filter(last_name__icontains=form.cleaned_data['last_name'])
+            if form.cleaned_data['first_name']:
+                users = User.objects.filter(first_name__icontains=form.cleaned_data['first_name'])
 
             return render(request, 'search.html', {'form': form, 'users': users})
 
@@ -88,6 +91,7 @@ def search(request):
         form = SearchForm()
 
     return render(request, 'search.html', {'form': form})
+
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):

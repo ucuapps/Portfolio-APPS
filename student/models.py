@@ -127,17 +127,36 @@ class Skill(models.Model):
         return self.name
 
 
+class ProgrammingLanguage(models.Model):
+    LEVELS = (
+        ('1', "Beginner"),
+        ('2', "Elementary"),
+        ('3', "Intermediate"),
+        ('4', "Upper Intermediate"),
+        ('5', "Advanced")
+    )
+
+    name = models.CharField(max_length=255)
+    plang_level = models.CharField(max_length=255, choices=LEVELS)
+
+    def __str__(self):
+        return self.name
+
+
 class Project(models.Model):
     project_field = models.CharField(max_length=20, default="", help_text="Word/words/abbreviation which describes your project."
                                                       " Example: ML, WEB, IOT, NLP, CV, AI, Design, Networks, BA,"
                                                       " Visualization, Robotics, Data Mining, Software, Security, "
                                                       "Analysis, Economics", blank=False)
-    title = models.CharField(max_length=60, help_text="Project title. Example: Health Care project", blank=False)
+    name = models.CharField(max_length=60, help_text="Project title. Example: Health Care project", blank=False)
     about = models.TextField()
     technologies = models.ManyToManyField(Skill, blank=True)
 
     # TODO: mentor
     collaborators = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class VolunteerExperience(models.Model):
@@ -147,6 +166,9 @@ class VolunteerExperience(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     organization = models.CharField(max_length=225, blank=True, null=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Education(models.Model):
     degree = models.CharField(max_length=30)
@@ -155,7 +177,7 @@ class Education(models.Model):
     description = models.TextField(max_length=130)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    university = models.CharField(max_length=225, blank=True, null=True)
+    university = models.CharField(max_length=225, null=True)
     field_of_study = models.CharField(max_length=225, blank=True, null=True)
 
 
@@ -169,6 +191,9 @@ class WorkingExperience(models.Model):
                                                                     " of your responsibilities, gained experience")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.occupation) + ' at ' + str(self.company)
+
 
 class StudyProgramme(models.Model):
     name = models.CharField(max_length=255)
@@ -177,13 +202,20 @@ class StudyProgramme(models.Model):
         return self.name
 
 
-
 class Certification(models.Model):
     title = models.CharField(max_length=60, help_text="Please fill the field with the certificate name "
                                                       "Example: Data Science Summer School")
     image = models.FileField(upload_to="%Y/%m/%d")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+
+class CvStyle(models.Model):
+    css_file = models.FilePathField(path="static/static/css/cv_styles", match="([a-zA-Z]+)\.css", default="bw_style.css")
+    image = models.ImageField(blank=True, null=True)
+    name = models.CharField(max_length=25, blank=True, null=False)
+
+    def __str__(self):
+        return self.name
 
 class Student(models.Model):
     STUDY_YEARS = (
@@ -201,8 +233,18 @@ class Student(models.Model):
 
     # Skills
     hard_skills = models.ManyToManyField(Skill, related_name="hard_skills", blank=True)
+    # programming_languages = models.ManyToManyField(ProgrammingLanguage, related_name="programming_languages", blank=True)
     programming_languages = models.ManyToManyField(Skill, related_name="programming_languages", blank=True)
     soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
+
+    cv_hard_skills = models.ManyToManyField(Skill, related_name="cv_hard_skills", blank=True)
+    # cv_programming_languages = models.ManyToManyField(ProgrammingLanguage, related_name="cv_programming_languages", blank=True)
+    cv_programming_languages = models.ManyToManyField(Skill, related_name="cv_programming_languages", blank=True)
+    cv_soft_skills = models.ManyToManyField(Skill, related_name="cv_soft_skills", blank=True)
+
+    cv_projects = models.ManyToManyField(Project, related_name="cv_projects", blank=True)
+    cv_volunteering = models.ManyToManyField(VolunteerExperience, related_name="cv_volunteering", blank=True)
+    cv_working = models.ManyToManyField(WorkingExperience, related_name="cv_working", blank=True)
 
     summary = models.TextField(blank=True, null=True, help_text="Enter here 1-5 sentences about you. EX: Honors student"
                                                                 " with record of academic and extracurricular success. "
@@ -211,17 +253,6 @@ class Student(models.Model):
                                                                 "Adept at working across departments, with faculty,"
                                                                 " administrators")
 
-    # Projects
-    # projects = models.ManyToManyField(Project, blank=True)
+    cv_summary = models.TextField(blank=True, null=True, max_length=280, help_text="Enter not more than 280 symbols")
 
-    # Languages
-    # languages
-
-    # Working exp
-    # working_experience = None
-
-    # Volunteer exp
-    # volunteer_experience = None
-
-    # Certifications
-    # certifications = None
+    cv_style = models.ManyToManyField(CvStyle, related_name="cv_style", blank=True)

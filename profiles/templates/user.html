@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html>
-{% load static %}
-<head>
-    <title>Profile</title>
-    <meta charset="utf-8">
+    {% load static %}
+    <head>
+        <title>Profile</title>
+        <meta charset="utf-8">
 
-    <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
-    <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
-    <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-    <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
+        <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
+        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
+        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-    <meta name="description" content="This helps you to create your portfolio">
-    <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
-    <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css' %}">
-    <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css' %}">
-    <link rel="stylesheet" href="{% static 'css/student_page/student_carousel.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
-    <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/ico">
-    <script src="{% static 'js/student_switcher.js' %}"></script>
-    <script src="{% static 'js/project_resizer.js' %}"></script>
-    <script src="{% static 'js/menu_mover.js'%}"></script>
-    <script>
-        function teacher_info() {
-            var proj = document.getElementById('projcont');
-            var hard = document.getElementById('hard');
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <meta name="description" content="This helps you to create your portfolio">
+        <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
+        <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css' %}">
+        <link rel="stylesheet" href="{% static 'css/student_page/student_carousel.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/ico">
+        <script src="{% static 'js/student_switcher.js' %}"></script>
+        <script src="{% static 'js/project_resizer.js' %}"></script>
+        <script src="{% static 'js/menu_mover.js'%}"></script>
+        <script>
+            function teacher_info() {
+                var proj = document.getElementById('projcont');
+                var hard = document.getElementById('hard');
 
-            proj.style.display = "none";
-            hard.style.display = "flex";
-            document.getElementsByClassName('proj_sw')[0].style.color = "rgb(101,57,152)";
-            document.getElementsByClassName('switch')[0].style.borderBottom = "2px solid rgb(101,57,152)";
-            document.getElementsByClassName('proj_sw')[1].style.color = "rgb(68,68,68)";
-            document.getElementsByClassName('switch')[1].style.borderBottom = "none";
+                proj.style.display = "none";
+                hard.style.display = "flex";
+                document.getElementsByClassName('proj_sw')[0].style.color = "rgb(101,57,152)";
+                document.getElementsByClassName('switch')[0].style.borderBottom = "2px solid rgb(101,57,152)";
+                document.getElementsByClassName('proj_sw')[1].style.color = "rgb(68,68,68)";
+                document.getElementsByClassName('switch')[1].style.borderBottom = "none";
 
-        }
+            }
 
-        function courses() {
-            document.getElementsByClassName('student_info')[0].style.justifyContent = "center";
-            var proj = document.getElementById('projcont');
-            var hard = document.getElementById('hard');
-            document.getElementsByClassName('switchers')[1].style.display = "none";
+            function courses() {
+                document.getElementsByClassName('student_info')[0].style.justifyContent = "center";
+                var proj = document.getElementById('projcont');
+                var hard = document.getElementById('hard');
+                document.getElementsByClassName('switchers')[1].style.display = "none";
 
-            hard.style.display = "none";
-            proj.style.display = "flex";
-            document.getElementsByClassName('proj_sw')[1].style.color = "rgb(101,57,152)";
-            document.getElementsByClassName('switch')[1].style.borderBottom = "2px solid rgb(101,57,152)";
-            document.getElementsByClassName('proj_sw')[0].style.color = "rgb(68,68,68)";
-            document.getElementsByClassName('switch')[0].style.borderBottom = "none";
-        }
-    </script>
+                hard.style.display = "none";
+                proj.style.display = "flex";
+                document.getElementsByClassName('proj_sw')[1].style.color = "rgb(101,57,152)";
+                document.getElementsByClassName('switch')[1].style.borderBottom = "2px solid rgb(101,57,152)";
+                document.getElementsByClassName('proj_sw')[0].style.color = "rgb(68,68,68)";
+                document.getElementsByClassName('switch')[0].style.borderBottom = "none";
+            }
+        </script>
 
-    {% load bootstrap4 %}
-    
-    {% bootstrap_css %}
-    {% bootstrap_javascript jquery='full' %}
+        {% load bootstrap4 %}
+        
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
 
-</head>
+    </head>
     <body>
         {% include 'includes/header.html' %}
         {% if found_user.is_student %}
@@ -97,18 +97,18 @@
             <div class="student_info">
                 <div class="skills" id="hard">
                     <svg id="triang"
-                                x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
-                                <defs>
-                                </defs>
-                                <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
-                                </svg>
+                            x="0px" y="0px" width="61.5px" height="32px" viewBox="0 0 61.5 39" enable-background="new 0 0 61.5 39" xml:space="preserve">
+                            <defs>
+                            </defs>
+                            <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
+                    </svg>
                     <div class="hard_skills">
                         {% if found_user.student.summary %}
-                        <span>ABOUT ME</span>
-                        <div class="description">
-                            <p>{{ found_user.student.summary }}</p>
-                        </div>
-                        <hr class="divide">
+                            <span>ABOUT ME</span>
+                            <div class="description">
+                                <p>{{ found_user.student.summary }}</p>
+                            </div>
+                            <hr class="divide">
                         {% endif %}
 
 
@@ -129,7 +129,7 @@
                         <hr class="divide">
                         <span class="last">PROGRAMMING LANGUAGES</span>
                         <ul class="rate">
-                            {% for plang in found_user.student.programming_languages.all %}
+                            {% for plang in found_user.student.programming_language.all %}
                             <li><span>{{ plang.name }}</span></li>
                             {% endfor %}
                         </ul>
@@ -142,7 +142,6 @@
                         </ul>
                         <hr class="divide">
                     </div>
-
                 </div>
                 <div class="projects_container" id="projcont">
                     <div class="switchers">
@@ -280,7 +279,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>                
                 <div class="skills" id="hobbies">
                     <span class="last">PROFESSIONAL INTERESTS</span>
                     <ul class="rate">

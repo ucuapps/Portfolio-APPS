@@ -22,8 +22,8 @@
             <tr><td>{{edu.degree}}</td>
             <td>{{edu.university}}</td>
             <td>{{edu.description|truncatechars:10}}</td>
-            <td><a href="{% url 'edit_edu' ve.id %}"><i class="far fa-edit"></i></a></td>
-            <td><a href="{% url 'delete_edu' ve.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            <td><a href="{% url 'edit_edu' edu.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'delete_edu' edu.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
             </tr>
         {% endfor %}
     </tbody>

@@ -1,176 +1,261 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Curriculum Vitae</title>
-
-
-<meta name="viewport" content="width=device-width"/>
-<meta name="description" content="CV"/>
-<meta charset="UTF-8">
-
-<link type="text/css" rel="stylesheet" href="{% static 'css/cv_style.css' %}">
-<link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
-
-
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href='{% static "css/cv_styles/bw_style.css" %}'>
+    <title>CV</title>
 </head>
-<div id="cv" class="instaFade">
-	<div class="mainDetails">
-        {% if found_user.profile_image %}
-		<div id="headshot" class="quickFade">
-			<img src="{% get_media_prefix %}{{found_user.profile_image}}" alt="userphoto" />
-		</div>
-        {% endif %}
-
-		<div id="name">
-			<h1 class="quickFade delayTwo">{{ found_user.first_name }} {{ found_user.last_name }}</h1>
-			<h2 class="quickFade delayThree">Student at UCU</h2>
-        </div>
-
-		<div id="contactDetails" class="quickFade delayFour">
-			<ul>
-            <!--email_off-->		<li>e: {{ found_user.email }}</li> <!--/email_off-->
-            {% if found_user.mobile_number %}
-            <li>m: {{ found_user.mobile_number }}</li>
+<body>
+<div class="cv">
+    <header class="cv__header">
+        <aside class="user header__left-content">
+            <label class="user__name">{{ found_user.first_name }}</label>
+            <label class="user__name">{{ found_user.last_name }}</label>
+            {% if found_user.student.cv_summary %}
+            <p class="user__description">{{ found_user.student.cv_summary }}</p>
+            {% else %}
+            <p class="user__description">{{ found_user.student.summary }}</p>
             {% endif %}
-			</ul>
-		</div>
-		<div class="clear"></div>
-	</div>
-
-	<div id="mainArea" class="quickFade delayFive">
-		<section>
-			<article>
-				<div class="sectionTitle">
-					<h1>Personal Profile</h1>
-				</div>
-
-				<div class="sectionContent">
-                    {% if found_user.student.summary %}
-					<p>{{ found_user.student.summary }}
+            <div class="user__contacts">
+                <div class="contacts__row">
+                    <a class="contacts__address">Lviv, Ukraine</a>
+                    {% if found_user.mobile_number %}
+                    <a class="contacts__phone">{{ found_user.mobile_number }}</a>
                     {% endif %}
                 </div>
-
-			</article>
-			<div class="clear"></div>
-		</section>
-
-
-		<section>
-			<div class="sectionTitle">
-				<h1>Work Experience</h1>
-			</div>
-
-			<div class="sectionContent">
-                {% for work in found_user.workingexperience_set.all %}
-				<article>
-					<h2>{{ work.title }} at {{ work.company }}</h2>
-                    {% if work.period_start %}
-					<p class="subDetails"> {{ work.period_start }} {% if work.period_end %} - {{ work.period_end }} {% endif %}</p>
+                <div class="contacts__row">
+                    <a class="contacts__email" href="{{ found_user.email }}">{{ found_user.email }}</a>
+                    {% if found_user.git_link %}
+                    <a class="contacts__git" href="{{ found_user.git_link }}">{{ found_user.git_link }}</a>
                     {% endif %}
-					<p>{{ work.description }}</p>
-				</article>
-                {% endfor %}
-			</div>
-			<div class="clear"></div>
-		</section>
-
-
-		<section>
-			<div class="sectionTitle">
-				<h1>Qualifications</h1>
-			</div>
-
-			<div class="sectionContent">
-				<ul class="keySkills">
-                    {% for hardskill in found_user.student.hard_skills.all %}
-					    <li>{{ hardskill }}</li>
-					{% endfor %}
-                    {% for softskill in found_user.student.soft_skills.all %}
-					    <li>{{ softskill }}</li>
-					{% endfor %}
-                    {% for lang in found_user.language_set.all %}
-                        <li>{{ lang.name }}({{lang.level}})</li>
-                    {% endfor %}
-				</ul>
-			</div>
-			<div class="clear"></div>
-		</section>
-
-
-		<section>
-			<div class="sectionTitle">
-				<h1>Education</h1>
-			</div>
-
-			<div class="sectionContent">
-            {% if found_user.student.study_programme.name %}
-				<article>
-					<h2>Bachelor of {{ found_user.student.study_programme.name }}</h2>
-					<p class="subDetails">Ukrainian Catholic University</p>
-					<p></p>
-				</article>
+                </div>
+            </div>
+        </aside>
+        <div class="header__right-content">
+            {% if found_user.profile_image %}
+            <img src="{% get_media_prefix %}{{found_user.profile_image}}" alt="" class="user__logo">
+            {% else %}
+            <img src='{%  static "images/assets/user-logo.png" %}' alt="" class="user__logo">
             {% endif %}
-                {% for edu in found_user.education.all %}
-				<article>
-                {% if edu.degree %}
-					<h2>{{ edu.degree }} of {{ edu.field_of_study }}</h2>
-                {% else %}
-                    <h2>{{ edu.field_of_study }}</h2>
-                {% endif %}
-                    {% if edu.period_start %}
-					<p class="subDetails"> {{ edu.period_start }} {% if edu.period_end %} - {{ edu.period_end }} {% endif %}</p>
+        </div>
+    </header>
+
+    <div class="cv__main-content">
+        <div id="col1" class="main-content__column">
+
+        {% if found_user.education_set.all %}
+            <article class="main-content__section main-content__section_bigger">
+                <header class="main-content__header">
+                    <h3 class="section__title section__title_book">Education</h3>
+                </header>
+                <main class="section_bigger__contents">
+                    <section class="section_bigger__year-column">
+                        {% for edu in found_user.education_set.all %}
+                        <div class="year-column__position-activity contents__row">
+                            {% if edu.field_of_study %}
+                            <h5 class="position__title">{{ edu.degree }}, {{ edu.field_of_study }}</h5>
+                            {% else %}
+                            <h5 class="position__title">{{ edu.degree }}</h5>
+                            {% endif %}
+                            {% if edu.period_start and edu.period_end%}
+                            <time class="position__date">{{ edu.period_start }} - {{ edu.period_end }}</time>
+{#                            <p class="position__date">Lviv,Ukraine</p>#}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                    </section>
+                    <hr class="contents__vertical-line">
+                    <section class="section_bigger__detailed-column">
+                        {% for edu in found_user.education_set.all %}
+                        <div class="detailed-column__position-description contents__row">
+                            <h5 class="position__title">{{ edu.university }}</h5>
+                            <p class="position-description__detailed">{{ edu.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </section>
+                </main>
+            </article>
+            {% endif %}
+
+            {% if found_user.student.cv_working.all %}
+            <article class="main-content__section main-content__section_bigger">
+                <header class="main-content__header">
+                    <h3 class="section__title section__title_internships">Internships</h3>
+                </header>
+                <main class="section_bigger__contents">
+                    <section class="section_bigger__year-column">
+
+                            {% for wexp in found_user.student.cv_working.all %}
+                            <div class="year-column__position-activity contents__row contents__row_lower">
+                                <h5 class="position__title">{{ wexp.occupation }}</h5>
+                                {% if wexp.period_start and wexp.period_end %}
+                                <time class="position__date">{{ wexp.period_start }} - {{ wexp.period_end }}</time>
+                                {% endif %}
+                                {% if wexp.link %}
+                                <a href="{{ wexp.link }}" class="position__link">{{ wexp.link }}</a>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                    </section>
+                    <hr class="contents__vertical-line">
+                    <section class="section_bigger__detailed-column">
+                       {% if found_user.student.cv_working %}
+                            {% for wexp in found_user.student.cv_working.all %}
+                            <div class="detailed-column__position-description contents__row_lower">
+                                <h5 class="position__title">{{ wexp.company }}</h5>
+                                <p class="position-description__detailed">{{ wexp.description }}</p>
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                    </section>
+                </main>
+            </article>
+            {% endif %}
+
+            {% if found_user.student.cv_projects.all %}
+             <article class="main-content__section main-content__section_bigger">
+                <header class="main-content__header">
+                    <h3 class="section__title section__title_project">Projects</h3>
+                </header>
+                <main class="section_bigger__contents">
+                    <hr class="contents__vertical-line contents__vertical-line_right">
+                    <section class="section_bigger__year-column section_bigger_full-width">
+                        {% if found_user.student.cv_projects %}
+                            {% for proj in found_user.student.cv_projects.all %}
+                            <div class="year-column__general contents__row_no-height">
+                                <h5 class="position__title">{{ proj.name }}</h5>
+                                <p class="position__description">{{ proj.about }}</p>
+
+                                <div class="position__short-info">
+                                    <p class="position__field">Project field: <span class="position__field_green">{{ proj.project_field }}</span>
+                                    </p>
+                                    <p class="position__field">Technologies: <span class="position__field_green">{{ project.technologies }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% endif %}
-                    {% if edu.description %}
-					<p>{{ edu.description }}</p>
+                    </section>
+                </main>
+            </article>
+            {% endif %}
+        </div>
+
+        <div id="col2" class="main-content__column">
+            {% if found_user.student.cv_soft_skills or found_user.student.cv_hard_skills %}
+            <article class="main-content__section main-content__section_smaller">
+                <header class="main-content__header">
+                    <h3 class="section__title section__title_skills">Skills</h3>
+                </header>
+                <main class="section_smaller__contents">
+                    {% if found_user.student.cv_soft_skills %}
+                    <div class="skills">
+                        <h5 class="position__title position__title_green">Soft Skills</h5>
+                        <ul class="skills__list">
+                            {% if found_user.student.cv_soft_skills %}
+                                {% for soft_skill in found_user.student.cv_soft_skills.all %}
+                                <li class="skills__item">{{ soft_skill }}</li>
+                                {% endfor %}
+                            {% else %}
+                                {% for soft_skill in found_user.soft_skills.all %}
+                                <li class="skills__item">{{ soft_skill }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
                     {% endif %}
-				</article>
+                    {% if found_user.student.cv_hard_skills %}
+                    <div class="skills">
+                        <h5 class="position__title position__title_green">Hard Skills</h5>
+                        <ul class="skills__list">
+                            {% if found_user.student.cv_hard_skills %}
+                                {% for hard_skill in found_user.student.cv_hard_skills.all %}
+                                <li class="skills__item">{{ hard_skill }}</li>
+                                {% endfor %}
+                            {% else %}
+                                {% for hard_skill in found_user.hard_skills.all %}
+                                <li class="skills__item">{{ hard_skill }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </main>
+            </article>
+            {% endif %}
+
+            {% if found_user.student.cv_programming_languages.all %}
+            <article class="main-content__section main-content__section_smaller">
+                <header class="main-content__header">
+                    <h3 class="section__title section__title_programming-lang">Programming Languages</h3>
+                </header>
+                {% for plang in found_user.student.cv_programming_languages.all %}
+                <main class="section_smaller__contents">
+                    <div class="programming-skill">
+                        <label class="programming-skill__name">{{ plang.name }}</label>
+                        <form class="custom-rating programming-skill__rating">
+                            <label class="custom-rating__label">
+                                <input type="radio" name="stars" value="1" class="label__input"/>
+                                <span class="label__icon"></span>
+                            </label>
+                            <label class="custom-rating__label">
+                                <input type="radio" name="stars" value="2" class="label__input"/>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                            </label>
+                            <label class="custom-rating__label">
+                                <input type="radio" name="stars" value="3" class="label__input"/>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                            </label>
+                            <label class="custom-rating__label">
+                                <input type="radio" name="stars" value="4" class="label__input"/>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                            </label>
+                            <label class="custom-rating__label">
+                                <input type="radio" name="stars" value="5" class="label__input"/>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                                <span class="label__icon"></span>
+                            </label>
+                        </form>
+                    </div>
+                </main>
                 {% endfor %}
+            </article>
+            {% endif %}
 
-			</div>
-			<div class="clear"></div>
-		</section>
-
-
-		<section>
-			<div class="sectionTitle">
-				<h1>Volunteering</h1>
-			</div>
-
-			<div class="sectionContent">
-                 {% for volunteering in found_user.volunteerexperience_set.all %}
-				<article>
-					<h2>{{ volunteering.title }}</h2>
-					<p class="subDetails">{{ volunteering.organization }}</p>
-					<p>{{ volunteering.description }}</p>
-				</article>
-				 {% endfor %}
-			</div>
-			<div class="clear"></div>
-		</section>
-
-        <section>
-			<div class="sectionTitle">
-				<h1>Interests</h1>
-			</div>
-			<div class="sectionContent">
-				<ul class="keySkills">
-                {% for interest in found_user.fields_of_interests.all %}
-                    <li>{{ interest }}</li>
-                {% endfor %}
-                </ul>
-                <ul class="keySkills">
-                {% for hobby in found_user.student.hobbies.all %}
-                    <li>{{ hobby }}</li>
-				{% endfor %}
-                </ul>
-			</div>
-			<div class="clear"></div>
-		</section>
-
-	</div>
+            {% if found_user.student.cv_volunteering.all %}
+            <article id="volunteering" class="main-content__section main-content__section_smaller">
+                <header class="main-content__header">
+                    <h3 class="section__title section__title_volunteer">Volunteering</h3>
+                </header>
+                <main class="section_smaller__contents">
+                    <ul class="volunteering-list">
+                            {% for vexp in found_user.student.cv_voluneering.all %}
+                            <li class="volunteering-list__item">
+                                <h5 class="item__title">{{ vexp.title }}</h5>
+                                <p class="item__description">{{ vexp.description }}</p>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </main>
+            </article>
+            {% endif %}
+        </div>
+    </div>
+    <footer class="cv__footer">Footer</footer>
 </div>
+</body>
 </html>

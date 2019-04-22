@@ -2,7 +2,7 @@ import os
 
 google_path = ""
 
-try:
-    google_path = os.environ['ADM_JSON']
-except:
+if os.environ.get('ADM_JSON') is not None:
+        google_path = os.environ['ADM_JSON']
+else:
     google_path = '/Users/StasMaster/Downloads/adm.json'
