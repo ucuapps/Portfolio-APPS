@@ -153,3 +153,7 @@ hr{
 svg{
     display: block;
 }
+
+#projectsCarousel {
+    width: 220px;
+}

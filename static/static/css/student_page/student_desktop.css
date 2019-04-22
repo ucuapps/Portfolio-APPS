@@ -434,7 +434,6 @@ svg{
     justify-content: start;
     align-items: center;
     margin-top: 15px;
-    width: 200px;
     height: 50px;
 }
 .intern_project, .volunteer_project{
@@ -459,7 +458,7 @@ svg{
 }
 .proj_tech span{
     margin-left: 13px;
-    font-size: 32px;
+    font-size: 21px;
     font-weight: 900;
 }
 #intern .proj_tech span,

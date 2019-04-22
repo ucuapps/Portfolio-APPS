@@ -18,7 +18,7 @@ from .forms import SearchForm
 
 @login_required
 def index(request):
-    template = 'profiles/index.html'
+    # template = 'profiles/index.html'
     # return render(request, template, {})
     # if request.user.is_authenticated:
     return redirect('show-user', request.user.id)
