@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="row justify-content-md-center">
+        {% for internship in internships %}
+            <h1>internship</h1>
+        {% endfor %}
+    </div>
+
+{% endblock %}
