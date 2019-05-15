@@ -15,6 +15,7 @@ from student.models import Student
 from .forms import UserForm
 from .forms import SearchForm
 
+from internships.models import Internship
 
 @login_required
 def index(request):
@@ -92,9 +93,10 @@ def search(request):
 
     return render(request, 'search.html', {'form': form})
 
+
 def show_internships(request):
-    # internships = Internship.objects.all()
-    return render(request, "internships.html", {'internships':[]})
+    internships = Internship.objects.all()
+    return render(request, "internships.html", {'internships': internships})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):

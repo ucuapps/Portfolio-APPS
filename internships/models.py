@@ -8,3 +8,6 @@ class Internship(models.Model):
     link = models.URLField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # TODO: Add applicants field
+
+    def __str__(self):
+        return self.name
