@@ -4,10 +4,16 @@
 
 {% block content %}
 
+    <button type="button" class="btn btn-primary">Add internship</button>
+
+    {% if internships %}
+
     <div class="row justify-content-md-center">
         {% for internship in internships %}
             <h1>internship</h1>
         {% endfor %}
     </div>
+
+    {% endif %}
 
 {% endblock %}

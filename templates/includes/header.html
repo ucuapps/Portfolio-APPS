@@ -155,6 +155,7 @@
     <div class="info">
         <a href="{{home}}">Profile</a>
         <a href="{{edit_user}}">Edit</a>
+        <a href="">Internships</a>
         <hr>
         <div class="exit">
             <svg version="1.1"
@@ -232,10 +233,13 @@
                                 </g>
                     </svg>
                 </a>
+                <a href="{% url 'internships' %}">
+                    <img src="{% static 'images/linkedin.png' %}" alt="">
+                </a>
                 {% if request.user.is_student %}
                 <a href="{% url 'edit_cv' request.user.id %}"><span id="nav">CV</span></a>
                 <a href="{% url 'show_my_requests' %}" >
-                    <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav">
+                    <img style="width: 20px" src="{% static 'images/envelope.png'%}">
                 </a>
                 {% elif request.user.is_teacher %}
                 <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav" onclick="popup_request_func()" class="request">

@@ -92,6 +92,10 @@ def search(request):
 
     return render(request, 'search.html', {'form': form})
 
+def show_internships(request):
+    # internships = Internship.objects.all()
+    return render(request, "internships.html", {'internships':[]})
+
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
