@@ -4,15 +4,23 @@
 
 {% block content %}
 
-    <button type="button" class="btn btn-primary">Add internship</button>
+    <button type="button" class="btn btn-primary mb-3">Add internship</button>
 
     {% if internships %}
 
         <div class="justify-content-md-center">
             {% for internship in internships %}
-                <h1>{{internship.name}}</h1>
-                <br>
-                <br>
+                <ul class="col-md-4">
+                    <li class="list-group-item">
+                        Title: {{internship.name}}
+                    </li>
+                    <li class="list-group-item">
+                        Published by: {{internship.created_by}}
+                    </li>
+                    <li class="list-group-item">
+                        <a class="btn btn-primary" href="#">Apply</a>
+                    </li>
+                </ul>
             {% endfor %}
         </div>
 
