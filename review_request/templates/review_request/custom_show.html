@@ -6,32 +6,34 @@
 {% block head_title %}{% trans title %}{% endblock %}
 {% block block-header %}{% trans title %}{% endblock %}
 {% block content %}
-<div class="row">
-{% for req in requests %}
-<ul class="col-md-4 list-group">
-    <li class="list-group-item">
-        Student: <a href="{% url 'show-user' req.student.id %}">{{req.student.email}}</a>
-    </li>
-    <li class="list-group-item">
-            Title: {{req.title}}
-    </li>
-    {% if request.user.is_student %}
-    <li class="list-group-item">    <a class="btn btn-primary" href="{% url 'edit_request' req.id %}">Edit request</a>
-</li>
-    {% else %}
-<li class="list-group-item">        <a class="btn btn-primary" href="{% url 'show_single_request' req.id %}">More...</a>
-</li>
-    {% endif %}
+    <div class="row">
+        {% for req in requests %}
+            <ul class="col-md-4 list-group">
+                
+                <li class="list-group-item">
+                    Student: <a href="{% url 'show-user' req.student.id %}">{{req.student.email}}</a>
+                </li>
+                <li class="list-group-item">
+                        Title: {{req.title}}
+                </li>
+                {% if request.user.is_student %}
+                    <li class="list-group-item">    <a class="btn btn-primary" href="{% url 'edit_request' req.id %}">Edit request</a>
+                    </li>
+                        {% else %}
+                    <li class="list-group-item">        <a class="btn btn-primary" href="{% url 'show_single_request' req.id %}">More...</a>
+                    </li>
+                {% endif %}
 
-</ul>
-{% endfor %}
+            </ul>
+        {% endfor %}
     </div>
-{% if request.user.is_student %}
-   <div style="margin-top: 20px;">
-       <a class="btn btn-primary" href="{% url 'create_request' %}">Create request</a>
-   </div>
+    {% if request.user.is_student %}
+        
+        <div style="margin-top: 20px;">
+            <a class="btn btn-primary" href="{% url 'create_request' %}">Create request</a>
+        </div>
 
-{% endif %}
+    {% endif %}
 
 {% endblock %}
 
