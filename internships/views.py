@@ -15,7 +15,7 @@ def create_internship(request, pk=None):
         title = 'Edit internship:'
         internship = get_object_or_404(Internship, pk=pk)
     else:
-        title = 'Create request:'
+        title = 'Create internship:'
         internship = Internship()
         internship.created_by = request.user
         new_form = True
@@ -28,10 +28,7 @@ def create_internship(request, pk=None):
     if request.method == "POST" and form.is_valid():
         a = form.save()
 
-        if new_form:
-            # notify_teachers(review_request)
-            pass
         messages.success(request, "Process finished successfully")
-        return redirect('profiles/show_internships')
+        return redirect('internships')
 
-    return render(request, template_name='internships/edit.html', context={'form': form, 'title': title})
+    return render(request, template_name='internship_edit.html', context={'form': form, 'title': title})
