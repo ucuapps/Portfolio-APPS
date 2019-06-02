@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load staticfiles %}
 
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/internships.css' %}">
+{% endblock %}
+
 {% block head_title %}{% trans title %}{% endblock %}
 {% block block-header %}{% trans title %}{% endblock %}
 
@@ -9,25 +13,25 @@
 
     <!-- <button type="button" class="btn btn-primary mb-3" href="{% url 'create_internship' %}">Add internship</button> -->
 
-    <div class="mt-3">
+    <div class="mt-3 mb-3 text-center">
         <a class="btn btn-primary" href="{% url 'create_internship' %}">Create internship</a>
     </div>
 
     {% if internships %}
 
-        <div class="justify-content-md-center">
+        <div class="internship_container">
             {% for internship in internships %}
-                <ul class="col-md-4">
+                <div>
                     <li class="list-group-item">
                         Title: {{internship.name}}
                     </li>
                     <li class="list-group-item">
-                        Published by: {{internship.created_by}}
+                        Published by: <div class="created_by">{{internship.created_by}}</div>
                     </li>
                     <li class="list-group-item">
                         <a class="btn btn-primary" href="#">Apply</a>
                     </li>
-                </ul>
+                </div>
             {% endfor %}
         </div>
 

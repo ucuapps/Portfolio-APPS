@@ -1,0 +1,11 @@
+.internship_container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 15px;
+    justify-content: space-between;
+}
+.created_by{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #000000;
+}
