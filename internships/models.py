@@ -7,6 +7,7 @@ class Internship(models.Model):
     description = models.TextField()
     link = models.URLField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    deadline = models.DateField()
     # TODO: Add applicants field
 
     def __str__(self):

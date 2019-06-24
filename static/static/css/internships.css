@@ -1,11 +1,30 @@
 .internship_container{
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 15px;
+    justify-content: space-between; */
+}
+.internship_description{
+    height: 225px;
+}
+.big-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+.text-hidden{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.internship_footer{
+    align-items: center;
+    display: flex;
     justify-content: space-between;
+    padding-right: 7px;
+    padding-left: 10px;
 }
 .created_by{
-    text-overflow: ellipsis;
-    overflow: hidden;
     color: #000000;
+    display: block;
+    margin-left: -3px;
 }

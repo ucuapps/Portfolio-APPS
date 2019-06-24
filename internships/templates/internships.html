@@ -19,17 +19,31 @@
 
     {% if internships %}
 
-        <div class="internship_container">
+        <div class="row internship_container">
             {% for internship in internships %}
-                <div>
-                    <li class="list-group-item">
-                        Title: {{internship.name}}
+                <div class="col-lg-6 col-xl-6 mb-3">
+                    <li class="list-group-item text-center">
+                        <h4>{{internship.name}}</h4>
+                    </li>
+                    <li class="list-group-item internship_description">
+                        <h5 class="text-center">{{internship.position}}</h5>
+                        <div class="big-text text-hidden">
+                            {{internship.description}}
+                        </div>
                     </li>
                     <li class="list-group-item">
-                        Published by: <div class="created_by">{{internship.created_by}}</div>
+                        Published by:  
+                        <div class="created_by text-hidden">
+                            <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to={{ internship.created_by }}&tf=1" target="_blank">
+                                {{internship.created_by}}
+                            </a>
+                        </div>
                     </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-primary" href="#">Apply</a>
+                    <li class="list-group-item internship_footer">
+                        <div>
+                            <a class="btn btn-primary" href="#">Apply</a>
+                        </div>
+                        <div>Deadline: {{internship.deadline}}</div>
                     </li>
                 </div>
             {% endfor %}
