@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required, user_passes_test
+from datetime import date
 
 from profiles.models import User, Interests
 from student.views import student_login_required
@@ -96,7 +97,14 @@ def search(request):
 
 def show_internships(request):
     internships = Internship.objects.all()
-    return render(request, "internships.html", {'internships': internships})
+    archive = []
+    actual_interns = []
+    for i in internships:
+        if i.deadline < date.today():
+            archive.append(i)
+        else:
+            actual_interns.append(i)
+    return render(request, "internships.html", {'internships': actual_interns, 'archive':archive})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):

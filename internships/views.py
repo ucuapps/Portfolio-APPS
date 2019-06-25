@@ -10,7 +10,6 @@ from student.views import student_login_required
 
 @student_login_required
 def create_internship(request, pk=None):
-    new_form = False
     if pk:
         title = 'Edit internship:'
         internship = get_object_or_404(Internship, pk=pk)
@@ -18,7 +17,6 @@ def create_internship(request, pk=None):
         title = 'Create internship:'
         internship = Internship()
         internship.created_by = request.user
-        new_form = True
 
     if request.method == "POST":
         form = CreateInternshipForm(request.POST, instance=internship)
@@ -26,7 +24,7 @@ def create_internship(request, pk=None):
         form = CreateInternshipForm(instance=internship)
 
     if request.method == "POST" and form.is_valid():
-        a = form.save()
+        form.save()
 
         messages.success(request, "Process finished successfully")
         return redirect('internships')
