@@ -25,10 +25,30 @@
                     <li class="list-group-item text-center">
                         <h4>{{internship.name}}</h4>
                     </li>
-                    <li class="list-group-item internship_description">
+                    <li class="list-group-item internship_description" data-toggle="modal" data-target="#intern_desc_modal">
                         <h5 class="text-center">{{internship.position}}</h5>
-                        <div class="big-text text-hidden">
+                        <div class="big-text text-hidden" style="cursor: pointer;">
                             {{internship.description}}
+                        </div>
+
+                        <div class="modal fade" id="intern_desc_modal" tabindex="-1" role="dialog" aria-labelledby="intern_modal_title" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h5 class="modal-title" id="intern_modal_title">{{internship.name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 class="text-center">{{internship.position}}</h5>
+                                        {{internship.description}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="list-group-item">
@@ -51,7 +71,20 @@
 
     {% endif %}
 
+    {% block scripts %}
+        <script type="text/javascript">
+            var modals = document.getElementsByClassName("modal");
+            var desc_parents = document.querySelectorAll('[data-toggle="modal"]');
+            var modal_titles = document.getElementsByClassName("modal-title");
+            for (let i = 0; i < modals.length; i++) {
+                modals[i].id = "intern_desc_modal_" + i;
+                modals[i].setAttribute('aria-labelledby',"intern_modal_title_" + i);
+                desc_parents[i].setAttribute('data-target',"#intern_desc_modal_" + i);
+                modal_titles[i].id = "intern_modal_title_" + i;
+            }
 
+        </script>
+    {% endblock %}
 
 
 {% endblock %}
