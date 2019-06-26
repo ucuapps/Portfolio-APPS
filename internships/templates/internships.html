@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/internships.css' %}">
     <script type="text/javascript">
         function mark_modals() {
-            debugger;
             var modals = document.getElementsByClassName("modal");
             var desc_parents = document.querySelectorAll('[data-toggle="modal"]');
             var modal_titles = document.getElementsByClassName("modal-title");
@@ -72,10 +71,15 @@
                         </div>
                     </li>
                     <li class="list-group-item internship_footer">
+                        {% if user.is_student %}
+                            <div>
+                                <a class="btn btn-primary" href="#">Apply</a>
+                            </div>
+                        {% endif %}
                         <div>
-                            <a class="btn btn-primary" href="#">Apply</a>
+                            <div>Deadline:</div>
+                            <div>{{internship.deadline}}</div>
                         </div>
-                        <div>Deadline: {{internship.deadline}}</div>
                     </li>
                 </div>
             {% endfor %}
@@ -85,7 +89,7 @@
 
     {% if archive %}
         <div class="text-center">
-            <a class="btn btn-primary" id="archive_btn" href="#intern_archive" data-toggle="collapse" data-target="#intern_archive"
+            <a class="btn btn-primary mb-3" id="archive_btn" href="#intern_archive" data-toggle="collapse" data-target="#intern_archive"
                 aria-expanded="false" aria-controls="intern_archive">
                     Archive of internships
             </a>
@@ -136,7 +140,10 @@
                             <h5 class="text-danger ml-2">
                                 Overdue
                             </h5>
-                            <div>Deadline: {{internship.deadline}}</div>
+                            <div>
+                                <div>Deadline:</div>
+                                <div>{{internship.deadline}}</div>
+                            </div>
                         </li>
                     </div>
                 {% endfor %}

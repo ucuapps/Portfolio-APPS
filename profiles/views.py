@@ -104,7 +104,7 @@ def show_internships(request):
             archive.append(i)
         else:
             actual_interns.append(i)
-    return render(request, "internships.html", {'internships': actual_interns, 'archive':archive})
+    return render(request, "internships.html", {'internships': actual_interns, 'archive': archive, 'user': request.user})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):

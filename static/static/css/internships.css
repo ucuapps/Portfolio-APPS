@@ -20,12 +20,9 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding-right: 7px;
-    padding-left: 10px;
 }
 .created_by{
     color: #000000;
     display: block;
-    margin-left: -3px;
 }
 .list-group-item, .list-group-item:hover{ z-index: auto !important; }
