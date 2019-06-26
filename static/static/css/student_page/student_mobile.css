@@ -340,7 +340,6 @@ hr{
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    margin-left: 20px;
     width: 100%;
     height: auto;
 }
@@ -457,7 +456,7 @@ hr{
     letter-spacing: .05px;
 }
 .proj_info hr, .divide{
-    margin: 5.5px;
+    margin: 5.5px 0px 5.5px 0px;
     height: 1px;
     background-color: rgb(180,180,180);
 }
@@ -586,4 +585,11 @@ hr{
 }
 .places span:last-of-type{
     margin-bottom: 13px;
+}
+.about_block{
+    margin-left: 20px;
+}
+.lang_lvl div{
+    color: rgb(68,68,68);
+    width: 70%;
 }

@@ -5,21 +5,22 @@
         <title>Profile</title>
         <meta charset="utf-8">
 
-        <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
         <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
-        <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/header/header_mobile.css'%}">
+        <link rel="stylesheet" media="screen and (min-width: 426px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
+        <link rel="stylesheet" media="screen and (max-width: 425px)" href="{% static 'css/header/header_mobile.css'%}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
         <link rel="shortcut icon" href="{% static 'images/logo.ico'%}" type="image/ico">
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
         <meta name="description" content="This helps you to create your portfolio">
+        <link rel="stylesheet" href="{% static 'css/student_page/student.css' %} ">
         <link rel="stylesheet" media="screen and (min-width: 450px) and (max-width: 1250px)" href="{% static 'css/student_page/student_tablets.css' %} ">
         <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/student_page/student_desktop.css' %}">
         <link rel="stylesheet" media="screen and (max-width: 449px)" href="{% static 'css/student_page/student_mobile.css' %}">
         <link rel="stylesheet" href="{% static 'css/student_page/student_carousel.css' %}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
         <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/ico">
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">
         <script type="text/javascript" src="{% static 'js/student_switcher.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/project_resizer.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/menu_mover.js'%}"></script>
@@ -78,42 +79,54 @@
                     </svg>
                     <div class="hard_skills">
                         {% if found_user.student.summary %}
-                            <span>ABOUT ME</span>
-                            <div class="description">
-                                <p>{{ found_user.student.summary }}</p>
+                            <div class="about_block">
+                                <span>ABOUT ME</span>
+                                <div class="description">
+                                    <p>{{ found_user.student.summary }}</p>
+                                </div>    
                             </div>
                             <hr class="divide">
                         {% endif %}
 
-
-                        <span class="last">LANGUAGES</span>
-                        <ul class="rate">
-                            {% for lang in found_user.language_set.all %}
-                            <li><span>{{ lang.name }}</span><span>{{ lang.level }}</span></li>
-                            {% endfor %}
-
-                        </ul>
+                        <div class="about_block">
+                            <span class="last">LANGUAGES</span>
+                            <div class="lang_lvl">
+                                {% for lang in found_user.language_set.all %}
+                                <div class="ml-3 mr-3">
+                                    <div>{{ lang.name }}</div>
+                                    <div>{{ lang.level }}</div>
+                                </div>
+                                {% endfor %}
+    
+                            </div>    
+                        </div>
                         <hr class="divide">
-                        <span class="last">HARD SKILLS</span>
-                        <ul class="rate">
-                            {% for hard in found_user.student.hard_skills.all %}
-                            <li><span>{{ hard.name }}</span></li>
-                            {% endfor %}
-                        </ul>
+                        <div class="about_block">
+                            <span class="last">HARD SKILLS</span>
+                            <ul class="rate">
+                                {% for hard in found_user.student.hard_skills.all %}
+                                <li><span>{{ hard.name }}</span></li>
+                                {% endfor %}
+                            </ul>    
+                        </div>
                         <hr class="divide">
-                        <span class="last">PROGRAMMING LANGUAGES</span>
-                        <ul class="rate">
-                            {% for plang in found_user.student.programming_language.all %}
-                            <li><span>{{ plang.name }}</span></li>
-                            {% endfor %}
-                        </ul>
+                        <div class="about_block">
+                            <span class="last">PROGRAMMING LANGUAGES</span>
+                            <ul class="rate">
+                                {% for plang in found_user.student.programming_language.all %}
+                                <li></li><span>{{ plang.name }}</span></li>
+                                {% endfor %}
+                            </ul>    
+                        </div>
                         <hr class="divide">
-                        <span class="last">SOFT SKILLS</span>
-                        <ul class="rate">
-                            {% for soft in found_user.student.soft_skills.all %}
-                            <li><span>{{ soft.name }}</span></li>
-                            {% endfor %}
-                        </ul>
+                        <div class="about_block">
+                            <span class="last">SOFT SKILLS</span>
+                            <ul class="rate">
+                                {% for soft in found_user.student.soft_skills.all %}
+                                <li><span>{{ soft.name }}</span></li>
+                                {% endfor %}
+                            </ul>    
+                        </div>
                         <hr class="divide">
                     </div>
                 </div>
