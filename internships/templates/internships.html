@@ -4,19 +4,7 @@
 
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/internships.css' %}">
-    <script type="text/javascript">
-        function mark_modals() {
-            var modals = document.getElementsByClassName("modal");
-            var desc_parents = document.querySelectorAll('[data-toggle="modal"]');
-            var modal_titles = document.getElementsByClassName("modal-title");
-            for (let i = 0; i < modals.length; i++) {
-                modals[i].id = "intern_desc_modal_" + i;
-                modals[i].setAttribute('aria-labelledby',"intern_modal_title_" + i);
-                desc_parents[i].setAttribute('data-target',"#intern_desc_modal_" + i);
-                modal_titles[i].id = "intern_modal_title_" + i;
-            }            
-        }
-    </script>
+    <script type="text/javascript" src="{% static 'js/internships.js' %}"></script>
 {% endblock %}
 
 {% block head_title %}{% trans title %}{% endblock %}
@@ -89,7 +77,7 @@
 
     {% if archive %}
         <div class="text-center">
-            <a class="btn btn-primary mb-3" id="archive_btn" href="#intern_archive" data-toggle="collapse" data-target="#intern_archive"
+            <a class="btn btn-primary mt-3 mb-3" id="archive_btn" href="#intern_archive" data-toggle="collapse" data-target="#intern_archive"
                 aria-expanded="false" aria-controls="intern_archive">
                     Archive of internships
             </a>
