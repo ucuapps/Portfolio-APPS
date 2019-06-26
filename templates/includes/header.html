@@ -233,8 +233,8 @@
                                 </g>
                     </svg>
                 </a>
-                <a href="{% url 'internships' %}">
-                    <img src="{% static 'images/linkedin.png' %}" alt="">
+                <a class='intern_header_icon' href="{% url 'internships' %}">
+                    <img src="{% static 'images/briefcase.png' %}" alt="">
                 </a>
                 {% if request.user.is_student %}
                 <a href="{% url 'edit_cv' request.user.id %}"><span id="nav">CV</span></a>
