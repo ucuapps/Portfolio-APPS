@@ -18,6 +18,7 @@ from .forms import SearchForm
 
 from internships.models import Internship
 
+
 @login_required
 def index(request):
     # template = 'profiles/index.html'
@@ -81,7 +82,8 @@ def search(request):
         if form.is_valid():
             users = User.objects.all()
             if form.cleaned_data['current_study_year']:
-                users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'])
+                users = User.objects.filter(
+                    student__current_study_year__icontains=form.cleaned_data['current_study_year'])
             if form.cleaned_data['last_name']:
                 users = User.objects.filter(last_name__icontains=form.cleaned_data['last_name'])
             if form.cleaned_data['first_name']:
@@ -97,14 +99,19 @@ def search(request):
 
 def show_internships(request):
     internships = Internship.objects.all()
-    archive = []
-    actual_interns = []
-    for i in internships:
-        if i.deadline < date.today():
-            archive.append(i)
-        else:
-            actual_interns.append(i)
-    return render(request, "internships.html", {'internships': actual_interns, 'archive': archive, 'user': request.user})
+    if request.user.is_teacher:
+        archive = []
+        actual_interns = []
+        for i in internships:
+            if i.deadline < date.today():
+                archive.append(i)
+            else:
+                actual_interns.append(i)
+        return render(request, "internships_teacher.html",
+                      {'internships': actual_interns, 'archive': archive, 'user': request.user})
+    elif request.user.is_student:
+        # TODO: my internships
+        return render(request, "internships_student.html", {'internships': internships})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):
