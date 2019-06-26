@@ -1,4 +1,4 @@
-// Fix this gauno code as soon as possible
+// This code can be much better
 
 function hard() {
     var proj = document.getElementById('projcont');
