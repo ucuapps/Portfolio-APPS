@@ -66,3 +66,10 @@ body > div > div > div.col-md-6.align-left > div > div.kastil {
 .form-control.is-valid:focus {
     box-shadow: 0 0 0 0.02rem rgba(168, 127, 244, 0.6);
 }
+.intern_header_icon{
+    margin-top: -5px;
+}
+/* .intern_header_icon img{
+    height: 22px;
+    width: 22px;
+} */
