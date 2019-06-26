@@ -8,7 +8,8 @@ from teacher.views import teacher_login_required
 from student.views import student_login_required
 
 
-@student_login_required
+@teacher_login_required
+# @student_login_required
 def create_internship(request, pk=None):
     if pk:
         title = 'Edit internship:'
@@ -30,3 +31,8 @@ def create_internship(request, pk=None):
         return redirect('internships')
 
     return render(request, template_name='internship_edit.html', context={'form': form, 'title': title})
+
+
+@student_login_required
+def apply_to_internship(request, pk=None):
+    return render(request, template_name='internship_apply.html')

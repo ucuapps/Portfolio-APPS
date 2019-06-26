@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/internships.css' %}">
+    <script type="text/javascript" src="{% static 'js/internships.js' %}"></script>
+{% endblock %}
+
+{% block head_title %}{% trans title %}{% endblock %}
+{% block block-header %}{% trans title %}{% endblock %}
+
+{% block content %}
+
+    {% if internships %}
+
+        <div class="row internship_container">
+            {% for internship in internships %}
+                <div class="col-lg-6 col-xl-6 mb-3">
+                    <li class="list-group-item text-center">
+                        <h4>{{internship.name}}</h4>
+                    </li>
+                    <li class="list-group-item internship_description" data-toggle="modal" data-target="#intern_desc_modal">
+                        <h5 class="text-center">{{internship.position}}</h5>
+                        <div class="big-text text-hidden" style="cursor: pointer;">
+                            {{internship.description}}
+                        </div>
+
+                        <div class="modal fade" id="intern_desc_modal" tabindex="-1" role="dialog" aria-labelledby="intern_modal_title" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                        <h5 class="modal-title" id="intern_modal_title">{{internship.name}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 class="text-center">{{internship.position}}</h5>
+                                        {{internship.description}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        Published by:  
+                        <div class="created_by text-hidden">
+                            <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to={{ internship.created_by }}&tf=1" target="_blank">
+                                {{internship.created_by}}
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item internship_footer">
+                        {% if user.is_student %}
+                            <div>
+                                <a class="btn btn-primary" href="#">Apply</a>
+                            </div>
+                        {% endif %}
+                        <div>
+                            <div>Deadline:</div>
+                            <div>{{internship.deadline}}</div>
+                        </div>
+                    </li>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    {% if archive %}
+        <div class="text-center">
+            <a class="btn btn-primary mt-3 mb-3" id="archive_btn" href="#intern_archive" data-toggle="collapse" data-target="#intern_archive"
+                aria-expanded="false" aria-controls="intern_archive">
+                    Archive of internships
+            </a>
+        </div>
+        <div class="collapse" id="intern_archive">
+            <h2 class="text-center mt-3 mb-3" name="archive_title"> <a ></a> Archive of internships</h2>
+            <div class="row internship_container">
+                {% for internship in archive %}
+                    <div class="col-lg-6 col-xl-6 mb-3">
+                        <li class="list-group-item text-center">
+                            <h4>{{internship.name}}</h4>
+                        </li>
+                        <li class="list-group-item internship_description" data-toggle="modal" data-target="#intern_desc_modal">
+                            <h5 class="text-center">{{internship.position}}</h5>
+                            <div class="big-text text-hidden" style="cursor: pointer;">
+                                {{internship.description}}
+                            </div>
+
+                            <div class="modal fade" id="intern_desc_modal" tabindex="-1" role="dialog" aria-labelledby="intern_modal_title" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h5 class="modal-title" id="intern_modal_title">{{internship.name}}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5 class="text-center">{{internship.position}}</h5>
+                                            {{internship.description}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            Published by:  
+                            <div class="created_by text-hidden">
+                                <a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to={{ internship.created_by }}&tf=1" target="_blank">
+                                    {{internship.created_by}}
+                                </a>
+                            </div>
+                        </li>
+                        <li class="list-group-item internship_footer">
+                            <h5 class="text-danger ml-2">
+                                Overdue
+                            </h5>
+                            <div>
+                                <div>Deadline:</div>
+                                <div>{{internship.deadline}}</div>
+                            </div>
+                        </li>
+                    </div>
+                {% endfor %}
+            </div>            
+        </div>
+
+    {% endif %}
+
+    {% block scripts %}
+        <script type="text/javascript">
+            mark_modals();
+        </script>
+    {% endblock %}
+
+
+{% endblock %}

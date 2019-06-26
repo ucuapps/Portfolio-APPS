@@ -1,6 +1,9 @@
 from django.db import models
 from django.conf import settings
 
+from student.models import Student
+
+
 class Internship(models.Model):
     name = models.CharField(max_length=40)
     position = models.CharField(max_length=40)
@@ -8,7 +11,17 @@ class Internship(models.Model):
     link = models.URLField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     deadline = models.DateField()
-    # TODO: Add applicants field
+
+    applicants = models.ManyToManyField(Student, related_name="applicants", blank=True)
+    approved_applicants = models.ManyToManyField(Student, related_name="approved_applicants", blank=True)
 
     def __str__(self):
         return self.name
+
+
+class Application(models.Model):
+    internship = models.ForeignKey(Internship, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    cv = models.FileField()
+    motivation_letter = models.TextField(blank=True, null=True)
