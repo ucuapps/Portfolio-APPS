@@ -69,7 +69,9 @@ body > div > div > div.col-md-6.align-left > div > div.kastil {
 .intern_header_icon{
     margin-top: -5px;
 }
-/* .intern_header_icon img{
-    height: 22px;
-    width: 22px;
-} */
+.search_icon img{
+    transform: scaleX(-1);
+}
+.request_icon {
+    width: 20px;
+}

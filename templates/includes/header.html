@@ -56,7 +56,7 @@
         }
         .icons{
             height: 98%;
-            width: 145px;
+            width: 180px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -109,7 +109,7 @@
         }
         .icons{
             height: 100%;
-            width: 145px;
+            width: 180px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -222,8 +222,9 @@
         <div class="icon_container">
             <div class="icons">
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'search_user' %}">
-                    <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
+                <a class="search_icon" href="{% url 'search_user' %}">
+                    <img src="{% static 'images/search.png'%}">
+                    <!-- <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
                                 <defs>
                                 </defs>
                                 <g id="nav">
@@ -231,7 +232,7 @@
                                         l25.4-25.4l0,0c5.6,3.9,12.3,6.1,19.6,6.1c18.9,0,34.3-15.4,34.3-34.3S72.9,0,53.9,0C35,0,19.6,15.4,19.6,34.3z M27.7,34.3
                                         c0-14.5,11.7-26.2,26.2-26.2s26.2,11.7,26.2,26.2S68.4,60.5,53.9,60.5S27.7,48.8,27.7,34.3z"/>
                                 </g>
-                    </svg>
+                    </svg> -->
                 </a>
                 <a class='intern_header_icon' href="{% url 'internships' %}">
                     <img src="{% static 'images/briefcase.png' %}" alt="">
@@ -239,12 +240,12 @@
                 {% if request.user.is_student %}
                 <a href="{% url 'edit_cv' request.user.id %}"><span id="nav">CV</span></a>
                 <a href="{% url 'show_my_requests' %}" >
-                    <img style="width: 20px" src="{% static 'images/envelope.png'%}">
+                    <img class="request_icon" src="{% static 'images/envelope.png'%}">
                 </a>
                 {% elif request.user.is_teacher %}
-                <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav" onclick="popup_request_func()" class="request">
+                <img class="request_icon" src="{% static 'images/envelope.png'%}" id="nav" onclick="popup_request_func()" class="request">
                 {% endif %}
-                <div onclick="popup_func()">
+                <div class="ml-2" onclick="popup_func()">
                     <img src="{% get_media_prefix %}{{ request.user.profile_image }}" class="avatar">
                 </div>
             </div>
