@@ -40,11 +40,9 @@ def edit_student(request):
         form = StudentForm(instance=request.user.student)
 
     if request.method == "POST" and form.is_valid():
-        if 'mainSave' in request.POST:
-            form.save()
-            messages.success(request, "Your profile data has been changed")
-        elif 'langSave' in request.POST:
-            form.save()
+        form.save()
+        messages.success(request, "Your profile data has been changed")
+        if 'langSave' in request.POST:
             return redirect('new_language')
 
     context["form"] = form
