@@ -12,6 +12,10 @@
 
 {% block content %}
 
+    <div class="mt-3 mb-3 text-center">
+        <a class="btn btn-primary" href="{% url 'create_internship' %}">Create internship</a>
+    </div>
+
     {% if internships %}
 
         <div class="row internship_container">
@@ -57,7 +61,7 @@
                     <li class="list-group-item internship_footer">
                         {% if user.is_student %}
                             <div>
-                                <a class="btn btn-primary" href="#">Apply</a>
+                                <a class="btn btn-primary" href="{% url 'apply_to_inyernship' ">Apply</a>
                             </div>
                         {% endif %}
                         <div>
@@ -144,3 +148,4 @@
 
 
 {% endblock %}
+
