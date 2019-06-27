@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-# from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
 
@@ -10,6 +9,7 @@ from teacher.views import teacher_login_required
 from student.views import student_login_required
 
 from profiles.models import User
+
 
 @teacher_login_required
 def create_internship(request, pk=None):
@@ -30,7 +30,7 @@ def create_internship(request, pk=None):
         form.save()
         students = User.objects.filter(is_student=True)
         student_emails = list([student.email for student in students])
-        send_mail('New internship at {}: {}'.format(internship.name, internship.position),
+        send_mail('New internship at {}: {}'.format(internship.company_name, internship.position),
                   internship.description,
                   'help.portfolio.apps@gmail.com',
                   student_emails,

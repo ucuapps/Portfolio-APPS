@@ -17,7 +17,7 @@ class Internship(models.Model):
     approved_applicants = models.ManyToManyField(Student, related_name="approved_applicants", blank=True)
 
     def __str__(self):
-        return self.name
+        return self.company_name
 
 
 class Application(models.Model):

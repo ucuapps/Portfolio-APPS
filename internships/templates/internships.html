@@ -24,7 +24,7 @@
             {% for internship in internships %}
                 <div class="col-lg-6 col-xl-6 mb-3">
                     <li class="list-group-item text-center">
-                        <h4>{{internship.name}}</h4>
+                        <h4>{{internship.company_name}}</h4>
                     </li>
                     <li class="list-group-item internship_description" data-toggle="modal" data-target="#intern_desc_modal">
                         <h5 class="text-center">{{internship.position}}</h5>
@@ -61,9 +61,13 @@
                         </div>
                     </li>
                     <li class="list-group-item internship_footer">
-                        {% if user.is_student %}
+                        {% if user.is_student and internship.is_inner %}
                             <div>
                                 <a class="btn btn-primary" href="{% url 'apply_to_internship' internship.id">Apply</a>
+                            </div>
+                        {% elif user.is_student%}
+                            <div>
+                                <a class="btn btn-primary" href={{ internship.link }}>Apply</a>
                             </div>
                         {% endif %}
                         <div>
