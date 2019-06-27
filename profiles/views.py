@@ -16,7 +16,8 @@ from student.models import Student
 from .forms import UserForm
 from .forms import SearchForm
 
-from internships.models import Internship
+from internships.models import Internship, Application
+
 
 @login_required
 def index(request):
@@ -81,7 +82,8 @@ def search(request):
         if form.is_valid():
             users = User.objects.all()
             if form.cleaned_data['current_study_year']:
-                users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'])
+                users = User.objects.filter(
+                    student__current_study_year__icontains=form.cleaned_data['current_study_year'])
             if form.cleaned_data['last_name']:
                 users = User.objects.filter(last_name__icontains=form.cleaned_data['last_name'])
             if form.cleaned_data['first_name']:
@@ -97,14 +99,32 @@ def search(request):
 
 def show_internships(request):
     internships = Internship.objects.all()
-    archive = []
-    actual_interns = []
-    for i in internships:
-        if i.deadline < date.today():
-            archive.append(i)
-        else:
-            actual_interns.append(i)
-    return render(request, "internships.html", {'internships': actual_interns, 'archive': archive, 'user': request.user})
+    if request.user.is_teacher:
+        archive = list()
+        actual_interns = list()
+        for i in internships:
+            if i.deadline < date.today():
+                archive.append(i)
+            else:
+                actual_interns.append(i)
+        return render(request, "internships.html",
+                      {'internships': actual_interns, 'archive': archive, 'user': request.user})
+    elif request.user.is_student:
+        applications = Application.objects.filter(applicant=request.user.student)
+
+        available_interns = internships
+        my_interns = set()
+        for i in internships:
+            for app in applications:
+                if app.internship is i:
+                    my_interns.add(i)
+                    if i in available_interns:
+                        available_interns.remove(i)
+
+        available_interns = list(available_interns)
+        my_interns = list(my_interns)
+
+        return render(request, "internships.html", {'internships': available_interns, 'my_internships': my_interns})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):
