@@ -81,7 +81,7 @@ class User(AbstractUser):
     mobile_number = models.CharField(max_length=25, blank=True, null=True, help_text="Enter your mobile number in the following format: +380*********")
     git_link = models.URLField(blank=True, null=True)
     fb_link = models.URLField(blank=True, null=True)
-    profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
+    profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True, help_text="Please, use square photo")
 
     fields_of_interests = models.ManyToManyField(Interests, related_name="interests", blank=True)
     hobbies = models.ManyToManyField(Interests, related_name="hobbies", blank=True)
