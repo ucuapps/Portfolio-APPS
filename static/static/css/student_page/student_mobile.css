@@ -589,7 +589,9 @@ hr{
 .about_block{
     margin-left: 20px;
 }
-.lang_lvl div{
+.about_block_text{
     color: rgb(68,68,68);
+}
+.lang_lvl div{
     width: 70%;
 }

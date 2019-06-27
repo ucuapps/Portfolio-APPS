@@ -543,3 +543,6 @@ svg{
     flex-direction: row;
     flex-wrap: wrap;
 }
+.about_block_text{
+    color: whitesmoke;
+}
