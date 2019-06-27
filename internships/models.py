@@ -5,12 +5,13 @@ from student.models import Student
 
 
 class Internship(models.Model):
-    name = models.CharField(max_length=40)
+    company_name = models.CharField(max_length=40)
     position = models.CharField(max_length=40)
     description = models.TextField()
     link = models.URLField()
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     deadline = models.DateField()
+    is_inner = models.BooleanField(default=True)
 
     applicants = models.ManyToManyField(Student, related_name="applicants", blank=True)
     approved_applicants = models.ManyToManyField(Student, related_name="approved_applicants", blank=True)

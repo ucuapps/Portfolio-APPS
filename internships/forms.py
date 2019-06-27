@@ -12,9 +12,13 @@ class DateInput(forms.DateInput):
 class CreateInternshipForm(forms.ModelForm):
     class Meta:
         model = Internship
-        exclude = ('created_by',)
+        exclude = ('created_by', 'applicants', 'approved_applicants')
         widgets = {
             'deadline': DateInput(),
+            'is_inner': forms.CheckboxInput(attrs={'id': 'inner_check'})
+        }
+        labels = {
+            'is_inner': "Is it an inner internship?"
         }
 
     def __init__(self, *args, **kwargs):

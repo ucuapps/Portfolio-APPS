@@ -26,3 +26,7 @@
     display: block;
 }
 .list-group-item, .list-group-item:hover{ z-index: auto !important; }
+
+.inner_check{
+/* TODO: align with the desctiption, make bigger */
+}
