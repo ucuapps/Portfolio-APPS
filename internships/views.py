@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 from django.contrib import messages
+from django.core.mail import send_mail
 
 from .models import Internship, Application
 from .forms import CreateInternshipForm, ApplyToInternshipForm
@@ -25,6 +27,14 @@ def create_internship(request, pk=None):
 
     if request.method == "POST" and form.is_valid():
         form.save()
+        students = User.objects.filter(is_student=True)
+        student_emails = list([student.email for student in students])
+        teacher_email = internship.created_by.email
+        send_mail('New internship at {}: {}'.format(internship.name, internship.position),
+                  internship.description,
+                  teacher_email,
+                  student_emails,
+                  )
 
         messages.success(request, "Process finished successfully")
         return redirect('internships')
