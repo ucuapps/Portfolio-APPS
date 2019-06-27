@@ -25,3 +25,5 @@ class Application(models.Model):
 
     cv = models.FileField()
     motivation_letter = models.TextField(blank=True, null=True)
+
+    sent = models.BooleanField(default=False)

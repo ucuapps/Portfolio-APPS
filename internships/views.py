@@ -2,14 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 
-from .models import Internship
-from .forms import CreateInternshipForm
+from .models import Internship, Application
+from .forms import CreateInternshipForm, ApplyToInternshipForm
 from teacher.views import teacher_login_required
 from student.views import student_login_required
 
 
 @teacher_login_required
-# @student_login_required
 def create_internship(request, pk=None):
     if pk:
         title = 'Edit internship:'
@@ -35,4 +34,28 @@ def create_internship(request, pk=None):
 
 @student_login_required
 def apply_to_internship(request, pk=None):
-    return render(request, template_name='internship_apply.html')
+    if pk:
+        title = 'Edit application:'
+        application = get_object_or_404(Application, pk=pk)
+
+        if application.sent:
+            messages.error(request, "You can't edit application that has been already sent")
+            return redirect('internships')
+
+    else:
+        title = 'Apply to internship:'
+        application = Application()
+        application.internship = internship
+
+    if request.method == "POST":
+        form = ApplyToInternshipForm(request.POST, instance=application)
+    else:
+        form = ApplyToInternshipForm(instance=application)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+
+        messages.success(request, "Process finished successfully")
+        return redirect('internships')
+
+    return render(request, template_name='internship_apply.html', context={'form': form, 'title':title})
