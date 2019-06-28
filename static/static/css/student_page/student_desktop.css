@@ -13,16 +13,16 @@ body, html{
 #overlay{
     display: none;
 }
-#leftColumn{
+#hobbies{
     padding-top: 55px; /* This value is related to the about block margin*/
 }
-#leftColumn :first-child{
+#hobbies :first-child{
     margin-top: 0px;
 }
-#leftColumn, #hard{
+#hobbies, #hard{
     text-align: center;
 }
-#leftColumn li{
+#hobbies li{
     width: 100%;
 }
 #hard p{
