@@ -90,20 +90,19 @@
 
                         <div class="about_block">
                             <span class="last">LANGUAGES</span>
-                            <div class="lang_lvl">
+                            <ul class="about_block_text list-inline lang_lvl mt-1">
                                 {% for lang in found_user.language_set.all %}
-                                <div class="about_block_text ml-3 mr-3">
-                                    <div>{{ lang.name }}</div>
-                                    <div>{{ lang.level }}</div>
-                                </div>
+                                    <li class="list-inline-item">
+                                        <div>{{ lang.name }}</div>  
+                                        <div>{{ lang.level }}</div> 
+                                    </li>
                                 {% endfor %}
-    
-                            </div>    
+                            </ul>    
                         </div>
                         <hr class="divide">
-                        <div class="about_block">
+                        <div class="about_block mt-1">
                             <span class="last">HARD SKILLS</span>
-                            <ul class="list-inline">
+                            <ul class="list-inline mt-1">
                                 {% for hard in found_user.student.hard_skills.all %}
                                 <li class="list-inline-item about_block_text">{{ hard.name }}</li>
                                 {% endfor %}
@@ -121,9 +120,9 @@
                         <hr class="divide">
                         <div class="about_block">
                             <span class="last">SOFT SKILLS</span>
-                            <ul class="rate">
+                            <ul class="about_block_text list-inline">
                                 {% for soft in found_user.student.soft_skills.all %}
-                                <li><span>{{ soft.name }}</span></li>
+                                <li class="list-inline-item">{{ soft.name }}</li>
                                 {% endfor %}
                             </ul>    
                         </div>
@@ -268,7 +267,7 @@
                     </div>
                 </div>                
                 <div class="skills" id="hobbies">
-                    <span class="last">PROFESSIONAL INTERESTS</span>
+                    <span class="last" id="left_header">PROFESSIONAL INTERESTS</span>
                     <ul class="rate">
                         {% if found_user.fields_of_interests.all %}
                         {% for intrs in found_user.fields_of_interests.all %}
@@ -279,7 +278,7 @@
                     <hr class="divide">
 
                     {% if found_user.hobbies.all %}
-                    <span class="last">HOBBIES</span>
+                    <span class="last mt-2">HOBBIES</span>
                     <ul class="rate">
 
                         {% for hobby in found_user.hobbies.all %}

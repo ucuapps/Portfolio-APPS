@@ -19,9 +19,6 @@ body, html{
 #hard p{
     text-align: start;
 }
-#hobbies span:first-child{
-    margin-top: 15px;
-}
 #main{
     transition: all .5s;
     width: auto;
@@ -254,7 +251,7 @@ hr{
     margin-left: 13px;
 }
 .hard_skills{
-    margin-top: 15px;
+    margin-top: 23px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -368,10 +365,9 @@ svg{
 }
 
 .rate{
-    width: 70%;
+    width: 80%;
     text-align: center;
     padding: 0;
-    margin: 5px 0px 10px 0px;
     list-style-position: inside;
 }
 .rate li{
@@ -385,7 +381,7 @@ svg{
     margin-top: 0;
 }
 .rate span:nth-child(2n-1){
-    width: 65%;
+    width: 100%;
     font-size: 14px;
     font-weight: 300;
 }
@@ -545,4 +541,13 @@ svg{
 }
 .about_block_text{
     color: whitesmoke;
+}
+.about_block_text .list-inline-item{
+    margin: auto !important;
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+#left_header{
+    margin-top: 55px; /* This value is related to the about block margin*/
 }
