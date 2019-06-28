@@ -1,9 +1,6 @@
 .about_block{
     width: 100%;
 }
-.about_block .description p {
-    width: 85% !important;
-}
 .lang_lvl div{
     display: flex;
     justify-content: space-between;
