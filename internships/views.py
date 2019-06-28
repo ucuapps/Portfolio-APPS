@@ -43,7 +43,7 @@ def create_internship(request, pk=None):
 
 
 @student_login_required
-def apply_to_internship(request, pk=None):
+def apply_to_internship(request, intern_id, pk=None):
     if pk:
         title = 'Edit application:'
         application = get_object_or_404(Application, pk=pk)
@@ -55,6 +55,7 @@ def apply_to_internship(request, pk=None):
     else:
         title = 'Apply to internship:'
         application = Application()
+        internship = Internship.objects.get(id=intern_id)
         application.internship = internship
 
     if request.method == "POST":
@@ -69,3 +70,8 @@ def apply_to_internship(request, pk=None):
         return redirect('internships')
 
     return render(request, template_name='internship_apply.html', context={'form': form, 'title':title})
+
+
+@student_login_required
+def send_application(request, pk):
+    pass

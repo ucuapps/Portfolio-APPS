@@ -28,7 +28,10 @@ class CreateInternshipForm(forms.ModelForm):
 class ApplyToInternshipForm(forms.ModelForm):
     class Meta:
         model = Application
-        exclude = ('internship',)
+        exclude = ('internship', 'applicant', 'sent',)
+        labels = {
+            'cv': 'CV',
+        }
 
     def __init__(self, *args, **kwargs):
         super(ApplyToInternshipForm, self).__init__(*args, **kwargs)
