@@ -75,3 +75,6 @@ body > div > div > div.col-md-6.align-left > div > div.kastil {
 .request_icon {
     width: 20px;
 }
+.icons a:hover{
+    background-color: transparent;
+}
