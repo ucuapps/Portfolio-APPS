@@ -79,7 +79,7 @@
                     </svg>
                     <div class="hard_skills">
                         {% if found_user.student.summary %}
-                            <div class="about_block">
+                            <div class="about_block" id="aboutMe">
                                 <span>ABOUT ME</span>
                                 <div class="description">
                                     <p>{{ found_user.student.summary }}</p>
@@ -90,7 +90,7 @@
 
                         <div class="about_block">
                             <span class="last">LANGUAGES</span>
-                            <ul class="about_block_text list-inline lang_lvl mt-1">
+                            <ul class="about_block_text list-inline lang_lvl">
                                 {% for lang in found_user.language_set.all %}
                                     <li class="list-inline-item">
                                         <div>{{ lang.name }}</div>  
@@ -100,7 +100,7 @@
                             </ul>    
                         </div>
                         <hr class="divide">
-                        <div class="about_block mt-1">
+                        <div class="about_block">
                             <span class="last">HARD SKILLS</span>
                             <ul class="list-inline mt-1">
                                 {% for hard in found_user.student.hard_skills.all %}
@@ -111,9 +111,9 @@
                         <hr class="divide">
                         <div class="about_block">
                             <span class="last">PROGRAMMING LANGUAGES</span>
-                            <ul class="rate">
+                            <ul class="about_block_text list-inline">
                                 {% for plang in found_user.student.programming_languages.all %}
-                                <li></li><span>{{ plang.name }}</span></li>
+                                <li class="list-inline-item">{{ plang.name }}</li>
                                 {% endfor %}
                             </ul>    
                         </div>
@@ -266,26 +266,28 @@
                         </div>
                     </div>
                 </div>                
-                <div class="skills" id="hobbies">
-                    <span class="last" id="left_header">PROFESSIONAL INTERESTS</span>
-                    <ul class="rate">
-                        {% if found_user.fields_of_interests.all %}
-                        {% for intrs in found_user.fields_of_interests.all %}
-                        <li><span>{{ intrs.name }}</span></li>
-                        {% endfor %}
-                        {% endif %}
-                    </ul>
+                <div class="skills" id="leftColumn">
+                    <div class="about_block">
+                        <span class="last" >PROFESSIONAL INTERESTS</span>
+                        <ul class="about_block_text list-inline" id="profIntList">
+                            {% if found_user.fields_of_interests.all %}
+                                {% for intrs in found_user.fields_of_interests.all %}
+                                    <li class="list-inline-item">{{ intrs.name }}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>        
+                    </div>
                     <hr class="divide">
 
                     {% if found_user.hobbies.all %}
-                    <span class="last mt-2">HOBBIES</span>
-                    <ul class="rate">
-
-                        {% for hobby in found_user.hobbies.all %}
-                        <li><span>{{ hobby.name }}</span></li>
-                        {% endfor %}
-
-                    </ul>
+                        <div class="about_block" id="hobbiesList">
+                            <span class="last">HOBBIES</span>
+                            <ul class="about_block_text rate">
+                                {% for hobby in found_user.hobbies.all %}
+                                    <li class="list-inline-item">{{ hobby.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     {% endif %}
 
                 </div>
@@ -329,14 +331,16 @@
                                 <polygon fill="#653998" points="30.7,39 30.7,39 0,0 61.5,0 "/>
                                 </svg>
                     <div class="hard_skills">
-                        <span>ABOUT ME</span>
-                        <div class="description">
-                            {% if found_user.teacher.about_me %}
-
-                            <p>{{ found_user.teacher.about_me }}
-                            </p>
-                            {% else %}
-                            {% endif %}
+                        <div class="about_block" id="aboutMe">
+                            <span>ABOUT ME</span>
+                            <div class="description">
+                                {% if found_user.teacher.about_me %}
+    
+                                <p>{{ found_user.teacher.about_me }}
+                                </p>
+                                {% else %}
+                                {% endif %}
+                            </div>        
                         </div>
                         <hr class="divide">
 

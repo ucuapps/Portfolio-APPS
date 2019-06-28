@@ -13,8 +13,17 @@ body, html{
 #overlay{
     display: none;
 }
-#hobbies, #hard{
+#leftColumn{
+    padding-top: 55px; /* This value is related to the about block margin*/
+}
+#leftColumn :first-child{
+    margin-top: 0px;
+}
+#leftColumn, #hard{
     text-align: center;
+}
+#leftColumn li{
+    width: 100%;
 }
 #hard p{
     text-align: start;
@@ -271,12 +280,13 @@ hr{
 }
 
 .description{
+    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     height: auto;
+    justify-content: center;
+    margin-top: .25em;
+    width: 100%;
 }
 .projects_container .switchers{
     height: 50px;
@@ -334,7 +344,7 @@ svg{
     font-size: 11px;
     font-weight: 300;
     letter-spacing: 1px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     line-height: 1.2;
 }
 .pref span{
@@ -365,13 +375,16 @@ svg{
 }
 
 .rate{
-    width: 80%;
+    width: 100%;
     text-align: center;
     padding: 0;
     list-style-position: inside;
+    margin-top: .25em;
+}
+.rate li:first-child{
+    margin-top: 0;
 }
 .rate li{
-    margin-top: 10px;
     list-style-type: none;
 }
 .rate li span{
@@ -382,8 +395,8 @@ svg{
 }
 .rate span:nth-child(2n-1){
     width: 100%;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 400;
 }
 .places{
     height: auto;
@@ -541,13 +554,33 @@ svg{
 }
 .about_block_text{
     color: whitesmoke;
+    margin-top: .25rem;
 }
 .about_block_text .list-inline-item{
     margin: auto !important;
     display: flex;
     justify-content: space-between;
-    width: 60%;
+    width: 70%;
 }
-#left_header{
-    margin-top: 55px; /* This value is related to the about block margin*/
+.about_block{
+    margin-top: 1em;
+}
+.about_block ul{
+    margin-bottom: 0px;
+}
+#aboutMe{
+    margin-top: 0px !important;
+}
+.skills ul{
+    margin-bottom: 0px;
+}
+#hobbiesList li {
+    margin: auto;
+    width: 70%;
+}
+#hobbiesList li span{
+    font-family: inherit;
+}
+#profIntList li{
+    width: 105%;
 }
