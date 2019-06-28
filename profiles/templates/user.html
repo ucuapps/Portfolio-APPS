@@ -200,10 +200,11 @@
                                                 <h5>Position: {{ work.occupation }}</h5>
                                                 <h5>Period: {{ work.period_start }} - {{ work.period_end }}</h5>
                                                     
-                                                <hr class="mt-0 mb-1">
+                                                <hr class="mt-1 mb-1">
                                                 <div>
-                                                    <h5>About:</h5>
-                                                    <div>{{ work.description }}</div>
+                                                    <br>
+                                                    <h6>About:</h6>
+                                                    <div class="proj_about_section">{{ work.description }}</div>
                                                 </div>
                                         </div>
 
@@ -237,15 +238,16 @@
                                                 <div class="volunteer_organization">
                                                     {% if volunteering.organization %}
                                                     <h5>
-                                                        Orhanization: <a href="{{ volunteering.link }}">{{ volunteering.organization }}</a>
+                                                        Organization: <a href="{{ volunteering.link }}">{{ volunteering.organization }}</a>
                                                     </h5>
                                                     {% endif %}                                                            
                                                 </div>
                                                 <div class="proj_info">
-                                                    <hr class="mt-0 mb-1">
+                                                    <hr class="mt-1 mb-1">
                                                     <div>
-                                                        <h5>About:</h5>
-                                                        <div>{{ volunteering.description }}</div>
+                                                        <br>
+                                                        <h6>About:</h6>
+                                                        <div class="proj_about_section">{{ volunteering.description }}</div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -576,7 +576,6 @@ svg{
 }
 #hobbiesList li {
     margin: auto;
-    width: 70%;
 }
 #hobbiesList li span{
     font-family: inherit;
