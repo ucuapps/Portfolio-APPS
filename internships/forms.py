@@ -15,10 +15,10 @@ class CreateInternshipForm(forms.ModelForm):
         exclude = ('created_by', 'applicants', 'approved_applicants')
         widgets = {
             'deadline': DateInput(),
-            'is_inner': forms.CheckboxInput(attrs={'id': 'inner_check'})
+            'is_inner': forms.CheckboxInput(attrs={'style': 'width:5%;display:inline;vertical-align:middle;', 'id': 'inner_check',})
         }
         labels = {
-            'is_inner': "Is it an inner internship?"
+            'is_inner': "Is it an UCU internship?"
         }
 
     def __init__(self, *args, **kwargs):
