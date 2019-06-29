@@ -24,7 +24,7 @@ class Application(models.Model):
     internship = models.ForeignKey(Internship, on_delete=models.CASCADE)
     applicant = models.ForeignKey(Student, on_delete=models.CASCADE)
 
-    cv = models.FileField()
+    cv = models.FileField(upload_to='cv_uploads/%Y/%m/%d/')
     motivation_letter = models.TextField(blank=True, null=True)
 
     sent = models.BooleanField(default=False)

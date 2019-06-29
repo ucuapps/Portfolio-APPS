@@ -110,19 +110,11 @@ def show_internships(request):
         return render(request, "internships.html",
                       {'internships': actual_interns, 'archive': archive, 'user': request.user})
     elif request.user.is_student:
-        applications = Application.objects.filter(applicant=request.user.student)
+        my_apps = Application.objects.filter(applicant=request.user.student)
 
         available_interns = internships
-        my_interns = set()
-        for i in internships:
-            for app in applications:
-                if app.internship is i:
-                    my_interns.add(i)
-                    if i in available_interns:
-                        available_interns.remove(i)
-
-        available_interns = list(available_interns)
-        my_interns = list(my_interns)
+        my_interns = [app.internship for app in my_apps]
+        available_interns = [intern for intern in available_interns if intern not in my_interns]
 
         return render(request, "internships.html", {'internships': available_interns, 'my_internships': my_interns})
 

@@ -18,7 +18,7 @@ class CreateInternshipForm(forms.ModelForm):
             'is_inner': forms.CheckboxInput(attrs={'id': 'inner_check'})
         }
         labels = {
-            'is_inner': "Is it an inner internship?"
+            'is_inner': "Is it an UCU internship?"
         }
 
     def __init__(self, *args, **kwargs):
