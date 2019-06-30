@@ -198,38 +198,6 @@
                 <main class="section_smaller__contents">
                     <div class="programming-skill">
                         <label class="programming-skill__name">{{ plang.name }}</label>
-                        <form class="custom-rating programming-skill__rating">
-                            <label class="custom-rating__label">
-                                <input type="radio" name="stars" value="1" class="label__input"/>
-                                <span class="label__icon"></span>
-                            </label>
-                            <label class="custom-rating__label">
-                                <input type="radio" name="stars" value="2" class="label__input"/>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                            </label>
-                            <label class="custom-rating__label">
-                                <input type="radio" name="stars" value="3" class="label__input"/>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                            </label>
-                            <label class="custom-rating__label">
-                                <input type="radio" name="stars" value="4" class="label__input"/>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                            </label>
-                            <label class="custom-rating__label">
-                                <input type="radio" name="stars" value="5" class="label__input"/>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                                <span class="label__icon"></span>
-                            </label>
-                        </form>
                     </div>
                 </main>
                 {% endfor %}
@@ -243,7 +211,7 @@
                 </header>
                 <main class="section_smaller__contents">
                     <ul class="volunteering-list">
-                            {% for vexp in found_user.student.cv_voluneering.all %}
+                            {% for vexp in found_user.student.cv_volunteering.all %}
                             <li class="volunteering-list__item">
                                 <h5 class="item__title">{{ vexp.title }}</h5>
                                 <p class="item__description">{{ vexp.description }}</p>
