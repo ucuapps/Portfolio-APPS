@@ -119,11 +119,19 @@ def show_internships(request):
     elif request.user.is_student:
         my_apps = Application.objects.filter(applicant=request.user.student)
 
-        available_interns = internships
+        # only available internships
+        available_interns = [intern for intern in internships if intern.deadline < date.today()]
         my_interns = [app.internship for app in my_apps]
         available_interns = [intern for intern in available_interns if intern not in my_interns]
 
-        return render(request, "internships.html", {'internships': available_interns, 'my_internships': my_interns})
+        # my internships with deadline overdue
+        overdue_interns = list()
+        for intern in my_interns:
+            if intern.deadline < date.today():
+                overdue_interns.append(intern)
+
+        return render(request, "internships.html", {'internships': available_interns, 'my_internships': my_interns,
+                                                    'overdue': overdue_interns})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):
