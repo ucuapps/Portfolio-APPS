@@ -72,10 +72,6 @@ class LanguageForm(forms.ModelForm):
         exclude = ('user',)
 
 
-class StudentSearch(forms.ModelForm):
-  pass
-
-
 class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
@@ -87,7 +83,11 @@ class EducationForm(forms.ModelForm):
         }
 
 
-class cvForm(forms.ModelForm):
+class StudentSearch(forms.ModelForm):
+    pass
+
+
+class CvForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('cv_hard_skills', 'cv_soft_skills', 'cv_programming_languages',\
@@ -112,8 +112,7 @@ class cvForm(forms.ModelForm):
         }
 
         def __init__(self, *args, **kwargs):
-            super(cvForm, self).__init__(*args, **kwargs)
-            # self.fields["cv_programming_languages"].queryset = Skill.objects.filter(skill_type="programming")
+            super(CvForm, self).__init__(*args, **kwargs)
             self.fields['cv_programming_languages'].queryset = Skill.objects.filter(skill_type="programming")
             self.fields["cv_soft_skills"].queryset = Skill.objects.filter(skill_type="soft")
             self.fields["cv_hard_skills"].queryset = Skill.objects.filter(skill_type="hard")

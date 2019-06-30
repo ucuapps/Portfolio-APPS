@@ -199,13 +199,17 @@
                             </div>
                         </li>
                         <li class="list-group-item internship_footer">
-                            {% if internship.is_inner %}
+                            {% if internship not in overdue and internship.is_inner %}
                             <div>
                                 <a class="btn btn-primary" href="{% url 'edit_application' internship.id %}">Edit application</a>
                             </div>
-                            {% else %}
+                            {% elif internship not in overdue %}
                              <div>
                                 <a class="btn btn-primary" href="{% url 'apply_outer_intern' internship.id %}" target="_blank">Edit application</a>
+                            </div>
+                            {% else %}
+                            <div id="btn-disabled" class="btn">
+                                Edit application
                             </div>
                             {% endif %}
                             <div>

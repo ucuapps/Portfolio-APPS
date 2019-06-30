@@ -8,7 +8,7 @@ from student.models import Student
 from student.forms import StudentSearch
 
 from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, \
-    EducationForm, cvForm
+    EducationForm, CvForm
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education, ProgrammingLanguage
 
 # from weasyprint import HTML, CSS
@@ -425,7 +425,7 @@ def edit_cv(request, pk=None):
         context = {}
 
         if request.method == "POST":
-            form = cvForm(request.POST, instance=request.user.student)
+            form = CvForm(request.POST, instance=request.user.student)
         else:
             instance = request.user.student
             if not instance.cv_hard_skills:
@@ -436,7 +436,7 @@ def edit_cv(request, pk=None):
                 instance.cv_programming_languages = instance.programming_languages
             if not instance.cv_summary:
                 instance.cv_summary = instance.summary
-            form = cvForm(instance=instance)
+            form = CvForm(instance=instance)
 
         if request.method == "POST" and form.is_valid():
             form.save()
@@ -451,7 +451,7 @@ def generate_cv(request, pk=None):
         context = {}
 
         if request.method == "POST":
-            form = cvForm(request.POST, instance=request.user.student)
+            form = CvForm(request.POST, instance=request.user.student)
         else:
             instance = request.user.student
             if not instance.cv_hard_skills:
@@ -462,7 +462,7 @@ def generate_cv(request, pk=None):
                 instance.cv_programming_languages = instance.programming_languages
             if not instance.cv_summary:
                 instance.cv_summary = instance.summary
-            form = cvForm(instance=instance)
+            form = CvForm(instance=instance)
 
         if request.method == "POST" and form.is_valid():
             form.save()
@@ -476,7 +476,6 @@ def generate_cv(request, pk=None):
     counter.counter += 1
     counter.save()
     str_counter = '{:06d}'.format(counter.counter)
-    print(str_counter)
 
     context = dict(found_user=u, title="User", media="/media/", counter=str_counter)
     return render(request, "cv/index.html", context)
