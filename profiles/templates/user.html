@@ -144,9 +144,9 @@
                                             
                                             <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
                                                 <h4 class="proj_title">
-                                                    {{ proj.title }}
+                                                    {{ proj.name }}
                                                 </h4 >
-
+                                                <hr>
                                                 {% if proj.technologies.all %}
                                                     <div class="proj_desc">
                                                         <h2>Tools:</h2>
