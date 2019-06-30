@@ -197,7 +197,7 @@
                             </div>
                         </li>
                         <li class="list-group-item internship_footer">
-                            {% if internship.is_inner%}
+                            {% if internship.is_inner and%}
                             <div>
                                 <a class="btn btn-primary" href="{% url 'edit_application' internship.id %}">Edit application</a>
                             </div>
