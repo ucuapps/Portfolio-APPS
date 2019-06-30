@@ -29,62 +29,9 @@
                     </div>
                 {% endif %}
 
-                <div class="row">
-                    {% with field=form.first_name %}
-                        <div class="col-md-6 col-sm-12 margin_bottom20">
-
-
-                            {% if form.is_bound %}
-                                {% if field.errors %}
-
-                                    {% render_field field class="form-control is-invalid" %}
-                                    {% for error in field.errors %}
-                                        <div class="invalid-feedback">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    {% render_field field class="form-control is-valid" %}
-                                {% endif %}
-                            {% else %}
-                                {% render_field field class="form-control" %}
-                            {% endif %}
-
-                            {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
-                            {% endif %}
-
-                        </div>
-                    {% endwith %}
-
-                    {% with field=form.last_name %}
-
-                        <div class="col-md-6 col-sm-12 margin_bottom20">
-
-                            {% if form.is_bound %}
-                                {% if field.errors %}
-                                    {% render_field field class="form-control is-invalid" %}
-                                    {% for error in field.errors %}
-                                        <div class="invalid-feedback">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    {% render_field field class="form-control is-valid" %}
-                                {% endif %}
-                            {% else %}
-                                {% render_field field class="form-control" %}
-                            {% endif %}
-
-                            {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
-                            {% endif %}
-
-                        </div>
-                    {% endwith %}
-
-                    {% with field=form.current_study_year %}
-                        <div class="col-md-6 col-sm-12 margin_bottom20">
+        <div class="row">
+            {% with field='first_name' %}
+            <div class="col-md-6 col-sm-12 margin_bottom20">
 
                         {% if form.is_bound %}
                                 {% if field.errors %}
@@ -106,37 +53,62 @@
                                 <small class="form-text text-muted">{{ field.help_text }}</small>
                             {% endif %}
                         </div>
-                    {% endwith %}
+            {% endwith %}
 
-                </div>
-{#            Hard skills/Programming languages{% with field=form.skills %}#}
-{#            <div class="col-md-6 col-sm-12 margin_bottom20">#}
-{##}
-{#                        {% if form.is_bound %}#}
-{#                                {% if field.errors %}#}
-{##}
-{#                                    {% render_field field class="form-control is-invalid" %}#}
-{#                                    {% for error in field.errors %}#}
-{#                                        <div class="invalid-feedback">#}
-{#                                            {{ error }}#}
-{#                                        </div>#}
-{#                                    {% endfor %}#}
-{#                                {% else %}#}
-{#                                    {% render_field field class="form-control is-valid" %}#}
-{#                                {% endif %}#}
-{#                            {% else %}#}
-{#                                {% render_field field class="form-control" %}#}
-{#                            {% endif %}#}
-{##}
-{#                            {% if field.help_text %}#}
-{#                                <small class="form-text text-muted">{{ field.help_text }}</small>#}
-{#                            {% endif %}#}
-{#                        </div>#}
-{#        {% endwith %}#}
-{##}
-{##}
-{#        language {{ form.language }}#}
-{#        interests {{ form.fields_of_interests }}#}
+            {% with field='last_name' %}
+            <div class="col-md-6 col-sm-12 margin_bottom20">
+
+                        {% if form.is_bound %}
+                                {% if field.errors %}
+
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+            {% endwith %}
+        </div>
+
+        {% for ffield in form %}
+            {% with field=ffield %}
+            <div class="col-md-6 col-sm-12 margin_bottom20">
+
+                        {% if form.is_bound %}
+                                {% if field.errors %}
+
+                                    {% render_field field class="form-control is-invalid" %}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field field class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field field class="form-control" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+            {% endwith %}
+        {% endfor %}
+
+
 
                 <button type="submit" class="btn btn-primary" aria-pressed="true">Search</button>
             </form>

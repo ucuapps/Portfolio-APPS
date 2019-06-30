@@ -17,7 +17,6 @@ from student.models import Skill, Language
 
 from django.db import models
 
-
 # class IntegerRangeField(models.IntegerField):
 #     def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
 #         self.min_value, self.max_value = min_value, max_value
@@ -123,21 +122,21 @@ class SearchForm(f.Form):
                             widget=f.TextInput(attrs={'placeholder': 'Last name'}))
     current_study_year = f.IntegerField(required=False, initial=1,
                                         validators=[
-                                        MaxValueValidator(4),
-                                               MinValueValidator(1)
-                                           ])
+                                            MaxValueValidator(4),
+                                            MinValueValidator(1)
+                                        ])
 
-    language = f.ModelChoiceField(required=False,
-                                queryset=Language.objects.all(),
-                                widget=autocomplete.ModelSelect2Multiple(url='language-autocomplete'))
+    hard_skills = f.ModelChoiceField(required=False,
+                                     queryset=Skill.objects.all(),
+                                     widget=autocomplete.ModelSelect2(url='hard-autocomplete'))
 
-    skills = f.ModelChoiceField(required=False,
-                                queryset=Skill.objects.all(),
-                                widget=autocomplete.ModelSelect2Multiple(url='skills-autocomplete'))
+    prog_lang = f.ModelChoiceField(required=False,
+                                   queryset=Skill.objects.all(),
+                                   widget=autocomplete.ModelSelect2(url='planguage-autocomplete'))
 
     fields_of_interests = f.ModelChoiceField(required=False,
-                               queryset=Interests.objects.all(),
-                               widget=autocomplete.ModelSelect2Multiple(url='interests-autocomplete'))
+                                             queryset=Interests.objects.all(),
+                                             widget=autocomplete.ModelSelect2(url='interests-autocomplete'))
 
     def clean_current_study_year(self):
         if self.cleaned_data['current_study_year']:

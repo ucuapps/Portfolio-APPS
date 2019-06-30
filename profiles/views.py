@@ -80,17 +80,24 @@ def search(request):
         form = SearchForm(request.POST)
 
         if form.is_valid():
+            print(form.cleaned_data)
             users = User.objects.all()
             if form.cleaned_data['current_study_year']:
-                users = User.objects.filter(
+                users = users.filter(
                     student__current_study_year__icontains=form.cleaned_data['current_study_year'])
             if form.cleaned_data['last_name']:
-                users = User.objects.filter(last_name__icontains=form.cleaned_data['last_name'])
+                users = users.filter(last_name__icontains=form.cleaned_data['last_name'])
             if form.cleaned_data['first_name']:
-                users = User.objects.filter(first_name__icontains=form.cleaned_data['first_name'])
+                users = users.filter(first_name__icontains=form.cleaned_data['first_name'])
+            # advanced search
+            if form.cleaned_data['hard_skills']:
+                users = users.filter(student__hard_skills=form.cleaned_data['hard_skills'])
+            if form.cleaned_data['prog_lang']:
+                users = users.filter(student__programming_languages=form.cleaned_data['prog_lang'])
+            if form.cleaned_data['fields_of_interests']:
+                users = users.filter(fields_of_interests=form.cleaned_data['fields_of_interests'])
 
             return render(request, 'search.html', {'form': form, 'users': users})
-
     else:
         form = SearchForm()
 
