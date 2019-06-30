@@ -63,11 +63,13 @@
                     <li class="list-group-item internship_footer">
                         {% if user.is_student and internship.is_inner %}
                             <div>
-                                <a class="btn btn-primary" href="{% url 'apply_to_internship' internship.id %}">Apply</a>
+                                <a class="btn btn-primary" href="{% url 'apply_to_internship' internship.id %}">
+                                    Apply
+                                </a>
                             </div>
                         {% elif user.is_student%}
                             <div>
-                                <a class="btn btn-primary" href={{ internship.link }} target="_blank">Apply</a>
+                                <a class="btn btn-primary" href="{% url 'apply_outer_intern' internship.id %}" target="_blank">Apply</a>
                             </div>
                         {% endif %}
                         <div>
@@ -197,9 +199,13 @@
                             </div>
                         </li>
                         <li class="list-group-item internship_footer">
-                            {% if internship.is_inner and%}
+                            {% if internship.is_inner %}
                             <div>
                                 <a class="btn btn-primary" href="{% url 'edit_application' internship.id %}">Edit application</a>
+                            </div>
+                            {% else %}
+                             <div>
+                                <a class="btn btn-primary" href="{% url 'apply_outer_intern' internship.id %}" target="_blank">Edit application</a>
                             </div>
                             {% endif %}
                             <div>

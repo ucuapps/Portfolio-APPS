@@ -1,16 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 
+from profiles.models import User
 from .models import Internship, Application
 from .forms import CreateInternshipForm, ApplyToInternshipForm
 from teacher.views import teacher_login_required
 from student.views import student_login_required
 
-from profiles.models import User
+from portfolio.settings import EMAIL_HOST_USER
 
-from django.core.mail import EmailMessage
+from datetime import date
 
 
 @teacher_login_required
@@ -65,7 +65,8 @@ def apply_to_internship(request, intern_id, pk=None):
         messages.success(request, "Process finished successfully")
         return redirect('internships')
 
-    return render(request, template_name='internship_apply.html', context={'form': form, 'title': title})
+    return render(request, template_name='internship_apply.html', context={'form': form, 'title': title,
+                                                                           'intern_id': intern_id})
 
 
 @student_login_required
@@ -79,6 +80,10 @@ def edit_application(request, intern_id):
         messages.error(request, "You can't edit application that has been already sent")
         return redirect('internships')
 
+    if curr_internship.deadline < date.today():
+        messages.error(request, "This internship is already overdue")
+        return redirect('internships')
+
     if request.method == "POST":
         form = ApplyToInternshipForm(request.POST, request.FILES, instance=application)
     else:
@@ -90,23 +95,43 @@ def edit_application(request, intern_id):
         messages.success(request, "Process finished successfully")
         return redirect('internships')
 
-    return render(request, template_name='internship_apply.html', context={'form': form, 'title': title})
+    return render(request, template_name='internship_apply.html', context={'form': form, 'title': title,
+                                                                           'intern_id': intern_id})
 
 
 @student_login_required
-def send_application(request, pk):
-    application = get_object_or_404(Application, pk=pk)
+def apply_outer_intern(request, pk):
+    internship = get_object_or_404(Internship, pk=pk)
+
+    if internship.deadline < date.today():
+        messages.error(request, "This internship is already overdue")
+        return redirect('internships')
+
+    internship.applicants.add(request.user.student)
+    application, created = Application.objects.get_or_create(internship=internship,
+                                                             applicant=request.user.student)
+    application.save()
+
+    return redirect(internship.link)
+
+
+@student_login_required
+def send_application(request, intern_id):
+    internship = Internship.objects.get(id=intern_id)
+    application = Application.objects.get(internship=internship)
     application.sent = True
-    internship = application.internship
-    teacher_email = internship.created_by.email
+    application.save()
+
+    header = 'New application to {} internship'.format(internship.company_name)
+    teacher_email = [internship.created_by.email]
 
     email = EmailMessage(
-        'New application to {} internship'.format(internship.company_name),
-        'Body goes here',
-        'help.portfolio.apps@gmail.com',
-        teacher_email,
+        header,  # letter header
+        application.motivation_letter,  # letter body
+        EMAIL_HOST_USER,  # from
+        teacher_email,  # to
     )
-    email.attach(application.cv.path)
+    # email.attach_file(application.cv.path)
     email.send()
 
     return redirect('internships')
