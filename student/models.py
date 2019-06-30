@@ -162,7 +162,7 @@ class Project(models.Model):
 class VolunteerExperience(models.Model):
     title = models.CharField(max_length=60, help_text="Event title. Example: ML Conference", blank=False)
     description = models.TextField(max_length=150)
-    link = models.URLField(null=True, blank=True)
+    link = models.URLField(null=True, blank=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     organization = models.CharField(max_length=225, blank=True, null=True)
 
@@ -182,11 +182,11 @@ class Education(models.Model):
 
 
 class WorkingExperience(models.Model):
-    occupation = models.CharField(max_length=255,default="", help_text="Example: Back-end dev")
+    occupation = models.CharField(max_length=255, default="", help_text="Example: Back-end dev")
     company = models.CharField(max_length=255, null=True, blank=True)
     period_start = models.DateField(null=True, blank=True)
     period_end = models.DateField(null=True, blank=True)
-    link = models.URLField(null=True, blank=True)
+    link = models.URLField(null=True, blank=False)
     description = models.TextField(blank=True, null=True, help_text="Fill the field with description"
                                                                     " of your responsibilities, gained experience")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -217,6 +217,7 @@ class CvStyle(models.Model):
     def __str__(self):
         return self.name
 
+
 class Student(models.Model):
     STUDY_YEARS = (
         (1, "First year"),
@@ -233,12 +234,10 @@ class Student(models.Model):
 
     # Skills
     hard_skills = models.ManyToManyField(Skill, related_name="hard_skills", blank=True)
-    # programming_languages = models.ManyToManyField(ProgrammingLanguage, related_name="programming_languages", blank=True)
     programming_languages = models.ManyToManyField(Skill, related_name="programming_languages", blank=True)
     soft_skills = models.ManyToManyField(Skill, related_name="soft_skills", blank=True)
 
     cv_hard_skills = models.ManyToManyField(Skill, related_name="cv_hard_skills", blank=True)
-    # cv_programming_languages = models.ManyToManyField(ProgrammingLanguage, related_name="cv_programming_languages", blank=True)
     cv_programming_languages = models.ManyToManyField(Skill, related_name="cv_programming_languages", blank=True)
     cv_soft_skills = models.ManyToManyField(Skill, related_name="cv_soft_skills", blank=True)
 

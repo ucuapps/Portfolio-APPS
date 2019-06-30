@@ -484,3 +484,7 @@ hr{
 .about_block{
     margin-left: 20px;
 }
+.about_block_text .list-inline-item{
+    margin: 0px !important;
+    width: 13%;
+}

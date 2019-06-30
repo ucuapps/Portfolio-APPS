@@ -6,6 +6,7 @@
         <meta charset="utf-8">
 
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <link href="{% static 'css/header/header.css' %}" rel="stylesheet">
         <link rel="stylesheet" media="screen and (min-width: 1251px)" href="{% static 'css/header/header_desktop.css'%}">
         <link rel="stylesheet" media="screen and (min-width: 426px) and (max-width: 1250px)" href="{% static 'css/header/header_tablets.css'%}">
         <link rel="stylesheet" media="screen and (max-width: 425px)" href="{% static 'css/header/header_mobile.css'%}">
@@ -200,10 +201,10 @@
                                                 <h5>Position: {{ work.occupation }}</h5>
                                                 <h5>Period: {{ work.period_start }} - {{ work.period_end }}</h5>
                                                     
-                                                <hr class="mt-0 mb-1">
+                                                <hr class="mt-3 mb-3">
                                                 <div>
-                                                    <h5>About:</h5>
-                                                    <div>{{ work.description }}</div>
+                                                    <h6>About:</h6>
+                                                    <div class="proj_about_section">{{ work.description }}</div>
                                                 </div>
                                         </div>
 
@@ -237,15 +238,15 @@
                                                 <div class="volunteer_organization">
                                                     {% if volunteering.organization %}
                                                     <h5>
-                                                        Orhanization: <a href="{{ volunteering.link }}">{{ volunteering.organization }}</a>
+                                                        Organization: <a href="{{ volunteering.link }}">{{ volunteering.organization }}</a>
                                                     </h5>
                                                     {% endif %}                                                            
                                                 </div>
                                                 <div class="proj_info">
-                                                    <hr class="mt-0 mb-1">
+                                                    <hr class="mb-3">
                                                     <div>
-                                                        <h5>About:</h5>
-                                                        <div>{{ volunteering.description }}</div>
+                                                        <h6>About:</h6>
+                                                        <div class="proj_about_section">{{ volunteering.description }}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -266,7 +267,7 @@
                         </div>
                     </div>
                 </div>                
-                <div class="skills" id="leftColumn">
+                <div class="skills" id="hobbies">
                     <div class="about_block">
                         <span class="last" >PROFESSIONAL INTERESTS</span>
                         <ul class="about_block_text list-inline" id="profIntList">

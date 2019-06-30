@@ -137,3 +137,11 @@ def social_login_fname_lname_profilepic(sociallogin, user, **kwargs):
                     File(open(result[0], "rb"))
                 )
     user.save()
+
+
+class Counter(models.Model):
+    type = models.CharField(max_length=15, default="license_counter")
+    counter = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.counter)

@@ -91,7 +91,7 @@ class cvForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ('cv_hard_skills', 'cv_soft_skills', 'cv_programming_languages',\
-                  'cv_projects', 'cv_volunteering', 'cv_working', 'cv_summary', 'cv_style',)
+                  'cv_projects', 'cv_volunteering', 'cv_working', 'cv_summary',)
         labels = {
             'cv_hard_skills': _('Hard skills:'),
             'cv_soft_skills': _('Soft skills:'),
@@ -100,7 +100,6 @@ class cvForm(forms.ModelForm):
             'cv_projects': _('Projects:'),
             'cv_volunteering': _('Volunteering experience:'),
             'cv_working': _('Working experience:'),
-            'cv_style': _('CV design:'),
         }
         widgets = {
             'cv_hard_skills': autocomplete.ModelSelect2Multiple(url='cv-hard-autocomplete'),
@@ -110,8 +109,6 @@ class cvForm(forms.ModelForm):
             'cv_volunteering': autocomplete.ModelSelect2Multiple(url='volunteer-autocomplete'),
             'cv_working': autocomplete.ModelSelect2Multiple(url='working-autocomplete'),
             'cv_summary': forms.Textarea(attrs={'rows': 3}),
-
-            'cv_style': autocomplete.ModelSelect2()
         }
 
         def __init__(self, *args, **kwargs):

@@ -25,8 +25,6 @@ body > div > div > div.col-md-6.align-left > div > div.kastil {
 .btn-primary {
     background-color: rgb(101,57,152);
     border-color: rgb(101,57,152);
-
-
 }
 
 .btn-primary:hover {
@@ -35,32 +33,26 @@ body > div > div > div.col-md-6.align-left > div > div.kastil {
     color: rgb(101,57,152);
 }
 
-
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: rgb(101,57,152);
   background-color: rgb(201, 201, 201);
   border-color: rgb(101,57,152);
   shadow: 0 3px 3px rgb(0, 0, 0);
-
 }
-
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
 .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(101,57,152, 0.2);
 }
 
-
-
-
 .btn-primary:focus, .btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgb(101,57,152);
 }
 
+
 .form-control.is-valid:focus, .form-control.is-valid{
     border-color: rgba(168, 127, 244, 0.6);
-
 }
 
 .form-control.is-valid:focus {

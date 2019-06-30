@@ -184,3 +184,6 @@ hr{
     background-color: whitesmoke;
     width: 100%;
 }
+.popup{
+    display: none !important;
+}
