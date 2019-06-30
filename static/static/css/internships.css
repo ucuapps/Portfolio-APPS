@@ -60,3 +60,18 @@
 .send-btn:focus, .send-btn.focus {
   box-shadow: 0 0 0 0.2rem rgb(0, 60, 5);
 }
+
+.send-link {
+    color: rgb(255, 255, 255);
+}
+
+.send-link:hover {
+    color: rgb(0, 60, 5);
+}
+
+#btn-disabled {
+  color: rgb(101,57,152);
+  background-color: rgb(201, 201, 201);
+  border-color: rgb(101,57,152);
+  shadow: 0 3px 3px rgb(0, 0, 0);
+}
