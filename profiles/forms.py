@@ -128,15 +128,18 @@ class SearchForm(f.Form):
 
     hard_skills = f.ModelChoiceField(required=False,
                                      queryset=Skill.objects.all(),
-                                     widget=autocomplete.ModelSelect2(url='hard-autocomplete'))
+                                     widget=autocomplete.ModelSelect2(url='hard-autocomplete'),
+                                     help_text="Hard skill")
 
     prog_lang = f.ModelChoiceField(required=False,
                                    queryset=Skill.objects.all(),
-                                   widget=autocomplete.ModelSelect2(url='planguage-autocomplete'))
+                                   widget=autocomplete.ModelSelect2(url='planguage-autocomplete'),
+                                   help_text="Programming language")
 
     fields_of_interests = f.ModelChoiceField(required=False,
                                              queryset=Interests.objects.all(),
-                                             widget=autocomplete.ModelSelect2(url='interests-autocomplete'))
+                                             widget=autocomplete.ModelSelect2(url='interests-autocomplete'),
+                                             help_text="Field of professional interests")
 
     def clean_current_study_year(self):
         if self.cleaned_data['current_study_year']:
