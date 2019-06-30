@@ -118,29 +118,34 @@ def apply_outer_intern(request, pk):
 @student_login_required
 def send_application(request, intern_id):
     internship = Internship.objects.get(id=intern_id)
-    application = Application.objects.get(internship=internship)
-    application.sent = True
-    application.save()
+    try:
+        application = Application.objects.get(internship=internship)
+        application.sent = True
+        application.save()
 
-    header = 'New application to {} internship'.format(internship.company_name)
-    student_name = request.user.first_name + ' ' + request.user.last_name
-    letter_body = '''
-    {} application to {} position in {}
-    Motivation letter:
-    {}
-    
-    Find CV attached
-    '''.format(student_name, internship.position, internship.company_name,
-               application.motivation_letter)
-    teacher_email = [internship.created_by.email]
+        header = 'New application to {} internship'.format(internship.company_name)
+        student_name = request.user.first_name + ' ' + request.user.last_name
+        letter_body = '''
+        {} application to {} position in {}
+        Motivation letter:
+        {}
+        
+        Find CV attached
+        '''.format(student_name, internship.position, internship.company_name,
+                   application.motivation_letter)
+        teacher_email = [internship.created_by.email]
 
-    email = EmailMessage(
-        header,  # letter header
-        letter_body,  # letter body
-        EMAIL_HOST_USER,  # from
-        teacher_email,  # to
-    )
-    email.attach_file(application.cv.path)
-    email.send()
+        email = EmailMessage(
+            header,  # letter header
+            letter_body,  # letter body
+            EMAIL_HOST_USER,  # from
+            teacher_email,  # to
+        )
+        email.attach_file(application.cv.path)
+        email.send()
 
-    return redirect('internships')
+        return redirect('internships')
+    except Application.DoesNotExist:
+        messages.warning(request, "Please save your application before sending it")
+        return redirect('apply_to_internship', intern_id)
+
