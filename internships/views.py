@@ -123,15 +123,24 @@ def send_application(request, intern_id):
     application.save()
 
     header = 'New application to {} internship'.format(internship.company_name)
+    student_name = request.user.first_name + ' ' + request.user.last_name
+    letter_body = '''
+    {} application to {} position in {}
+    Motivation letter:
+    {}
+    
+    Find CV attached
+    '''.format(student_name, internship.position, internship.company_name,
+               application.motivation_letter)
     teacher_email = [internship.created_by.email]
 
     email = EmailMessage(
         header,  # letter header
-        application.motivation_letter,  # letter body
+        letter_body,  # letter body
         EMAIL_HOST_USER,  # from
         teacher_email,  # to
     )
-    # email.attach_file(application.cv.path)
+    email.attach_file(application.cv.path)
     email.send()
 
     return redirect('internships')
