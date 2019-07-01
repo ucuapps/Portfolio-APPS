@@ -13,14 +13,20 @@ body, html{
 #overlay{
     display: none;
 }
+#hobbies{
+    padding-top: 55px; /* This value is related to the about block margin*/
+}
+#hobbies :first-child{
+    margin-top: 0px;
+}
 #hobbies, #hard{
     text-align: center;
 }
+#hobbies li{
+    width: 100%;
+}
 #hard p{
     text-align: start;
-}
-#hobbies span:first-child{
-    margin-top: 15px;
 }
 #main{
     transition: all .5s;
@@ -154,6 +160,7 @@ a{
     flex-direction: column;
     width: 250px;
     background-color: rgb(68,68,68);
+    padding: 0px 20px 0px 20px;
 }
 .skills:first-child{
     width: 250px;
@@ -254,7 +261,7 @@ hr{
     margin-left: 13px;
 }
 .hard_skills{
-    margin-top: 15px;
+    margin-top: 23px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -273,12 +280,13 @@ hr{
 }
 
 .description{
+    align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     height: auto;
+    justify-content: center;
+    margin-top: .25em;
+    width: 100%;
 }
 .projects_container .switchers{
     height: 50px;
@@ -333,11 +341,10 @@ svg{
     height: auto;
 }
 .description p{
-    width: 88%;
     font-size: 11px;
     font-weight: 300;
     letter-spacing: 1px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     line-height: 1.2;
 }
 .pref span{
@@ -368,14 +375,16 @@ svg{
 }
 
 .rate{
-    width: 70%;
+    width: 100%;
     text-align: center;
     padding: 0;
-    margin: 5px 0px 10px 0px;
     list-style-position: inside;
+    margin-top: .25em;
+}
+.rate li:first-child{
+    margin-top: 0;
 }
 .rate li{
-    margin-top: 10px;
     list-style-type: none;
 }
 .rate li span{
@@ -385,9 +394,9 @@ svg{
     margin-top: 0;
 }
 .rate span:nth-child(2n-1){
-    width: 65%;
-    font-size: 14px;
-    font-weight: 300;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
 }
 .places{
     height: auto;
@@ -542,4 +551,35 @@ svg{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.about_block_text{
+    color: whitesmoke;
+    margin-top: .25rem;
+}
+.about_block_text .list-inline-item{
+    margin: auto !important;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+.about_block{
+    margin-top: 1em;
+}
+.about_block ul{
+    margin-bottom: 0px;
+}
+#aboutMe{
+    margin-top: 0px !important;
+}
+.skills ul{
+    margin-bottom: 0px;
+}
+#hobbiesList li {
+    margin: auto;
+}
+#hobbiesList li span{
+    font-family: inherit;
+}
+#profIntList li{
+    width: 105%;
 }

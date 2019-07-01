@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from dal import autocomplete
 from django.contrib.auth.decorators import login_required, user_passes_test
+from datetime import date
 
 from profiles.models import User, Interests
 from student.views import student_login_required
@@ -14,6 +15,8 @@ from student.views import SkillsAutocomplete
 from student.models import Student
 from .forms import UserForm
 from .forms import SearchForm
+
+from internships.models import Internship, Application
 
 
 @login_required
@@ -77,20 +80,59 @@ def search(request):
         form = SearchForm(request.POST)
 
         if form.is_valid():
+            print(form.cleaned_data)
             users = User.objects.all()
             if form.cleaned_data['current_study_year']:
-                users = User.objects.filter(student__current_study_year__icontains=form.cleaned_data['current_study_year'])
+                users = users.filter(
+                    student__current_study_year__icontains=form.cleaned_data['current_study_year'])
             if form.cleaned_data['last_name']:
-                users = User.objects.filter(last_name__icontains=form.cleaned_data['last_name'])
+                users = users.filter(last_name__icontains=form.cleaned_data['last_name'])
             if form.cleaned_data['first_name']:
-                users = User.objects.filter(first_name__icontains=form.cleaned_data['first_name'])
+                users = users.filter(first_name__icontains=form.cleaned_data['first_name'])
+            # advanced search
+            if form.cleaned_data['hard_skills']:
+                users = users.filter(student__hard_skills=form.cleaned_data['hard_skills'])
+            if form.cleaned_data['prog_lang']:
+                users = users.filter(student__programming_languages=form.cleaned_data['prog_lang'])
+            if form.cleaned_data['fields_of_interests']:
+                users = users.filter(fields_of_interests=form.cleaned_data['fields_of_interests'])
 
             return render(request, 'search.html', {'form': form, 'users': users})
-
     else:
         form = SearchForm()
 
     return render(request, 'search.html', {'form': form})
+
+
+def show_internships(request):
+    internships = Internship.objects.all()
+    if request.user.is_teacher:
+        archive = list()
+        actual_interns = list()
+        for i in internships:
+            if i.deadline < date.today():
+                archive.append(i)
+            else:
+                actual_interns.append(i)
+        return render(request, "internships.html",
+                      {'internships': actual_interns, 'archive': archive, 'user': request.user})
+    elif request.user.is_student:
+        my_apps = Application.objects.filter(applicant=request.user.student)
+
+        # only available internships
+        # available_interns = internships
+        available_interns = [intern for intern in internships if intern.deadline > date.today()]
+        my_interns = [app.internship for app in my_apps]
+        available_interns = [intern for intern in available_interns if intern not in my_interns]
+
+        # my internships with deadline overdue
+        overdue_interns = list()
+        for intern in my_interns:
+            if intern.deadline < date.today():
+                overdue_interns.append(intern)
+
+        return render(request, "internships.html", {'internships': available_interns, 'my_internships': my_interns,
+                                                    'overdue': overdue_interns})
 
 
 class InterestsAutocomplete(autocomplete.Select2QuerySetView):

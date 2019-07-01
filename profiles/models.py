@@ -18,8 +18,6 @@ from django.contrib.auth import get_user_model
 from student.models import Student
 
 
-
-
 class Interests(models.Model):
     INTEREST_TYPES = (
         ("professional", "Professional interest"),
@@ -31,6 +29,7 @@ class Interests(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -82,7 +81,7 @@ class User(AbstractUser):
     mobile_number = models.CharField(max_length=25, blank=True, null=True, help_text="Enter your mobile number in the following format: +380*********")
     git_link = models.URLField(blank=True, null=True)
     fb_link = models.URLField(blank=True, null=True)
-    profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True)
+    profile_image = models.ImageField(upload_to="profiles_img/%Y/%m/%d", blank=True, null=True, help_text="Please, use square photo")
 
     fields_of_interests = models.ManyToManyField(Interests, related_name="interests", blank=True)
     hobbies = models.ManyToManyField(Interests, related_name="hobbies", blank=True)
@@ -110,6 +109,8 @@ def create_user_profile(sender, instance, created, **kwargs):
         Student.objects.create(user=instance)
         instance.is_student = True
         instance.save()
+
+
 from allauth.account.signals import user_signed_up, user_logged_in
 
 
@@ -135,7 +136,12 @@ def social_login_fname_lname_profilepic(sociallogin, user, **kwargs):
                     str(user.id)+".jpg",
                     File(open(result[0], "rb"))
                 )
-
-
-
     user.save()
+
+
+class Counter(models.Model):
+    type = models.CharField(max_length=15, default="license_counter")
+    counter = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.counter)

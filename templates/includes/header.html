@@ -15,137 +15,8 @@
         {% url 'edit_cv' user.id as generate_cv %}
 {% endif %}
 
-<script>
-    function popup_func() {
-        var popup = document.getElementsByClassName("popup")[0];
-        var popup_request = document.getElementsByClassName("popup")[1];
-        popup.style.display = "flex";
-        popup_request.style.display = "none";
-    }
-    function popup_request_func() {
-        var popup = document.getElementsByClassName("popup")[0];
-        var popup_request = document.getElementsByClassName("popup")[1];
-        popup.style.display = "none";
-        popup_request.style.display = "flex";
-    }
-    document.onclick = function(e){
-        var popup = document.getElementsByClassName("popup");
-        if(e.target.className !== "request" && e.target.className !== "avatar" && e.target.className !== "popup"){
-            console.log(popup.length);
-            for(var i = 0; i < popup.length; i++){
-                popup[i].style.display = 'none';
-            }
-        }
-    };
-</script>
-<style>
-    @media screen and (min-width: 450px) and (max-width: 1250px){
-        #nav:hover{
-            cursor: pointer;
-            opacity: 1;
-        }
-        .icon_container{
-            margin-right: 30px;
-            width: auto;
-            height: 65px;
-        }
-        .icon_container .avatar{
-            opacity: .8;
-            width: 35px;
-            height: 35px;
-        }
-        .icons{
-            height: 98%;
-            width: 145px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .popup{
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            height: auto;
-            position: relative;
-            z-index: 10;
-            background-color: whitesmoke;
-            box-shadow: 0px 0px 8px rgb(171, 171, 171);
-        }
-        .popup a{
-            font-weight: 500;
-            letter-spacing: .5px;
-            color: #3a3a3a;
-            text-decoration: none;
-            font-size: 15px;
-        }
-        .popup a:nth-child(n+2){
-            margin: 10px 0px 0px 10px;
-        }
-        .popup a:nth-child(1){
-            margin: 10px 0px 0px 10px;
-        }
-        .popup hr{
-            width: 100%;
-            background-color: #3a3a3a;
-        }
-        .popup .exit a{
-            margin: 0px 0px 0px 5px;
-        }
-    }
-    @media screen and (min-width: 1251px){
-        .icon_container{
-            margin-right: 30px;
-            width: auto;
-            height: 65px;
-        }
-        .icon_container .avatar{
-            opacity: .8;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-        }
-        .icon_container .avatar:hover{
-            opacity: 1;
-        }
-        .icons{
-            height: 100%;
-            width: 145px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .popup{
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            height: auto;
-            position: relative;
-            z-index: 10;
-            background-color: whitesmoke;
-            box-shadow: 0px 0px 8px rgb(171, 171, 171);
-        }
-        .popup a{
-            font-weight: 500;
-            letter-spacing: .5px;
-            color: #3a3a3a;
-            text-decoration: none;
-            font-size: 15px;
-        }
-        .popup a:nth-child(n+2){
-            margin: 10px 0px 0px 10px;
-        }
-        .popup a:nth-child(1){
-            margin: 10px 0px 0px 10px;
-        }
-        .popup hr{
-            width: 100%;
-            background-color: #3a3a3a;
-        }
-        .popup .exit a{
-            margin: 0px 0px 0px 5px;
-        }
-    }
-</style>
+<script type="text/javascript" src="{% static 'js/header.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/header/header.css'%}">
 <div id="overlay"></div>
 {% if request.user.is_authenticated %}
 <div id="pop_menu">
@@ -154,7 +25,7 @@
     </div>
     <div class="info">
         <a href="{{home}}">Profile</a>
-        <a href="{{edit_user}}">Edit</a>
+        <a href="{{edit_user}}" id="up">Edit</a>
         <hr>
         <div class="exit">
             <svg version="1.1"
@@ -221,8 +92,9 @@
         <div class="icon_container">
             <div class="icons">
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'search_user' %}">
-                    <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
+                <a class="search_icon" href="{% url 'search_user' %}">
+                    <img src="{% static 'images/search.png'%}">
+                    <!-- <svg x="0px" y="0px" width="20px" height="50%" viewBox="0 0 88.2 88.3" enable-background="new 0 0 88.2 88.3" xml:space="preserve">
                                 <defs>
                                 </defs>
                                 <g id="nav">
@@ -230,23 +102,26 @@
                                         l25.4-25.4l0,0c5.6,3.9,12.3,6.1,19.6,6.1c18.9,0,34.3-15.4,34.3-34.3S72.9,0,53.9,0C35,0,19.6,15.4,19.6,34.3z M27.7,34.3
                                         c0-14.5,11.7-26.2,26.2-26.2s26.2,11.7,26.2,26.2S68.4,60.5,53.9,60.5S27.7,48.8,27.7,34.3z"/>
                                 </g>
-                    </svg>
+                    </svg> -->
+                </a>
+                <a class='intern_header_icon' href="{% url 'internships' %}">
+                    <img src="{% static 'images/briefcase.png' %}" alt="">
                 </a>
                 {% if request.user.is_student %}
                 <a href="{% url 'edit_cv' request.user.id %}"><span id="nav">CV</span></a>
                 <a href="{% url 'show_my_requests' %}" >
-                    <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav">
+                    <img class="request_icon" src="{% static 'images/envelope.png'%}">
                 </a>
                 {% elif request.user.is_teacher %}
-                <img style="width: 20px" src="{% static 'images/envelope.png'%}" id="nav" onclick="popup_request_func()" class="request">
+                <img class="request_icon" src="{% static 'images/envelope.png'%}" id="nav" onclick="popup_request_func()" class="request">
                 {% endif %}
-                <div onclick="popup_func()">
+                <div class="ml-2" onclick="popup_func()">
                     <img src="{% get_media_prefix %}{{ request.user.profile_image }}" class="avatar">
                 </div>
             </div>
             <div class="popup">
                     <a href="{{home}}">Profile</a>
-                    <a href="{{edit_user}}">Edit</a>
+                    <a href="{{edit_user}}" id="down">Edit</a>
                     <hr>
                     <div class="exit">
                         <svg version="1.1"

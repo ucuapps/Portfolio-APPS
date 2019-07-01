@@ -4,22 +4,22 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import get_user_model
 
-
 from student.models import Student
 from student.forms import StudentSearch
 
-from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, EducationForm, cvForm
+from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExperienceForm, LanguageForm, \
+    EducationForm, CvForm
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education, ProgrammingLanguage
 
-
-#from weasyprint import HTML, CSS
+# from weasyprint import HTML, CSS
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import FileResponse
 from django.conf import settings
 import os
-#import pdfkit
+# import pdfkit
 
+from profiles.models import Counter
 
 student_login_required = user_passes_test(lambda u: u.is_student, login_url='/')
 
@@ -42,9 +42,13 @@ def edit_student(request):
     if request.method == "POST" and form.is_valid():
         form.save()
         messages.success(request, "Your profile data has been changed")
+        if 'langSave' in request.POST:
+            return redirect('new_language')
+
     context["form"] = form
     context["languages"] = Language.objects.filter(user=request.user)
     return render(request, template, context)
+
 
 @user_login_required
 def edit_project(request, pk=None):
@@ -106,10 +110,12 @@ def edit_work_exp(request, pk=None):
 
     return render(request, template_name='edit/work_experience.html', context={'form': form, 'title': title})
 
+
 @user_login_required
 def edit_work_exps(request):
     work_exps = WorkingExperience.objects.filter(user=request.user)
     return render(request, 'edit/work_experiences.html', {'work_exps': work_exps, 'title': 'Working experiences'})
+
 
 @user_login_required
 def edit_volunteer_exp(request, pk=None):
@@ -139,10 +145,12 @@ def edit_volunteer_exp(request, pk=None):
 
     return render(request, template_name='edit/volunteer_experience.html', context={'form': form, 'title': title})
 
+
 @user_login_required
 def edit_volunteer_exps(request):
     vexps = VolunteerExperience.objects.filter(user=request.user)
     return render(request, 'edit/volunteer_experiences.html', {'vexps': vexps, 'title': 'Volunteer experiences'})
+
 
 @user_login_required
 def edit_language(request, pk=None):
@@ -172,6 +180,7 @@ def edit_language(request, pk=None):
 
     return render(request, template_name='edit/language.html', context={'form': form, 'title': title})
 
+
 @user_login_required
 def edit_edu_exp(request, pk=None):
     if pk:
@@ -199,6 +208,7 @@ def edit_edu_exp(request, pk=None):
 
     return render(request, template_name='edit/education.html', context={'form': form, 'title': title})
 
+
 @user_login_required
 def edit_edu_exps(request):
     edus = Education.objects.filter(user=request.user)
@@ -214,6 +224,7 @@ def delete_language(request, pk):
     messages.success(request, "Languages block was changed!")
     return redirect('edit_student')
 
+
 @user_login_required
 def delete_we(request, pk):
     we = get_object_or_404(WorkingExperience, pk=pk)
@@ -222,6 +233,7 @@ def delete_we(request, pk):
     we.delete()
     messages.success(request, "Working experience was deleted!")
     return redirect('edit_work_exps')
+
 
 @user_login_required
 def delete_ve(request, pk):
@@ -232,6 +244,7 @@ def delete_ve(request, pk):
     messages.success(request, "Volunteer experience was deleted!")
     return redirect('edit_vexps')
 
+
 @user_login_required
 def delete_edu(request, pk):
     edu = get_object_or_404(Education, pk=pk)
@@ -240,6 +253,7 @@ def delete_edu(request, pk):
     edu.delete()
     messages.success(request, "Education item was deleted!")
     return redirect('edit_edus')
+
 
 from dal import autocomplete
 
@@ -285,6 +299,7 @@ class HardSkillsAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs.all()
 
+
 class CvHardSkillsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
@@ -328,6 +343,7 @@ class CvProgrammingLanguagesAutocomplete(autocomplete.Select2QuerySetView):
             qs = qs.filter(name__istartswith=self.q)
 
         return qs.all()
+
 
 class SkillsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
@@ -375,6 +391,7 @@ class CvProjectsAutocomplete(autocomplete.Select2QuerySetView):
 
         return qs.all()
 
+
 class CvVolunteerExpsAutocomplete(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         # Don't forget to filter out results depending on the visitor !
@@ -408,7 +425,7 @@ def edit_cv(request, pk=None):
         context = {}
 
         if request.method == "POST":
-            form = cvForm(request.POST, instance=request.user.student)
+            form = CvForm(request.POST, instance=request.user.student)
         else:
             instance = request.user.student
             if not instance.cv_hard_skills:
@@ -419,7 +436,7 @@ def edit_cv(request, pk=None):
                 instance.cv_programming_languages = instance.programming_languages
             if not instance.cv_summary:
                 instance.cv_summary = instance.summary
-            form = cvForm(instance=instance)
+            form = CvForm(instance=instance)
 
         if request.method == "POST" and form.is_valid():
             form.save()
@@ -431,11 +448,10 @@ def edit_cv(request, pk=None):
 
 def generate_cv(request, pk=None):
     if pk:
-        # template = "cv/cv_preview.html"
         context = {}
 
         if request.method == "POST":
-            form = cvForm(request.POST, instance=request.user.student)
+            form = CvForm(request.POST, instance=request.user.student)
         else:
             instance = request.user.student
             if not instance.cv_hard_skills:
@@ -446,7 +462,7 @@ def generate_cv(request, pk=None):
                 instance.cv_programming_languages = instance.programming_languages
             if not instance.cv_summary:
                 instance.cv_summary = instance.summary
-            form = cvForm(instance=instance)
+            form = CvForm(instance=instance)
 
         if request.method == "POST" and form.is_valid():
             form.save()
@@ -454,7 +470,14 @@ def generate_cv(request, pk=None):
         context["form"] = form
 
     u = get_object_or_404(get_user_model(), id=pk)
-    context = dict(found_user=u, title="User", media="/media/")
+
+    # increment license counter
+    counter, created = Counter.objects.get_or_create(type="license_counter")
+    counter.counter += 1
+    counter.save()
+    str_counter = '{:06d}'.format(counter.counter)
+
+    context = dict(found_user=u, title="User", media="/media/", counter=str_counter)
     return render(request, "cv/index.html", context)
 
 
@@ -466,8 +489,8 @@ def show_preview(request, pk=None):
 
 @user_login_required
 def convertation(request, pk=None):
-  #  pdf = "myCV.pdf"
-    url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk':pk}))
+    #  pdf = "myCV.pdf"
+    url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk': pk}))
     pdf = settings.MEDIA_ROOT + '/student_cv/myCV.pdf'
 
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
@@ -479,9 +502,8 @@ def convertation(request, pk=None):
         'margin-left': '0.0in',
     }'''
 
-  #  pdfkit.from_url(url, pdf, options=options)
+    #  pdfkit.from_url(url, pdf, options=options)
     response = FileResponse(open(pdf, 'rb'), content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=' + 'myCV.pdf'
     os.remove(pdf)
     return response
-

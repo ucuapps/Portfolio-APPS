@@ -10,4 +10,5 @@ urlpatterns = [
     re_path(r'^search/$', views.search, name='search_user'),
     re_path(r'^interests-autocomplete/$', views.InterestsAutocomplete.as_view(), name='interests-autocomplete'),
     re_path(r'^hobby-autocomplete/$', views.HobbyAutocomplete.as_view(), name='hobby-autocomplete'),
+    re_path(r'^internships/$', views.show_internships, name='internships')
 ]

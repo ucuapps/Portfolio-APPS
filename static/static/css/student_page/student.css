@@ -1,0 +1,11 @@
+.about_block{
+    width: 100%;
+}
+.lang_lvl div{
+    display: flex;
+    justify-content: space-between;
+}
+.about_block_text .list-inline-item{
+    display: flex;
+    justify-content: space-between;
+}
