@@ -10,6 +10,7 @@ urlpatterns = [
     re_path(r'^edit/projects/$', views.edit_projects, name='edit_projects'),
     re_path(r'^edit/project/(?P<pk>\d+)/$', views.edit_project, name='edit_project'),
     re_path(r'^edit/new-project/$', views.edit_project, name='new_project'),
+    re_path(r'^edit/delete-project/(?P<pk>\d+)/$', views.delete_project, name='delete_project'),
 
     re_path(r'^edit/working-experiences/$', views.edit_work_exps, name='edit_work_exps'),
     re_path(r'^edit/working-experience/(?P<pk>\d+)/$', views.edit_work_exp, name='edit_work_exp'),
@@ -50,4 +51,5 @@ urlpatterns = [
     re_path(r'^generate-cv/(?P<pk>\d+)/$', views.edit_cv, name="edit_cv"),
     re_path(r'^show-cv/(?P<pk>\d+)/$', views.generate_cv, name='show_cv'),
     re_path(r'^generate-pdf/(?P<pk>\d+)/$', views.generate_cv, name='generate_pdf'),
+    # re_path(r'^generate-pdf/(?P<pk>\d+)/$', views.convertation, name='generate_pdf'),
 ]

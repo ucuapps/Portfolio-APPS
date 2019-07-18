@@ -12,14 +12,17 @@
       <tr>
         <th>Title</th>
         <th>About</th>
-        <th>Edit</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
         {% for project in projects %}
             <tr><td>{{project.title}}</td>
             <td>{{project.about|truncatechars:10}}</td>
-            <td><a href="{% url 'edit_project' project.id %}">Edit</a></td></tr>
+            <td><a href="{% url 'edit_project' project.id %}"><i class="far fa-edit"></i></a></td>
+            <td><a href="{% url 'delete_project' project.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
         {% endfor %}
     </tbody>
   </table>
