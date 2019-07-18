@@ -228,7 +228,7 @@ def delete_language(request, pk):
 @user_login_required
 def delete_project(request, pk):
     project = get_object_or_404(Project, pk=pk)
-    if request.user not in project.collaborators:
+    if request.user not in project.collaborators.all():
         return HttpResponseForbidden()
     project.delete()
     messages.success(request, "Project was deleted!")
