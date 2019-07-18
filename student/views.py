@@ -11,13 +11,13 @@ from .forms import StudentForm, ProjectForm, WorkingExperienceForm, VolunteerExp
     EducationForm, CvForm
 from .models import Project, WorkingExperience, VolunteerExperience, Language, Skill, Education, ProgrammingLanguage
 
-# from weasyprint import HTML, CSS
+from weasyprint import HTML, CSS
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.http import FileResponse
 from django.conf import settings
 import os
-# import pdfkit
+import pdfkit
 
 from profiles.models import Counter
 
@@ -223,6 +223,16 @@ def delete_language(request, pk):
     l.delete()
     messages.success(request, "Languages block was changed!")
     return redirect('edit_student')
+
+
+@user_login_required
+def delete_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    if request.user not in project.collaborators:
+        return HttpResponseForbidden()
+    project.delete()
+    messages.success(request, "Project was deleted!")
+    return redirect('edit_projects')
 
 
 @user_login_required
@@ -489,20 +499,20 @@ def show_preview(request, pk=None):
 
 @user_login_required
 def convertation(request, pk=None):
-    #  pdf = "myCV.pdf"
-    url = request.build_absolute_uri(reverse('show_cv', kwargs={'pk': pk}))
+    pdf = "myCV.pdf"
+    url = request.build_absolute_uri(reverse('generate-cv', kwargs={'pk': pk}))
     pdf = settings.MEDIA_ROOT + '/student_cv/myCV.pdf'
 
     HTML(url).write_pdf(pdf, stylesheets=[CSS(string='@page { size: A4; margin: 0.0cm }')])
-    '''  options = {
+    options = {
         'page-size': 'A4',
         'margin-top': '0.0in',
         'margin-right': '0.0in',
         'margin-bottom': '0.0in',
         'margin-left': '0.0in',
-    }'''
+    }
 
-    #  pdfkit.from_url(url, pdf, options=options)
+    pdfkit.from_url(url, pdf, options=options)
     response = FileResponse(open(pdf, 'rb'), content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename=' + 'myCV.pdf'
     os.remove(pdf)
