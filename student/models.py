@@ -143,20 +143,20 @@ class ProgrammingLanguage(models.Model):
         return self.name
 
 
-# class Project(models.Model):
-#     project_field = models.CharField(max_length=20, default="", help_text="Word/words/abbreviation which describes your project."
-#                                                       " Example: ML, WEB, IOT, NLP, CV, AI, Design, Networks, BA,"
-#                                                       " Visualization, Robotics, Data Mining, Software, Security, "
-#                                                       "Analysis, Economics", blank=False)
-#     name = models.CharField(max_length=60, help_text="Project title. Example: Health Care project", blank=False)
-#     about = models.TextField()
-#     technologies = models.ManyToManyField(Skill, blank=True)
-#
-#     # TODO: mentor
-#     collaborators = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
-#
-#     def __str__(self):
-#         return self.name
+class Project(models.Model):
+    project_field = models.CharField(max_length=20, default="", help_text="Word/words/abbreviation which describes your project."
+                                                      " Example: ML, WEB, IOT, NLP, CV, AI, Design, Networks, BA,"
+                                                      " Visualization, Robotics, Data Mining, Software, Security, "
+                                                      "Analysis, Economics", blank=False)
+    name = models.CharField(max_length=60, help_text="Project title. Example: Health Care project", blank=False)
+    about = models.TextField()
+    technologies = models.ManyToManyField(Skill, blank=True)
+
+    # TODO: mentor
+    collaborators = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class VolunteerExperience(models.Model):
