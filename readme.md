@@ -27,7 +27,7 @@ source .env
 
 ./manage.py runserver
 ```
-You can find a more detailed guide on how to set up your workspace for development in repository's wiki.
+You can find a more detailed guide on how to set up your workspace for development in repository's [wiki](https://github.com/ucuapps/Portfolio-APPS/wiki/Project-set-up-cheat-sheet).
 ## License
 This project is licensed under the MIT License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ucuapps/Portfolio-APPS/blob/master/LICENSE)
