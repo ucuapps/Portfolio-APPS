@@ -195,7 +195,13 @@
 
                                         <div {% if forloop.first %} class="active carousel-item" {% else %} class="carousel-item" {% endif %}>
                                                 
-                                                <h4 class="mt-2 text-center"> <a href="{{ work.link }}">{{work.company}}</a> </h4>
+                                                <h4 class="mt-2 text-center"> 
+                                                    {% if work.link %}
+                                                        <a href="{{ work.link }}">{{work.company}}</a>
+                                                    {% else %}
+                                                        {{work.company}}
+                                                    {% endif %}
+                                                 </h4>
 
                                                 <h5>Position: {{ work.occupation }}</h5>
                                                 <h5>Period: {{ work.period_start }} - {{ work.period_end }}</h5>
