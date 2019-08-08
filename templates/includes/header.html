@@ -23,9 +23,23 @@
     <div class="menu_head">
         <img src="{% static 'images/cross_mark.png'%}" class="close" onclick="closeNav()">
     </div>
-    <div class="info">
+    <div class="info left-side-menu-icons">
         <a href="{{home}}">Profile</a>
         <a href="{{edit_user}}" id="up">Edit</a>
+        <a href="{% url 'search_user' %}">
+            Search <img src="{% static 'images/search.png'%}">
+        </a>
+        <a href="{% url 'internships' %}">
+            Internships <img src="{% static 'images/briefcase.png' %}" alt="">
+        </a>
+        {% if request.user.is_student %}
+            <a href="{% url 'edit_cv' request.user.id %}"><span id="nav">CV</span></a>
+            <a href="{% url 'show_my_requests' %}" >
+                Requests <img class="request_icon" src="{% static 'images/envelope.png'%}">
+            </a>
+        {% elif request.user.is_teacher %}
+            <img class="request_icon" src="{% static 'images/envelope.png'%}" id="nav" onclick="popup_request_func()" class="request">
+        {% endif %}
         <hr>
         <div class="exit">
             <svg version="1.1"
@@ -45,7 +59,7 @@
 <div id="main">
     <div class="navigation">
         <img id="menu" src="{% static 'images/menu.png'%}" onclick="openNav()">
-        <div class="logo">
+        <div class="logo head-logo">
             <a href="{{home}}">
             <svg
 				 x="0px" y="0px" width="70px" height="50px" viewBox="0 0 408.7 117" enable-background="new 0 0 408.7 117"
