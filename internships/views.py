@@ -34,7 +34,7 @@ def create_internship(request, pk=None):
         student_emails = list([student.email for student in students])
         send_mail('New internship at {}: {}'.format(internship.company_name, internship.position),
                   internship.description,
-                  'help.portfolio.apps@gmail.com',
+                  EMAIL_HOST_USER,
                   student_emails,
                   )
 
