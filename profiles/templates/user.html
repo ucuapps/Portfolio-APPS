@@ -43,13 +43,13 @@
                         <img src="{% get_media_prefix %}{{ found_user.profile_image}}" class="avatar">
                     </div>
                 </div>
-                <div class="student_name">
+                <div class="student_name ml-2">
                     <span class="name">{{ found_user.first_name}} {{ found_user.last_name}}</span>
                     {% if found_user.student.study_programme %}
                     <span class="occupation">{{ found_user.student.study_programme }}, {{ found_user.student.current_study_year }}</span>
                     {% endif %}
-                    <hr>
-                    <div>
+                    <hr class="mt-2 mb-2">
+                    <div class="mb-2">
                         {%if found_user.fb_link %}
                         <a href="{{ found_user.fb_link }}" target="_blank"><img src="{% static 'images/facebook.png' %}" width="25px" height="25px"></a>
                         {% endif %}
@@ -93,7 +93,7 @@
                             <span class="last">LANGUAGES</span>
                             <ul class="about_block_text list-inline lang_lvl">
                                 {% for lang in found_user.language_set.all %}
-                                    <li class="list-inline-item">
+                                    <li class="d-flex">
                                         <div>{{ lang.name }}</div>  
                                         <div>{{ lang.level }}</div> 
                                     </li>
@@ -273,8 +273,8 @@
                     </div>
                 </div>                
                 <div class="skills" id="hobbies">
-                    <div class="about_block">
-                        <span class="last" >PROFESSIONAL INTERESTS</span>
+                    <div class="about_block mt-2">
+                        <h6 class="last" >PROFESSIONAL INTERESTS</h6>
                         <ul class="about_block_text list-inline" id="profIntList">
                             {% if found_user.fields_of_interests.all %}
                                 {% for intrs in found_user.fields_of_interests.all %}
@@ -287,7 +287,7 @@
 
                     {% if found_user.hobbies.all %}
                         <div class="about_block" id="hobbiesList">
-                            <span class="last">HOBBIES</span>
+                            <h6 class="last">HOBBIES</h6>
                             <ul class="about_block_text rate">
                                 {% for hobby in found_user.hobbies.all %}
                                     <li class="list-inline-item">{{ hobby.name }}</li>

@@ -478,6 +478,9 @@ hr{
 .lang_lvl{
     width: auto;
 }
+.lang_lvl div:first-child{
+    width: 20%;
+}
 .about_block_text{
     color: rgb(68,68,68);
 }

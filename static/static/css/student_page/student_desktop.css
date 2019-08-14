@@ -583,3 +583,6 @@ svg{
 #profIntList li{
     width: 105%;
 }
+.lang_lvl div:first-child{
+    width: 75%;
+}

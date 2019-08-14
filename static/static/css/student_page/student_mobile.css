@@ -409,7 +409,6 @@ hr{
     list-style-position: inside;
 }
 .rate li{
-    margin-top: 10px;
     list-style-type: none;
 }
 .rate li span{
@@ -601,11 +600,15 @@ hr{
     margin-bottom: 13px;
 }
 .about_block{
+    width: 88%;
     margin-left: 20px;
 }
 .about_block_text{
     color: rgb(68,68,68);
 }
-.lang_lvl div{
-    width: 70%;
+.lang_lvl div:first-child{
+    width: 50%;
+}
+#aboutMe{
+    width: 100%;
 }
