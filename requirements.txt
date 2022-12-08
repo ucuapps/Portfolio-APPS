@@ -1,6 +1,6 @@
 cairocffi==0.8.1
 CairoSVG==2.1.3
-certifi==2018.4.16
+certifi==2022.12.7
 cffi==1.11.5
 chardet==3.0.4
 cssselect2==0.2.1
